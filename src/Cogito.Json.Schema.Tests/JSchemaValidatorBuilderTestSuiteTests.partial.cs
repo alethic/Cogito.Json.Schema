@@ -32,16 +32,16 @@ namespace Cogito.Json.Schema.Tests
                 this.baseDir = baseDir ?? throw new ArgumentNullException(nameof(baseDir));
 
                 nested = new JSchemaPreloadedResolver();
-                nested.Add(new Uri("http://json-schema.org/draft-03/schema"), File.ReadAllText(Path.Combine(baseDir, @"Schema\schema-draft-03.json")));
-                nested.Add(new Uri("http://json-schema.org/draft-04/schema"), File.ReadAllText(Path.Combine(baseDir, @"Schema\schema-draft-04.json")));
-                nested.Add(new Uri("http://json-schema.org/draft-06/schema"), File.ReadAllText(Path.Combine(baseDir, @"Schema\schema-draft-06.json")));
-                nested.Add(new Uri("http://json-schema.org/draft-07/schema"), File.ReadAllText(Path.Combine(baseDir, @"Schema\schema-draft-07.json")));
+                nested.Add(new Uri("http://json-schema.org/draft-03/schema"), File.ReadAllText(Path.Combine(baseDir, @"schema-draft-03.json")));
+                nested.Add(new Uri("http://json-schema.org/draft-04/schema"), File.ReadAllText(Path.Combine(baseDir, @"schema-draft-04.json")));
+                nested.Add(new Uri("http://json-schema.org/draft-06/schema"), File.ReadAllText(Path.Combine(baseDir, @"schema-draft-06.json")));
+                nested.Add(new Uri("http://json-schema.org/draft-07/schema"), File.ReadAllText(Path.Combine(baseDir, @"schema-draft-07.json")));
             }
 
             public override Stream GetSchemaResource(ResolveSchemaContext context, SchemaReference reference)
             {
                 if (reference.BaseUri.Host == "localhost")
-                    return File.OpenRead(Path.Combine(baseDir, @"Schema\JSON-Schema-Test-Suite\remotes", reference.BaseUri.LocalPath.Trim('/').Replace('/', '\\')));
+                    return File.OpenRead(Path.Combine(baseDir, @"JSON-Schema-Test-Suite\remotes", reference.BaseUri.LocalPath.Trim('/').Replace('/', '\\')));
 
                 return nested.GetSchemaResource(context, reference);
             }
