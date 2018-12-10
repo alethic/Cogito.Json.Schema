@@ -76,18 +76,9 @@ namespace Cogito.Json.Schema.Tests
         [TestMethod]
         public void Can_load_really_big_schema()
         {
-            var s = JSchema.Parse(File.ReadAllText(Path.Combine(Path.GetDirectoryName(typeof(JSchemaValidatorBuilderTests).Assembly.Location), "Schema", "ecourt_com_151.json")));
-
-            var sdkf = typeof(JSchemaValidatorBuilderTests).Assembly.GetManifestResourceStream("Cogito.Json.Schema.Tests.efm.json");
-            var o = JObject.ReadFrom(new JsonTextReader(new StreamReader(sdkf)));
-
-
+            var s = JSchema.Parse(File.ReadAllText(Path.Combine(Path.GetDirectoryName(typeof(JSchemaValidatorBuilderTests).Assembly.Location), "ecourt_com_151.json")));
+            var o = JObject.Parse(File.ReadAllText(Path.Combine(Path.GetDirectoryName(typeof(JSchemaValidatorBuilderTests).Assembly.Location), "efm.json")));
             var v = JSchemaExpressionBuilder.CreateDefault().Build(s);
-
-            //BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
-            //PropertyInfo debugViewProp = typeof(Expression).GetProperty("DebugView", flags);
-            //MethodInfo debugViewGetter = debugViewProp.GetGetMethod(nonPublic: true);
-            //string debugView = (string)debugViewGetter.Invoke(v, null);
 
             var a = v.Compile();
             a.Invoke(o);

@@ -23,10 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="efm.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
     <PackageReference Include="FluentAssertions" Version="5.4.2" />
     <PackageReference Include="FluentAssertions.Json" Version="5.0.0" />
@@ -53,6 +49,9 @@
 
   <ItemGroup>
     <None Update="ecourt_com_151.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="efm.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="JSchemaValidatorBuilderTestSuiteTests.tt">
