@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Jerome Haltom</Authors>
+    <Company />
+    <Description>Fast validation around Newtonsoft.Json.Schema. Provides a generator of Linq Expression trees around JSchema instances. These expression trees can be compiled for validation speeds that far exceed Newtonsoft's implementation.</Description>
+    <PackageProjectUrl>https://github.com/wasabii/Cogito.Json.Schema</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/wasabii/Cogito.Json.Schema.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>json schema</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Cogito.Core" Version="3.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
+    <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.7" />
+  </ItemGroup>
+
+</Project>

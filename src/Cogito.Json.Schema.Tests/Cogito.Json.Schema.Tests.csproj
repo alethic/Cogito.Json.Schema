@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Cogito.Json.Schema.Validation\Cogito.Json.Schema.Validation.csproj" />
     <ProjectReference Include="..\Cogito.Json.Schema\Cogito.Json.Schema.csproj" />
   </ItemGroup>
 

@@ -24,7 +24,7 @@
 
 using System;
 
-namespace Cogito.Json.Schema.Internal
+namespace Cogito.Json.Schema.Validation.Internal
 {
 
     internal static class EmailHelpers

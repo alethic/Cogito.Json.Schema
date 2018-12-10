@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Numerics;
 #endif
 
-namespace Cogito.Json.Schema.Internal
+namespace Cogito.Json.Schema.Validation.Internal
 {
 
     static class MathHelpers

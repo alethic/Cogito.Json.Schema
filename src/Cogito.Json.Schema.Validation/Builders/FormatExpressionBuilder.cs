@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 
-using Cogito.Json.Schema.Internal;
+using Cogito.Json.Schema.Validation.Internal;
 
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;

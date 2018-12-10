@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Cogito.Json.Schema.Internal
+namespace Cogito.Json.Schema.Validation.Internal
 {
 
     static class FormatHelpers

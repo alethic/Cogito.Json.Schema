@@ -8,8 +8,8 @@ using System.Numerics;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
-using Cogito.Json.Schema.Internal;
 using Cogito.Json.Schema.Validation.Builders;
+using Cogito.Json.Schema.Validation.Internal;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

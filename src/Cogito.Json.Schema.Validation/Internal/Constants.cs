@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Cogito.Json.Schema.Internal
+namespace Cogito.Json.Schema.Validation.Internal
 {
 
     static class Constants
