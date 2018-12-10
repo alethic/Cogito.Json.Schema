@@ -65,17 +65,6 @@ namespace Cogito.Json.Schema.Validation
             Expression.Equal(TokenType(o), Expression.Constant(type));
 
         /// <summary>
-        /// Returns an expression that returns <c>true</c> if the specified <see cref="JToken"/> expressions are completely equal.
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <returns></returns>
-        static Expression DeepEqual(Expression a, Expression b) =>
-            Expression.AndAlso(
-                Expression.Equal(TokenType(a), TokenType(b)),
-                Expression.Call(typeof(JToken).GetMethod(nameof(JToken.DeepEquals)), a, b));
-
-        /// <summary>
         /// Returns an expression that returns the item at the specified index.
         /// </summary>
         /// <param name="o"></param>
@@ -262,6 +251,7 @@ namespace Cogito.Json.Schema.Validation
             return new JSchemaExpressionBuilder(DefaultIoCContainer.Value.ResolveAll<IExpressionBuilder>());
         }
 
+        readonly JTokenEqualityExpressionBuilder equalityBuilder = new JTokenEqualityExpressionBuilder();
         readonly IEnumerable<IExpressionBuilder> providers;
         readonly Dictionary<JSchema, ParameterExpression> delayed = new Dictionary<JSchema, ParameterExpression>();
         readonly Dictionary<JSchema, LambdaExpression> compile = new Dictionary<JSchema, LambdaExpression>();
@@ -440,7 +430,7 @@ namespace Cogito.Json.Schema.Validation
             if (ReferenceEquals(schema.Const, null))
                 return null;
 
-            return DeepEqual(o, Expression.Constant(schema.Const));
+            return equalityBuilder.Build(schema.Const, o);
         }
 
         Expression BuildContains(JSchema schema, Expression o)
@@ -647,7 +637,7 @@ namespace Cogito.Json.Schema.Validation
             if (schema.Enum.Count == 0)
                 return null;
 
-            return AnyOf(schema.Enum.Select(i => DeepEqual(o, Expression.Constant(i))));
+            return AnyOf(schema.Enum.Select(i => equalityBuilder.Build(i, o)));
         }
 
         /// <summary>
