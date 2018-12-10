@@ -1,13 +1,12 @@
 using System;
 
-using Cogito.Json.Schema;
 using Cogito.Json.Schema.Validation;
 
 using FluentAssertions;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Cogito.Json.Schema.Tests
+namespace Cogito.Json.Schema.Tests.Validation
 {
 
     public partial class JSchemaValidatorBuilderTestSuiteTests

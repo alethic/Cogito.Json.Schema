@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 
-namespace Cogito.Json.Schema.Tests
+namespace Cogito.Json.Schema.Tests.Validation
 {
 
     [TestClass]
@@ -75,8 +75,8 @@ namespace Cogito.Json.Schema.Tests
         [TestMethod]
         public void Can_load_really_big_schema()
         {
-            var s = JSchema.Parse(File.ReadAllText(Path.Combine(Path.GetDirectoryName(typeof(JSchemaValidatorBuilderTests).Assembly.Location), "ecourt_com_151.json")));
-            var o = JObject.Parse(File.ReadAllText(Path.Combine(Path.GetDirectoryName(typeof(JSchemaValidatorBuilderTests).Assembly.Location), "efm.json")));
+            var s = JSchema.Parse(File.ReadAllText(Path.Combine(Path.GetDirectoryName(typeof(JSchemaValidatorBuilderTests).Assembly.Location), "Validation", "ecourt_com_151.json")));
+            var o = JObject.Parse(File.ReadAllText(Path.Combine(Path.GetDirectoryName(typeof(JSchemaValidatorBuilderTests).Assembly.Location), "Validation", "efm.json")));
             var v = JSchemaExpressionBuilder.CreateDefault().Build(s);
 
             var a = v.Compile();

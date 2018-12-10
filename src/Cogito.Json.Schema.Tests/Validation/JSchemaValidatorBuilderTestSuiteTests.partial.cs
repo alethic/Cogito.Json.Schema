@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 
-namespace Cogito.Json.Schema.Tests
+namespace Cogito.Json.Schema.Tests.Validation
 {
 
     [TestClass]
@@ -41,7 +41,7 @@ namespace Cogito.Json.Schema.Tests
             public override Stream GetSchemaResource(ResolveSchemaContext context, SchemaReference reference)
             {
                 if (reference.BaseUri.Host == "localhost")
-                    return File.OpenRead(Path.Combine(baseDir, @"JSON-Schema-Test-Suite\remotes", reference.BaseUri.LocalPath.Trim('/').Replace('/', '\\')));
+                    return File.OpenRead(Path.Combine(baseDir, @"JSON-Schema-Test-Suite", "remotes", reference.BaseUri.LocalPath.Trim('/').Replace('/', '\\')));
 
                 return nested.GetSchemaResource(context, reference);
             }
@@ -69,7 +69,7 @@ namespace Cogito.Json.Schema.Tests
         /// <summary>
         /// Resolves from the remote directory.
         /// </summary>
-        static JSchemaResolver Resolver { get; } = new JSchemaRemoteResolver(Path.GetDirectoryName(typeof(JSchemaValidatorBuilderTestSuiteTests).Assembly.Location));
+        static JSchemaResolver Resolver { get; } = new JSchemaRemoteResolver(Path.Combine(Path.GetDirectoryName(typeof(JSchemaValidatorBuilderTestSuiteTests).Assembly.Location), "Validation"));
 
         /// <summary>
         /// Parses the given token string value from base64.
