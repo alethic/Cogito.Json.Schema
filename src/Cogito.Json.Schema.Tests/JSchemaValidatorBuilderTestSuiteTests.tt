@@ -1,0 +1,142 @@
+<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(UserProfile)\.nuget\packages\Newtonsoft.Json\11.0.2\lib\net45\Newtonsoft.Json.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Newtonsoft.Json" #>
+<#@ import namespace="Newtonsoft.Json.Linq" #>
+using System;
+
+using Cogito.Json.Schema;
+using Cogito.Json.Schema.Validation;
+
+using FluentAssertions;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Cogito.Json.Schema.Tests
+{
+
+    public partial class JSchemaValidatorBuilderTestSuiteTests
+    {
+
+<#
+    
+TestSuite(new Uri("http://json-schema.org/draft-03/schema#"), "draft3");
+TestSuite(new Uri("http://json-schema.org/draft-04/schema#"), "draft4");
+TestSuite(new Uri("http://json-schema.org/draft-06/schema#"), "draft6");
+TestSuite(new Uri("http://json-schema.org/draft-07/schema#"), "draft7");
+
+#>
+
+    }
+
+}
+
+<#+
+
+void TestSuite(Uri version, string name)
+{
+    var suiteDir = new DirectoryInfo(Path.Combine(Host.ResolvePath(""), "JSON-Schema-Test-Suite", "tests", name));
+
+    foreach (var testFile in suiteDir.GetFiles(@"*.json"))
+        WriteTestFile(version, testFile, suiteDir.Name, Path.GetFileNameWithoutExtension(testFile.Name));
+
+    foreach (var subDir1 in suiteDir.GetDirectories())
+    {
+        foreach (var testFile in subDir1.GetFiles(@"*.json"))
+            WriteTestFile(version, testFile, suiteDir.Name + "_" + subDir1.Name, Path.GetFileNameWithoutExtension(testFile.Name));
+
+        foreach (var subDir2 in subDir1.GetDirectories())
+            foreach (var testFile in subDir2.GetFiles(@"*.json"))
+                WriteTestFile(version, testFile, suiteDir.Name + "_" + subDir1.Name + "_" + subDir2.Name, Path.GetFileNameWithoutExtension(testFile.Name));
+    }
+}
+
+void WriteTestFile(Uri version, FileInfo file, string suiteName, string categoryName)
+{
+    int i = 0;
+
+    foreach (var group in JArray.Parse(File.ReadAllText(file.FullName)))
+    {
+        i++;
+
+        var d = (string)group["description"];
+        var s = (JToken)group["schema"];
+        var t = (JArray)group["tests"];
+        var o = (bool?)group["ignore"];
+
+        int j = 0;
+
+        foreach (var test in t)
+        {
+            j++;
+
+            var d2 = (string)test["description"];
+            var t2 = (JToken)test["data"];
+            var v2 = (bool)test["valid"];
+            var o2 = (bool?)test["ignore"];
+#>
+
+<#+
+            if (o == true || o2 == true)
+            {
+#>
+        [Ignore]
+<#+
+            }
+#>
+        [TestMethod]
+        [TestCategory("<#= suiteName #>")]
+        [TestCategory("<#= categoryName #>")]
+        public void Test_<#= Escape(suiteName) #>__<#= Escape(categoryName) #>__<#= Escape(d) #><#= i > 1 ? "_" + i.ToString() : "" #>__<#= Escape(d2) #><#= j > 1 ? "_" + j.ToString() : "" #>()
+        {
+            var s = ParseSchema("<#= EncodeToken(s) #>");
+            var t = ParseJToken("<#= EncodeToken(t2) #>");
+
+            s.SchemaVersion = new Uri("<#= version #>");
+
+<#+
+            if (v2)
+            {
+#>
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+<#+
+            }
+            else
+            {
+#>
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+<#+
+            }
+#>
+        }
+
+<#+
+        }
+
+    }
+
+}
+
+string Escape(string name)
+{
+    return Regex.Replace(name, @"[^a-zA-Z0-9]", "_");
+}
+
+string EncodeToken(JToken token)
+{
+    var s = new StringWriter();
+    using (var b = new JsonTextWriter(s))
+        token.WriteTo(b);
+
+    return Convert.ToBase64String(Encoding.UTF8.GetBytes(s.ToString()));
+}
+
+#>

@@ -1,0 +1,29 @@
+image: Visual Studio 2017
+configuration: Release
+platform: Any CPU
+
+install:
+  - choco install gitversion.portable -pre -y
+
+before_build:
+  - ps: gitversion /l console /output buildserver
+  - ps: $env:PackageVersion=$env:GitVersion_NuGetVersion
+  - ps: $env:AssemblyVersion=$env:GitVersion_AssemblySemVer
+  - ps: $env:FileVersion=$env:GitVersion_MajorMinorPatch.0
+  - ps: $env:InformationalVersion=$env:GitVersion_InformationalVersion
+  - dotnet restore src
+
+build_script:
+  - dotnet build src
+
+test:
+  assemblies:
+    - '**/Tests.dll'
+
+after_build:
+  - dotnet pack src --output %APPVEYOR_BUILD_FOLDER%/dist
+
+artifacts:
+  - path: dist/*.nupkg
+    name: packages
+ 
