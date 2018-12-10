@@ -235,7 +235,7 @@ namespace Cogito.Json.Schema.Validation
                 Expression.Label(brk, rsl));
         }
 
-        static readonly Lazy<TinyIoCContainer> DefaultIoCContainer = new Lazy<TinyIoCContainer>(CreateDefaultIoCContainer);
+        static readonly Lazy<TinyIoCContainer> DefaultIoCContainer = new Lazy<TinyIoCContainer>(CreateDefaultIoCContainer, true);
 
         /// <summary>
         /// Creates a new TinyIoC instance with the default validation configuration.
