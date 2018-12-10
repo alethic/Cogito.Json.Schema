@@ -190,7 +190,12 @@ namespace Cogito.Json.Schema.Validation
         /// <returns></returns>
         static Expression AllOf(IEnumerable<Expression> expressions)
         {
-            return expressions.Aggregate(True, (a, b) => Expression.AndAlso(a, b));
+            Expression e = null;
+
+            foreach (var i in expressions)
+                e = e == null ? i : Expression.AndAlso(e, i);
+
+            return e ?? True;
         }
 
         /// <summary>
@@ -200,7 +205,12 @@ namespace Cogito.Json.Schema.Validation
         /// <returns></returns>
         static Expression AnyOf(IEnumerable<Expression> expressions)
         {
-            return expressions.Aggregate(False, (a, b) => Expression.OrElse(a, b));
+            Expression e = null;
+
+            foreach (var i in expressions)
+                e = e == null ? i : Expression.OrElse(e, i);
+
+            return e ?? False;
         }
 
         /// <summary>
