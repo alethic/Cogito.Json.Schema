@@ -11,7 +11,7 @@ namespace Cogito.Json.Schema.Validation.Internal
     static class ColorHelpers
     {
 
-        static readonly List<string> NamedColors = new List<string>
+        static readonly HashSet<string> NamedColors = new HashSet<string>
         {
             "aqua",
             "black",
@@ -52,11 +52,8 @@ namespace Cogito.Json.Schema.Validation.Internal
                         var isHex = c >= '0' && c <= '9' ||
                                     c >= 'a' && c <= 'f' ||
                                     c >= 'A' && c <= 'F';
-
                         if (!isHex)
-                        {
                             return false;
-                        }
                     }
 
                     return true;
