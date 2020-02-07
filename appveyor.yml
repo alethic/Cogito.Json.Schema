@@ -1,4 +1,4 @@
-image: Visual Studio 2017
+image: Visual Studio 2019
 configuration: Release
 platform: Any CPU
 
@@ -26,4 +26,13 @@ after_build:
 artifacts:
   - path: dist/*.nupkg
     name: packages
- 
+
+deploy:
+  provider: NuGet
+  server: https://nuget.pkg.github.com/wasabii/index.json
+  username: wasabii
+  api_key:
+    secure: xrFuWmVqekabWUvYce7mOmKS4ToqdtFJOGgiLYyrDRVZJhMSMvpOUVxf0mhzwGiH
+  skip_symbols: false
+  symbol_server:
+  artifact: /.*\.nupkg/
