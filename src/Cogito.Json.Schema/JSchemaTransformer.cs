@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Cogito.Collections;
+using Cogito.Linq;
 
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
@@ -57,7 +58,9 @@ namespace Cogito.Json.Schema
             s.Const = TransformConst(schema, schema.Const, context);
             s.Contains = TransformContains(schema, schema.Contains, context);
             s.Default = TransformDefault(schema, schema.Default, context);
-            s.Dependencies.AddRange(TransformDependencies(schema, schema.Dependencies, context));
+            var dependencies = TransformDependencies(schema, schema.Dependencies, context).Tee();
+            if (dependencies.Count() > 0)
+                s.Dependencies.AddRange(dependencies);
             s.Description = TransformDescription(schema, schema.Description, context);
             s.Enum.AddRange(TransformEnum(schema, schema.Enum, context));
             s.ExclusiveMaximum = TransformExclusiveMaximum(schema, schema.ExclusiveMaximum, context);
