@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 
 namespace Cogito.Json.Schema
@@ -75,38 +74,20 @@ namespace Cogito.Json.Schema
                 if (r == null)
                     continue;
 
-                // reduce current schema
+                // apply transforms
                 var s2 = r(s1);
 
-                // reference equality means absolutely no possibility of change
-                if (!ReferenceEquals(s1, s2))
+                // transforms resulted in no changes
+                if (!JSchemaEqualityComparer.Default.Equals(s1, s2))
                 {
-                    // going to need this for comparison
-                    var j1 = JObject.FromObject(s1);
-                    var j2 = JObject.FromObject(s2);
-
-                    if (!JTokenEquals(j1, j2))
-                    {
-                        // start over using changed
-                        s1 = s2;
-                        i = -1;
-                    }
+                    // start over using changed
+                    s1 = s2;
+                    i = -1;
                 }
             }
 
             // resulting schema has been fully transformed
             return s1;
-        }
-
-        /// <summary>
-        ///  Returns <c>true</c> if the two <see cref="JSchema"/> objects are equal.
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <returns></returns>
-        bool JTokenEquals(JToken a, JToken b)
-        {
-            return Equals(a, b) || JToken.DeepEquals(a, b);
         }
 
     }
