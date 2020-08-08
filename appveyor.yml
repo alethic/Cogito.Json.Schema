@@ -11,28 +11,28 @@ before_build:
   - ps: $env:AssemblyVersion=$env:GitVersion_AssemblySemVer
   - ps: $env:FileVersion=$env:GitVersion_MajorMinorPatch.0
   - ps: $env:InformationalVersion=$env:GitVersion_InformationalVersion
-  - dotnet restore src
-
-build_script:
-  - dotnet build src
+  - ps: $env:PackageOutputPath="$env:APPVEYOR_BUILD_FOLDER\pkg"
+  - nuget restore
+  - dotnet restore
+  
+build:
+  verbosity: minimal
+  project: Cogito.Json.Schema.sln
 
 test:
   assemblies:
     - '**/Tests.dll'
 
-after_build:
-  - dotnet pack src --output %APPVEYOR_BUILD_FOLDER%/dist
-
 artifacts:
-  - path: dist/*.nupkg
-    name: packages
-
+  - path: pkg\*.nupkg
+    name: Cogito.Json.Schema
+    
 deploy:
   provider: NuGet
-  server: https://nuget.pkg.github.com/wasabii/index.json
+  server: https://nuget.pkg.github.com/alethic/index.json
   username: wasabii
   api_key:
-    secure: xrFuWmVqekabWUvYce7mOmKS4ToqdtFJOGgiLYyrDRVZJhMSMvpOUVxf0mhzwGiH
+    secure: 7KMGqRm3xSXVWGq+DM0EBZL2KXGW5VXgDD774n4dB5xEQA/Febc7GbwhZIkvZeV1
   skip_symbols: false
   symbol_server:
   artifact: /.*\.nupkg/

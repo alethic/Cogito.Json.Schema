@@ -1,0 +1,15 @@
+<Project>
+    <PropertyGroup>
+        <Authors>Jerome Haltom</Authors>
+        <Company>Alethic Solutions</Company>
+        <RepositoryUrl>https://github.com/alethic/Cogito.Json.Schema</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageProjectUrl>https://github.com/alethic/Cogito.Json.Schema</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageIcon>icon.png</PackageIcon>
+        <LangVersion>8.0</LangVersion>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="$(MSBuildThisFileDirectory)icon.png" Pack="true" PackagePath="" />
+    </ItemGroup>
+</Project>
