@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 
@@ -129,23 +130,21 @@ namespace Cogito.Json.Schema.Validation.Builders
             }
         }
 
+        static readonly Regex HostnameRegex = new Regex(@"^(?=.{1,255}$)[0-9A-Za-z](?:(?:[0-9A-Za-z]|-){0,61}[0-9A-Za-z])?(?:\.[0-9A-Za-z](?:(?:[0-9A-Za-z]|-){0,61}[0-9A-Za-z])?)*\.?$", RegexOptions.CultureInvariant | RegexOptions.Compiled);
+
         static bool ValidateHostname(string value)
         {
             return HostnameRegex.IsMatch(value);
         }
 
-        static readonly Regex HostnameRegex =
-            new Regex(@"^(?=.{1,255}$)[0-9A-Za-z](?:(?:[0-9A-Za-z]|-){0,61}[0-9A-Za-z])?(?:\.[0-9A-Za-z](?:(?:[0-9A-Za-z]|-){0,61}[0-9A-Za-z])?)*\.?$",
-                RegexOptions.CultureInvariant | RegexOptions.Compiled);
+        static readonly Regex IdnHostnameRegex = new Regex(@"^(?:[\p{L}\p{N}][\p{L}\p{N}-_]*.)+[\p{L}\p{N}]{2,}$", RegexOptions.CultureInvariant | RegexOptions.Compiled);
+        static readonly char[] DisallowedIdnChars = new[] { '\u0020', '\u002D', '\u00A2', '\u00A3', '\u00A4', '\u00A5', '\u034F', '\u0640', '\u07FA', '\u180B', '\u180C', '\u180D', '\u200B', '\u2060', '\u2104', '\u2108', '\u2114', '\u2117', '\u2118', '\u211E', '\u211F', '\u2123', '\u2125', '\u2282', '\u2283', '\u2284', '\u2285', '\u2286', '\u2287', '\u2288', '\u2616', '\u2617', '\u2619', '\u262F', '\u2638', '\u266C', '\u266D', '\u266F', '\u2752', '\u2756', '\u2758', '\u275E', '\u2761', '\u2775', '\u2794', '\u2798', '\u27AF', '\u27B1', '\u27BE', '\u3004', '\u3012', '\u3013', '\u3020', '\u302E', '\u302F', '\u3031', '\u3032', '\u3035', '\u303B', '\u3164', '\uFFA0' };
+        static readonly IdnMapping IdnMapping = new IdnMapping();
 
         static bool ValidateIdnHostname(string value)
         {
-            return IdnHostnameRegex.IsMatch(value);
+            return IdnHostnameRegex.IsMatch(value) && value.IndexOfAny(DisallowedIdnChars) == -1 && IdnMapping.GetAscii(value).Split('.').All(i => i.Length <= 63);
         }
-
-        static readonly Regex IdnHostnameRegex =
-            new Regex(@"^(?:[\p{L}\p{N}][\p{L}\p{N}-_]*.)+[\p{L}\p{N}]{2,}$",
-                RegexOptions.CultureInvariant | RegexOptions.Compiled);
 
         static bool ValidateColor(string value) => ColorHelpers.IsValid(value);
 
