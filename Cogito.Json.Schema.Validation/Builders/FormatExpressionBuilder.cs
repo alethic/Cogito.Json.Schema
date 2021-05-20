@@ -144,7 +144,7 @@ namespace Cogito.Json.Schema.Validation.Builders
         }
 
         static readonly Regex IdnHostnameRegex =
-            new Regex(@"^(?=.{1,255}$)[0-9A-Za-z](?:(?:[0-9A-Za-z]|-){0,61}[0-9A-Za-z])?(?:\.[0-9A-Za-z](?:(?:[0-9A-Za-z]|-){0,61}[0-9A-Za-z])?)*\.?$",
+            new Regex(@"^(?:[\p{L}\p{N}][\p{L}\p{N}-_]*.)+[\p{L}\p{N}]{2,}$",
                 RegexOptions.CultureInvariant | RegexOptions.Compiled);
 
         static bool ValidateColor(string value) => ColorHelpers.IsValid(value);

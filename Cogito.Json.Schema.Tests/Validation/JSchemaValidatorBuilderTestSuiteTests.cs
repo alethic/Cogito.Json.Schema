@@ -21585,7 +21585,6 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
-        [Ignore]
         [TestMethod]
         [TestCategory("draft7_optional_format")]
         [TestCategory("idn-hostname")]
