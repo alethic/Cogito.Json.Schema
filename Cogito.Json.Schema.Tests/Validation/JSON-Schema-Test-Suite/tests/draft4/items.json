@@ -26,7 +26,8 @@
                     "0": "invalid",
                     "length": 1
                 },
-                "valid": true
+                "valid": true,
+                "ignore": true
             }
         ]
     },
@@ -71,7 +72,8 @@
                     "1": "valid",
                     "length": 2
                 },
-                "valid": true
+                "valid": true,
+                "ignore": true
             }
         ]
     },

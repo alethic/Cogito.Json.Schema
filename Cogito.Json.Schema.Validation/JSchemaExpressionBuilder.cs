@@ -48,7 +48,7 @@ namespace Cogito.Json.Schema.Validation
             Expression.ReferenceEqual(e, Null);
 
         /// <summary>
-        /// Returns an expression that returns <c>true</c> if JSON token type of the specified expression.
+        /// Returns an expression that returns the token type of the specified expression.
         /// </summary>
         /// <param name="o"></param>
         /// <returns></returns>
@@ -716,6 +716,8 @@ namespace Cogito.Json.Schema.Validation
             Expression Comparer(Expression left, Expression right) =>
                 schema.ExclusiveMaximum ? Expression.LessThan(left, right) : Expression.LessThanOrEqual(left, right);
 
+            var bi = new BigInteger((double)schema.Maximum);
+
             return Expression.Switch(
                 TokenType(o),
                 True,
@@ -726,7 +728,7 @@ namespace Cogito.Json.Schema.Validation
                             typeof(BigInteger)),
                         Comparer(
                             Expression.Convert(Expression.Property(Expression.Convert(o, typeof(JValue)), nameof(JValue.Value)), typeof(BigInteger)),
-                            Expression.Constant((BigInteger)schema.Maximum)),
+                            Expression.Constant(new BigInteger((double)schema.Maximum))),
                         Comparer(
                             Expression.Convert(o, typeof(int)),
                             Expression.Constant((int)schema.Maximum))),

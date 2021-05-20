@@ -39,7 +39,8 @@
                 "data": "DD",
                 "valid": false
             }
-        ]
+        ],
+        "ignore": true
     },
     {
         "description": "Proper UTF-16 surrogate pair handling: patternProperties",
@@ -77,6 +78,7 @@
                 "data": { "🐲🐲": "hello" },
                 "valid": false
             }
-        ]
+        ],
+        "ignore": true
     }
 ]
