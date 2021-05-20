@@ -71,8 +71,7 @@
                     "1": "valid",
                     "length": 2
                 },
-                "valid": true,
-                "ignore": true
+                "valid": true
             }
         ]
     }
