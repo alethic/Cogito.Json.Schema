@@ -157,7 +157,7 @@ namespace Cogito.Json.Schema.Validation.Builders
                 return false;
 
             for (var i = 0; i < parts.Length; i++)
-                if (!int.TryParse(parts[i], NumberStyles.Integer, CultureInfo.InvariantCulture, out var num) || num < 0 || num > 255)
+                if (!int.TryParse(parts[i], NumberStyles.Integer, CultureInfo.InvariantCulture, out var num) || num < 0 || num > 255 || parts[i].StartsWith("0"))
                     return false;
 
             return true;
