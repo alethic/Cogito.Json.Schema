@@ -104,8 +104,7 @@ namespace Cogito.Json.Schema.Validation.Builders
         static bool ValidateRelativeJsonPointer(string value) =>
             FormatHelpers.ValidateRelativeJsonPointer(value);
 
-        static bool ValidateDate(string value) =>
-            DateTime.TryParseExact(value, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var _);
+        static bool ValidateDate(string value) => DateTime.TryParseExact(value, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var _);
 
         static bool ValidateTime(string value) => ValidateTimeRegex(value);
 

@@ -7,7 +7,8 @@
             {
                 "description": "matches empty",
                 "data": "",
-                "valid": true
+                "valid": true,
+                "ignore": true
             },
             {
                 "description": "matches single",
@@ -17,7 +18,8 @@
             {
                 "description": "matches two",
                 "data": "🐲🐲",
-                "valid": true
+                "valid": true,
+                "ignore": true
             },
             {
                 "description": "doesn't match one",
@@ -75,7 +77,8 @@
             {
                 "description": "doesn't match two",
                 "data": { "🐲🐲": "hello" },
-                "valid": false
+                "valid": false,
+                "ignore": true
             }
         ]
     }

@@ -75,7 +75,8 @@
             {
                 "description": "doesn't match two",
                 "data": { "🐲🐲": "hello" },
-                "valid": false
+                "valid": false,
+                "ignore": true
             }
         ]
     }

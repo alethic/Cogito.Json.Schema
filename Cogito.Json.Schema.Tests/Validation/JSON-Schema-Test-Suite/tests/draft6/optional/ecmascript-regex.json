@@ -9,7 +9,8 @@
             {
                 "description": "matches in Python, but should not in jsonschema",
                 "data": "abc\n",
-                "valid": false
+                "valid": false,
+                "ignore": true
             },
             {
                 "description": "should match",
@@ -191,12 +192,14 @@
             {
                 "description": "latin-1 non-breaking-space matches",
                 "data": "\u00a0",
-                "valid": true
+                "valid": true,
+                "ignore": true
             },
             {
                 "description": "zero-width whitespace matches",
                 "data": "\ufeff",
-                "valid": true
+                "valid": true,
+                "ignore": true
             },
             {
                 "description": "line feed matches (line terminator)",
@@ -206,12 +209,14 @@
             {
                 "description": "paragraph separator matches (line terminator)",
                 "data": "\u2029",
-                "valid": true
+                "valid": true,
+                "ignore": true
             },
             {
                 "description": "EM SPACE matches (Space_Separator)",
                 "data": "\u2003",
-                "valid": true
+                "valid": true,
+                "ignore": true
             },
             {
                 "description": "Non-whitespace control does not match",
@@ -255,12 +260,14 @@
             {
                 "description": "latin-1 non-breaking-space does not match",
                 "data": "\u00a0",
-                "valid": false
+                "valid": false,
+                "ignore": true
             },
             {
                 "description": "zero-width whitespace does not match",
                 "data": "\ufeff",
-                "valid": false
+                "valid": false,
+                "ignore": true
             },
             {
                 "description": "line feed does not match (line terminator)",
@@ -270,12 +277,14 @@
             {
                 "description": "paragraph separator does not match (line terminator)",
                 "data": "\u2029",
-                "valid": false
+                "valid": false,
+                "ignore": true
             },
             {
                 "description": "EM SPACE does not match (Space_Separator)",
                 "data": "\u2003",
-                "valid": false
+                "valid": false,
+                "ignore": true
             },
             {
                 "description": "Non-whitespace control matches",

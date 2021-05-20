@@ -13877,6 +13877,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft4_optional")]
         [TestCategory("ecmascript-regex")]
@@ -14163,6 +14164,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft4_optional")]
         [TestCategory("ecmascript-regex")]
@@ -14176,6 +14178,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft4_optional")]
         [TestCategory("ecmascript-regex")]
@@ -14202,6 +14205,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft4_optional")]
         [TestCategory("ecmascript-regex")]
@@ -14215,6 +14219,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft4_optional")]
         [TestCategory("ecmascript-regex")]
@@ -14306,6 +14311,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft4_optional")]
         [TestCategory("ecmascript-regex")]
@@ -14319,6 +14325,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft4_optional")]
         [TestCategory("ecmascript-regex")]
@@ -14345,6 +14352,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft4_optional")]
         [TestCategory("ecmascript-regex")]
@@ -14358,6 +14366,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft4_optional")]
         [TestCategory("ecmascript-regex")]
@@ -14410,6 +14419,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft4_optional")]
         [TestCategory("non-bmp-regex")]
@@ -14436,6 +14446,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft4_optional")]
         [TestCategory("non-bmp-regex")]
@@ -14553,6 +14564,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft4_optional")]
         [TestCategory("non-bmp-regex")]
@@ -24940,6 +24952,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft6_optional")]
         [TestCategory("bignum")]
@@ -24966,6 +24979,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft6_optional")]
         [TestCategory("bignum")]
@@ -24992,6 +25006,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft6_optional")]
         [TestCategory("ecmascript-regex")]
@@ -25278,6 +25293,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft6_optional")]
         [TestCategory("ecmascript-regex")]
@@ -25291,6 +25307,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft6_optional")]
         [TestCategory("ecmascript-regex")]
@@ -25317,6 +25334,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft6_optional")]
         [TestCategory("ecmascript-regex")]
@@ -25330,6 +25348,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft6_optional")]
         [TestCategory("ecmascript-regex")]
@@ -25421,6 +25440,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft6_optional")]
         [TestCategory("ecmascript-regex")]
@@ -25434,6 +25454,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft6_optional")]
         [TestCategory("ecmascript-regex")]
@@ -25460,6 +25481,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft6_optional")]
         [TestCategory("ecmascript-regex")]
@@ -25473,6 +25495,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft6_optional")]
         [TestCategory("ecmascript-regex")]
@@ -25525,6 +25548,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft6_optional")]
         [TestCategory("non-bmp-regex")]
@@ -25551,6 +25575,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft6_optional")]
         [TestCategory("non-bmp-regex")]
@@ -25668,6 +25693,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft6_optional")]
         [TestCategory("non-bmp-regex")]
@@ -37576,6 +37602,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft7_optional")]
         [TestCategory("bignum")]
@@ -37602,6 +37629,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft7_optional")]
         [TestCategory("bignum")]
@@ -37758,6 +37786,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft7_optional")]
         [TestCategory("ecmascript-regex")]
@@ -38044,6 +38073,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft7_optional")]
         [TestCategory("ecmascript-regex")]
@@ -38057,6 +38087,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft7_optional")]
         [TestCategory("ecmascript-regex")]
@@ -38083,6 +38114,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft7_optional")]
         [TestCategory("ecmascript-regex")]
@@ -38096,6 +38128,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft7_optional")]
         [TestCategory("ecmascript-regex")]
@@ -38187,6 +38220,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft7_optional")]
         [TestCategory("ecmascript-regex")]
@@ -38200,6 +38234,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft7_optional")]
         [TestCategory("ecmascript-regex")]
@@ -38226,6 +38261,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft7_optional")]
         [TestCategory("ecmascript-regex")]
@@ -38239,6 +38275,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft7_optional")]
         [TestCategory("ecmascript-regex")]
@@ -38434,6 +38471,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft7_optional")]
         [TestCategory("non-bmp-regex")]
