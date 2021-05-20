@@ -107,8 +107,39 @@ namespace Cogito.Json.Schema.Validation.Builders
         static bool ValidateDate(string value) =>
             DateTime.TryParseExact(value, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var _);
 
-        static bool ValidateTime(string value) =>
-            DateTime.TryParseExact(value, "HH:mm:ss.FFFFFFFK", CultureInfo.InvariantCulture, DateTimeStyles.None, out var _);
+        static bool ValidateTime(string value) => ValidateTimeRegex(value);
+
+        static readonly Regex TimeRegex = new Regex(@"^(?<h>\d{2})\:(?<m>\d{2})\:(?<s>\d{2})(.(?<ms>\d+)?)([Zz]|(?<o>[-+])(?<zh>\d{2}):(?<zm>\d{2}))$", RegexOptions.CultureInvariant | RegexOptions.Compiled);
+
+        static bool ValidateTimeRegex(string value)
+        {
+            var r = TimeRegex.Match(value);
+            if (r.Success)
+            {
+                if (int.TryParse(r.Groups["h"].Value, out var h) && int.TryParse(r.Groups["m"].Value, out var m) && int.TryParse(r.Groups["s"].Value, out var s) && int.TryParse(r.Groups["ms"].Value, out var ms))
+                {
+                    // time values must be in range (leap seconds!)
+                    if (h < 0 || h > 23 || m < 0 || m > 59 || s < 0 || s > 60)
+                        return false;
+                    if (ms < 0)
+                        return false;
+
+                    // offset indicator exists but isn't proper value
+                    if (r.Groups["o"] is Group og && og.Value != "-" && og.Value != "+")
+                        return false;
+
+                    // check that offset values are accurate
+                    if (r.Groups["zh"] is Group zhg && r.Groups["zm"] is Group zmg && int.TryParse(zhg.Value, out var zh) && int.TryParse(zmg.Value, out var zm))
+                        if (zh < 0 || zh > 23 || zm < 0 || zm > 59)
+                            return false;
+
+                    // all the checks succeeded
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         static bool ValidateDateTime(string value) =>
             DateTime.TryParseExact(value, @"yyyy-MM-dd\THH:mm:ss.FFFFFFFK", CultureInfo.InvariantCulture, DateTimeStyles.None, out var _) ||

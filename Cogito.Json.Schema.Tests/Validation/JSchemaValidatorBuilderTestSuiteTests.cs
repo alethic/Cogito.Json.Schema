@@ -13823,6 +13823,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft4_optional")]
         [TestCategory("bignum")]
@@ -13849,6 +13850,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft4_optional")]
         [TestCategory("bignum")]
