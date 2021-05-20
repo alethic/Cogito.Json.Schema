@@ -1,8 +1,7 @@
 [
     {
         "description": "validation of IRI References",
-        "schema": { "format": "iri-reference" },
-        "ignore": true,
+        "schema": {"format": "iri-reference"},
         "tests": [
             {
                 "description": "a valid IRI",

@@ -1,7 +1,7 @@
 [
     {
         "description": "integer",
-        "schema": { "type": "integer" },
+        "schema": {"type": "integer"},
         "tests": [
             {
                 "description": "a bignum is an integer",
@@ -12,7 +12,7 @@
     },
     {
         "description": "number",
-        "schema": { "type": "number" },
+        "schema": {"type": "number"},
         "tests": [
             {
                 "description": "a bignum is a number",
@@ -23,7 +23,7 @@
     },
     {
         "description": "integer",
-        "schema": { "type": "integer" },
+        "schema": {"type": "integer"},
         "tests": [
             {
                 "description": "a negative bignum is an integer",
@@ -61,8 +61,7 @@
             {
                 "description": "comparison works for high numbers",
                 "data": 18446744073709551600,
-                "valid": true,
-                "ignore": true
+                "valid": true
             }
         ]
     },
@@ -87,8 +86,7 @@
             {
                 "description": "comparison works for very negative numbers",
                 "data": -18446744073709551600,
-                "valid": true,
-                "ignore": true
+                "valid": true
             }
         ]
     },

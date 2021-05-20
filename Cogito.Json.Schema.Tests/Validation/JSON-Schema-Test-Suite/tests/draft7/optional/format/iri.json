@@ -9,15 +9,14 @@
                 "valid": true
             },
             {
-                "description": "a valid IRI with anchor tag and parantheses",
+                "description": "a valid IRI with anchor tag and parentheses",
                 "data": "http://ƒøø.com/blah_(wîkïpédiå)_blah#ßité-1",
                 "valid": true
             },
             {
                 "description": "a valid IRI with URL-encoded stuff",
                 "data": "http://ƒøø.ßår/?q=Test%20URL-encoded%20stuff",
-                "valid": true,
-                "ignore":  true
+                "valid": true
             },
             {
                 "description": "a valid IRI with many special characters",
