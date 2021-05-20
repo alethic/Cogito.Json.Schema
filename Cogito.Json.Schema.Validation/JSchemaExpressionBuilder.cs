@@ -895,7 +895,7 @@ namespace Cogito.Json.Schema.Validation
         {
             try
             {
-                return Regex.IsMatch(value, pattern);
+                return Regex.IsMatch(value, pattern, RegexOptions.ECMAScript);
             }
             catch (Exception)
             {
