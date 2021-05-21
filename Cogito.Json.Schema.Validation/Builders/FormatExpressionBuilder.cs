@@ -2,6 +2,8 @@
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
+using System.Net.Sockets;
 using System.Text.RegularExpressions;
 
 using Cogito.Json.Schema.Validation.Internal;
@@ -173,12 +175,28 @@ namespace Cogito.Json.Schema.Validation.Builders
 
         static bool ValidateIdnHostname(string value)
         {
-            return IdnHostnameRegex.IsMatch(value) && value.IndexOfAny(DisallowedIdnChars) == -1 && IdnMapping.GetAscii(value).Split('.').All(i => i.Length <= 63);
+             return IdnHostnameRegex.IsMatch(value) && value.IndexOfAny(DisallowedIdnChars) == -1 && TryGetIdnAsciiString(value, out var idn) && idn.Split('.').All(i => i.Length <= 63);
+        }
+
+        static bool TryGetIdnAsciiString(string unicode, out string idn)
+        {
+            try
+            {
+                idn = IdnMapping.GetAscii(unicode);
+                return true;
+            }
+            catch (ArgumentException)
+            {
+
+            }
+
+            idn = null;
+            return false;
         }
 
         static bool ValidateColor(string value) => ColorHelpers.IsValid(value);
 
-        static bool ValidateIPv6(string value) => Uri.CheckHostName(value) == UriHostNameType.IPv6;
+        static bool ValidateIPv6(string value) => Uri.CheckHostName(value) == UriHostNameType.IPv6 && IPAddress.TryParse(value, out var ip) && ip.AddressFamily == AddressFamily.InterNetworkV6;
 
         static bool ValidateIPv4(string value)
         {

@@ -19765,6 +19765,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft6")]
         [TestCategory("items")]
@@ -19843,6 +19844,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft6")]
         [TestCategory("items")]
@@ -32415,6 +32417,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft7")]
         [TestCategory("items")]
@@ -32493,6 +32496,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory("draft7")]
         [TestCategory("items")]
