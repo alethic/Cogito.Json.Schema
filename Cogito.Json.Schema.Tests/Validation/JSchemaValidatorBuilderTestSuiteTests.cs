@@ -41480,6 +41480,17283 @@ namespace Cogito.Json.Schema.Tests.Validation
             JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
         }
 
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalItems")]
+        public void Test_draft2019_09__additionalItems__additionalItems_as_schema__additional_items_match_schema()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3t9XSwiYWRkaXRpb25hbEl0ZW1zIjp7InR5cGUiOiJpbnRlZ2VyIn19");
+            var t = ParseJToken("W251bGwsMiwzLDRd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalItems")]
+        public void Test_draft2019_09__additionalItems__additionalItems_as_schema__additional_items_do_not_match_schema_2()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3t9XSwiYWRkaXRpb25hbEl0ZW1zIjp7InR5cGUiOiJpbnRlZ2VyIn19");
+            var t = ParseJToken("W251bGwsMiwzLCJmb28iXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalItems")]
+        public void Test_draft2019_09__additionalItems__when_items_is_schema__additionalItems_does_nothing_2__all_items_match_schema()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6e30sImFkZGl0aW9uYWxJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("WzEsMiwzLDQsNV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalItems")]
+        public void Test_draft2019_09__additionalItems__array_of_items_with_no_additionalItems_permitted_3__empty_array()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3t9LHt9LHt9XSwiYWRkaXRpb25hbEl0ZW1zIjpmYWxzZX0=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalItems")]
+        public void Test_draft2019_09__additionalItems__array_of_items_with_no_additionalItems_permitted_3__fewer_number_of_items_present__1__2()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3t9LHt9LHt9XSwiYWRkaXRpb25hbEl0ZW1zIjpmYWxzZX0=");
+            var t = ParseJToken("WzFd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalItems")]
+        public void Test_draft2019_09__additionalItems__array_of_items_with_no_additionalItems_permitted_3__fewer_number_of_items_present__2__3()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3t9LHt9LHt9XSwiYWRkaXRpb25hbEl0ZW1zIjpmYWxzZX0=");
+            var t = ParseJToken("WzEsMl0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalItems")]
+        public void Test_draft2019_09__additionalItems__array_of_items_with_no_additionalItems_permitted_3__equal_number_of_items_present_4()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3t9LHt9LHt9XSwiYWRkaXRpb25hbEl0ZW1zIjpmYWxzZX0=");
+            var t = ParseJToken("WzEsMiwzXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalItems")]
+        public void Test_draft2019_09__additionalItems__array_of_items_with_no_additionalItems_permitted_3__additional_items_are_not_permitted_5()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3t9LHt9LHt9XSwiYWRkaXRpb25hbEl0ZW1zIjpmYWxzZX0=");
+            var t = ParseJToken("WzEsMiwzLDRd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalItems")]
+        public void Test_draft2019_09__additionalItems__additionalItems_as_false_without_items_4__items_defaults_to_empty_schema_so_everything_is_valid()
+        {
+            var s = ParseSchema("eyJhZGRpdGlvbmFsSXRlbXMiOmZhbHNlfQ==");
+            var t = ParseJToken("WzEsMiwzLDQsNV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalItems")]
+        public void Test_draft2019_09__additionalItems__additionalItems_as_false_without_items_4__ignores_non_arrays_2()
+        {
+            var s = ParseSchema("eyJhZGRpdGlvbmFsSXRlbXMiOmZhbHNlfQ==");
+            var t = ParseJToken("eyJmb28iOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalItems")]
+        public void Test_draft2019_09__additionalItems__additionalItems_are_allowed_by_default_5__only_the_first_item_is_validated()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImludGVnZXIifV19");
+            var t = ParseJToken("WzEsImZvbyIsZmFsc2Vd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalItems")]
+        public void Test_draft2019_09__additionalItems__additionalItems_should_not_look_in_applicators__valid_case_6__items_defined_in_allOf_are_not_examined()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3siaXRlbXMiOlt7InR5cGUiOiJpbnRlZ2VyIn1dfV0sImFkZGl0aW9uYWxJdGVtcyI6eyJ0eXBlIjoiYm9vbGVhbiJ9fQ==");
+            var t = ParseJToken("WzEsbnVsbF0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalItems")]
+        public void Test_draft2019_09__additionalItems__additionalItems_should_not_look_in_applicators__invalid_case_7__items_defined_in_allOf_are_not_examined()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3siaXRlbXMiOlt7InR5cGUiOiJpbnRlZ2VyIn0seyJ0eXBlIjoic3RyaW5nIn1dfV0sIml0ZW1zIjpbeyJ0eXBlIjoiaW50ZWdlciJ9XSwiYWRkaXRpb25hbEl0ZW1zIjp7InR5cGUiOiJib29sZWFuIn19");
+            var t = ParseJToken("WzEsImhlbGxvIl0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalItems")]
+        public void Test_draft2019_09__additionalItems__items_validation_adjusts_the_starting_index_for_additionalItems_8__valid_items()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6InN0cmluZyJ9XSwiYWRkaXRpb25hbEl0ZW1zIjp7InR5cGUiOiJpbnRlZ2VyIn19");
+            var t = ParseJToken("WyJ4IiwyLDNd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalItems")]
+        public void Test_draft2019_09__additionalItems__items_validation_adjusts_the_starting_index_for_additionalItems_8__wrong_type_of_second_item_2()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6InN0cmluZyJ9XSwiYWRkaXRpb25hbEl0ZW1zIjp7InR5cGUiOiJpbnRlZ2VyIn19");
+            var t = ParseJToken("WyJ4IiwieSJd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalProperties")]
+        public void Test_draft2019_09__additionalProperties__additionalProperties_being_false_does_not_allow_other_properties__no_additional_properties_is_valid()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6e30sImJhciI6e319LCJwYXR0ZXJuUHJvcGVydGllcyI6eyJediI6e319LCJhZGRpdGlvbmFsUHJvcGVydGllcyI6ZmFsc2V9");
+            var t = ParseJToken("eyJmb28iOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalProperties")]
+        public void Test_draft2019_09__additionalProperties__additionalProperties_being_false_does_not_allow_other_properties__an_additional_property_is_invalid_2()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6e30sImJhciI6e319LCJwYXR0ZXJuUHJvcGVydGllcyI6eyJediI6e319LCJhZGRpdGlvbmFsUHJvcGVydGllcyI6ZmFsc2V9");
+            var t = ParseJToken("eyJmb28iOjEsImJhciI6MiwicXV1eCI6ImJvb20ifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalProperties")]
+        public void Test_draft2019_09__additionalProperties__additionalProperties_being_false_does_not_allow_other_properties__ignores_arrays_3()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6e30sImJhciI6e319LCJwYXR0ZXJuUHJvcGVydGllcyI6eyJediI6e319LCJhZGRpdGlvbmFsUHJvcGVydGllcyI6ZmFsc2V9");
+            var t = ParseJToken("WzEsMiwzXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalProperties")]
+        public void Test_draft2019_09__additionalProperties__additionalProperties_being_false_does_not_allow_other_properties__ignores_strings_4()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6e30sImJhciI6e319LCJwYXR0ZXJuUHJvcGVydGllcyI6eyJediI6e319LCJhZGRpdGlvbmFsUHJvcGVydGllcyI6ZmFsc2V9");
+            var t = ParseJToken("ImZvb2JhcmJheiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalProperties")]
+        public void Test_draft2019_09__additionalProperties__additionalProperties_being_false_does_not_allow_other_properties__ignores_other_non_objects_5()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6e30sImJhciI6e319LCJwYXR0ZXJuUHJvcGVydGllcyI6eyJediI6e319LCJhZGRpdGlvbmFsUHJvcGVydGllcyI6ZmFsc2V9");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalProperties")]
+        public void Test_draft2019_09__additionalProperties__additionalProperties_being_false_does_not_allow_other_properties__patternProperties_are_not_additional_properties_6()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6e30sImJhciI6e319LCJwYXR0ZXJuUHJvcGVydGllcyI6eyJediI6e319LCJhZGRpdGlvbmFsUHJvcGVydGllcyI6ZmFsc2V9");
+            var t = ParseJToken("eyJmb28iOjEsInZyb29tIjoyfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalProperties")]
+        public void Test_draft2019_09__additionalProperties__non_ASCII_pattern_with_additionalProperties_2__matching_the_pattern_is_valid()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJew6EiOnt9fSwiYWRkaXRpb25hbFByb3BlcnRpZXMiOmZhbHNlfQ==");
+            var t = ParseJToken("eyLDoXJtw6FueW9zIjoyfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalProperties")]
+        public void Test_draft2019_09__additionalProperties__non_ASCII_pattern_with_additionalProperties_2__not_matching_the_pattern_is_invalid_2()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJew6EiOnt9fSwiYWRkaXRpb25hbFByb3BlcnRpZXMiOmZhbHNlfQ==");
+            var t = ParseJToken("eyLDqWxtw6lueSI6Mn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalProperties")]
+        public void Test_draft2019_09__additionalProperties__additionalProperties_allows_a_schema_which_should_validate_3__no_additional_properties_is_valid()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6e30sImJhciI6e319LCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyJ0eXBlIjoiYm9vbGVhbiJ9fQ==");
+            var t = ParseJToken("eyJmb28iOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalProperties")]
+        public void Test_draft2019_09__additionalProperties__additionalProperties_allows_a_schema_which_should_validate_3__an_additional_valid_property_is_valid_2()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6e30sImJhciI6e319LCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyJ0eXBlIjoiYm9vbGVhbiJ9fQ==");
+            var t = ParseJToken("eyJmb28iOjEsImJhciI6MiwicXV1eCI6dHJ1ZX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalProperties")]
+        public void Test_draft2019_09__additionalProperties__additionalProperties_allows_a_schema_which_should_validate_3__an_additional_invalid_property_is_invalid_3()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6e30sImJhciI6e319LCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyJ0eXBlIjoiYm9vbGVhbiJ9fQ==");
+            var t = ParseJToken("eyJmb28iOjEsImJhciI6MiwicXV1eCI6MTJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalProperties")]
+        public void Test_draft2019_09__additionalProperties__additionalProperties_can_exist_by_itself_4__an_additional_valid_property_is_valid()
+        {
+            var s = ParseSchema("eyJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyJ0eXBlIjoiYm9vbGVhbiJ9fQ==");
+            var t = ParseJToken("eyJmb28iOnRydWV9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalProperties")]
+        public void Test_draft2019_09__additionalProperties__additionalProperties_can_exist_by_itself_4__an_additional_invalid_property_is_invalid_2()
+        {
+            var s = ParseSchema("eyJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyJ0eXBlIjoiYm9vbGVhbiJ9fQ==");
+            var t = ParseJToken("eyJmb28iOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalProperties")]
+        public void Test_draft2019_09__additionalProperties__additionalProperties_are_allowed_by_default_5__additional_properties_are_allowed()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6e30sImJhciI6e319fQ==");
+            var t = ParseJToken("eyJmb28iOjEsImJhciI6MiwicXV1eCI6dHJ1ZX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("additionalProperties")]
+        public void Test_draft2019_09__additionalProperties__additionalProperties_should_not_look_in_applicators_6__properties_defined_in_allOf_are_not_examined()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3sicHJvcGVydGllcyI6eyJmb28iOnt9fX1dLCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyJ0eXBlIjoiYm9vbGVhbiJ9fQ==");
+            var t = ParseJToken("eyJmb28iOjEsImJhciI6dHJ1ZX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf__allOf()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3sicHJvcGVydGllcyI6eyJiYXIiOnsidHlwZSI6ImludGVnZXIifX0sInJlcXVpcmVkIjpbImJhciJdfSx7InByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbImZvbyJdfV19");
+            var t = ParseJToken("eyJmb28iOiJiYXoiLCJiYXIiOjJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf__mismatch_second_2()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3sicHJvcGVydGllcyI6eyJiYXIiOnsidHlwZSI6ImludGVnZXIifX0sInJlcXVpcmVkIjpbImJhciJdfSx7InByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbImZvbyJdfV19");
+            var t = ParseJToken("eyJmb28iOiJiYXoifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf__mismatch_first_3()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3sicHJvcGVydGllcyI6eyJiYXIiOnsidHlwZSI6ImludGVnZXIifX0sInJlcXVpcmVkIjpbImJhciJdfSx7InByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbImZvbyJdfV19");
+            var t = ParseJToken("eyJiYXIiOjJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf__wrong_type_4()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3sicHJvcGVydGllcyI6eyJiYXIiOnsidHlwZSI6ImludGVnZXIifX0sInJlcXVpcmVkIjpbImJhciJdfSx7InByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbImZvbyJdfV19");
+            var t = ParseJToken("eyJmb28iOiJiYXoiLCJiYXIiOiJxdXV4In0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf_with_base_schema_2__valid()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImJhciI6eyJ0eXBlIjoiaW50ZWdlciJ9fSwicmVxdWlyZWQiOlsiYmFyIl0sImFsbE9mIjpbeyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoic3RyaW5nIn19LCJyZXF1aXJlZCI6WyJmb28iXX0seyJwcm9wZXJ0aWVzIjp7ImJheiI6eyJ0eXBlIjoibnVsbCJ9fSwicmVxdWlyZWQiOlsiYmF6Il19XX0=");
+            var t = ParseJToken("eyJmb28iOiJxdXV4IiwiYmFyIjoyLCJiYXoiOm51bGx9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf_with_base_schema_2__mismatch_base_schema_2()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImJhciI6eyJ0eXBlIjoiaW50ZWdlciJ9fSwicmVxdWlyZWQiOlsiYmFyIl0sImFsbE9mIjpbeyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoic3RyaW5nIn19LCJyZXF1aXJlZCI6WyJmb28iXX0seyJwcm9wZXJ0aWVzIjp7ImJheiI6eyJ0eXBlIjoibnVsbCJ9fSwicmVxdWlyZWQiOlsiYmF6Il19XX0=");
+            var t = ParseJToken("eyJmb28iOiJxdXV4IiwiYmF6IjpudWxsfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf_with_base_schema_2__mismatch_first_allOf_3()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImJhciI6eyJ0eXBlIjoiaW50ZWdlciJ9fSwicmVxdWlyZWQiOlsiYmFyIl0sImFsbE9mIjpbeyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoic3RyaW5nIn19LCJyZXF1aXJlZCI6WyJmb28iXX0seyJwcm9wZXJ0aWVzIjp7ImJheiI6eyJ0eXBlIjoibnVsbCJ9fSwicmVxdWlyZWQiOlsiYmF6Il19XX0=");
+            var t = ParseJToken("eyJiYXIiOjIsImJheiI6bnVsbH0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf_with_base_schema_2__mismatch_second_allOf_4()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImJhciI6eyJ0eXBlIjoiaW50ZWdlciJ9fSwicmVxdWlyZWQiOlsiYmFyIl0sImFsbE9mIjpbeyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoic3RyaW5nIn19LCJyZXF1aXJlZCI6WyJmb28iXX0seyJwcm9wZXJ0aWVzIjp7ImJheiI6eyJ0eXBlIjoibnVsbCJ9fSwicmVxdWlyZWQiOlsiYmF6Il19XX0=");
+            var t = ParseJToken("eyJmb28iOiJxdXV4IiwiYmFyIjoyfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf_with_base_schema_2__mismatch_both_5()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImJhciI6eyJ0eXBlIjoiaW50ZWdlciJ9fSwicmVxdWlyZWQiOlsiYmFyIl0sImFsbE9mIjpbeyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoic3RyaW5nIn19LCJyZXF1aXJlZCI6WyJmb28iXX0seyJwcm9wZXJ0aWVzIjp7ImJheiI6eyJ0eXBlIjoibnVsbCJ9fSwicmVxdWlyZWQiOlsiYmF6Il19XX0=");
+            var t = ParseJToken("eyJiYXIiOjJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf_simple_types_3__valid()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3sibWF4aW11bSI6MzB9LHsibWluaW11bSI6MjB9XX0=");
+            var t = ParseJToken("MjU=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf_simple_types_3__mismatch_one_2()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3sibWF4aW11bSI6MzB9LHsibWluaW11bSI6MjB9XX0=");
+            var t = ParseJToken("MzU=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf_with_boolean_schemas__all_true_4__any_value_is_valid()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3RydWUsdHJ1ZV19");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf_with_boolean_schemas__some_false_5__any_value_is_invalid()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3RydWUsZmFsc2VdfQ==");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf_with_boolean_schemas__all_false_6__any_value_is_invalid()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W2ZhbHNlLGZhbHNlXX0=");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf_with_one_empty_schema_7__any_data_is_valid()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3t9XX0=");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf_with_two_empty_schemas_8__any_data_is_valid()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3t9LHt9XX0=");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf_with_the_first_empty_schema_9__number_is_valid()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3t9LHsidHlwZSI6Im51bWJlciJ9XX0=");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf_with_the_first_empty_schema_9__string_is_invalid_2()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3t9LHsidHlwZSI6Im51bWJlciJ9XX0=");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf_with_the_last_empty_schema_10__number_is_valid()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3sidHlwZSI6Im51bWJlciJ9LHt9XX0=");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf_with_the_last_empty_schema_10__string_is_invalid_2()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3sidHlwZSI6Im51bWJlciJ9LHt9XX0=");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__nested_allOf__to_check_validation_semantics_11__null_is_valid()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3siYWxsT2YiOlt7InR5cGUiOiJudWxsIn1dfV19");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__nested_allOf__to_check_validation_semantics_11__anything_non_null_is_invalid_2()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3siYWxsT2YiOlt7InR5cGUiOiJudWxsIn1dfV19");
+            var t = ParseJToken("MTIz");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf_combined_with_anyOf__oneOf_12__allOf__false__anyOf__false__oneOf__false()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3sibXVsdGlwbGVPZiI6Mn1dLCJhbnlPZiI6W3sibXVsdGlwbGVPZiI6M31dLCJvbmVPZiI6W3sibXVsdGlwbGVPZiI6NX1dfQ==");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf_combined_with_anyOf__oneOf_12__allOf__false__anyOf__false__oneOf__true_2()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3sibXVsdGlwbGVPZiI6Mn1dLCJhbnlPZiI6W3sibXVsdGlwbGVPZiI6M31dLCJvbmVPZiI6W3sibXVsdGlwbGVPZiI6NX1dfQ==");
+            var t = ParseJToken("NQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf_combined_with_anyOf__oneOf_12__allOf__false__anyOf__true__oneOf__false_3()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3sibXVsdGlwbGVPZiI6Mn1dLCJhbnlPZiI6W3sibXVsdGlwbGVPZiI6M31dLCJvbmVPZiI6W3sibXVsdGlwbGVPZiI6NX1dfQ==");
+            var t = ParseJToken("Mw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf_combined_with_anyOf__oneOf_12__allOf__false__anyOf__true__oneOf__true_4()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3sibXVsdGlwbGVPZiI6Mn1dLCJhbnlPZiI6W3sibXVsdGlwbGVPZiI6M31dLCJvbmVPZiI6W3sibXVsdGlwbGVPZiI6NX1dfQ==");
+            var t = ParseJToken("MTU=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf_combined_with_anyOf__oneOf_12__allOf__true__anyOf__false__oneOf__false_5()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3sibXVsdGlwbGVPZiI6Mn1dLCJhbnlPZiI6W3sibXVsdGlwbGVPZiI6M31dLCJvbmVPZiI6W3sibXVsdGlwbGVPZiI6NX1dfQ==");
+            var t = ParseJToken("Mg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf_combined_with_anyOf__oneOf_12__allOf__true__anyOf__false__oneOf__true_6()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3sibXVsdGlwbGVPZiI6Mn1dLCJhbnlPZiI6W3sibXVsdGlwbGVPZiI6M31dLCJvbmVPZiI6W3sibXVsdGlwbGVPZiI6NX1dfQ==");
+            var t = ParseJToken("MTA=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf_combined_with_anyOf__oneOf_12__allOf__true__anyOf__true__oneOf__false_7()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3sibXVsdGlwbGVPZiI6Mn1dLCJhbnlPZiI6W3sibXVsdGlwbGVPZiI6M31dLCJvbmVPZiI6W3sibXVsdGlwbGVPZiI6NX1dfQ==");
+            var t = ParseJToken("Ng==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("allOf")]
+        public void Test_draft2019_09__allOf__allOf_combined_with_anyOf__oneOf_12__allOf__true__anyOf__true__oneOf__true_8()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3sibXVsdGlwbGVPZiI6Mn1dLCJhbnlPZiI6W3sibXVsdGlwbGVPZiI6M31dLCJvbmVPZiI6W3sibXVsdGlwbGVPZiI6NX1dfQ==");
+            var t = ParseJToken("MzA=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anchor")]
+        public void Test_draft2019_09__anchor__Location_independent_identifier__match()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiI2ZvbyIsIiRkZWZzIjp7IkEiOnsiJGFuY2hvciI6ImZvbyIsInR5cGUiOiJpbnRlZ2VyIn19fQ==");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anchor")]
+        public void Test_draft2019_09__anchor__Location_independent_identifier__mismatch_2()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiI2ZvbyIsIiRkZWZzIjp7IkEiOnsiJGFuY2hvciI6ImZvbyIsInR5cGUiOiJpbnRlZ2VyIn19fQ==");
+            var t = ParseJToken("ImEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anchor")]
+        public void Test_draft2019_09__anchor__Location_independent_identifier_with_absolute_URI_2__match()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cDovL2xvY2FsaG9zdDoxMjM0L2JhciNmb28iLCIkZGVmcyI6eyJBIjp7IiRpZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MTIzNC9iYXIiLCIkYW5jaG9yIjoiZm9vIiwidHlwZSI6ImludGVnZXIifX19");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anchor")]
+        public void Test_draft2019_09__anchor__Location_independent_identifier_with_absolute_URI_2__mismatch_2()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cDovL2xvY2FsaG9zdDoxMjM0L2JhciNmb28iLCIkZGVmcyI6eyJBIjp7IiRpZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MTIzNC9iYXIiLCIkYW5jaG9yIjoiZm9vIiwidHlwZSI6ImludGVnZXIifX19");
+            var t = ParseJToken("ImEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anchor")]
+        public void Test_draft2019_09__anchor__Location_independent_identifier_with_base_URI_change_in_subschema_3__match()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjEyMzQvcm9vdCIsIiRyZWYiOiJodHRwOi8vbG9jYWxob3N0OjEyMzQvbmVzdGVkLmpzb24jZm9vIiwiJGRlZnMiOnsiQSI6eyIkaWQiOiJuZXN0ZWQuanNvbiIsIiRkZWZzIjp7IkIiOnsiJGFuY2hvciI6ImZvbyIsInR5cGUiOiJpbnRlZ2VyIn19fX19");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anchor")]
+        public void Test_draft2019_09__anchor__Location_independent_identifier_with_base_URI_change_in_subschema_3__mismatch_2()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjEyMzQvcm9vdCIsIiRyZWYiOiJodHRwOi8vbG9jYWxob3N0OjEyMzQvbmVzdGVkLmpzb24jZm9vIiwiJGRlZnMiOnsiQSI6eyIkaWQiOiJuZXN0ZWQuanNvbiIsIiRkZWZzIjp7IkIiOnsiJGFuY2hvciI6ImZvbyIsInR5cGUiOiJpbnRlZ2VyIn19fX19");
+            var t = ParseJToken("ImEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anchor")]
+        public void Test_draft2019_09__anchor___anchor_inside_an_enum_is_not_a_real_identifier_4__exact_match_to_enum__and_type_matches()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJhbmNob3JfaW5fZW51bSI6eyJlbnVtIjpbeyIkYW5jaG9yIjoibXlfYW5jaG9yIiwidHlwZSI6Im51bGwifV19LCJyZWFsX2lkZW50aWZpZXJfaW5fc2NoZW1hIjp7IiRhbmNob3IiOiJteV9hbmNob3IiLCJ0eXBlIjoic3RyaW5nIn0sInp6el9hbmNob3JfaW5fY29uc3QiOnsiY29uc3QiOnsiJGFuY2hvciI6Im15X2FuY2hvciIsInR5cGUiOiJudWxsIn19fSwiYW55T2YiOlt7IiRyZWYiOiIjLyRkZWZzL2FuY2hvcl9pbl9lbnVtIn0seyIkcmVmIjoiI215X2FuY2hvciJ9XX0=");
+            var t = ParseJToken("eyIkYW5jaG9yIjoibXlfYW5jaG9yIiwidHlwZSI6Im51bGwifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anchor")]
+        public void Test_draft2019_09__anchor___anchor_inside_an_enum_is_not_a_real_identifier_4__in_implementations_that_strip__anchor__this_may_match_either__def_2()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJhbmNob3JfaW5fZW51bSI6eyJlbnVtIjpbeyIkYW5jaG9yIjoibXlfYW5jaG9yIiwidHlwZSI6Im51bGwifV19LCJyZWFsX2lkZW50aWZpZXJfaW5fc2NoZW1hIjp7IiRhbmNob3IiOiJteV9hbmNob3IiLCJ0eXBlIjoic3RyaW5nIn0sInp6el9hbmNob3JfaW5fY29uc3QiOnsiY29uc3QiOnsiJGFuY2hvciI6Im15X2FuY2hvciIsInR5cGUiOiJudWxsIn19fSwiYW55T2YiOlt7IiRyZWYiOiIjLyRkZWZzL2FuY2hvcl9pbl9lbnVtIn0seyIkcmVmIjoiI215X2FuY2hvciJ9XX0=");
+            var t = ParseJToken("eyJ0eXBlIjoibnVsbCJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anchor")]
+        public void Test_draft2019_09__anchor___anchor_inside_an_enum_is_not_a_real_identifier_4__match__ref_to__anchor_3()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJhbmNob3JfaW5fZW51bSI6eyJlbnVtIjpbeyIkYW5jaG9yIjoibXlfYW5jaG9yIiwidHlwZSI6Im51bGwifV19LCJyZWFsX2lkZW50aWZpZXJfaW5fc2NoZW1hIjp7IiRhbmNob3IiOiJteV9hbmNob3IiLCJ0eXBlIjoic3RyaW5nIn0sInp6el9hbmNob3JfaW5fY29uc3QiOnsiY29uc3QiOnsiJGFuY2hvciI6Im15X2FuY2hvciIsInR5cGUiOiJudWxsIn19fSwiYW55T2YiOlt7IiRyZWYiOiIjLyRkZWZzL2FuY2hvcl9pbl9lbnVtIn0seyIkcmVmIjoiI215X2FuY2hvciJ9XX0=");
+            var t = ParseJToken("ImEgc3RyaW5nIHRvIG1hdGNoICMvJGRlZnMvYW5jaG9yX2luX2VudW0i");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anchor")]
+        public void Test_draft2019_09__anchor___anchor_inside_an_enum_is_not_a_real_identifier_4__no_match_on_enum_or__ref_to__anchor_4()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJhbmNob3JfaW5fZW51bSI6eyJlbnVtIjpbeyIkYW5jaG9yIjoibXlfYW5jaG9yIiwidHlwZSI6Im51bGwifV19LCJyZWFsX2lkZW50aWZpZXJfaW5fc2NoZW1hIjp7IiRhbmNob3IiOiJteV9hbmNob3IiLCJ0eXBlIjoic3RyaW5nIn0sInp6el9hbmNob3JfaW5fY29uc3QiOnsiY29uc3QiOnsiJGFuY2hvciI6Im15X2FuY2hvciIsInR5cGUiOiJudWxsIn19fSwiYW55T2YiOlt7IiRyZWYiOiIjLyRkZWZzL2FuY2hvcl9pbl9lbnVtIn0seyIkcmVmIjoiI215X2FuY2hvciJ9XX0=");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anyOf")]
+        public void Test_draft2019_09__anyOf__anyOf__first_anyOf_valid()
+        {
+            var s = ParseSchema("eyJhbnlPZiI6W3sidHlwZSI6ImludGVnZXIifSx7Im1pbmltdW0iOjJ9XX0=");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anyOf")]
+        public void Test_draft2019_09__anyOf__anyOf__second_anyOf_valid_2()
+        {
+            var s = ParseSchema("eyJhbnlPZiI6W3sidHlwZSI6ImludGVnZXIifSx7Im1pbmltdW0iOjJ9XX0=");
+            var t = ParseJToken("Mi41");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anyOf")]
+        public void Test_draft2019_09__anyOf__anyOf__both_anyOf_valid_3()
+        {
+            var s = ParseSchema("eyJhbnlPZiI6W3sidHlwZSI6ImludGVnZXIifSx7Im1pbmltdW0iOjJ9XX0=");
+            var t = ParseJToken("Mw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anyOf")]
+        public void Test_draft2019_09__anyOf__anyOf__neither_anyOf_valid_4()
+        {
+            var s = ParseSchema("eyJhbnlPZiI6W3sidHlwZSI6ImludGVnZXIifSx7Im1pbmltdW0iOjJ9XX0=");
+            var t = ParseJToken("MS41");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anyOf")]
+        public void Test_draft2019_09__anyOf__anyOf_with_base_schema_2__mismatch_base_schema()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwiYW55T2YiOlt7Im1heExlbmd0aCI6Mn0seyJtaW5MZW5ndGgiOjR9XX0=");
+            var t = ParseJToken("Mw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anyOf")]
+        public void Test_draft2019_09__anyOf__anyOf_with_base_schema_2__one_anyOf_valid_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwiYW55T2YiOlt7Im1heExlbmd0aCI6Mn0seyJtaW5MZW5ndGgiOjR9XX0=");
+            var t = ParseJToken("ImZvb2JhciI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anyOf")]
+        public void Test_draft2019_09__anyOf__anyOf_with_base_schema_2__both_anyOf_invalid_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwiYW55T2YiOlt7Im1heExlbmd0aCI6Mn0seyJtaW5MZW5ndGgiOjR9XX0=");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anyOf")]
+        public void Test_draft2019_09__anyOf__anyOf_with_boolean_schemas__all_true_3__any_value_is_valid()
+        {
+            var s = ParseSchema("eyJhbnlPZiI6W3RydWUsdHJ1ZV19");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anyOf")]
+        public void Test_draft2019_09__anyOf__anyOf_with_boolean_schemas__some_true_4__any_value_is_valid()
+        {
+            var s = ParseSchema("eyJhbnlPZiI6W3RydWUsZmFsc2VdfQ==");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anyOf")]
+        public void Test_draft2019_09__anyOf__anyOf_with_boolean_schemas__all_false_5__any_value_is_invalid()
+        {
+            var s = ParseSchema("eyJhbnlPZiI6W2ZhbHNlLGZhbHNlXX0=");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anyOf")]
+        public void Test_draft2019_09__anyOf__anyOf_complex_types_6__first_anyOf_valid__complex_()
+        {
+            var s = ParseSchema("eyJhbnlPZiI6W3sicHJvcGVydGllcyI6eyJiYXIiOnsidHlwZSI6ImludGVnZXIifX0sInJlcXVpcmVkIjpbImJhciJdfSx7InByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbImZvbyJdfV19");
+            var t = ParseJToken("eyJiYXIiOjJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anyOf")]
+        public void Test_draft2019_09__anyOf__anyOf_complex_types_6__second_anyOf_valid__complex__2()
+        {
+            var s = ParseSchema("eyJhbnlPZiI6W3sicHJvcGVydGllcyI6eyJiYXIiOnsidHlwZSI6ImludGVnZXIifX0sInJlcXVpcmVkIjpbImJhciJdfSx7InByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbImZvbyJdfV19");
+            var t = ParseJToken("eyJmb28iOiJiYXoifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anyOf")]
+        public void Test_draft2019_09__anyOf__anyOf_complex_types_6__both_anyOf_valid__complex__3()
+        {
+            var s = ParseSchema("eyJhbnlPZiI6W3sicHJvcGVydGllcyI6eyJiYXIiOnsidHlwZSI6ImludGVnZXIifX0sInJlcXVpcmVkIjpbImJhciJdfSx7InByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbImZvbyJdfV19");
+            var t = ParseJToken("eyJmb28iOiJiYXoiLCJiYXIiOjJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anyOf")]
+        public void Test_draft2019_09__anyOf__anyOf_complex_types_6__neither_anyOf_valid__complex__4()
+        {
+            var s = ParseSchema("eyJhbnlPZiI6W3sicHJvcGVydGllcyI6eyJiYXIiOnsidHlwZSI6ImludGVnZXIifX0sInJlcXVpcmVkIjpbImJhciJdfSx7InByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbImZvbyJdfV19");
+            var t = ParseJToken("eyJmb28iOjIsImJhciI6InF1dXgifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anyOf")]
+        public void Test_draft2019_09__anyOf__anyOf_with_one_empty_schema_7__string_is_valid()
+        {
+            var s = ParseSchema("eyJhbnlPZiI6W3sidHlwZSI6Im51bWJlciJ9LHt9XX0=");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anyOf")]
+        public void Test_draft2019_09__anyOf__anyOf_with_one_empty_schema_7__number_is_valid_2()
+        {
+            var s = ParseSchema("eyJhbnlPZiI6W3sidHlwZSI6Im51bWJlciJ9LHt9XX0=");
+            var t = ParseJToken("MTIz");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anyOf")]
+        public void Test_draft2019_09__anyOf__nested_anyOf__to_check_validation_semantics_8__null_is_valid()
+        {
+            var s = ParseSchema("eyJhbnlPZiI6W3siYW55T2YiOlt7InR5cGUiOiJudWxsIn1dfV19");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("anyOf")]
+        public void Test_draft2019_09__anyOf__nested_anyOf__to_check_validation_semantics_8__anything_non_null_is_invalid_2()
+        {
+            var s = ParseSchema("eyJhbnlPZiI6W3siYW55T2YiOlt7InR5cGUiOiJudWxsIn1dfV19");
+            var t = ParseJToken("MTIz");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("boolean_schema")]
+        public void Test_draft2019_09__boolean_schema__boolean_schema__true___number_is_valid()
+        {
+            var s = ParseSchema("dHJ1ZQ==");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("boolean_schema")]
+        public void Test_draft2019_09__boolean_schema__boolean_schema__true___string_is_valid_2()
+        {
+            var s = ParseSchema("dHJ1ZQ==");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("boolean_schema")]
+        public void Test_draft2019_09__boolean_schema__boolean_schema__true___boolean_true_is_valid_3()
+        {
+            var s = ParseSchema("dHJ1ZQ==");
+            var t = ParseJToken("dHJ1ZQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("boolean_schema")]
+        public void Test_draft2019_09__boolean_schema__boolean_schema__true___boolean_false_is_valid_4()
+        {
+            var s = ParseSchema("dHJ1ZQ==");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("boolean_schema")]
+        public void Test_draft2019_09__boolean_schema__boolean_schema__true___null_is_valid_5()
+        {
+            var s = ParseSchema("dHJ1ZQ==");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("boolean_schema")]
+        public void Test_draft2019_09__boolean_schema__boolean_schema__true___object_is_valid_6()
+        {
+            var s = ParseSchema("dHJ1ZQ==");
+            var t = ParseJToken("eyJmb28iOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("boolean_schema")]
+        public void Test_draft2019_09__boolean_schema__boolean_schema__true___empty_object_is_valid_7()
+        {
+            var s = ParseSchema("dHJ1ZQ==");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("boolean_schema")]
+        public void Test_draft2019_09__boolean_schema__boolean_schema__true___array_is_valid_8()
+        {
+            var s = ParseSchema("dHJ1ZQ==");
+            var t = ParseJToken("WyJmb28iXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("boolean_schema")]
+        public void Test_draft2019_09__boolean_schema__boolean_schema__true___empty_array_is_valid_9()
+        {
+            var s = ParseSchema("dHJ1ZQ==");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("boolean_schema")]
+        public void Test_draft2019_09__boolean_schema__boolean_schema__false__2__number_is_invalid()
+        {
+            var s = ParseSchema("ZmFsc2U=");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("boolean_schema")]
+        public void Test_draft2019_09__boolean_schema__boolean_schema__false__2__string_is_invalid_2()
+        {
+            var s = ParseSchema("ZmFsc2U=");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("boolean_schema")]
+        public void Test_draft2019_09__boolean_schema__boolean_schema__false__2__boolean_true_is_invalid_3()
+        {
+            var s = ParseSchema("ZmFsc2U=");
+            var t = ParseJToken("dHJ1ZQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("boolean_schema")]
+        public void Test_draft2019_09__boolean_schema__boolean_schema__false__2__boolean_false_is_invalid_4()
+        {
+            var s = ParseSchema("ZmFsc2U=");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("boolean_schema")]
+        public void Test_draft2019_09__boolean_schema__boolean_schema__false__2__null_is_invalid_5()
+        {
+            var s = ParseSchema("ZmFsc2U=");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("boolean_schema")]
+        public void Test_draft2019_09__boolean_schema__boolean_schema__false__2__object_is_invalid_6()
+        {
+            var s = ParseSchema("ZmFsc2U=");
+            var t = ParseJToken("eyJmb28iOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("boolean_schema")]
+        public void Test_draft2019_09__boolean_schema__boolean_schema__false__2__empty_object_is_invalid_7()
+        {
+            var s = ParseSchema("ZmFsc2U=");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("boolean_schema")]
+        public void Test_draft2019_09__boolean_schema__boolean_schema__false__2__array_is_invalid_8()
+        {
+            var s = ParseSchema("ZmFsc2U=");
+            var t = ParseJToken("WyJmb28iXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("boolean_schema")]
+        public void Test_draft2019_09__boolean_schema__boolean_schema__false__2__empty_array_is_invalid_9()
+        {
+            var s = ParseSchema("ZmFsc2U=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_validation__same_value_is_valid()
+        {
+            var s = ParseSchema("eyJjb25zdCI6Mn0=");
+            var t = ParseJToken("Mg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_validation__another_value_is_invalid_2()
+        {
+            var s = ParseSchema("eyJjb25zdCI6Mn0=");
+            var t = ParseJToken("NQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_validation__another_type_is_invalid_3()
+        {
+            var s = ParseSchema("eyJjb25zdCI6Mn0=");
+            var t = ParseJToken("ImEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with_object_2__same_object_is_valid()
+        {
+            var s = ParseSchema("eyJjb25zdCI6eyJmb28iOiJiYXIiLCJiYXoiOiJiYXgifX0=");
+            var t = ParseJToken("eyJmb28iOiJiYXIiLCJiYXoiOiJiYXgifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with_object_2__same_object_with_different_property_order_is_valid_2()
+        {
+            var s = ParseSchema("eyJjb25zdCI6eyJmb28iOiJiYXIiLCJiYXoiOiJiYXgifX0=");
+            var t = ParseJToken("eyJiYXoiOiJiYXgiLCJmb28iOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with_object_2__another_object_is_invalid_3()
+        {
+            var s = ParseSchema("eyJjb25zdCI6eyJmb28iOiJiYXIiLCJiYXoiOiJiYXgifX0=");
+            var t = ParseJToken("eyJmb28iOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with_object_2__another_type_is_invalid_4()
+        {
+            var s = ParseSchema("eyJjb25zdCI6eyJmb28iOiJiYXIiLCJiYXoiOiJiYXgifX0=");
+            var t = ParseJToken("WzEsMl0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with_array_3__same_array_is_valid()
+        {
+            var s = ParseSchema("eyJjb25zdCI6W3siZm9vIjoiYmFyIn1dfQ==");
+            var t = ParseJToken("W3siZm9vIjoiYmFyIn1d");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with_array_3__another_array_item_is_invalid_2()
+        {
+            var s = ParseSchema("eyJjb25zdCI6W3siZm9vIjoiYmFyIn1dfQ==");
+            var t = ParseJToken("WzJd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with_array_3__array_with_additional_items_is_invalid_3()
+        {
+            var s = ParseSchema("eyJjb25zdCI6W3siZm9vIjoiYmFyIn1dfQ==");
+            var t = ParseJToken("WzEsMiwzXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with_null_4__null_is_valid()
+        {
+            var s = ParseSchema("eyJjb25zdCI6bnVsbH0=");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with_null_4__not_null_is_invalid_2()
+        {
+            var s = ParseSchema("eyJjb25zdCI6bnVsbH0=");
+            var t = ParseJToken("MA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with_false_does_not_match_0_5__false_is_valid()
+        {
+            var s = ParseSchema("eyJjb25zdCI6ZmFsc2V9");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with_false_does_not_match_0_5__integer_zero_is_invalid_2()
+        {
+            var s = ParseSchema("eyJjb25zdCI6ZmFsc2V9");
+            var t = ParseJToken("MA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with_false_does_not_match_0_5__float_zero_is_invalid_3()
+        {
+            var s = ParseSchema("eyJjb25zdCI6ZmFsc2V9");
+            var t = ParseJToken("MC4w");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with_true_does_not_match_1_6__true_is_valid()
+        {
+            var s = ParseSchema("eyJjb25zdCI6dHJ1ZX0=");
+            var t = ParseJToken("dHJ1ZQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with_true_does_not_match_1_6__integer_one_is_invalid_2()
+        {
+            var s = ParseSchema("eyJjb25zdCI6dHJ1ZX0=");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with_true_does_not_match_1_6__float_one_is_invalid_3()
+        {
+            var s = ParseSchema("eyJjb25zdCI6dHJ1ZX0=");
+            var t = ParseJToken("MS4w");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with__false__does_not_match__0__7___false__is_valid()
+        {
+            var s = ParseSchema("eyJjb25zdCI6W2ZhbHNlXX0=");
+            var t = ParseJToken("W2ZhbHNlXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with__false__does_not_match__0__7___0__is_invalid_2()
+        {
+            var s = ParseSchema("eyJjb25zdCI6W2ZhbHNlXX0=");
+            var t = ParseJToken("WzBd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with__false__does_not_match__0__7___0_0__is_invalid_3()
+        {
+            var s = ParseSchema("eyJjb25zdCI6W2ZhbHNlXX0=");
+            var t = ParseJToken("WzAuMF0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with__true__does_not_match__1__8___true__is_valid()
+        {
+            var s = ParseSchema("eyJjb25zdCI6W3RydWVdfQ==");
+            var t = ParseJToken("W3RydWVd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with__true__does_not_match__1__8___1__is_invalid_2()
+        {
+            var s = ParseSchema("eyJjb25zdCI6W3RydWVdfQ==");
+            var t = ParseJToken("WzFd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with__true__does_not_match__1__8___1_0__is_invalid_3()
+        {
+            var s = ParseSchema("eyJjb25zdCI6W3RydWVdfQ==");
+            var t = ParseJToken("WzEuMF0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with___a___false__does_not_match___a___0__9____a___false__is_valid()
+        {
+            var s = ParseSchema("eyJjb25zdCI6eyJhIjpmYWxzZX19");
+            var t = ParseJToken("eyJhIjpmYWxzZX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with___a___false__does_not_match___a___0__9____a___0__is_invalid_2()
+        {
+            var s = ParseSchema("eyJjb25zdCI6eyJhIjpmYWxzZX19");
+            var t = ParseJToken("eyJhIjowfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with___a___false__does_not_match___a___0__9____a___0_0__is_invalid_3()
+        {
+            var s = ParseSchema("eyJjb25zdCI6eyJhIjpmYWxzZX19");
+            var t = ParseJToken("eyJhIjowLjB9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with___a___true__does_not_match___a___1__10____a___true__is_valid()
+        {
+            var s = ParseSchema("eyJjb25zdCI6eyJhIjp0cnVlfX0=");
+            var t = ParseJToken("eyJhIjp0cnVlfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with___a___true__does_not_match___a___1__10____a___1__is_invalid_2()
+        {
+            var s = ParseSchema("eyJjb25zdCI6eyJhIjp0cnVlfX0=");
+            var t = ParseJToken("eyJhIjoxfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with___a___true__does_not_match___a___1__10____a___1_0__is_invalid_3()
+        {
+            var s = ParseSchema("eyJjb25zdCI6eyJhIjp0cnVlfX0=");
+            var t = ParseJToken("eyJhIjoxLjB9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with_0_does_not_match_other_zero_like_types_11__false_is_invalid()
+        {
+            var s = ParseSchema("eyJjb25zdCI6MH0=");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with_0_does_not_match_other_zero_like_types_11__integer_zero_is_valid_2()
+        {
+            var s = ParseSchema("eyJjb25zdCI6MH0=");
+            var t = ParseJToken("MA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with_0_does_not_match_other_zero_like_types_11__float_zero_is_valid_3()
+        {
+            var s = ParseSchema("eyJjb25zdCI6MH0=");
+            var t = ParseJToken("MC4w");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with_0_does_not_match_other_zero_like_types_11__empty_object_is_invalid_4()
+        {
+            var s = ParseSchema("eyJjb25zdCI6MH0=");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with_0_does_not_match_other_zero_like_types_11__empty_array_is_invalid_5()
+        {
+            var s = ParseSchema("eyJjb25zdCI6MH0=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with_0_does_not_match_other_zero_like_types_11__empty_string_is_invalid_6()
+        {
+            var s = ParseSchema("eyJjb25zdCI6MH0=");
+            var t = ParseJToken("IiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with_1_does_not_match_true_12__true_is_invalid()
+        {
+            var s = ParseSchema("eyJjb25zdCI6MX0=");
+            var t = ParseJToken("dHJ1ZQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with_1_does_not_match_true_12__integer_one_is_valid_2()
+        {
+            var s = ParseSchema("eyJjb25zdCI6MX0=");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with_1_does_not_match_true_12__float_one_is_valid_3()
+        {
+            var s = ParseSchema("eyJjb25zdCI6MX0=");
+            var t = ParseJToken("MS4w");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with__2_0_matches_integer_and_float_types_13__integer__2_is_valid()
+        {
+            var s = ParseSchema("eyJjb25zdCI6LTIuMH0=");
+            var t = ParseJToken("LTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with__2_0_matches_integer_and_float_types_13__integer_2_is_invalid_2()
+        {
+            var s = ParseSchema("eyJjb25zdCI6LTIuMH0=");
+            var t = ParseJToken("Mg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with__2_0_matches_integer_and_float_types_13__float__2_0_is_valid_3()
+        {
+            var s = ParseSchema("eyJjb25zdCI6LTIuMH0=");
+            var t = ParseJToken("LTIuMA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with__2_0_matches_integer_and_float_types_13__float_2_0_is_invalid_4()
+        {
+            var s = ParseSchema("eyJjb25zdCI6LTIuMH0=");
+            var t = ParseJToken("Mi4w");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__const_with__2_0_matches_integer_and_float_types_13__float__2_00001_is_invalid_5()
+        {
+            var s = ParseSchema("eyJjb25zdCI6LTIuMH0=");
+            var t = ParseJToken("LTIuMDAwMDE=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__float_and_integers_are_equal_up_to_64_bit_representation_limits_14__integer_is_valid()
+        {
+            var s = ParseSchema("eyJjb25zdCI6OTAwNzE5OTI1NDc0MDk5Mn0=");
+            var t = ParseJToken("OTAwNzE5OTI1NDc0MDk5Mg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__float_and_integers_are_equal_up_to_64_bit_representation_limits_14__integer_minus_one_is_invalid_2()
+        {
+            var s = ParseSchema("eyJjb25zdCI6OTAwNzE5OTI1NDc0MDk5Mn0=");
+            var t = ParseJToken("OTAwNzE5OTI1NDc0MDk5MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__float_and_integers_are_equal_up_to_64_bit_representation_limits_14__float_is_valid_3()
+        {
+            var s = ParseSchema("eyJjb25zdCI6OTAwNzE5OTI1NDc0MDk5Mn0=");
+            var t = ParseJToken("OTAwNzE5OTI1NDc0MDk5Mi4w");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__float_and_integers_are_equal_up_to_64_bit_representation_limits_14__float_minus_one_is_invalid_4()
+        {
+            var s = ParseSchema("eyJjb25zdCI6OTAwNzE5OTI1NDc0MDk5Mn0=");
+            var t = ParseJToken("OTAwNzE5OTI1NDc0MDk5MS4w");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__nul_characters_in_strings_15__match_string_with_nul()
+        {
+            var s = ParseSchema("eyJjb25zdCI6ImhlbGxvXHUwMDAwdGhlcmUifQ==");
+            var t = ParseJToken("ImhlbGxvXHUwMDAwdGhlcmUi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("const")]
+        public void Test_draft2019_09__const__nul_characters_in_strings_15__do_not_match_string_lacking_nul_2()
+        {
+            var s = ParseSchema("eyJjb25zdCI6ImhlbGxvXHUwMDAwdGhlcmUifQ==");
+            var t = ParseJToken("ImhlbGxvdGhlcmUi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("contains")]
+        public void Test_draft2019_09__contains__contains_keyword_validation__array_with_item_matching_schema__5__is_valid()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJtaW5pbXVtIjo1fX0=");
+            var t = ParseJToken("WzMsNCw1XQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("contains")]
+        public void Test_draft2019_09__contains__contains_keyword_validation__array_with_item_matching_schema__6__is_valid_2()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJtaW5pbXVtIjo1fX0=");
+            var t = ParseJToken("WzMsNCw2XQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("contains")]
+        public void Test_draft2019_09__contains__contains_keyword_validation__array_with_two_items_matching_schema__5__6__is_valid_3()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJtaW5pbXVtIjo1fX0=");
+            var t = ParseJToken("WzMsNCw1LDZd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("contains")]
+        public void Test_draft2019_09__contains__contains_keyword_validation__array_without_items_matching_schema_is_invalid_4()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJtaW5pbXVtIjo1fX0=");
+            var t = ParseJToken("WzIsMyw0XQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("contains")]
+        public void Test_draft2019_09__contains__contains_keyword_validation__empty_array_is_invalid_5()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJtaW5pbXVtIjo1fX0=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("contains")]
+        public void Test_draft2019_09__contains__contains_keyword_validation__not_array_is_valid_6()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJtaW5pbXVtIjo1fX0=");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("contains")]
+        public void Test_draft2019_09__contains__contains_keyword_with_const_keyword_2__array_with_item_5_is_valid()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6NX19");
+            var t = ParseJToken("WzMsNCw1XQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("contains")]
+        public void Test_draft2019_09__contains__contains_keyword_with_const_keyword_2__array_with_two_items_5_is_valid_2()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6NX19");
+            var t = ParseJToken("WzMsNCw1LDVd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("contains")]
+        public void Test_draft2019_09__contains__contains_keyword_with_const_keyword_2__array_without_item_5_is_invalid_3()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6NX19");
+            var t = ParseJToken("WzEsMiwzLDRd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("contains")]
+        public void Test_draft2019_09__contains__contains_keyword_with_boolean_schema_true_3__any_non_empty_array_is_valid()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6dHJ1ZX0=");
+            var t = ParseJToken("WyJmb28iXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("contains")]
+        public void Test_draft2019_09__contains__contains_keyword_with_boolean_schema_true_3__empty_array_is_invalid_2()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6dHJ1ZX0=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("contains")]
+        public void Test_draft2019_09__contains__contains_keyword_with_boolean_schema_false_4__any_non_empty_array_is_invalid()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6ZmFsc2V9");
+            var t = ParseJToken("WyJmb28iXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("contains")]
+        public void Test_draft2019_09__contains__contains_keyword_with_boolean_schema_false_4__empty_array_is_invalid_2()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6ZmFsc2V9");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("contains")]
+        public void Test_draft2019_09__contains__contains_keyword_with_boolean_schema_false_4__non_arrays_are_valid_3()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6ZmFsc2V9");
+            var t = ParseJToken("ImNvbnRhaW5zIGRvZXMgbm90IGFwcGx5IHRvIHN0cmluZ3Mi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("contains")]
+        public void Test_draft2019_09__contains__items___contains_5__matches_items__does_not_match_contains()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6eyJtdWx0aXBsZU9mIjoyfSwiY29udGFpbnMiOnsibXVsdGlwbGVPZiI6M319");
+            var t = ParseJToken("WzIsNCw4XQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("contains")]
+        public void Test_draft2019_09__contains__items___contains_5__does_not_match_items__matches_contains_2()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6eyJtdWx0aXBsZU9mIjoyfSwiY29udGFpbnMiOnsibXVsdGlwbGVPZiI6M319");
+            var t = ParseJToken("WzMsNiw5XQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("contains")]
+        public void Test_draft2019_09__contains__items___contains_5__matches_both_items_and_contains_3()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6eyJtdWx0aXBsZU9mIjoyfSwiY29udGFpbnMiOnsibXVsdGlwbGVPZiI6M319");
+            var t = ParseJToken("WzYsMTJd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("contains")]
+        public void Test_draft2019_09__contains__items___contains_5__matches_neither_items_nor_contains_4()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6eyJtdWx0aXBsZU9mIjoyfSwiY29udGFpbnMiOnsibXVsdGlwbGVPZiI6M319");
+            var t = ParseJToken("WzEsNV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("content")]
+        public void Test_draft2019_09__content__validation_of_string_encoded_content_based_on_media_type__a_valid_JSON_document()
+        {
+            var s = ParseSchema("eyJjb250ZW50TWVkaWFUeXBlIjoiYXBwbGljYXRpb24vanNvbiJ9");
+            var t = ParseJToken("IntcImZvb1wiOiBcImJhclwifSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("content")]
+        public void Test_draft2019_09__content__validation_of_string_encoded_content_based_on_media_type__an_invalid_JSON_document__validates_true_2()
+        {
+            var s = ParseSchema("eyJjb250ZW50TWVkaWFUeXBlIjoiYXBwbGljYXRpb24vanNvbiJ9");
+            var t = ParseJToken("Ins6fSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("content")]
+        public void Test_draft2019_09__content__validation_of_string_encoded_content_based_on_media_type__ignores_non_strings_3()
+        {
+            var s = ParseSchema("eyJjb250ZW50TWVkaWFUeXBlIjoiYXBwbGljYXRpb24vanNvbiJ9");
+            var t = ParseJToken("MTAw");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("content")]
+        public void Test_draft2019_09__content__validation_of_binary_string_encoding_2__a_valid_base64_string()
+        {
+            var s = ParseSchema("eyJjb250ZW50RW5jb2RpbmciOiJiYXNlNjQifQ==");
+            var t = ParseJToken("ImV5Sm1iMjhpT2lBaVltRnlJbjBLIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("content")]
+        public void Test_draft2019_09__content__validation_of_binary_string_encoding_2__an_invalid_base64_string____is_not_a_valid_character___validates_true_2()
+        {
+            var s = ParseSchema("eyJjb250ZW50RW5jb2RpbmciOiJiYXNlNjQifQ==");
+            var t = ParseJToken("ImV5Sm1iMjhpT2klaVltRnlJbjBLIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("content")]
+        public void Test_draft2019_09__content__validation_of_binary_string_encoding_2__ignores_non_strings_3()
+        {
+            var s = ParseSchema("eyJjb250ZW50RW5jb2RpbmciOiJiYXNlNjQifQ==");
+            var t = ParseJToken("MTAw");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("content")]
+        public void Test_draft2019_09__content__validation_of_binary_encoded_media_type_documents_3__a_valid_base64_encoded_JSON_document()
+        {
+            var s = ParseSchema("eyJjb250ZW50TWVkaWFUeXBlIjoiYXBwbGljYXRpb24vanNvbiIsImNvbnRlbnRFbmNvZGluZyI6ImJhc2U2NCJ9");
+            var t = ParseJToken("ImV5Sm1iMjhpT2lBaVltRnlJbjBLIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("content")]
+        public void Test_draft2019_09__content__validation_of_binary_encoded_media_type_documents_3__a_validly_encoded_invalid_JSON_document__validates_true_2()
+        {
+            var s = ParseSchema("eyJjb250ZW50TWVkaWFUeXBlIjoiYXBwbGljYXRpb24vanNvbiIsImNvbnRlbnRFbmNvZGluZyI6ImJhc2U2NCJ9");
+            var t = ParseJToken("ImV6cDlDZz09Ig==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("content")]
+        public void Test_draft2019_09__content__validation_of_binary_encoded_media_type_documents_3__an_invalid_base64_string_that_is_valid_JSON__validates_true_3()
+        {
+            var s = ParseSchema("eyJjb250ZW50TWVkaWFUeXBlIjoiYXBwbGljYXRpb24vanNvbiIsImNvbnRlbnRFbmNvZGluZyI6ImJhc2U2NCJ9");
+            var t = ParseJToken("Int9Ig==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("content")]
+        public void Test_draft2019_09__content__validation_of_binary_encoded_media_type_documents_3__ignores_non_strings_4()
+        {
+            var s = ParseSchema("eyJjb250ZW50TWVkaWFUeXBlIjoiYXBwbGljYXRpb24vanNvbiIsImNvbnRlbnRFbmNvZGluZyI6ImJhc2U2NCJ9");
+            var t = ParseJToken("MTAw");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("content")]
+        public void Test_draft2019_09__content__validation_of_binary_encoded_media_type_documents_with_schema_4__a_valid_base64_encoded_JSON_document()
+        {
+            var s = ParseSchema("eyJjb250ZW50TWVkaWFUeXBlIjoiYXBwbGljYXRpb24vanNvbiIsImNvbnRlbnRFbmNvZGluZyI6ImJhc2U2NCIsImNvbnRlbnRTY2hlbWEiOnsicmVxdWlyZWQiOlsiZm9vIl0sInByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX19fQ==");
+            var t = ParseJToken("ImV5Sm1iMjhpT2lBaVltRnlJbjBLIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("content")]
+        public void Test_draft2019_09__content__validation_of_binary_encoded_media_type_documents_with_schema_4__another_valid_base64_encoded_JSON_document_2()
+        {
+            var s = ParseSchema("eyJjb250ZW50TWVkaWFUeXBlIjoiYXBwbGljYXRpb24vanNvbiIsImNvbnRlbnRFbmNvZGluZyI6ImJhc2U2NCIsImNvbnRlbnRTY2hlbWEiOnsicmVxdWlyZWQiOlsiZm9vIl0sInByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX19fQ==");
+            var t = ParseJToken("ImV5SmliMjhpT2lBeU1Dd2dJbVp2YnlJNklDSmlZWG9pZlE9PSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("content")]
+        public void Test_draft2019_09__content__validation_of_binary_encoded_media_type_documents_with_schema_4__an_invalid_base64_encoded_JSON_document__validates_true_3()
+        {
+            var s = ParseSchema("eyJjb250ZW50TWVkaWFUeXBlIjoiYXBwbGljYXRpb24vanNvbiIsImNvbnRlbnRFbmNvZGluZyI6ImJhc2U2NCIsImNvbnRlbnRTY2hlbWEiOnsicmVxdWlyZWQiOlsiZm9vIl0sInByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX19fQ==");
+            var t = ParseJToken("ImV5SmliMjhpT2lBeU1IMD0i");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("content")]
+        public void Test_draft2019_09__content__validation_of_binary_encoded_media_type_documents_with_schema_4__an_empty_object_as_a_base64_encoded_JSON_document__validates_true_4()
+        {
+            var s = ParseSchema("eyJjb250ZW50TWVkaWFUeXBlIjoiYXBwbGljYXRpb24vanNvbiIsImNvbnRlbnRFbmNvZGluZyI6ImJhc2U2NCIsImNvbnRlbnRTY2hlbWEiOnsicmVxdWlyZWQiOlsiZm9vIl0sInByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX19fQ==");
+            var t = ParseJToken("ImUzMD0i");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("content")]
+        public void Test_draft2019_09__content__validation_of_binary_encoded_media_type_documents_with_schema_4__an_empty_array_as_a_base64_encoded_JSON_document_5()
+        {
+            var s = ParseSchema("eyJjb250ZW50TWVkaWFUeXBlIjoiYXBwbGljYXRpb24vanNvbiIsImNvbnRlbnRFbmNvZGluZyI6ImJhc2U2NCIsImNvbnRlbnRTY2hlbWEiOnsicmVxdWlyZWQiOlsiZm9vIl0sInByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX19fQ==");
+            var t = ParseJToken("IlcxMD0i");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("content")]
+        public void Test_draft2019_09__content__validation_of_binary_encoded_media_type_documents_with_schema_4__a_validly_encoded_invalid_JSON_document__validates_true_6()
+        {
+            var s = ParseSchema("eyJjb250ZW50TWVkaWFUeXBlIjoiYXBwbGljYXRpb24vanNvbiIsImNvbnRlbnRFbmNvZGluZyI6ImJhc2U2NCIsImNvbnRlbnRTY2hlbWEiOnsicmVxdWlyZWQiOlsiZm9vIl0sInByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX19fQ==");
+            var t = ParseJToken("ImV6cDlDZz09Ig==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("content")]
+        public void Test_draft2019_09__content__validation_of_binary_encoded_media_type_documents_with_schema_4__an_invalid_base64_string_that_is_valid_JSON__validates_true_7()
+        {
+            var s = ParseSchema("eyJjb250ZW50TWVkaWFUeXBlIjoiYXBwbGljYXRpb24vanNvbiIsImNvbnRlbnRFbmNvZGluZyI6ImJhc2U2NCIsImNvbnRlbnRTY2hlbWEiOnsicmVxdWlyZWQiOlsiZm9vIl0sInByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX19fQ==");
+            var t = ParseJToken("Int9Ig==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("content")]
+        public void Test_draft2019_09__content__validation_of_binary_encoded_media_type_documents_with_schema_4__ignores_non_strings_8()
+        {
+            var s = ParseSchema("eyJjb250ZW50TWVkaWFUeXBlIjoiYXBwbGljYXRpb24vanNvbiIsImNvbnRlbnRFbmNvZGluZyI6ImJhc2U2NCIsImNvbnRlbnRTY2hlbWEiOnsicmVxdWlyZWQiOlsiZm9vIl0sInByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX19fQ==");
+            var t = ParseJToken("MTAw");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("default")]
+        public void Test_draft2019_09__default__invalid_type_for_default__valid_when_property_is_specified()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoiaW50ZWdlciIsImRlZmF1bHQiOltdfX19");
+            var t = ParseJToken("eyJmb28iOjEzfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("default")]
+        public void Test_draft2019_09__default__invalid_type_for_default__still_valid_when_the_invalid_default_is_used_2()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoiaW50ZWdlciIsImRlZmF1bHQiOltdfX19");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("default")]
+        public void Test_draft2019_09__default__invalid_string_value_for_default_2__valid_when_property_is_specified()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImJhciI6eyJ0eXBlIjoic3RyaW5nIiwibWluTGVuZ3RoIjo0LCJkZWZhdWx0IjoiYmFkIn19fQ==");
+            var t = ParseJToken("eyJiYXIiOiJnb29kIn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("default")]
+        public void Test_draft2019_09__default__invalid_string_value_for_default_2__still_valid_when_the_invalid_default_is_used_2()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImJhciI6eyJ0eXBlIjoic3RyaW5nIiwibWluTGVuZ3RoIjo0LCJkZWZhdWx0IjoiYmFkIn19fQ==");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("default")]
+        public void Test_draft2019_09__default__the_default_keyword_does_not_do_anything_if_the_property_is_missing_3__an_explicit_property_value_is_checked_against_maximum__passing_()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJhbHBoYSI6eyJ0eXBlIjoibnVtYmVyIiwibWF4aW11bSI6MywiZGVmYXVsdCI6NX19fQ==");
+            var t = ParseJToken("eyJhbHBoYSI6MX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("default")]
+        public void Test_draft2019_09__default__the_default_keyword_does_not_do_anything_if_the_property_is_missing_3__an_explicit_property_value_is_checked_against_maximum__failing__2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJhbHBoYSI6eyJ0eXBlIjoibnVtYmVyIiwibWF4aW11bSI6MywiZGVmYXVsdCI6NX19fQ==");
+            var t = ParseJToken("eyJhbHBoYSI6NX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("default")]
+        public void Test_draft2019_09__default__the_default_keyword_does_not_do_anything_if_the_property_is_missing_3__missing_properties_are_not_filled_in_with_the_default_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJhbHBoYSI6eyJ0eXBlIjoibnVtYmVyIiwibWF4aW11bSI6MywiZGVmYXVsdCI6NX19fQ==");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("defs")]
+        public void Test_draft2019_09__defs__validate_definition_against_metaschema__valid_definition_schema()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAxOS0wOS9zY2hlbWEifQ==");
+            var t = ParseJToken("eyIkZGVmcyI6eyJmb28iOnsidHlwZSI6ImludGVnZXIifX19");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("defs")]
+        public void Test_draft2019_09__defs__validate_definition_against_metaschema__invalid_definition_schema_2()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAxOS0wOS9zY2hlbWEifQ==");
+            var t = ParseJToken("eyIkZGVmcyI6eyJmb28iOnsidHlwZSI6MX19fQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentRequired")]
+        public void Test_draft2019_09__dependentRequired__single_dependency__neither()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRSZXF1aXJlZCI6eyJiYXIiOlsiZm9vIl19fQ==");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentRequired")]
+        public void Test_draft2019_09__dependentRequired__single_dependency__nondependant_2()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRSZXF1aXJlZCI6eyJiYXIiOlsiZm9vIl19fQ==");
+            var t = ParseJToken("eyJmb28iOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentRequired")]
+        public void Test_draft2019_09__dependentRequired__single_dependency__with_dependency_3()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRSZXF1aXJlZCI6eyJiYXIiOlsiZm9vIl19fQ==");
+            var t = ParseJToken("eyJmb28iOjEsImJhciI6Mn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentRequired")]
+        public void Test_draft2019_09__dependentRequired__single_dependency__missing_dependency_4()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRSZXF1aXJlZCI6eyJiYXIiOlsiZm9vIl19fQ==");
+            var t = ParseJToken("eyJiYXIiOjJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentRequired")]
+        public void Test_draft2019_09__dependentRequired__single_dependency__ignores_arrays_5()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRSZXF1aXJlZCI6eyJiYXIiOlsiZm9vIl19fQ==");
+            var t = ParseJToken("WyJiYXIiXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentRequired")]
+        public void Test_draft2019_09__dependentRequired__single_dependency__ignores_strings_6()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRSZXF1aXJlZCI6eyJiYXIiOlsiZm9vIl19fQ==");
+            var t = ParseJToken("ImZvb2JhciI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentRequired")]
+        public void Test_draft2019_09__dependentRequired__single_dependency__ignores_other_non_objects_7()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRSZXF1aXJlZCI6eyJiYXIiOlsiZm9vIl19fQ==");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentRequired")]
+        public void Test_draft2019_09__dependentRequired__empty_dependents_2__empty_object()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRSZXF1aXJlZCI6eyJiYXIiOltdfX0=");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentRequired")]
+        public void Test_draft2019_09__dependentRequired__empty_dependents_2__object_with_one_property_2()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRSZXF1aXJlZCI6eyJiYXIiOltdfX0=");
+            var t = ParseJToken("eyJiYXIiOjJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentRequired")]
+        public void Test_draft2019_09__dependentRequired__empty_dependents_2__non_object_is_valid_3()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRSZXF1aXJlZCI6eyJiYXIiOltdfX0=");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentRequired")]
+        public void Test_draft2019_09__dependentRequired__multiple_dependents_required_3__neither()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRSZXF1aXJlZCI6eyJxdXV4IjpbImZvbyIsImJhciJdfX0=");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentRequired")]
+        public void Test_draft2019_09__dependentRequired__multiple_dependents_required_3__nondependants_2()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRSZXF1aXJlZCI6eyJxdXV4IjpbImZvbyIsImJhciJdfX0=");
+            var t = ParseJToken("eyJmb28iOjEsImJhciI6Mn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentRequired")]
+        public void Test_draft2019_09__dependentRequired__multiple_dependents_required_3__with_dependencies_3()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRSZXF1aXJlZCI6eyJxdXV4IjpbImZvbyIsImJhciJdfX0=");
+            var t = ParseJToken("eyJmb28iOjEsImJhciI6MiwicXV1eCI6M30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentRequired")]
+        public void Test_draft2019_09__dependentRequired__multiple_dependents_required_3__missing_dependency_4()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRSZXF1aXJlZCI6eyJxdXV4IjpbImZvbyIsImJhciJdfX0=");
+            var t = ParseJToken("eyJmb28iOjEsInF1dXgiOjJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentRequired")]
+        public void Test_draft2019_09__dependentRequired__multiple_dependents_required_3__missing_other_dependency_5()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRSZXF1aXJlZCI6eyJxdXV4IjpbImZvbyIsImJhciJdfX0=");
+            var t = ParseJToken("eyJiYXIiOjEsInF1dXgiOjJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentRequired")]
+        public void Test_draft2019_09__dependentRequired__multiple_dependents_required_3__missing_both_dependencies_6()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRSZXF1aXJlZCI6eyJxdXV4IjpbImZvbyIsImJhciJdfX0=");
+            var t = ParseJToken("eyJxdXV4IjoxfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentRequired")]
+        public void Test_draft2019_09__dependentRequired__dependencies_with_escaped_characters_4__CRLF()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRSZXF1aXJlZCI6eyJmb29cbmJhciI6WyJmb29ccmJhciJdLCJmb29cImJhciI6WyJmb28nYmFyIl19fQ==");
+            var t = ParseJToken("eyJmb29cbmJhciI6MSwiZm9vXHJiYXIiOjJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentRequired")]
+        public void Test_draft2019_09__dependentRequired__dependencies_with_escaped_characters_4__quoted_quotes_2()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRSZXF1aXJlZCI6eyJmb29cbmJhciI6WyJmb29ccmJhciJdLCJmb29cImJhciI6WyJmb28nYmFyIl19fQ==");
+            var t = ParseJToken("eyJmb28nYmFyIjoxLCJmb29cImJhciI6Mn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentRequired")]
+        public void Test_draft2019_09__dependentRequired__dependencies_with_escaped_characters_4__CRLF_missing_dependent_3()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRSZXF1aXJlZCI6eyJmb29cbmJhciI6WyJmb29ccmJhciJdLCJmb29cImJhciI6WyJmb28nYmFyIl19fQ==");
+            var t = ParseJToken("eyJmb29cbmJhciI6MSwiZm9vIjoyfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentRequired")]
+        public void Test_draft2019_09__dependentRequired__dependencies_with_escaped_characters_4__quoted_quotes_missing_dependent_4()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRSZXF1aXJlZCI6eyJmb29cbmJhciI6WyJmb29ccmJhciJdLCJmb29cImJhciI6WyJmb28nYmFyIl19fQ==");
+            var t = ParseJToken("eyJmb29cImJhciI6Mn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentSchemas")]
+        public void Test_draft2019_09__dependentSchemas__single_dependency__valid()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRTY2hlbWFzIjp7ImJhciI6eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJiYXIiOnsidHlwZSI6ImludGVnZXIifX19fX0=");
+            var t = ParseJToken("eyJmb28iOjEsImJhciI6Mn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentSchemas")]
+        public void Test_draft2019_09__dependentSchemas__single_dependency__no_dependency_2()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRTY2hlbWFzIjp7ImJhciI6eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJiYXIiOnsidHlwZSI6ImludGVnZXIifX19fX0=");
+            var t = ParseJToken("eyJmb28iOiJxdXV4In0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentSchemas")]
+        public void Test_draft2019_09__dependentSchemas__single_dependency__wrong_type_3()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRTY2hlbWFzIjp7ImJhciI6eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJiYXIiOnsidHlwZSI6ImludGVnZXIifX19fX0=");
+            var t = ParseJToken("eyJmb28iOiJxdXV4IiwiYmFyIjoyfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentSchemas")]
+        public void Test_draft2019_09__dependentSchemas__single_dependency__wrong_type_other_4()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRTY2hlbWFzIjp7ImJhciI6eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJiYXIiOnsidHlwZSI6ImludGVnZXIifX19fX0=");
+            var t = ParseJToken("eyJmb28iOjIsImJhciI6InF1dXgifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentSchemas")]
+        public void Test_draft2019_09__dependentSchemas__single_dependency__wrong_type_both_5()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRTY2hlbWFzIjp7ImJhciI6eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJiYXIiOnsidHlwZSI6ImludGVnZXIifX19fX0=");
+            var t = ParseJToken("eyJmb28iOiJxdXV4IiwiYmFyIjoicXV1eCJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentSchemas")]
+        public void Test_draft2019_09__dependentSchemas__boolean_subschemas_2__object_with_property_having_schema_true_is_valid()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRTY2hlbWFzIjp7ImZvbyI6dHJ1ZSwiYmFyIjpmYWxzZX19");
+            var t = ParseJToken("eyJmb28iOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentSchemas")]
+        public void Test_draft2019_09__dependentSchemas__boolean_subschemas_2__object_with_property_having_schema_false_is_invalid_2()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRTY2hlbWFzIjp7ImZvbyI6dHJ1ZSwiYmFyIjpmYWxzZX19");
+            var t = ParseJToken("eyJiYXIiOjJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentSchemas")]
+        public void Test_draft2019_09__dependentSchemas__boolean_subschemas_2__object_with_both_properties_is_invalid_3()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRTY2hlbWFzIjp7ImZvbyI6dHJ1ZSwiYmFyIjpmYWxzZX19");
+            var t = ParseJToken("eyJmb28iOjEsImJhciI6Mn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentSchemas")]
+        public void Test_draft2019_09__dependentSchemas__boolean_subschemas_2__empty_object_is_valid_4()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRTY2hlbWFzIjp7ImZvbyI6dHJ1ZSwiYmFyIjpmYWxzZX19");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentSchemas")]
+        public void Test_draft2019_09__dependentSchemas__dependencies_with_escaped_characters_3__quoted_tab()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRTY2hlbWFzIjp7ImZvb1x0YmFyIjp7Im1pblByb3BlcnRpZXMiOjR9LCJmb28nYmFyIjp7InJlcXVpcmVkIjpbImZvb1wiYmFyIl19fX0=");
+            var t = ParseJToken("eyJmb29cdGJhciI6MSwiYSI6MiwiYiI6MywiYyI6NH0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentSchemas")]
+        public void Test_draft2019_09__dependentSchemas__dependencies_with_escaped_characters_3__quoted_quote_2()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRTY2hlbWFzIjp7ImZvb1x0YmFyIjp7Im1pblByb3BlcnRpZXMiOjR9LCJmb28nYmFyIjp7InJlcXVpcmVkIjpbImZvb1wiYmFyIl19fX0=");
+            var t = ParseJToken("eyJmb28nYmFyIjp7ImZvb1wiYmFyIjoxfX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentSchemas")]
+        public void Test_draft2019_09__dependentSchemas__dependencies_with_escaped_characters_3__quoted_tab_invalid_under_dependent_schema_3()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRTY2hlbWFzIjp7ImZvb1x0YmFyIjp7Im1pblByb3BlcnRpZXMiOjR9LCJmb28nYmFyIjp7InJlcXVpcmVkIjpbImZvb1wiYmFyIl19fX0=");
+            var t = ParseJToken("eyJmb29cdGJhciI6MSwiYSI6Mn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("dependentSchemas")]
+        public void Test_draft2019_09__dependentSchemas__dependencies_with_escaped_characters_3__quoted_quote_invalid_under_dependent_schema_4()
+        {
+            var s = ParseSchema("eyJkZXBlbmRlbnRTY2hlbWFzIjp7ImZvb1x0YmFyIjp7Im1pblByb3BlcnRpZXMiOjR9LCJmb28nYmFyIjp7InJlcXVpcmVkIjpbImZvb1wiYmFyIl19fX0=");
+            var t = ParseJToken("eyJmb28nYmFyIjoxfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__simple_enum_validation__one_of_the_enum_is_valid()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbMSwyLDNdfQ==");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__simple_enum_validation__something_else_is_invalid_2()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbMSwyLDNdfQ==");
+            var t = ParseJToken("NA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__heterogeneous_enum_validation_2__one_of_the_enum_is_valid()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbNiwiZm9vIixbXSx0cnVlLHsiZm9vIjoxMn1dfQ==");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__heterogeneous_enum_validation_2__something_else_is_invalid_2()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbNiwiZm9vIixbXSx0cnVlLHsiZm9vIjoxMn1dfQ==");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__heterogeneous_enum_validation_2__objects_are_deep_compared_3()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbNiwiZm9vIixbXSx0cnVlLHsiZm9vIjoxMn1dfQ==");
+            var t = ParseJToken("eyJmb28iOmZhbHNlfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__heterogeneous_enum_validation_2__valid_object_matches_4()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbNiwiZm9vIixbXSx0cnVlLHsiZm9vIjoxMn1dfQ==");
+            var t = ParseJToken("eyJmb28iOjEyfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__heterogeneous_enum_validation_2__extra_properties_in_object_is_invalid_5()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbNiwiZm9vIixbXSx0cnVlLHsiZm9vIjoxMn1dfQ==");
+            var t = ParseJToken("eyJmb28iOjEyLCJib28iOjQyfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__heterogeneous_enum_with_null_validation_3__null_is_valid()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbNixudWxsXX0=");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__heterogeneous_enum_with_null_validation_3__number_is_valid_2()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbNixudWxsXX0=");
+            var t = ParseJToken("Ng==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__heterogeneous_enum_with_null_validation_3__something_else_is_invalid_3()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbNixudWxsXX0=");
+            var t = ParseJToken("InRlc3Qi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__enums_in_properties_4__both_properties_are_valid()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsiZW51bSI6WyJmb28iXX0sImJhciI6eyJlbnVtIjpbImJhciJdfX0sInJlcXVpcmVkIjpbImJhciJdfQ==");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__enums_in_properties_4__wrong_foo_value_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsiZW51bSI6WyJmb28iXX0sImJhciI6eyJlbnVtIjpbImJhciJdfX0sInJlcXVpcmVkIjpbImJhciJdfQ==");
+            var t = ParseJToken("eyJmb28iOiJmb290IiwiYmFyIjoiYmFyIn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__enums_in_properties_4__wrong_bar_value_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsiZW51bSI6WyJmb28iXX0sImJhciI6eyJlbnVtIjpbImJhciJdfX0sInJlcXVpcmVkIjpbImJhciJdfQ==");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXJ0In0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__enums_in_properties_4__missing_optional_property_is_valid_4()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsiZW51bSI6WyJmb28iXX0sImJhciI6eyJlbnVtIjpbImJhciJdfX0sInJlcXVpcmVkIjpbImJhciJdfQ==");
+            var t = ParseJToken("eyJiYXIiOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__enums_in_properties_4__missing_required_property_is_invalid_5()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsiZW51bSI6WyJmb28iXX0sImJhciI6eyJlbnVtIjpbImJhciJdfX0sInJlcXVpcmVkIjpbImJhciJdfQ==");
+            var t = ParseJToken("eyJmb28iOiJmb28ifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__enums_in_properties_4__missing_all_properties_is_invalid_6()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsiZW51bSI6WyJmb28iXX0sImJhciI6eyJlbnVtIjpbImJhciJdfX0sInJlcXVpcmVkIjpbImJhciJdfQ==");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__enum_with_escaped_characters_5__member_1_is_valid()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbImZvb1xuYmFyIiwiZm9vXHJiYXIiXX0=");
+            var t = ParseJToken("ImZvb1xuYmFyIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__enum_with_escaped_characters_5__member_2_is_valid_2()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbImZvb1xuYmFyIiwiZm9vXHJiYXIiXX0=");
+            var t = ParseJToken("ImZvb1xyYmFyIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__enum_with_escaped_characters_5__another_string_is_invalid_3()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbImZvb1xuYmFyIiwiZm9vXHJiYXIiXX0=");
+            var t = ParseJToken("ImFiYyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__enum_with_false_does_not_match_0_6__false_is_valid()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbZmFsc2VdfQ==");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__enum_with_false_does_not_match_0_6__integer_zero_is_invalid_2()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbZmFsc2VdfQ==");
+            var t = ParseJToken("MA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__enum_with_false_does_not_match_0_6__float_zero_is_invalid_3()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbZmFsc2VdfQ==");
+            var t = ParseJToken("MC4w");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__enum_with_true_does_not_match_1_7__true_is_valid()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbdHJ1ZV19");
+            var t = ParseJToken("dHJ1ZQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__enum_with_true_does_not_match_1_7__integer_one_is_invalid_2()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbdHJ1ZV19");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__enum_with_true_does_not_match_1_7__float_one_is_invalid_3()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbdHJ1ZV19");
+            var t = ParseJToken("MS4w");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__enum_with_0_does_not_match_false_8__false_is_invalid()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbMF19");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__enum_with_0_does_not_match_false_8__integer_zero_is_valid_2()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbMF19");
+            var t = ParseJToken("MA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__enum_with_0_does_not_match_false_8__float_zero_is_valid_3()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbMF19");
+            var t = ParseJToken("MC4w");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__enum_with_1_does_not_match_true_9__true_is_invalid()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbMV19");
+            var t = ParseJToken("dHJ1ZQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__enum_with_1_does_not_match_true_9__integer_one_is_valid_2()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbMV19");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__enum_with_1_does_not_match_true_9__float_one_is_valid_3()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbMV19");
+            var t = ParseJToken("MS4w");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__nul_characters_in_strings_10__match_string_with_nul()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbImhlbGxvXHUwMDAwdGhlcmUiXX0=");
+            var t = ParseJToken("ImhlbGxvXHUwMDAwdGhlcmUi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("enum")]
+        public void Test_draft2019_09__enum__nul_characters_in_strings_10__do_not_match_string_lacking_nul_2()
+        {
+            var s = ParseSchema("eyJlbnVtIjpbImhlbGxvXHUwMDAwdGhlcmUiXX0=");
+            var t = ParseJToken("ImhlbGxvdGhlcmUi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("exclusiveMaximum")]
+        public void Test_draft2019_09__exclusiveMaximum__exclusiveMaximum_validation__below_the_exclusiveMaximum_is_valid()
+        {
+            var s = ParseSchema("eyJleGNsdXNpdmVNYXhpbXVtIjozLjB9");
+            var t = ParseJToken("Mi4y");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("exclusiveMaximum")]
+        public void Test_draft2019_09__exclusiveMaximum__exclusiveMaximum_validation__boundary_point_is_invalid_2()
+        {
+            var s = ParseSchema("eyJleGNsdXNpdmVNYXhpbXVtIjozLjB9");
+            var t = ParseJToken("My4w");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("exclusiveMaximum")]
+        public void Test_draft2019_09__exclusiveMaximum__exclusiveMaximum_validation__above_the_exclusiveMaximum_is_invalid_3()
+        {
+            var s = ParseSchema("eyJleGNsdXNpdmVNYXhpbXVtIjozLjB9");
+            var t = ParseJToken("My41");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("exclusiveMaximum")]
+        public void Test_draft2019_09__exclusiveMaximum__exclusiveMaximum_validation__ignores_non_numbers_4()
+        {
+            var s = ParseSchema("eyJleGNsdXNpdmVNYXhpbXVtIjozLjB9");
+            var t = ParseJToken("Ingi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("exclusiveMinimum")]
+        public void Test_draft2019_09__exclusiveMinimum__exclusiveMinimum_validation__above_the_exclusiveMinimum_is_valid()
+        {
+            var s = ParseSchema("eyJleGNsdXNpdmVNaW5pbXVtIjoxLjF9");
+            var t = ParseJToken("MS4y");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("exclusiveMinimum")]
+        public void Test_draft2019_09__exclusiveMinimum__exclusiveMinimum_validation__boundary_point_is_invalid_2()
+        {
+            var s = ParseSchema("eyJleGNsdXNpdmVNaW5pbXVtIjoxLjF9");
+            var t = ParseJToken("MS4x");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("exclusiveMinimum")]
+        public void Test_draft2019_09__exclusiveMinimum__exclusiveMinimum_validation__below_the_exclusiveMinimum_is_invalid_3()
+        {
+            var s = ParseSchema("eyJleGNsdXNpdmVNaW5pbXVtIjoxLjF9");
+            var t = ParseJToken("MC42");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("exclusiveMinimum")]
+        public void Test_draft2019_09__exclusiveMinimum__exclusiveMinimum_validation__ignores_non_numbers_4()
+        {
+            var s = ParseSchema("eyJleGNsdXNpdmVNaW5pbXVtIjoxLjF9");
+            var t = ParseJToken("Ingi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_e_mail_addresses__ignores_integers()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJlbWFpbCJ9");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_e_mail_addresses__ignores_floats_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJlbWFpbCJ9");
+            var t = ParseJToken("MTMuNw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_e_mail_addresses__ignores_objects_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJlbWFpbCJ9");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_e_mail_addresses__ignores_arrays_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJlbWFpbCJ9");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_e_mail_addresses__ignores_booleans_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJlbWFpbCJ9");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_e_mail_addresses__ignores_null_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJlbWFpbCJ9");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_e_mail_addresses__invalid_email_string_is_only_an_annotation_by_default_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJlbWFpbCJ9");
+            var t = ParseJToken("IjI5NjIi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IDN_e_mail_addresses_2__ignores_integers()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4tZW1haWwifQ==");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IDN_e_mail_addresses_2__ignores_floats_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4tZW1haWwifQ==");
+            var t = ParseJToken("MTMuNw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IDN_e_mail_addresses_2__ignores_objects_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4tZW1haWwifQ==");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IDN_e_mail_addresses_2__ignores_arrays_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4tZW1haWwifQ==");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IDN_e_mail_addresses_2__ignores_booleans_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4tZW1haWwifQ==");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IDN_e_mail_addresses_2__ignores_null_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4tZW1haWwifQ==");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IDN_e_mail_addresses_2__invalid_idn_email_string_is_only_an_annotation_by_default_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4tZW1haWwifQ==");
+            var t = ParseJToken("IjI5NjIi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_regexes_3__ignores_integers()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWdleCJ9");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_regexes_3__ignores_floats_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWdleCJ9");
+            var t = ParseJToken("MTMuNw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_regexes_3__ignores_objects_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWdleCJ9");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_regexes_3__ignores_arrays_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWdleCJ9");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_regexes_3__ignores_booleans_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWdleCJ9");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_regexes_3__ignores_null_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWdleCJ9");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_regexes_3__invalid_regex_string_is_only_an_annotation_by_default_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWdleCJ9");
+            var t = ParseJToken("Il4oYWJjXSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IP_addresses_4__ignores_integers()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY0In0=");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IP_addresses_4__ignores_floats_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY0In0=");
+            var t = ParseJToken("MTMuNw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IP_addresses_4__ignores_objects_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY0In0=");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IP_addresses_4__ignores_arrays_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY0In0=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IP_addresses_4__ignores_booleans_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY0In0=");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IP_addresses_4__ignores_null_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY0In0=");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IP_addresses_4__invalid_ipv4_string_is_only_an_annotation_by_default_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY0In0=");
+            var t = ParseJToken("IjEyNy4wLjAuMC4xIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IPv6_addresses_5__ignores_integers()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IPv6_addresses_5__ignores_floats_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("MTMuNw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IPv6_addresses_5__ignores_objects_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IPv6_addresses_5__ignores_arrays_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IPv6_addresses_5__ignores_booleans_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IPv6_addresses_5__ignores_null_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IPv6_addresses_5__invalid_ipv6_string_is_only_an_annotation_by_default_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("IjEyMzQ1Ojoi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IDN_hostnames_6__ignores_integers()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IDN_hostnames_6__ignores_floats_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("MTMuNw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IDN_hostnames_6__ignores_objects_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IDN_hostnames_6__ignores_arrays_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IDN_hostnames_6__ignores_booleans_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IDN_hostnames_6__ignores_null_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IDN_hostnames_6__invalid_idn_hostname_string_is_only_an_annotation_by_default_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("IuOAruyLpOuhgC7thYzsiqTtirgi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_hostnames_7__ignores_integers()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJob3N0bmFtZSJ9");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_hostnames_7__ignores_floats_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJob3N0bmFtZSJ9");
+            var t = ParseJToken("MTMuNw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_hostnames_7__ignores_objects_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJob3N0bmFtZSJ9");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_hostnames_7__ignores_arrays_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJob3N0bmFtZSJ9");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_hostnames_7__ignores_booleans_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJob3N0bmFtZSJ9");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_hostnames_7__ignores_null_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJob3N0bmFtZSJ9");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_hostnames_7__invalid_hostname_string_is_only_an_annotation_by_default_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJob3N0bmFtZSJ9");
+            var t = ParseJToken("Ii1hLWhvc3QtbmFtZS10aGF0LXN0YXJ0cy13aXRoLS0i");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_date_strings_8__ignores_integers()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlIn0=");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_date_strings_8__ignores_floats_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlIn0=");
+            var t = ParseJToken("MTMuNw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_date_strings_8__ignores_objects_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlIn0=");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_date_strings_8__ignores_arrays_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlIn0=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_date_strings_8__ignores_booleans_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlIn0=");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_date_strings_8__ignores_null_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlIn0=");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_date_strings_8__invalid_date_string_is_only_an_annotation_by_default_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlIn0=");
+            var t = ParseJToken("IjA2LzE5LzE5NjMi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_date_time_strings_9__ignores_integers()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlLXRpbWUifQ==");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_date_time_strings_9__ignores_floats_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlLXRpbWUifQ==");
+            var t = ParseJToken("MTMuNw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_date_time_strings_9__ignores_objects_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlLXRpbWUifQ==");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_date_time_strings_9__ignores_arrays_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlLXRpbWUifQ==");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_date_time_strings_9__ignores_booleans_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlLXRpbWUifQ==");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_date_time_strings_9__ignores_null_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlLXRpbWUifQ==");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_date_time_strings_9__invalid_date_time_string_is_only_an_annotation_by_default_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlLXRpbWUifQ==");
+            var t = ParseJToken("IjE5OTAtMDItMzFUMTU6NTk6NjAuMTIzLTA4OjAwIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_time_strings_10__ignores_integers()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_time_strings_10__ignores_floats_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("MTMuNw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_time_strings_10__ignores_objects_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_time_strings_10__ignores_arrays_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_time_strings_10__ignores_booleans_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_time_strings_10__ignores_null_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_time_strings_10__invalid_time_string_is_only_an_annotation_by_default_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("IjA4OjMwOjA2IFBTVCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_JSON_pointers_11__ignores_integers()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_JSON_pointers_11__ignores_floats_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("MTMuNw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_JSON_pointers_11__ignores_objects_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_JSON_pointers_11__ignores_arrays_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_JSON_pointers_11__ignores_booleans_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_JSON_pointers_11__ignores_null_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_JSON_pointers_11__invalid_json_pointer_string_is_only_an_annotation_by_default_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9mb28vYmFyfiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_relative_JSON_pointers_12__ignores_integers()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWxhdGl2ZS1qc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_relative_JSON_pointers_12__ignores_floats_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWxhdGl2ZS1qc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("MTMuNw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_relative_JSON_pointers_12__ignores_objects_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWxhdGl2ZS1qc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_relative_JSON_pointers_12__ignores_arrays_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWxhdGl2ZS1qc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_relative_JSON_pointers_12__ignores_booleans_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWxhdGl2ZS1qc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_relative_JSON_pointers_12__ignores_null_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWxhdGl2ZS1qc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_relative_JSON_pointers_12__invalid_relative_json_pointer_string_is_only_an_annotation_by_default_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWxhdGl2ZS1qc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9mb28vYmFyIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IRIs_13__ignores_integers()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmkifQ==");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IRIs_13__ignores_floats_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmkifQ==");
+            var t = ParseJToken("MTMuNw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IRIs_13__ignores_objects_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmkifQ==");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IRIs_13__ignores_arrays_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmkifQ==");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IRIs_13__ignores_booleans_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmkifQ==");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IRIs_13__ignores_null_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmkifQ==");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IRIs_13__invalid_iri_string_is_only_an_annotation_by_default_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmkifQ==");
+            var t = ParseJToken("Imh0dHA6Ly8yMDAxOjBkYjg6ODVhMzowMDAwOjAwMDA6OGEyZTowMzcwOjczMzQi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IRI_references_14__ignores_integers()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IRI_references_14__ignores_floats_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("MTMuNw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IRI_references_14__ignores_objects_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IRI_references_14__ignores_arrays_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IRI_references_14__ignores_booleans_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IRI_references_14__ignores_null_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_IRI_references_14__invalid_iri_reference_string_is_only_an_annotation_by_default_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("IlxcXFxXSU5ET1dTXFxmaWzDq8Ofw6Vyw6ki");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_URIs_15__ignores_integers()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_URIs_15__ignores_floats_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("MTMuNw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_URIs_15__ignores_objects_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_URIs_15__ignores_arrays_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_URIs_15__ignores_booleans_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_URIs_15__ignores_null_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_URIs_15__invalid_uri_string_is_only_an_annotation_by_default_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("Ii8vZm9vLmJhci8/YmF6PXF1eCNxdXV4Ig==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_URI_references_16__ignores_integers()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_URI_references_16__ignores_floats_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("MTMuNw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_URI_references_16__ignores_objects_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_URI_references_16__ignores_arrays_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_URI_references_16__ignores_booleans_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_URI_references_16__ignores_null_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_URI_references_16__invalid_uri_reference_string_is_only_an_annotation_by_default_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("IlxcXFxXSU5ET1dTXFxmaWxlc2hhcmUi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_URI_templates_17__ignores_integers()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktdGVtcGxhdGUifQ==");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_URI_templates_17__ignores_floats_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktdGVtcGxhdGUifQ==");
+            var t = ParseJToken("MTMuNw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_URI_templates_17__ignores_objects_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktdGVtcGxhdGUifQ==");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_URI_templates_17__ignores_arrays_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktdGVtcGxhdGUifQ==");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_URI_templates_17__ignores_booleans_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktdGVtcGxhdGUifQ==");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_URI_templates_17__ignores_null_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktdGVtcGxhdGUifQ==");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_URI_templates_17__invalid_uri_template_string_is_only_an_annotation_by_default_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktdGVtcGxhdGUifQ==");
+            var t = ParseJToken("Imh0dHA6Ly9leGFtcGxlLmNvbS9kaWN0aW9uYXJ5L3t0ZXJtOjF9L3t0ZXJtIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_UUIDs_18__ignores_integers()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1dWlkIn0=");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_UUIDs_18__ignores_floats_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1dWlkIn0=");
+            var t = ParseJToken("MTMuNw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_UUIDs_18__ignores_objects_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1dWlkIn0=");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_UUIDs_18__ignores_arrays_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1dWlkIn0=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_UUIDs_18__ignores_booleans_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1dWlkIn0=");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_UUIDs_18__ignores_null_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1dWlkIn0=");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_UUIDs_18__invalid_uuid_string_is_only_an_annotation_by_default_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1dWlkIn0=");
+            var t = ParseJToken("IjJlYjhhYTA4LWFhOTgtMTFlYS1iNGFhLTczYjQ0MWQxNjM4Ig==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_durations_19__ignores_integers()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkdXJhdGlvbiJ9");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_durations_19__ignores_floats_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkdXJhdGlvbiJ9");
+            var t = ParseJToken("MTMuNw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_durations_19__ignores_objects_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkdXJhdGlvbiJ9");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_durations_19__ignores_arrays_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkdXJhdGlvbiJ9");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_durations_19__ignores_booleans_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkdXJhdGlvbiJ9");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_durations_19__ignores_null_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkdXJhdGlvbiJ9");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("format")]
+        public void Test_draft2019_09__format__validation_of_durations_19__invalid_duration_string_is_only_an_annotation_by_default_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkdXJhdGlvbiJ9");
+            var t = ParseJToken("IlBUMUQi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("id")]
+        public void Test_draft2019_09__id__Invalid_use_of_fragments_in_location_independent__id__Identifier_name()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAxOS0wOS9zY2hlbWEifQ==");
+            var t = ParseJToken("eyIkcmVmIjoiI2ZvbyIsIiRkZWZzIjp7IkEiOnsiJGlkIjoiI2ZvbyIsInR5cGUiOiJpbnRlZ2VyIn19fQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("id")]
+        public void Test_draft2019_09__id__Invalid_use_of_fragments_in_location_independent__id__Identifier_name_and_no_ref_2()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAxOS0wOS9zY2hlbWEifQ==");
+            var t = ParseJToken("eyIkZGVmcyI6eyJBIjp7IiRpZCI6IiNmb28ifX19");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("id")]
+        public void Test_draft2019_09__id__Invalid_use_of_fragments_in_location_independent__id__Identifier_path_3()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAxOS0wOS9zY2hlbWEifQ==");
+            var t = ParseJToken("eyIkcmVmIjoiIy9hL2IiLCIkZGVmcyI6eyJBIjp7IiRpZCI6IiMvYS9iIiwidHlwZSI6ImludGVnZXIifX19");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("id")]
+        public void Test_draft2019_09__id__Invalid_use_of_fragments_in_location_independent__id__Identifier_name_with_absolute_URI_4()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAxOS0wOS9zY2hlbWEifQ==");
+            var t = ParseJToken("eyIkcmVmIjoiaHR0cDovL2xvY2FsaG9zdDoxMjM0L2JhciNmb28iLCIkZGVmcyI6eyJBIjp7IiRpZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MTIzNC9iYXIjZm9vIiwidHlwZSI6ImludGVnZXIifX19");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("id")]
+        public void Test_draft2019_09__id__Invalid_use_of_fragments_in_location_independent__id__Identifier_path_with_absolute_URI_5()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAxOS0wOS9zY2hlbWEifQ==");
+            var t = ParseJToken("eyIkcmVmIjoiaHR0cDovL2xvY2FsaG9zdDoxMjM0L2JhciMvYS9iIiwiJGRlZnMiOnsiQSI6eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjEyMzQvYmFyIy9hL2IiLCJ0eXBlIjoiaW50ZWdlciJ9fX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("id")]
+        public void Test_draft2019_09__id__Invalid_use_of_fragments_in_location_independent__id__Identifier_name_with_base_URI_change_in_subschema_6()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAxOS0wOS9zY2hlbWEifQ==");
+            var t = ParseJToken("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjEyMzQvcm9vdCIsIiRyZWYiOiJodHRwOi8vbG9jYWxob3N0OjEyMzQvbmVzdGVkLmpzb24jZm9vIiwiJGRlZnMiOnsiQSI6eyIkaWQiOiJuZXN0ZWQuanNvbiIsIiRkZWZzIjp7IkIiOnsiJGlkIjoiI2ZvbyIsInR5cGUiOiJpbnRlZ2VyIn19fX19");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("id")]
+        public void Test_draft2019_09__id__Invalid_use_of_fragments_in_location_independent__id__Identifier_path_with_base_URI_change_in_subschema_7()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAxOS0wOS9zY2hlbWEifQ==");
+            var t = ParseJToken("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjEyMzQvcm9vdCIsIiRyZWYiOiJodHRwOi8vbG9jYWxob3N0OjEyMzQvbmVzdGVkLmpzb24jL2EvYiIsIiRkZWZzIjp7IkEiOnsiJGlkIjoibmVzdGVkLmpzb24iLCIkZGVmcyI6eyJCIjp7IiRpZCI6IiMvYS9iIiwidHlwZSI6ImludGVnZXIifX19fX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("id")]
+        public void Test_draft2019_09__id__Valid_use_of_empty_fragments_in_location_independent__id_2__Identifier_name_with_absolute_URI()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAxOS0wOS9zY2hlbWEifQ==");
+            var t = ParseJToken("eyIkcmVmIjoiaHR0cDovL2xvY2FsaG9zdDoxMjM0L2JhciIsIiRkZWZzIjp7IkEiOnsiJGlkIjoiaHR0cDovL2xvY2FsaG9zdDoxMjM0L2JhciMiLCJ0eXBlIjoiaW50ZWdlciJ9fX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("id")]
+        public void Test_draft2019_09__id__Valid_use_of_empty_fragments_in_location_independent__id_2__Identifier_name_with_base_URI_change_in_subschema_2()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAxOS0wOS9zY2hlbWEifQ==");
+            var t = ParseJToken("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjEyMzQvcm9vdCIsIiRyZWYiOiJodHRwOi8vbG9jYWxob3N0OjEyMzQvbmVzdGVkLmpzb24jLyRkZWZzL0IiLCIkZGVmcyI6eyJBIjp7IiRpZCI6Im5lc3RlZC5qc29uIiwiJGRlZnMiOnsiQiI6eyIkaWQiOiIjIiwidHlwZSI6ImludGVnZXIifX19fX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("id")]
+        public void Test_draft2019_09__id__Unnormalized__ids_are_allowed_but_discouraged_3__Unnormalized_identifier()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAxOS0wOS9zY2hlbWEifQ==");
+            var t = ParseJToken("eyIkcmVmIjoiaHR0cDovL2xvY2FsaG9zdDoxMjM0L2Zvby9iYXoiLCIkZGVmcyI6eyJBIjp7IiRpZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MTIzNC9mb28vYmFyLy4uL2JheiIsInR5cGUiOiJpbnRlZ2VyIn19fQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("id")]
+        public void Test_draft2019_09__id__Unnormalized__ids_are_allowed_but_discouraged_3__Unnormalized_identifier_and_no_ref_2()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAxOS0wOS9zY2hlbWEifQ==");
+            var t = ParseJToken("eyIkZGVmcyI6eyJBIjp7IiRpZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MTIzNC9mb28vYmFyLy4uL2JheiIsInR5cGUiOiJpbnRlZ2VyIn19fQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("id")]
+        public void Test_draft2019_09__id__Unnormalized__ids_are_allowed_but_discouraged_3__Unnormalized_identifier_with_empty_fragment_3()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAxOS0wOS9zY2hlbWEifQ==");
+            var t = ParseJToken("eyIkcmVmIjoiaHR0cDovL2xvY2FsaG9zdDoxMjM0L2Zvby9iYXoiLCIkZGVmcyI6eyJBIjp7IiRpZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MTIzNC9mb28vYmFyLy4uL2JheiMiLCJ0eXBlIjoiaW50ZWdlciJ9fX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("id")]
+        public void Test_draft2019_09__id__Unnormalized__ids_are_allowed_but_discouraged_3__Unnormalized_identifier_with_empty_fragment_and_no_ref_4()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAxOS0wOS9zY2hlbWEifQ==");
+            var t = ParseJToken("eyIkZGVmcyI6eyJBIjp7IiRpZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MTIzNC9mb28vYmFyLy4uL2JheiMiLCJ0eXBlIjoiaW50ZWdlciJ9fX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("id")]
+        public void Test_draft2019_09__id___id_inside_an_enum_is_not_a_real_identifier_4__exact_match_to_enum__and_type_matches()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJpZF9pbl9lbnVtIjp7ImVudW0iOlt7IiRpZCI6Imh0dHBzOi8vbG9jYWxob3N0OjEyMzQvaWQvbXlfaWRlbnRpZmllci5qc29uIiwidHlwZSI6Im51bGwifV19LCJyZWFsX2lkX2luX3NjaGVtYSI6eyIkaWQiOiJodHRwczovL2xvY2FsaG9zdDoxMjM0L2lkL215X2lkZW50aWZpZXIuanNvbiIsInR5cGUiOiJzdHJpbmcifSwienp6X2lkX2luX2NvbnN0Ijp7ImNvbnN0Ijp7IiRpZCI6Imh0dHBzOi8vbG9jYWxob3N0OjEyMzQvaWQvbXlfaWRlbnRpZmllci5qc29uIiwidHlwZSI6Im51bGwifX19LCJhbnlPZiI6W3siJHJlZiI6IiMvJGRlZnMvaWRfaW5fZW51bSJ9LHsiJHJlZiI6Imh0dHBzOi8vbG9jYWxob3N0OjEyMzQvaWQvbXlfaWRlbnRpZmllci5qc29uIn1dfQ==");
+            var t = ParseJToken("eyIkaWQiOiJodHRwczovL2xvY2FsaG9zdDoxMjM0L2lkL215X2lkZW50aWZpZXIuanNvbiIsInR5cGUiOiJudWxsIn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("id")]
+        public void Test_draft2019_09__id___id_inside_an_enum_is_not_a_real_identifier_4__match__ref_to__id_2()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJpZF9pbl9lbnVtIjp7ImVudW0iOlt7IiRpZCI6Imh0dHBzOi8vbG9jYWxob3N0OjEyMzQvaWQvbXlfaWRlbnRpZmllci5qc29uIiwidHlwZSI6Im51bGwifV19LCJyZWFsX2lkX2luX3NjaGVtYSI6eyIkaWQiOiJodHRwczovL2xvY2FsaG9zdDoxMjM0L2lkL215X2lkZW50aWZpZXIuanNvbiIsInR5cGUiOiJzdHJpbmcifSwienp6X2lkX2luX2NvbnN0Ijp7ImNvbnN0Ijp7IiRpZCI6Imh0dHBzOi8vbG9jYWxob3N0OjEyMzQvaWQvbXlfaWRlbnRpZmllci5qc29uIiwidHlwZSI6Im51bGwifX19LCJhbnlPZiI6W3siJHJlZiI6IiMvJGRlZnMvaWRfaW5fZW51bSJ9LHsiJHJlZiI6Imh0dHBzOi8vbG9jYWxob3N0OjEyMzQvaWQvbXlfaWRlbnRpZmllci5qc29uIn1dfQ==");
+            var t = ParseJToken("ImEgc3RyaW5nIHRvIG1hdGNoICMvJGRlZnMvaWRfaW5fZW51bSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("id")]
+        public void Test_draft2019_09__id___id_inside_an_enum_is_not_a_real_identifier_4__no_match_on_enum_or__ref_to__id_3()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJpZF9pbl9lbnVtIjp7ImVudW0iOlt7IiRpZCI6Imh0dHBzOi8vbG9jYWxob3N0OjEyMzQvaWQvbXlfaWRlbnRpZmllci5qc29uIiwidHlwZSI6Im51bGwifV19LCJyZWFsX2lkX2luX3NjaGVtYSI6eyIkaWQiOiJodHRwczovL2xvY2FsaG9zdDoxMjM0L2lkL215X2lkZW50aWZpZXIuanNvbiIsInR5cGUiOiJzdHJpbmcifSwienp6X2lkX2luX2NvbnN0Ijp7ImNvbnN0Ijp7IiRpZCI6Imh0dHBzOi8vbG9jYWxob3N0OjEyMzQvaWQvbXlfaWRlbnRpZmllci5qc29uIiwidHlwZSI6Im51bGwifX19LCJhbnlPZiI6W3siJHJlZiI6IiMvJGRlZnMvaWRfaW5fZW51bSJ9LHsiJHJlZiI6Imh0dHBzOi8vbG9jYWxob3N0OjEyMzQvaWQvbXlfaWRlbnRpZmllci5qc29uIn1dfQ==");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__ignore_if_without_then_or_else__valid_when_valid_against_lone_if()
+        {
+            var s = ParseSchema("eyJpZiI6eyJjb25zdCI6MH19");
+            var t = ParseJToken("MA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__ignore_if_without_then_or_else__valid_when_invalid_against_lone_if_2()
+        {
+            var s = ParseSchema("eyJpZiI6eyJjb25zdCI6MH19");
+            var t = ParseJToken("ImhlbGxvIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__ignore_then_without_if_2__valid_when_valid_against_lone_then()
+        {
+            var s = ParseSchema("eyJ0aGVuIjp7ImNvbnN0IjowfX0=");
+            var t = ParseJToken("MA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__ignore_then_without_if_2__valid_when_invalid_against_lone_then_2()
+        {
+            var s = ParseSchema("eyJ0aGVuIjp7ImNvbnN0IjowfX0=");
+            var t = ParseJToken("ImhlbGxvIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__ignore_else_without_if_3__valid_when_valid_against_lone_else()
+        {
+            var s = ParseSchema("eyJlbHNlIjp7ImNvbnN0IjowfX0=");
+            var t = ParseJToken("MA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__ignore_else_without_if_3__valid_when_invalid_against_lone_else_2()
+        {
+            var s = ParseSchema("eyJlbHNlIjp7ImNvbnN0IjowfX0=");
+            var t = ParseJToken("ImhlbGxvIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__if_and_then_without_else_4__valid_through_then()
+        {
+            var s = ParseSchema("eyJpZiI6eyJleGNsdXNpdmVNYXhpbXVtIjowfSwidGhlbiI6eyJtaW5pbXVtIjotMTB9fQ==");
+            var t = ParseJToken("LTE=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__if_and_then_without_else_4__invalid_through_then_2()
+        {
+            var s = ParseSchema("eyJpZiI6eyJleGNsdXNpdmVNYXhpbXVtIjowfSwidGhlbiI6eyJtaW5pbXVtIjotMTB9fQ==");
+            var t = ParseJToken("LTEwMA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__if_and_then_without_else_4__valid_when_if_test_fails_3()
+        {
+            var s = ParseSchema("eyJpZiI6eyJleGNsdXNpdmVNYXhpbXVtIjowfSwidGhlbiI6eyJtaW5pbXVtIjotMTB9fQ==");
+            var t = ParseJToken("Mw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__if_and_else_without_then_5__valid_when_if_test_passes()
+        {
+            var s = ParseSchema("eyJpZiI6eyJleGNsdXNpdmVNYXhpbXVtIjowfSwiZWxzZSI6eyJtdWx0aXBsZU9mIjoyfX0=");
+            var t = ParseJToken("LTE=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__if_and_else_without_then_5__valid_through_else_2()
+        {
+            var s = ParseSchema("eyJpZiI6eyJleGNsdXNpdmVNYXhpbXVtIjowfSwiZWxzZSI6eyJtdWx0aXBsZU9mIjoyfX0=");
+            var t = ParseJToken("NA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__if_and_else_without_then_5__invalid_through_else_3()
+        {
+            var s = ParseSchema("eyJpZiI6eyJleGNsdXNpdmVNYXhpbXVtIjowfSwiZWxzZSI6eyJtdWx0aXBsZU9mIjoyfX0=");
+            var t = ParseJToken("Mw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__validate_against_correct_branch__then_vs_else_6__valid_through_then()
+        {
+            var s = ParseSchema("eyJpZiI6eyJleGNsdXNpdmVNYXhpbXVtIjowfSwidGhlbiI6eyJtaW5pbXVtIjotMTB9LCJlbHNlIjp7Im11bHRpcGxlT2YiOjJ9fQ==");
+            var t = ParseJToken("LTE=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__validate_against_correct_branch__then_vs_else_6__invalid_through_then_2()
+        {
+            var s = ParseSchema("eyJpZiI6eyJleGNsdXNpdmVNYXhpbXVtIjowfSwidGhlbiI6eyJtaW5pbXVtIjotMTB9LCJlbHNlIjp7Im11bHRpcGxlT2YiOjJ9fQ==");
+            var t = ParseJToken("LTEwMA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__validate_against_correct_branch__then_vs_else_6__valid_through_else_3()
+        {
+            var s = ParseSchema("eyJpZiI6eyJleGNsdXNpdmVNYXhpbXVtIjowfSwidGhlbiI6eyJtaW5pbXVtIjotMTB9LCJlbHNlIjp7Im11bHRpcGxlT2YiOjJ9fQ==");
+            var t = ParseJToken("NA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__validate_against_correct_branch__then_vs_else_6__invalid_through_else_4()
+        {
+            var s = ParseSchema("eyJpZiI6eyJleGNsdXNpdmVNYXhpbXVtIjowfSwidGhlbiI6eyJtaW5pbXVtIjotMTB9LCJlbHNlIjp7Im11bHRpcGxlT2YiOjJ9fQ==");
+            var t = ParseJToken("Mw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__non_interference_across_combined_schemas_7__valid__but_would_have_been_invalid_through_then()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3siaWYiOnsiZXhjbHVzaXZlTWF4aW11bSI6MH19LHsidGhlbiI6eyJtaW5pbXVtIjotMTB9fSx7ImVsc2UiOnsibXVsdGlwbGVPZiI6Mn19XX0=");
+            var t = ParseJToken("LTEwMA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__non_interference_across_combined_schemas_7__valid__but_would_have_been_invalid_through_else_2()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3siaWYiOnsiZXhjbHVzaXZlTWF4aW11bSI6MH19LHsidGhlbiI6eyJtaW5pbXVtIjotMTB9fSx7ImVsc2UiOnsibXVsdGlwbGVPZiI6Mn19XX0=");
+            var t = ParseJToken("Mw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__if_with_boolean_schema_true_8__boolean_schema_true_in_if_always_chooses_the_then_path__valid_()
+        {
+            var s = ParseSchema("eyJpZiI6dHJ1ZSwidGhlbiI6eyJjb25zdCI6InRoZW4ifSwiZWxzZSI6eyJjb25zdCI6ImVsc2UifX0=");
+            var t = ParseJToken("InRoZW4i");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__if_with_boolean_schema_true_8__boolean_schema_true_in_if_always_chooses_the_then_path__invalid__2()
+        {
+            var s = ParseSchema("eyJpZiI6dHJ1ZSwidGhlbiI6eyJjb25zdCI6InRoZW4ifSwiZWxzZSI6eyJjb25zdCI6ImVsc2UifX0=");
+            var t = ParseJToken("ImVsc2Ui");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__if_with_boolean_schema_false_9__boolean_schema_false_in_if_always_chooses_the_else_path__invalid_()
+        {
+            var s = ParseSchema("eyJpZiI6ZmFsc2UsInRoZW4iOnsiY29uc3QiOiJ0aGVuIn0sImVsc2UiOnsiY29uc3QiOiJlbHNlIn19");
+            var t = ParseJToken("InRoZW4i");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__if_with_boolean_schema_false_9__boolean_schema_false_in_if_always_chooses_the_else_path__valid__2()
+        {
+            var s = ParseSchema("eyJpZiI6ZmFsc2UsInRoZW4iOnsiY29uc3QiOiJ0aGVuIn0sImVsc2UiOnsiY29uc3QiOiJlbHNlIn19");
+            var t = ParseJToken("ImVsc2Ui");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__if_appears_at_the_end_when_serialized__keyword_processing_sequence__10__yes_redirects_to_then_and_passes()
+        {
+            var s = ParseSchema("eyJ0aGVuIjp7ImNvbnN0IjoieWVzIn0sImVsc2UiOnsiY29uc3QiOiJvdGhlciJ9LCJpZiI6eyJtYXhMZW5ndGgiOjR9fQ==");
+            var t = ParseJToken("InllcyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__if_appears_at_the_end_when_serialized__keyword_processing_sequence__10__other_redirects_to_else_and_passes_2()
+        {
+            var s = ParseSchema("eyJ0aGVuIjp7ImNvbnN0IjoieWVzIn0sImVsc2UiOnsiY29uc3QiOiJvdGhlciJ9LCJpZiI6eyJtYXhMZW5ndGgiOjR9fQ==");
+            var t = ParseJToken("Im90aGVyIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__if_appears_at_the_end_when_serialized__keyword_processing_sequence__10__no_redirects_to_then_and_fails_3()
+        {
+            var s = ParseSchema("eyJ0aGVuIjp7ImNvbnN0IjoieWVzIn0sImVsc2UiOnsiY29uc3QiOiJvdGhlciJ9LCJpZiI6eyJtYXhMZW5ndGgiOjR9fQ==");
+            var t = ParseJToken("Im5vIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("if-then-else")]
+        public void Test_draft2019_09__if_then_else__if_appears_at_the_end_when_serialized__keyword_processing_sequence__10__invalid_redirects_to_else_and_fails_4()
+        {
+            var s = ParseSchema("eyJ0aGVuIjp7ImNvbnN0IjoieWVzIn0sImVsc2UiOnsiY29uc3QiOiJvdGhlciJ9LCJpZiI6eyJtYXhMZW5ndGgiOjR9fQ==");
+            var t = ParseJToken("ImludmFsaWQi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("infinite-loop-detection")]
+        public void Test_draft2019_09__infinite_loop_detection__evaluating_the_same_schema_location_against_the_same_data_location_twice_is_not_a_sign_of_an_infinite_loop__passing_case()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJpbnQiOnsidHlwZSI6ImludGVnZXIifX0sImFsbE9mIjpbeyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyIkcmVmIjoiIy8kZGVmcy9pbnQifX19LHsiYWRkaXRpb25hbFByb3BlcnRpZXMiOnsiJHJlZiI6IiMvJGRlZnMvaW50In19XX0=");
+            var t = ParseJToken("eyJmb28iOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("infinite-loop-detection")]
+        public void Test_draft2019_09__infinite_loop_detection__evaluating_the_same_schema_location_against_the_same_data_location_twice_is_not_a_sign_of_an_infinite_loop__failing_case_2()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJpbnQiOnsidHlwZSI6ImludGVnZXIifX0sImFsbE9mIjpbeyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyIkcmVmIjoiIy8kZGVmcy9pbnQifX19LHsiYWRkaXRpb25hbFByb3BlcnRpZXMiOnsiJHJlZiI6IiMvJGRlZnMvaW50In19XX0=");
+            var t = ParseJToken("eyJmb28iOiJhIHN0cmluZyJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__a_schema_given_for_items__valid_items()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6eyJ0eXBlIjoiaW50ZWdlciJ9fQ==");
+            var t = ParseJToken("WzEsMiwzXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__a_schema_given_for_items__wrong_type_of_items_2()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6eyJ0eXBlIjoiaW50ZWdlciJ9fQ==");
+            var t = ParseJToken("WzEsIngiXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__a_schema_given_for_items__ignores_non_arrays_3()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6eyJ0eXBlIjoiaW50ZWdlciJ9fQ==");
+            var t = ParseJToken("eyJmb28iOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__a_schema_given_for_items__JavaScript_pseudo_array_is_valid_4()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6eyJ0eXBlIjoiaW50ZWdlciJ9fQ==");
+            var t = ParseJToken("eyIwIjoiaW52YWxpZCIsImxlbmd0aCI6MX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__an_array_of_schemas_for_items_2__correct_types()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImludGVnZXIifSx7InR5cGUiOiJzdHJpbmcifV19");
+            var t = ParseJToken("WzEsImZvbyJd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__an_array_of_schemas_for_items_2__wrong_types_2()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImludGVnZXIifSx7InR5cGUiOiJzdHJpbmcifV19");
+            var t = ParseJToken("WyJmb28iLDFd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__an_array_of_schemas_for_items_2__incomplete_array_of_items_3()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImludGVnZXIifSx7InR5cGUiOiJzdHJpbmcifV19");
+            var t = ParseJToken("WzFd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__an_array_of_schemas_for_items_2__array_with_additional_items_4()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImludGVnZXIifSx7InR5cGUiOiJzdHJpbmcifV19");
+            var t = ParseJToken("WzEsImZvbyIsdHJ1ZV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__an_array_of_schemas_for_items_2__empty_array_5()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImludGVnZXIifSx7InR5cGUiOiJzdHJpbmcifV19");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__an_array_of_schemas_for_items_2__JavaScript_pseudo_array_is_valid_6()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImludGVnZXIifSx7InR5cGUiOiJzdHJpbmcifV19");
+            var t = ParseJToken("eyIwIjoiaW52YWxpZCIsIjEiOiJ2YWxpZCIsImxlbmd0aCI6Mn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__items_with_boolean_schema__true__3__any_array_is_valid()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("WzEsImZvbyIsdHJ1ZV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__items_with_boolean_schema__true__3__empty_array_is_valid_2()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__items_with_boolean_schema__false__4__any_non_empty_array_is_invalid()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("WzEsImZvbyIsdHJ1ZV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__items_with_boolean_schema__false__4__empty_array_is_valid_2()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__items_with_boolean_schemas_5__array_with_one_item_is_valid()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3RydWUsZmFsc2VdfQ==");
+            var t = ParseJToken("WzFd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__items_with_boolean_schemas_5__array_with_two_items_is_invalid_2()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3RydWUsZmFsc2VdfQ==");
+            var t = ParseJToken("WzEsImZvbyJd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__items_with_boolean_schemas_5__empty_array_is_valid_3()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3RydWUsZmFsc2VdfQ==");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__items_and_subitems_6__valid_items()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJpdGVtIjp7InR5cGUiOiJhcnJheSIsImFkZGl0aW9uYWxJdGVtcyI6ZmFsc2UsIml0ZW1zIjpbeyIkcmVmIjoiIy8kZGVmcy9zdWItaXRlbSJ9LHsiJHJlZiI6IiMvJGRlZnMvc3ViLWl0ZW0ifV19LCJzdWItaXRlbSI6eyJ0eXBlIjoib2JqZWN0IiwicmVxdWlyZWQiOlsiZm9vIl19fSwidHlwZSI6ImFycmF5IiwiYWRkaXRpb25hbEl0ZW1zIjpmYWxzZSwiaXRlbXMiOlt7IiRyZWYiOiIjLyRkZWZzL2l0ZW0ifSx7IiRyZWYiOiIjLyRkZWZzL2l0ZW0ifSx7IiRyZWYiOiIjLyRkZWZzL2l0ZW0ifV19");
+            var t = ParseJToken("W1t7ImZvbyI6bnVsbH0seyJmb28iOm51bGx9XSxbeyJmb28iOm51bGx9LHsiZm9vIjpudWxsfV0sW3siZm9vIjpudWxsfSx7ImZvbyI6bnVsbH1dXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__items_and_subitems_6__too_many_items_2()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJpdGVtIjp7InR5cGUiOiJhcnJheSIsImFkZGl0aW9uYWxJdGVtcyI6ZmFsc2UsIml0ZW1zIjpbeyIkcmVmIjoiIy8kZGVmcy9zdWItaXRlbSJ9LHsiJHJlZiI6IiMvJGRlZnMvc3ViLWl0ZW0ifV19LCJzdWItaXRlbSI6eyJ0eXBlIjoib2JqZWN0IiwicmVxdWlyZWQiOlsiZm9vIl19fSwidHlwZSI6ImFycmF5IiwiYWRkaXRpb25hbEl0ZW1zIjpmYWxzZSwiaXRlbXMiOlt7IiRyZWYiOiIjLyRkZWZzL2l0ZW0ifSx7IiRyZWYiOiIjLyRkZWZzL2l0ZW0ifSx7IiRyZWYiOiIjLyRkZWZzL2l0ZW0ifV19");
+            var t = ParseJToken("W1t7ImZvbyI6bnVsbH0seyJmb28iOm51bGx9XSxbeyJmb28iOm51bGx9LHsiZm9vIjpudWxsfV0sW3siZm9vIjpudWxsfSx7ImZvbyI6bnVsbH1dLFt7ImZvbyI6bnVsbH0seyJmb28iOm51bGx9XV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__items_and_subitems_6__too_many_sub_items_3()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJpdGVtIjp7InR5cGUiOiJhcnJheSIsImFkZGl0aW9uYWxJdGVtcyI6ZmFsc2UsIml0ZW1zIjpbeyIkcmVmIjoiIy8kZGVmcy9zdWItaXRlbSJ9LHsiJHJlZiI6IiMvJGRlZnMvc3ViLWl0ZW0ifV19LCJzdWItaXRlbSI6eyJ0eXBlIjoib2JqZWN0IiwicmVxdWlyZWQiOlsiZm9vIl19fSwidHlwZSI6ImFycmF5IiwiYWRkaXRpb25hbEl0ZW1zIjpmYWxzZSwiaXRlbXMiOlt7IiRyZWYiOiIjLyRkZWZzL2l0ZW0ifSx7IiRyZWYiOiIjLyRkZWZzL2l0ZW0ifSx7IiRyZWYiOiIjLyRkZWZzL2l0ZW0ifV19");
+            var t = ParseJToken("W1t7ImZvbyI6bnVsbH0seyJmb28iOm51bGx9LHsiZm9vIjpudWxsfV0sW3siZm9vIjpudWxsfSx7ImZvbyI6bnVsbH1dLFt7ImZvbyI6bnVsbH0seyJmb28iOm51bGx9XV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__items_and_subitems_6__wrong_item_4()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJpdGVtIjp7InR5cGUiOiJhcnJheSIsImFkZGl0aW9uYWxJdGVtcyI6ZmFsc2UsIml0ZW1zIjpbeyIkcmVmIjoiIy8kZGVmcy9zdWItaXRlbSJ9LHsiJHJlZiI6IiMvJGRlZnMvc3ViLWl0ZW0ifV19LCJzdWItaXRlbSI6eyJ0eXBlIjoib2JqZWN0IiwicmVxdWlyZWQiOlsiZm9vIl19fSwidHlwZSI6ImFycmF5IiwiYWRkaXRpb25hbEl0ZW1zIjpmYWxzZSwiaXRlbXMiOlt7IiRyZWYiOiIjLyRkZWZzL2l0ZW0ifSx7IiRyZWYiOiIjLyRkZWZzL2l0ZW0ifSx7IiRyZWYiOiIjLyRkZWZzL2l0ZW0ifV19");
+            var t = ParseJToken("W3siZm9vIjpudWxsfSxbeyJmb28iOm51bGx9LHsiZm9vIjpudWxsfV0sW3siZm9vIjpudWxsfSx7ImZvbyI6bnVsbH1dXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__items_and_subitems_6__wrong_sub_item_5()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJpdGVtIjp7InR5cGUiOiJhcnJheSIsImFkZGl0aW9uYWxJdGVtcyI6ZmFsc2UsIml0ZW1zIjpbeyIkcmVmIjoiIy8kZGVmcy9zdWItaXRlbSJ9LHsiJHJlZiI6IiMvJGRlZnMvc3ViLWl0ZW0ifV19LCJzdWItaXRlbSI6eyJ0eXBlIjoib2JqZWN0IiwicmVxdWlyZWQiOlsiZm9vIl19fSwidHlwZSI6ImFycmF5IiwiYWRkaXRpb25hbEl0ZW1zIjpmYWxzZSwiaXRlbXMiOlt7IiRyZWYiOiIjLyRkZWZzL2l0ZW0ifSx7IiRyZWYiOiIjLyRkZWZzL2l0ZW0ifSx7IiRyZWYiOiIjLyRkZWZzL2l0ZW0ifV19");
+            var t = ParseJToken("W1t7fSx7ImZvbyI6bnVsbH1dLFt7ImZvbyI6bnVsbH0seyJmb28iOm51bGx9XSxbeyJmb28iOm51bGx9LHsiZm9vIjpudWxsfV1d");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__items_and_subitems_6__fewer_items_is_valid_6()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJpdGVtIjp7InR5cGUiOiJhcnJheSIsImFkZGl0aW9uYWxJdGVtcyI6ZmFsc2UsIml0ZW1zIjpbeyIkcmVmIjoiIy8kZGVmcy9zdWItaXRlbSJ9LHsiJHJlZiI6IiMvJGRlZnMvc3ViLWl0ZW0ifV19LCJzdWItaXRlbSI6eyJ0eXBlIjoib2JqZWN0IiwicmVxdWlyZWQiOlsiZm9vIl19fSwidHlwZSI6ImFycmF5IiwiYWRkaXRpb25hbEl0ZW1zIjpmYWxzZSwiaXRlbXMiOlt7IiRyZWYiOiIjLyRkZWZzL2l0ZW0ifSx7IiRyZWYiOiIjLyRkZWZzL2l0ZW0ifSx7IiRyZWYiOiIjLyRkZWZzL2l0ZW0ifV19");
+            var t = ParseJToken("W1t7ImZvbyI6bnVsbH1dLFt7ImZvbyI6bnVsbH1dXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__nested_items_7__valid_nested_array()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6eyJ0eXBlIjoibnVtYmVyIn19fX19");
+            var t = ParseJToken("W1tbWzFdXSxbWzJdLFszXV1dLFtbWzRdLFs1XSxbNl1dXV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__nested_items_7__nested_array_with_invalid_type_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6eyJ0eXBlIjoibnVtYmVyIn19fX19");
+            var t = ParseJToken("W1tbWyIxIl1dLFtbMl0sWzNdXV0sW1tbNF0sWzVdLFs2XV1dXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("items")]
+        public void Test_draft2019_09__items__nested_items_7__not_deep_enough_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6eyJ0eXBlIjoibnVtYmVyIn19fX19");
+            var t = ParseJToken("W1tbMV0sWzJdLFszXV0sW1s0XSxbNV0sWzZdXV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxContains")]
+        public void Test_draft2019_09__maxContains__maxContains_without_contains_is_ignored__one_item_valid_against_lone_maxContains()
+        {
+            var s = ParseSchema("eyJtYXhDb250YWlucyI6MX0=");
+            var t = ParseJToken("WzFd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxContains")]
+        public void Test_draft2019_09__maxContains__maxContains_without_contains_is_ignored__two_items_still_valid_against_lone_maxContains_2()
+        {
+            var s = ParseSchema("eyJtYXhDb250YWlucyI6MX0=");
+            var t = ParseJToken("WzEsMl0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxContains")]
+        public void Test_draft2019_09__maxContains__maxContains_with_contains_2__empty_data()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1heENvbnRhaW5zIjoxfQ==");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxContains")]
+        public void Test_draft2019_09__maxContains__maxContains_with_contains_2__all_elements_match__valid_maxContains_2()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1heENvbnRhaW5zIjoxfQ==");
+            var t = ParseJToken("WzFd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxContains")]
+        public void Test_draft2019_09__maxContains__maxContains_with_contains_2__all_elements_match__invalid_maxContains_3()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1heENvbnRhaW5zIjoxfQ==");
+            var t = ParseJToken("WzEsMV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxContains")]
+        public void Test_draft2019_09__maxContains__maxContains_with_contains_2__some_elements_match__valid_maxContains_4()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1heENvbnRhaW5zIjoxfQ==");
+            var t = ParseJToken("WzEsMl0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxContains")]
+        public void Test_draft2019_09__maxContains__maxContains_with_contains_2__some_elements_match__invalid_maxContains_5()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1heENvbnRhaW5zIjoxfQ==");
+            var t = ParseJToken("WzEsMiwxXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxContains")]
+        public void Test_draft2019_09__maxContains__minContains___maxContains_3__actual___minContains___maxContains()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1pbkNvbnRhaW5zIjoxLCJtYXhDb250YWlucyI6M30=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxContains")]
+        public void Test_draft2019_09__maxContains__minContains___maxContains_3__minContains___actual___maxContains_2()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1pbkNvbnRhaW5zIjoxLCJtYXhDb250YWlucyI6M30=");
+            var t = ParseJToken("WzEsMV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxContains")]
+        public void Test_draft2019_09__maxContains__minContains___maxContains_3__minContains___maxContains___actual_3()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1pbkNvbnRhaW5zIjoxLCJtYXhDb250YWlucyI6M30=");
+            var t = ParseJToken("WzEsMSwxLDFd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maximum")]
+        public void Test_draft2019_09__maximum__maximum_validation__below_the_maximum_is_valid()
+        {
+            var s = ParseSchema("eyJtYXhpbXVtIjozLjB9");
+            var t = ParseJToken("Mi42");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maximum")]
+        public void Test_draft2019_09__maximum__maximum_validation__boundary_point_is_valid_2()
+        {
+            var s = ParseSchema("eyJtYXhpbXVtIjozLjB9");
+            var t = ParseJToken("My4w");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maximum")]
+        public void Test_draft2019_09__maximum__maximum_validation__above_the_maximum_is_invalid_3()
+        {
+            var s = ParseSchema("eyJtYXhpbXVtIjozLjB9");
+            var t = ParseJToken("My41");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maximum")]
+        public void Test_draft2019_09__maximum__maximum_validation__ignores_non_numbers_4()
+        {
+            var s = ParseSchema("eyJtYXhpbXVtIjozLjB9");
+            var t = ParseJToken("Ingi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maximum")]
+        public void Test_draft2019_09__maximum__maximum_validation_with_unsigned_integer_2__below_the_maximum_is_invalid()
+        {
+            var s = ParseSchema("eyJtYXhpbXVtIjozMDB9");
+            var t = ParseJToken("Mjk5Ljk3");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maximum")]
+        public void Test_draft2019_09__maximum__maximum_validation_with_unsigned_integer_2__boundary_point_integer_is_valid_2()
+        {
+            var s = ParseSchema("eyJtYXhpbXVtIjozMDB9");
+            var t = ParseJToken("MzAw");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maximum")]
+        public void Test_draft2019_09__maximum__maximum_validation_with_unsigned_integer_2__boundary_point_float_is_valid_3()
+        {
+            var s = ParseSchema("eyJtYXhpbXVtIjozMDB9");
+            var t = ParseJToken("MzAwLjA=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maximum")]
+        public void Test_draft2019_09__maximum__maximum_validation_with_unsigned_integer_2__above_the_maximum_is_invalid_4()
+        {
+            var s = ParseSchema("eyJtYXhpbXVtIjozMDB9");
+            var t = ParseJToken("MzAwLjU=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxItems")]
+        public void Test_draft2019_09__maxItems__maxItems_validation__shorter_is_valid()
+        {
+            var s = ParseSchema("eyJtYXhJdGVtcyI6Mn0=");
+            var t = ParseJToken("WzFd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxItems")]
+        public void Test_draft2019_09__maxItems__maxItems_validation__exact_length_is_valid_2()
+        {
+            var s = ParseSchema("eyJtYXhJdGVtcyI6Mn0=");
+            var t = ParseJToken("WzEsMl0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxItems")]
+        public void Test_draft2019_09__maxItems__maxItems_validation__too_long_is_invalid_3()
+        {
+            var s = ParseSchema("eyJtYXhJdGVtcyI6Mn0=");
+            var t = ParseJToken("WzEsMiwzXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxItems")]
+        public void Test_draft2019_09__maxItems__maxItems_validation__ignores_non_arrays_4()
+        {
+            var s = ParseSchema("eyJtYXhJdGVtcyI6Mn0=");
+            var t = ParseJToken("ImZvb2JhciI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxLength")]
+        public void Test_draft2019_09__maxLength__maxLength_validation__shorter_is_valid()
+        {
+            var s = ParseSchema("eyJtYXhMZW5ndGgiOjJ9");
+            var t = ParseJToken("ImYi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxLength")]
+        public void Test_draft2019_09__maxLength__maxLength_validation__exact_length_is_valid_2()
+        {
+            var s = ParseSchema("eyJtYXhMZW5ndGgiOjJ9");
+            var t = ParseJToken("ImZvIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxLength")]
+        public void Test_draft2019_09__maxLength__maxLength_validation__too_long_is_invalid_3()
+        {
+            var s = ParseSchema("eyJtYXhMZW5ndGgiOjJ9");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxLength")]
+        public void Test_draft2019_09__maxLength__maxLength_validation__ignores_non_strings_4()
+        {
+            var s = ParseSchema("eyJtYXhMZW5ndGgiOjJ9");
+            var t = ParseJToken("MTAw");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxLength")]
+        public void Test_draft2019_09__maxLength__maxLength_validation__two_supplementary_Unicode_code_points_is_long_enough_5()
+        {
+            var s = ParseSchema("eyJtYXhMZW5ndGgiOjJ9");
+            var t = ParseJToken("IvCfkqnwn5KpIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxProperties")]
+        public void Test_draft2019_09__maxProperties__maxProperties_validation__shorter_is_valid()
+        {
+            var s = ParseSchema("eyJtYXhQcm9wZXJ0aWVzIjoyfQ==");
+            var t = ParseJToken("eyJmb28iOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxProperties")]
+        public void Test_draft2019_09__maxProperties__maxProperties_validation__exact_length_is_valid_2()
+        {
+            var s = ParseSchema("eyJtYXhQcm9wZXJ0aWVzIjoyfQ==");
+            var t = ParseJToken("eyJmb28iOjEsImJhciI6Mn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxProperties")]
+        public void Test_draft2019_09__maxProperties__maxProperties_validation__too_long_is_invalid_3()
+        {
+            var s = ParseSchema("eyJtYXhQcm9wZXJ0aWVzIjoyfQ==");
+            var t = ParseJToken("eyJmb28iOjEsImJhciI6MiwiYmF6IjozfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxProperties")]
+        public void Test_draft2019_09__maxProperties__maxProperties_validation__ignores_arrays_4()
+        {
+            var s = ParseSchema("eyJtYXhQcm9wZXJ0aWVzIjoyfQ==");
+            var t = ParseJToken("WzEsMiwzXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxProperties")]
+        public void Test_draft2019_09__maxProperties__maxProperties_validation__ignores_strings_5()
+        {
+            var s = ParseSchema("eyJtYXhQcm9wZXJ0aWVzIjoyfQ==");
+            var t = ParseJToken("ImZvb2JhciI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxProperties")]
+        public void Test_draft2019_09__maxProperties__maxProperties_validation__ignores_other_non_objects_6()
+        {
+            var s = ParseSchema("eyJtYXhQcm9wZXJ0aWVzIjoyfQ==");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxProperties")]
+        public void Test_draft2019_09__maxProperties__maxProperties___0_means_the_object_is_empty_2__no_properties_is_valid()
+        {
+            var s = ParseSchema("eyJtYXhQcm9wZXJ0aWVzIjowfQ==");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("maxProperties")]
+        public void Test_draft2019_09__maxProperties__maxProperties___0_means_the_object_is_empty_2__one_property_is_invalid_2()
+        {
+            var s = ParseSchema("eyJtYXhQcm9wZXJ0aWVzIjowfQ==");
+            var t = ParseJToken("eyJmb28iOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minContains")]
+        public void Test_draft2019_09__minContains__minContains_without_contains_is_ignored__one_item_valid_against_lone_minContains()
+        {
+            var s = ParseSchema("eyJtaW5Db250YWlucyI6MX0=");
+            var t = ParseJToken("WzFd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minContains")]
+        public void Test_draft2019_09__minContains__minContains_without_contains_is_ignored__zero_items_still_valid_against_lone_minContains_2()
+        {
+            var s = ParseSchema("eyJtaW5Db250YWlucyI6MX0=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minContains")]
+        public void Test_draft2019_09__minContains__minContains_1_with_contains_2__empty_data()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1pbkNvbnRhaW5zIjoxfQ==");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minContains")]
+        public void Test_draft2019_09__minContains__minContains_1_with_contains_2__no_elements_match_2()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1pbkNvbnRhaW5zIjoxfQ==");
+            var t = ParseJToken("WzJd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minContains")]
+        public void Test_draft2019_09__minContains__minContains_1_with_contains_2__single_element_matches__valid_minContains_3()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1pbkNvbnRhaW5zIjoxfQ==");
+            var t = ParseJToken("WzFd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minContains")]
+        public void Test_draft2019_09__minContains__minContains_1_with_contains_2__some_elements_match__valid_minContains_4()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1pbkNvbnRhaW5zIjoxfQ==");
+            var t = ParseJToken("WzEsMl0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minContains")]
+        public void Test_draft2019_09__minContains__minContains_1_with_contains_2__all_elements_match__valid_minContains_5()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1pbkNvbnRhaW5zIjoxfQ==");
+            var t = ParseJToken("WzEsMV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minContains")]
+        public void Test_draft2019_09__minContains__minContains_2_with_contains_3__empty_data()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1pbkNvbnRhaW5zIjoyfQ==");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minContains")]
+        public void Test_draft2019_09__minContains__minContains_2_with_contains_3__all_elements_match__invalid_minContains_2()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1pbkNvbnRhaW5zIjoyfQ==");
+            var t = ParseJToken("WzFd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minContains")]
+        public void Test_draft2019_09__minContains__minContains_2_with_contains_3__some_elements_match__invalid_minContains_3()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1pbkNvbnRhaW5zIjoyfQ==");
+            var t = ParseJToken("WzEsMl0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minContains")]
+        public void Test_draft2019_09__minContains__minContains_2_with_contains_3__all_elements_match__valid_minContains__exactly_as_needed__4()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1pbkNvbnRhaW5zIjoyfQ==");
+            var t = ParseJToken("WzEsMV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minContains")]
+        public void Test_draft2019_09__minContains__minContains_2_with_contains_3__all_elements_match__valid_minContains__more_than_needed__5()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1pbkNvbnRhaW5zIjoyfQ==");
+            var t = ParseJToken("WzEsMSwxXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minContains")]
+        public void Test_draft2019_09__minContains__minContains_2_with_contains_3__some_elements_match__valid_minContains_6()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1pbkNvbnRhaW5zIjoyfQ==");
+            var t = ParseJToken("WzEsMiwxXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minContains")]
+        public void Test_draft2019_09__minContains__maxContains___minContains_4__empty_data()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1heENvbnRhaW5zIjoyLCJtaW5Db250YWlucyI6Mn0=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minContains")]
+        public void Test_draft2019_09__minContains__maxContains___minContains_4__all_elements_match__invalid_minContains_2()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1heENvbnRhaW5zIjoyLCJtaW5Db250YWlucyI6Mn0=");
+            var t = ParseJToken("WzFd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minContains")]
+        public void Test_draft2019_09__minContains__maxContains___minContains_4__all_elements_match__invalid_maxContains_3()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1heENvbnRhaW5zIjoyLCJtaW5Db250YWlucyI6Mn0=");
+            var t = ParseJToken("WzEsMSwxXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minContains")]
+        public void Test_draft2019_09__minContains__maxContains___minContains_4__all_elements_match__valid_maxContains_and_minContains_4()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1heENvbnRhaW5zIjoyLCJtaW5Db250YWlucyI6Mn0=");
+            var t = ParseJToken("WzEsMV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minContains")]
+        public void Test_draft2019_09__minContains__maxContains___minContains_5__empty_data()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1heENvbnRhaW5zIjoxLCJtaW5Db250YWlucyI6M30=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minContains")]
+        public void Test_draft2019_09__minContains__maxContains___minContains_5__invalid_minContains_2()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1heENvbnRhaW5zIjoxLCJtaW5Db250YWlucyI6M30=");
+            var t = ParseJToken("WzFd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minContains")]
+        public void Test_draft2019_09__minContains__maxContains___minContains_5__invalid_maxContains_3()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1heENvbnRhaW5zIjoxLCJtaW5Db250YWlucyI6M30=");
+            var t = ParseJToken("WzEsMSwxXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minContains")]
+        public void Test_draft2019_09__minContains__maxContains___minContains_5__invalid_maxContains_and_minContains_4()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1heENvbnRhaW5zIjoxLCJtaW5Db250YWlucyI6M30=");
+            var t = ParseJToken("WzEsMV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minContains")]
+        public void Test_draft2019_09__minContains__minContains___0_6__empty_data()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1pbkNvbnRhaW5zIjowfQ==");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minContains")]
+        public void Test_draft2019_09__minContains__minContains___0_6__minContains___0_makes_contains_always_pass_2()
+        {
+            var s = ParseSchema("eyJjb250YWlucyI6eyJjb25zdCI6MX0sIm1pbkNvbnRhaW5zIjowfQ==");
+            var t = ParseJToken("WzJd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minimum")]
+        public void Test_draft2019_09__minimum__minimum_validation__above_the_minimum_is_valid()
+        {
+            var s = ParseSchema("eyJtaW5pbXVtIjoxLjF9");
+            var t = ParseJToken("Mi42");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minimum")]
+        public void Test_draft2019_09__minimum__minimum_validation__boundary_point_is_valid_2()
+        {
+            var s = ParseSchema("eyJtaW5pbXVtIjoxLjF9");
+            var t = ParseJToken("MS4x");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minimum")]
+        public void Test_draft2019_09__minimum__minimum_validation__below_the_minimum_is_invalid_3()
+        {
+            var s = ParseSchema("eyJtaW5pbXVtIjoxLjF9");
+            var t = ParseJToken("MC42");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minimum")]
+        public void Test_draft2019_09__minimum__minimum_validation__ignores_non_numbers_4()
+        {
+            var s = ParseSchema("eyJtaW5pbXVtIjoxLjF9");
+            var t = ParseJToken("Ingi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minimum")]
+        public void Test_draft2019_09__minimum__minimum_validation_with_signed_integer_2__negative_above_the_minimum_is_valid()
+        {
+            var s = ParseSchema("eyJtaW5pbXVtIjotMn0=");
+            var t = ParseJToken("LTE=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minimum")]
+        public void Test_draft2019_09__minimum__minimum_validation_with_signed_integer_2__positive_above_the_minimum_is_valid_2()
+        {
+            var s = ParseSchema("eyJtaW5pbXVtIjotMn0=");
+            var t = ParseJToken("MA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minimum")]
+        public void Test_draft2019_09__minimum__minimum_validation_with_signed_integer_2__boundary_point_is_valid_3()
+        {
+            var s = ParseSchema("eyJtaW5pbXVtIjotMn0=");
+            var t = ParseJToken("LTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minimum")]
+        public void Test_draft2019_09__minimum__minimum_validation_with_signed_integer_2__boundary_point_with_float_is_valid_4()
+        {
+            var s = ParseSchema("eyJtaW5pbXVtIjotMn0=");
+            var t = ParseJToken("LTIuMA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minimum")]
+        public void Test_draft2019_09__minimum__minimum_validation_with_signed_integer_2__float_below_the_minimum_is_invalid_5()
+        {
+            var s = ParseSchema("eyJtaW5pbXVtIjotMn0=");
+            var t = ParseJToken("LTIuMDAwMQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minimum")]
+        public void Test_draft2019_09__minimum__minimum_validation_with_signed_integer_2__int_below_the_minimum_is_invalid_6()
+        {
+            var s = ParseSchema("eyJtaW5pbXVtIjotMn0=");
+            var t = ParseJToken("LTM=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minimum")]
+        public void Test_draft2019_09__minimum__minimum_validation_with_signed_integer_2__ignores_non_numbers_7()
+        {
+            var s = ParseSchema("eyJtaW5pbXVtIjotMn0=");
+            var t = ParseJToken("Ingi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minItems")]
+        public void Test_draft2019_09__minItems__minItems_validation__longer_is_valid()
+        {
+            var s = ParseSchema("eyJtaW5JdGVtcyI6MX0=");
+            var t = ParseJToken("WzEsMl0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minItems")]
+        public void Test_draft2019_09__minItems__minItems_validation__exact_length_is_valid_2()
+        {
+            var s = ParseSchema("eyJtaW5JdGVtcyI6MX0=");
+            var t = ParseJToken("WzFd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minItems")]
+        public void Test_draft2019_09__minItems__minItems_validation__too_short_is_invalid_3()
+        {
+            var s = ParseSchema("eyJtaW5JdGVtcyI6MX0=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minItems")]
+        public void Test_draft2019_09__minItems__minItems_validation__ignores_non_arrays_4()
+        {
+            var s = ParseSchema("eyJtaW5JdGVtcyI6MX0=");
+            var t = ParseJToken("IiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minLength")]
+        public void Test_draft2019_09__minLength__minLength_validation__longer_is_valid()
+        {
+            var s = ParseSchema("eyJtaW5MZW5ndGgiOjJ9");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minLength")]
+        public void Test_draft2019_09__minLength__minLength_validation__exact_length_is_valid_2()
+        {
+            var s = ParseSchema("eyJtaW5MZW5ndGgiOjJ9");
+            var t = ParseJToken("ImZvIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minLength")]
+        public void Test_draft2019_09__minLength__minLength_validation__too_short_is_invalid_3()
+        {
+            var s = ParseSchema("eyJtaW5MZW5ndGgiOjJ9");
+            var t = ParseJToken("ImYi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minLength")]
+        public void Test_draft2019_09__minLength__minLength_validation__ignores_non_strings_4()
+        {
+            var s = ParseSchema("eyJtaW5MZW5ndGgiOjJ9");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minLength")]
+        public void Test_draft2019_09__minLength__minLength_validation__one_supplementary_Unicode_code_point_is_not_long_enough_5()
+        {
+            var s = ParseSchema("eyJtaW5MZW5ndGgiOjJ9");
+            var t = ParseJToken("IvCfkqki");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minProperties")]
+        public void Test_draft2019_09__minProperties__minProperties_validation__longer_is_valid()
+        {
+            var s = ParseSchema("eyJtaW5Qcm9wZXJ0aWVzIjoxfQ==");
+            var t = ParseJToken("eyJmb28iOjEsImJhciI6Mn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minProperties")]
+        public void Test_draft2019_09__minProperties__minProperties_validation__exact_length_is_valid_2()
+        {
+            var s = ParseSchema("eyJtaW5Qcm9wZXJ0aWVzIjoxfQ==");
+            var t = ParseJToken("eyJmb28iOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minProperties")]
+        public void Test_draft2019_09__minProperties__minProperties_validation__too_short_is_invalid_3()
+        {
+            var s = ParseSchema("eyJtaW5Qcm9wZXJ0aWVzIjoxfQ==");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minProperties")]
+        public void Test_draft2019_09__minProperties__minProperties_validation__ignores_arrays_4()
+        {
+            var s = ParseSchema("eyJtaW5Qcm9wZXJ0aWVzIjoxfQ==");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minProperties")]
+        public void Test_draft2019_09__minProperties__minProperties_validation__ignores_strings_5()
+        {
+            var s = ParseSchema("eyJtaW5Qcm9wZXJ0aWVzIjoxfQ==");
+            var t = ParseJToken("IiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("minProperties")]
+        public void Test_draft2019_09__minProperties__minProperties_validation__ignores_other_non_objects_6()
+        {
+            var s = ParseSchema("eyJtaW5Qcm9wZXJ0aWVzIjoxfQ==");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("multipleOf")]
+        public void Test_draft2019_09__multipleOf__by_int__int_by_int()
+        {
+            var s = ParseSchema("eyJtdWx0aXBsZU9mIjoyfQ==");
+            var t = ParseJToken("MTA=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("multipleOf")]
+        public void Test_draft2019_09__multipleOf__by_int__int_by_int_fail_2()
+        {
+            var s = ParseSchema("eyJtdWx0aXBsZU9mIjoyfQ==");
+            var t = ParseJToken("Nw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("multipleOf")]
+        public void Test_draft2019_09__multipleOf__by_int__ignores_non_numbers_3()
+        {
+            var s = ParseSchema("eyJtdWx0aXBsZU9mIjoyfQ==");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("multipleOf")]
+        public void Test_draft2019_09__multipleOf__by_number_2__zero_is_multiple_of_anything()
+        {
+            var s = ParseSchema("eyJtdWx0aXBsZU9mIjoxLjV9");
+            var t = ParseJToken("MA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("multipleOf")]
+        public void Test_draft2019_09__multipleOf__by_number_2__4_5_is_multiple_of_1_5_2()
+        {
+            var s = ParseSchema("eyJtdWx0aXBsZU9mIjoxLjV9");
+            var t = ParseJToken("NC41");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("multipleOf")]
+        public void Test_draft2019_09__multipleOf__by_number_2__35_is_not_multiple_of_1_5_3()
+        {
+            var s = ParseSchema("eyJtdWx0aXBsZU9mIjoxLjV9");
+            var t = ParseJToken("MzU=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("multipleOf")]
+        public void Test_draft2019_09__multipleOf__by_small_number_3__0_0075_is_multiple_of_0_0001()
+        {
+            var s = ParseSchema("eyJtdWx0aXBsZU9mIjowLjAwMDF9");
+            var t = ParseJToken("MC4wMDc1");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("multipleOf")]
+        public void Test_draft2019_09__multipleOf__by_small_number_3__0_00751_is_not_multiple_of_0_0001_2()
+        {
+            var s = ParseSchema("eyJtdWx0aXBsZU9mIjowLjAwMDF9");
+            var t = ParseJToken("MC4wMDc1MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("multipleOf")]
+        public void Test_draft2019_09__multipleOf__invalid_instance_should_not_raise_error_when_float_division___inf_4__always_invalid__but_naive_implementations_may_raise_an_overflow_error()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiaW50ZWdlciIsIm11bHRpcGxlT2YiOjAuMTIzNDU2Nzg5fQ==");
+            var t = ParseJToken("MUUrMzA4");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("not")]
+        public void Test_draft2019_09__not__not__allowed()
+        {
+            var s = ParseSchema("eyJub3QiOnsidHlwZSI6ImludGVnZXIifX0=");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("not")]
+        public void Test_draft2019_09__not__not__disallowed_2()
+        {
+            var s = ParseSchema("eyJub3QiOnsidHlwZSI6ImludGVnZXIifX0=");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("not")]
+        public void Test_draft2019_09__not__not_multiple_types_2__valid()
+        {
+            var s = ParseSchema("eyJub3QiOnsidHlwZSI6WyJpbnRlZ2VyIiwiYm9vbGVhbiJdfX0=");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("not")]
+        public void Test_draft2019_09__not__not_multiple_types_2__mismatch_2()
+        {
+            var s = ParseSchema("eyJub3QiOnsidHlwZSI6WyJpbnRlZ2VyIiwiYm9vbGVhbiJdfX0=");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("not")]
+        public void Test_draft2019_09__not__not_multiple_types_2__other_mismatch_3()
+        {
+            var s = ParseSchema("eyJub3QiOnsidHlwZSI6WyJpbnRlZ2VyIiwiYm9vbGVhbiJdfX0=");
+            var t = ParseJToken("dHJ1ZQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("not")]
+        public void Test_draft2019_09__not__not_more_complex_schema_3__match()
+        {
+            var s = ParseSchema("eyJub3QiOnsidHlwZSI6Im9iamVjdCIsInByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX19fQ==");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("not")]
+        public void Test_draft2019_09__not__not_more_complex_schema_3__other_match_2()
+        {
+            var s = ParseSchema("eyJub3QiOnsidHlwZSI6Im9iamVjdCIsInByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX19fQ==");
+            var t = ParseJToken("eyJmb28iOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("not")]
+        public void Test_draft2019_09__not__not_more_complex_schema_3__mismatch_3()
+        {
+            var s = ParseSchema("eyJub3QiOnsidHlwZSI6Im9iamVjdCIsInByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX19fQ==");
+            var t = ParseJToken("eyJmb28iOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("not")]
+        public void Test_draft2019_09__not__forbidden_property_4__property_present()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJub3QiOnt9fX19");
+            var t = ParseJToken("eyJmb28iOjEsImJhciI6Mn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("not")]
+        public void Test_draft2019_09__not__forbidden_property_4__property_absent_2()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJub3QiOnt9fX19");
+            var t = ParseJToken("eyJiYXIiOjEsImJheiI6Mn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("not")]
+        public void Test_draft2019_09__not__not_with_boolean_schema_true_5__any_value_is_invalid()
+        {
+            var s = ParseSchema("eyJub3QiOnRydWV9");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("not")]
+        public void Test_draft2019_09__not__not_with_boolean_schema_false_6__any_value_is_valid()
+        {
+            var s = ParseSchema("eyJub3QiOmZhbHNlfQ==");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf__first_oneOf_valid()
+        {
+            var s = ParseSchema("eyJvbmVPZiI6W3sidHlwZSI6ImludGVnZXIifSx7Im1pbmltdW0iOjJ9XX0=");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf__second_oneOf_valid_2()
+        {
+            var s = ParseSchema("eyJvbmVPZiI6W3sidHlwZSI6ImludGVnZXIifSx7Im1pbmltdW0iOjJ9XX0=");
+            var t = ParseJToken("Mi41");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf__both_oneOf_valid_3()
+        {
+            var s = ParseSchema("eyJvbmVPZiI6W3sidHlwZSI6ImludGVnZXIifSx7Im1pbmltdW0iOjJ9XX0=");
+            var t = ParseJToken("Mw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf__neither_oneOf_valid_4()
+        {
+            var s = ParseSchema("eyJvbmVPZiI6W3sidHlwZSI6ImludGVnZXIifSx7Im1pbmltdW0iOjJ9XX0=");
+            var t = ParseJToken("MS41");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf_with_base_schema_2__mismatch_base_schema()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwib25lT2YiOlt7Im1pbkxlbmd0aCI6Mn0seyJtYXhMZW5ndGgiOjR9XX0=");
+            var t = ParseJToken("Mw==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf_with_base_schema_2__one_oneOf_valid_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwib25lT2YiOlt7Im1pbkxlbmd0aCI6Mn0seyJtYXhMZW5ndGgiOjR9XX0=");
+            var t = ParseJToken("ImZvb2JhciI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf_with_base_schema_2__both_oneOf_valid_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwib25lT2YiOlt7Im1pbkxlbmd0aCI6Mn0seyJtYXhMZW5ndGgiOjR9XX0=");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf_with_boolean_schemas__all_true_3__any_value_is_invalid()
+        {
+            var s = ParseSchema("eyJvbmVPZiI6W3RydWUsdHJ1ZSx0cnVlXX0=");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf_with_boolean_schemas__one_true_4__any_value_is_valid()
+        {
+            var s = ParseSchema("eyJvbmVPZiI6W3RydWUsZmFsc2UsZmFsc2VdfQ==");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf_with_boolean_schemas__more_than_one_true_5__any_value_is_invalid()
+        {
+            var s = ParseSchema("eyJvbmVPZiI6W3RydWUsdHJ1ZSxmYWxzZV19");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf_with_boolean_schemas__all_false_6__any_value_is_invalid()
+        {
+            var s = ParseSchema("eyJvbmVPZiI6W2ZhbHNlLGZhbHNlLGZhbHNlXX0=");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf_complex_types_7__first_oneOf_valid__complex_()
+        {
+            var s = ParseSchema("eyJvbmVPZiI6W3sicHJvcGVydGllcyI6eyJiYXIiOnsidHlwZSI6ImludGVnZXIifX0sInJlcXVpcmVkIjpbImJhciJdfSx7InByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbImZvbyJdfV19");
+            var t = ParseJToken("eyJiYXIiOjJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf_complex_types_7__second_oneOf_valid__complex__2()
+        {
+            var s = ParseSchema("eyJvbmVPZiI6W3sicHJvcGVydGllcyI6eyJiYXIiOnsidHlwZSI6ImludGVnZXIifX0sInJlcXVpcmVkIjpbImJhciJdfSx7InByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbImZvbyJdfV19");
+            var t = ParseJToken("eyJmb28iOiJiYXoifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf_complex_types_7__both_oneOf_valid__complex__3()
+        {
+            var s = ParseSchema("eyJvbmVPZiI6W3sicHJvcGVydGllcyI6eyJiYXIiOnsidHlwZSI6ImludGVnZXIifX0sInJlcXVpcmVkIjpbImJhciJdfSx7InByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbImZvbyJdfV19");
+            var t = ParseJToken("eyJmb28iOiJiYXoiLCJiYXIiOjJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf_complex_types_7__neither_oneOf_valid__complex__4()
+        {
+            var s = ParseSchema("eyJvbmVPZiI6W3sicHJvcGVydGllcyI6eyJiYXIiOnsidHlwZSI6ImludGVnZXIifX0sInJlcXVpcmVkIjpbImJhciJdfSx7InByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbImZvbyJdfV19");
+            var t = ParseJToken("eyJmb28iOjIsImJhciI6InF1dXgifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf_with_empty_schema_8__one_valid___valid()
+        {
+            var s = ParseSchema("eyJvbmVPZiI6W3sidHlwZSI6Im51bWJlciJ9LHt9XX0=");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf_with_empty_schema_8__both_valid___invalid_2()
+        {
+            var s = ParseSchema("eyJvbmVPZiI6W3sidHlwZSI6Im51bWJlciJ9LHt9XX0=");
+            var t = ParseJToken("MTIz");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf_with_required_9__both_invalid___invalid()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0Iiwib25lT2YiOlt7InJlcXVpcmVkIjpbImZvbyIsImJhciJdfSx7InJlcXVpcmVkIjpbImZvbyIsImJheiJdfV19");
+            var t = ParseJToken("eyJiYXIiOjJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf_with_required_9__first_valid___valid_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0Iiwib25lT2YiOlt7InJlcXVpcmVkIjpbImZvbyIsImJhciJdfSx7InJlcXVpcmVkIjpbImZvbyIsImJheiJdfV19");
+            var t = ParseJToken("eyJmb28iOjEsImJhciI6Mn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf_with_required_9__second_valid___valid_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0Iiwib25lT2YiOlt7InJlcXVpcmVkIjpbImZvbyIsImJhciJdfSx7InJlcXVpcmVkIjpbImZvbyIsImJheiJdfV19");
+            var t = ParseJToken("eyJmb28iOjEsImJheiI6M30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf_with_required_9__both_valid___invalid_4()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0Iiwib25lT2YiOlt7InJlcXVpcmVkIjpbImZvbyIsImJhciJdfSx7InJlcXVpcmVkIjpbImZvbyIsImJheiJdfV19");
+            var t = ParseJToken("eyJmb28iOjEsImJhciI6MiwiYmF6IjozfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf_with_missing_optional_property_10__first_oneOf_valid()
+        {
+            var s = ParseSchema("eyJvbmVPZiI6W3sicHJvcGVydGllcyI6eyJiYXIiOnRydWUsImJheiI6dHJ1ZX0sInJlcXVpcmVkIjpbImJhciJdfSx7InByb3BlcnRpZXMiOnsiZm9vIjp0cnVlfSwicmVxdWlyZWQiOlsiZm9vIl19XX0=");
+            var t = ParseJToken("eyJiYXIiOjh9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf_with_missing_optional_property_10__second_oneOf_valid_2()
+        {
+            var s = ParseSchema("eyJvbmVPZiI6W3sicHJvcGVydGllcyI6eyJiYXIiOnRydWUsImJheiI6dHJ1ZX0sInJlcXVpcmVkIjpbImJhciJdfSx7InByb3BlcnRpZXMiOnsiZm9vIjp0cnVlfSwicmVxdWlyZWQiOlsiZm9vIl19XX0=");
+            var t = ParseJToken("eyJmb28iOiJmb28ifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf_with_missing_optional_property_10__both_oneOf_valid_3()
+        {
+            var s = ParseSchema("eyJvbmVPZiI6W3sicHJvcGVydGllcyI6eyJiYXIiOnRydWUsImJheiI6dHJ1ZX0sInJlcXVpcmVkIjpbImJhciJdfSx7InByb3BlcnRpZXMiOnsiZm9vIjp0cnVlfSwicmVxdWlyZWQiOlsiZm9vIl19XX0=");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOjh9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__oneOf_with_missing_optional_property_10__neither_oneOf_valid_4()
+        {
+            var s = ParseSchema("eyJvbmVPZiI6W3sicHJvcGVydGllcyI6eyJiYXIiOnRydWUsImJheiI6dHJ1ZX0sInJlcXVpcmVkIjpbImJhciJdfSx7InByb3BlcnRpZXMiOnsiZm9vIjp0cnVlfSwicmVxdWlyZWQiOlsiZm9vIl19XX0=");
+            var t = ParseJToken("eyJiYXoiOiJxdXV4In0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__nested_oneOf__to_check_validation_semantics_11__null_is_valid()
+        {
+            var s = ParseSchema("eyJvbmVPZiI6W3sib25lT2YiOlt7InR5cGUiOiJudWxsIn1dfV19");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("oneOf")]
+        public void Test_draft2019_09__oneOf__nested_oneOf__to_check_validation_semantics_11__anything_non_null_is_invalid_2()
+        {
+            var s = ParseSchema("eyJvbmVPZiI6W3sib25lT2YiOlt7InR5cGUiOiJudWxsIn1dfV19");
+            var t = ParseJToken("MTIz");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("pattern")]
+        public void Test_draft2019_09__pattern__pattern_validation__a_matching_pattern_is_valid()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuIjoiXmEqJCJ9");
+            var t = ParseJToken("ImFhYSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("pattern")]
+        public void Test_draft2019_09__pattern__pattern_validation__a_non_matching_pattern_is_invalid_2()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuIjoiXmEqJCJ9");
+            var t = ParseJToken("ImFiYyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("pattern")]
+        public void Test_draft2019_09__pattern__pattern_validation__ignores_booleans_3()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuIjoiXmEqJCJ9");
+            var t = ParseJToken("dHJ1ZQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("pattern")]
+        public void Test_draft2019_09__pattern__pattern_validation__ignores_integers_4()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuIjoiXmEqJCJ9");
+            var t = ParseJToken("MTIz");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("pattern")]
+        public void Test_draft2019_09__pattern__pattern_validation__ignores_floats_5()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuIjoiXmEqJCJ9");
+            var t = ParseJToken("MS4w");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("pattern")]
+        public void Test_draft2019_09__pattern__pattern_validation__ignores_objects_6()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuIjoiXmEqJCJ9");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("pattern")]
+        public void Test_draft2019_09__pattern__pattern_validation__ignores_arrays_7()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuIjoiXmEqJCJ9");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("pattern")]
+        public void Test_draft2019_09__pattern__pattern_validation__ignores_null_8()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuIjoiXmEqJCJ9");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("pattern")]
+        public void Test_draft2019_09__pattern__pattern_is_not_anchored_2__matches_a_substring()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuIjoiYSsifQ==");
+            var t = ParseJToken("Inh4YWF5eSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("patternProperties")]
+        public void Test_draft2019_09__patternProperties__patternProperties_validates_properties_matching_a_regex__a_single_valid_match_is_valid()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJmLipvIjp7InR5cGUiOiJpbnRlZ2VyIn19fQ==");
+            var t = ParseJToken("eyJmb28iOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("patternProperties")]
+        public void Test_draft2019_09__patternProperties__patternProperties_validates_properties_matching_a_regex__multiple_valid_matches_is_valid_2()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJmLipvIjp7InR5cGUiOiJpbnRlZ2VyIn19fQ==");
+            var t = ParseJToken("eyJmb28iOjEsImZvb29vb28iOjJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("patternProperties")]
+        public void Test_draft2019_09__patternProperties__patternProperties_validates_properties_matching_a_regex__a_single_invalid_match_is_invalid_3()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJmLipvIjp7InR5cGUiOiJpbnRlZ2VyIn19fQ==");
+            var t = ParseJToken("eyJmb28iOiJiYXIiLCJmb29vb28iOjJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("patternProperties")]
+        public void Test_draft2019_09__patternProperties__patternProperties_validates_properties_matching_a_regex__multiple_invalid_matches_is_invalid_4()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJmLipvIjp7InR5cGUiOiJpbnRlZ2VyIn19fQ==");
+            var t = ParseJToken("eyJmb28iOiJiYXIiLCJmb29vb29vIjoiYmF6In0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("patternProperties")]
+        public void Test_draft2019_09__patternProperties__patternProperties_validates_properties_matching_a_regex__ignores_arrays_5()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJmLipvIjp7InR5cGUiOiJpbnRlZ2VyIn19fQ==");
+            var t = ParseJToken("WyJmb28iXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("patternProperties")]
+        public void Test_draft2019_09__patternProperties__patternProperties_validates_properties_matching_a_regex__ignores_strings_6()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJmLipvIjp7InR5cGUiOiJpbnRlZ2VyIn19fQ==");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("patternProperties")]
+        public void Test_draft2019_09__patternProperties__patternProperties_validates_properties_matching_a_regex__ignores_other_non_objects_7()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJmLipvIjp7InR5cGUiOiJpbnRlZ2VyIn19fQ==");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("patternProperties")]
+        public void Test_draft2019_09__patternProperties__multiple_simultaneous_patternProperties_are_validated_2__a_single_valid_match_is_valid()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJhKiI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJhYWEqIjp7Im1heGltdW0iOjIwfX19");
+            var t = ParseJToken("eyJhIjoyMX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("patternProperties")]
+        public void Test_draft2019_09__patternProperties__multiple_simultaneous_patternProperties_are_validated_2__a_simultaneous_match_is_valid_2()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJhKiI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJhYWEqIjp7Im1heGltdW0iOjIwfX19");
+            var t = ParseJToken("eyJhYWFhIjoxOH0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("patternProperties")]
+        public void Test_draft2019_09__patternProperties__multiple_simultaneous_patternProperties_are_validated_2__multiple_matches_is_valid_3()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJhKiI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJhYWEqIjp7Im1heGltdW0iOjIwfX19");
+            var t = ParseJToken("eyJhIjoyMSwiYWFhYSI6MTh9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("patternProperties")]
+        public void Test_draft2019_09__patternProperties__multiple_simultaneous_patternProperties_are_validated_2__an_invalid_due_to_one_is_invalid_4()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJhKiI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJhYWEqIjp7Im1heGltdW0iOjIwfX19");
+            var t = ParseJToken("eyJhIjoiYmFyIn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("patternProperties")]
+        public void Test_draft2019_09__patternProperties__multiple_simultaneous_patternProperties_are_validated_2__an_invalid_due_to_the_other_is_invalid_5()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJhKiI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJhYWEqIjp7Im1heGltdW0iOjIwfX19");
+            var t = ParseJToken("eyJhYWFhIjozMX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("patternProperties")]
+        public void Test_draft2019_09__patternProperties__multiple_simultaneous_patternProperties_are_validated_2__an_invalid_due_to_both_is_invalid_6()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJhKiI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJhYWEqIjp7Im1heGltdW0iOjIwfX19");
+            var t = ParseJToken("eyJhYWEiOiJmb28iLCJhYWFhIjozMX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("patternProperties")]
+        public void Test_draft2019_09__patternProperties__regexes_are_not_anchored_by_default_and_are_case_sensitive_3__non_recognized_members_are_ignored()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJbMC05XXsyLH0iOnsidHlwZSI6ImJvb2xlYW4ifSwiWF8iOnsidHlwZSI6InN0cmluZyJ9fX0=");
+            var t = ParseJToken("eyJhbnN3ZXIgMSI6IjQyIn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("patternProperties")]
+        public void Test_draft2019_09__patternProperties__regexes_are_not_anchored_by_default_and_are_case_sensitive_3__recognized_members_are_accounted_for_2()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJbMC05XXsyLH0iOnsidHlwZSI6ImJvb2xlYW4ifSwiWF8iOnsidHlwZSI6InN0cmluZyJ9fX0=");
+            var t = ParseJToken("eyJhMzFiIjpudWxsfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("patternProperties")]
+        public void Test_draft2019_09__patternProperties__regexes_are_not_anchored_by_default_and_are_case_sensitive_3__regexes_are_case_sensitive_3()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJbMC05XXsyLH0iOnsidHlwZSI6ImJvb2xlYW4ifSwiWF8iOnsidHlwZSI6InN0cmluZyJ9fX0=");
+            var t = ParseJToken("eyJhX3hfMyI6M30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("patternProperties")]
+        public void Test_draft2019_09__patternProperties__regexes_are_not_anchored_by_default_and_are_case_sensitive_3__regexes_are_case_sensitive__2_4()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJbMC05XXsyLH0iOnsidHlwZSI6ImJvb2xlYW4ifSwiWF8iOnsidHlwZSI6InN0cmluZyJ9fX0=");
+            var t = ParseJToken("eyJhX1hfMyI6M30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("patternProperties")]
+        public void Test_draft2019_09__patternProperties__patternProperties_with_boolean_schemas_4__object_with_property_matching_schema_true_is_valid()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJmLioiOnRydWUsImIuKiI6ZmFsc2V9fQ==");
+            var t = ParseJToken("eyJmb28iOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("patternProperties")]
+        public void Test_draft2019_09__patternProperties__patternProperties_with_boolean_schemas_4__object_with_property_matching_schema_false_is_invalid_2()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJmLioiOnRydWUsImIuKiI6ZmFsc2V9fQ==");
+            var t = ParseJToken("eyJiYXIiOjJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("patternProperties")]
+        public void Test_draft2019_09__patternProperties__patternProperties_with_boolean_schemas_4__object_with_both_properties_is_invalid_3()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJmLioiOnRydWUsImIuKiI6ZmFsc2V9fQ==");
+            var t = ParseJToken("eyJmb28iOjEsImJhciI6Mn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("patternProperties")]
+        public void Test_draft2019_09__patternProperties__patternProperties_with_boolean_schemas_4__object_with_a_property_matching_both_true_and_false_is_invalid_4()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJmLioiOnRydWUsImIuKiI6ZmFsc2V9fQ==");
+            var t = ParseJToken("eyJmb29iYXIiOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("patternProperties")]
+        public void Test_draft2019_09__patternProperties__patternProperties_with_boolean_schemas_4__empty_object_is_valid_5()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJmLioiOnRydWUsImIuKiI6ZmFsc2V9fQ==");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("properties")]
+        public void Test_draft2019_09__properties__object_properties_validation__both_properties_present_and_valid_is_valid()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJiYXIiOnsidHlwZSI6InN0cmluZyJ9fX0=");
+            var t = ParseJToken("eyJmb28iOjEsImJhciI6ImJheiJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("properties")]
+        public void Test_draft2019_09__properties__object_properties_validation__one_property_invalid_is_invalid_2()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJiYXIiOnsidHlwZSI6InN0cmluZyJ9fX0=");
+            var t = ParseJToken("eyJmb28iOjEsImJhciI6e319");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("properties")]
+        public void Test_draft2019_09__properties__object_properties_validation__both_properties_invalid_is_invalid_3()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJiYXIiOnsidHlwZSI6InN0cmluZyJ9fX0=");
+            var t = ParseJToken("eyJmb28iOltdLCJiYXIiOnt9fQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("properties")]
+        public void Test_draft2019_09__properties__object_properties_validation__doesn_t_invalidate_other_properties_4()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJiYXIiOnsidHlwZSI6InN0cmluZyJ9fX0=");
+            var t = ParseJToken("eyJxdXV4IjpbXX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("properties")]
+        public void Test_draft2019_09__properties__object_properties_validation__ignores_arrays_5()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJiYXIiOnsidHlwZSI6InN0cmluZyJ9fX0=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("properties")]
+        public void Test_draft2019_09__properties__object_properties_validation__ignores_other_non_objects_6()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJiYXIiOnsidHlwZSI6InN0cmluZyJ9fX0=");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("properties")]
+        public void Test_draft2019_09__properties__properties__patternProperties__additionalProperties_interaction_2__property_validates_property()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoiYXJyYXkiLCJtYXhJdGVtcyI6M30sImJhciI6eyJ0eXBlIjoiYXJyYXkifX0sInBhdHRlcm5Qcm9wZXJ0aWVzIjp7ImYubyI6eyJtaW5JdGVtcyI6Mn19LCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyJ0eXBlIjoiaW50ZWdlciJ9fQ==");
+            var t = ParseJToken("eyJmb28iOlsxLDJdfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("properties")]
+        public void Test_draft2019_09__properties__properties__patternProperties__additionalProperties_interaction_2__property_invalidates_property_2()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoiYXJyYXkiLCJtYXhJdGVtcyI6M30sImJhciI6eyJ0eXBlIjoiYXJyYXkifX0sInBhdHRlcm5Qcm9wZXJ0aWVzIjp7ImYubyI6eyJtaW5JdGVtcyI6Mn19LCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyJ0eXBlIjoiaW50ZWdlciJ9fQ==");
+            var t = ParseJToken("eyJmb28iOlsxLDIsMyw0XX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("properties")]
+        public void Test_draft2019_09__properties__properties__patternProperties__additionalProperties_interaction_2__patternProperty_invalidates_property_3()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoiYXJyYXkiLCJtYXhJdGVtcyI6M30sImJhciI6eyJ0eXBlIjoiYXJyYXkifX0sInBhdHRlcm5Qcm9wZXJ0aWVzIjp7ImYubyI6eyJtaW5JdGVtcyI6Mn19LCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyJ0eXBlIjoiaW50ZWdlciJ9fQ==");
+            var t = ParseJToken("eyJmb28iOltdfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("properties")]
+        public void Test_draft2019_09__properties__properties__patternProperties__additionalProperties_interaction_2__patternProperty_validates_nonproperty_4()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoiYXJyYXkiLCJtYXhJdGVtcyI6M30sImJhciI6eyJ0eXBlIjoiYXJyYXkifX0sInBhdHRlcm5Qcm9wZXJ0aWVzIjp7ImYubyI6eyJtaW5JdGVtcyI6Mn19LCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyJ0eXBlIjoiaW50ZWdlciJ9fQ==");
+            var t = ParseJToken("eyJmeG8iOlsxLDJdfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("properties")]
+        public void Test_draft2019_09__properties__properties__patternProperties__additionalProperties_interaction_2__patternProperty_invalidates_nonproperty_5()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoiYXJyYXkiLCJtYXhJdGVtcyI6M30sImJhciI6eyJ0eXBlIjoiYXJyYXkifX0sInBhdHRlcm5Qcm9wZXJ0aWVzIjp7ImYubyI6eyJtaW5JdGVtcyI6Mn19LCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyJ0eXBlIjoiaW50ZWdlciJ9fQ==");
+            var t = ParseJToken("eyJmeG8iOltdfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("properties")]
+        public void Test_draft2019_09__properties__properties__patternProperties__additionalProperties_interaction_2__additionalProperty_ignores_property_6()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoiYXJyYXkiLCJtYXhJdGVtcyI6M30sImJhciI6eyJ0eXBlIjoiYXJyYXkifX0sInBhdHRlcm5Qcm9wZXJ0aWVzIjp7ImYubyI6eyJtaW5JdGVtcyI6Mn19LCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyJ0eXBlIjoiaW50ZWdlciJ9fQ==");
+            var t = ParseJToken("eyJiYXIiOltdfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("properties")]
+        public void Test_draft2019_09__properties__properties__patternProperties__additionalProperties_interaction_2__additionalProperty_validates_others_7()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoiYXJyYXkiLCJtYXhJdGVtcyI6M30sImJhciI6eyJ0eXBlIjoiYXJyYXkifX0sInBhdHRlcm5Qcm9wZXJ0aWVzIjp7ImYubyI6eyJtaW5JdGVtcyI6Mn19LCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyJ0eXBlIjoiaW50ZWdlciJ9fQ==");
+            var t = ParseJToken("eyJxdXV4IjozfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("properties")]
+        public void Test_draft2019_09__properties__properties__patternProperties__additionalProperties_interaction_2__additionalProperty_invalidates_others_8()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoiYXJyYXkiLCJtYXhJdGVtcyI6M30sImJhciI6eyJ0eXBlIjoiYXJyYXkifX0sInBhdHRlcm5Qcm9wZXJ0aWVzIjp7ImYubyI6eyJtaW5JdGVtcyI6Mn19LCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyJ0eXBlIjoiaW50ZWdlciJ9fQ==");
+            var t = ParseJToken("eyJxdXV4IjoiZm9vIn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("properties")]
+        public void Test_draft2019_09__properties__properties_with_boolean_schema_3__no_property_present_is_valid()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6dHJ1ZSwiYmFyIjpmYWxzZX19");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("properties")]
+        public void Test_draft2019_09__properties__properties_with_boolean_schema_3__only__true__property_present_is_valid_2()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6dHJ1ZSwiYmFyIjpmYWxzZX19");
+            var t = ParseJToken("eyJmb28iOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("properties")]
+        public void Test_draft2019_09__properties__properties_with_boolean_schema_3__only__false__property_present_is_invalid_3()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6dHJ1ZSwiYmFyIjpmYWxzZX19");
+            var t = ParseJToken("eyJiYXIiOjJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("properties")]
+        public void Test_draft2019_09__properties__properties_with_boolean_schema_3__both_properties_present_is_invalid_4()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6dHJ1ZSwiYmFyIjpmYWxzZX19");
+            var t = ParseJToken("eyJmb28iOjEsImJhciI6Mn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("properties")]
+        public void Test_draft2019_09__properties__properties_with_escaped_characters_4__object_with_all_numbers_is_valid()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvb1xuYmFyIjp7InR5cGUiOiJudW1iZXIifSwiZm9vXCJiYXIiOnsidHlwZSI6Im51bWJlciJ9LCJmb29cXGJhciI6eyJ0eXBlIjoibnVtYmVyIn0sImZvb1xyYmFyIjp7InR5cGUiOiJudW1iZXIifSwiZm9vXHRiYXIiOnsidHlwZSI6Im51bWJlciJ9LCJmb29cZmJhciI6eyJ0eXBlIjoibnVtYmVyIn19fQ==");
+            var t = ParseJToken("eyJmb29cbmJhciI6MSwiZm9vXCJiYXIiOjEsImZvb1xcYmFyIjoxLCJmb29ccmJhciI6MSwiZm9vXHRiYXIiOjEsImZvb1xmYmFyIjoxfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("properties")]
+        public void Test_draft2019_09__properties__properties_with_escaped_characters_4__object_with_strings_is_invalid_2()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvb1xuYmFyIjp7InR5cGUiOiJudW1iZXIifSwiZm9vXCJiYXIiOnsidHlwZSI6Im51bWJlciJ9LCJmb29cXGJhciI6eyJ0eXBlIjoibnVtYmVyIn0sImZvb1xyYmFyIjp7InR5cGUiOiJudW1iZXIifSwiZm9vXHRiYXIiOnsidHlwZSI6Im51bWJlciJ9LCJmb29cZmJhciI6eyJ0eXBlIjoibnVtYmVyIn19fQ==");
+            var t = ParseJToken("eyJmb29cbmJhciI6IjEiLCJmb29cImJhciI6IjEiLCJmb29cXGJhciI6IjEiLCJmb29ccmJhciI6IjEiLCJmb29cdGJhciI6IjEiLCJmb29cZmJhciI6IjEifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("propertyNames")]
+        public void Test_draft2019_09__propertyNames__propertyNames_validation__all_property_names_valid()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0eU5hbWVzIjp7Im1heExlbmd0aCI6M319");
+            var t = ParseJToken("eyJmIjp7fSwiZm9vIjp7fX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("propertyNames")]
+        public void Test_draft2019_09__propertyNames__propertyNames_validation__some_property_names_invalid_2()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0eU5hbWVzIjp7Im1heExlbmd0aCI6M319");
+            var t = ParseJToken("eyJmb28iOnt9LCJmb29iYXIiOnt9fQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("propertyNames")]
+        public void Test_draft2019_09__propertyNames__propertyNames_validation__object_without_properties_is_valid_3()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0eU5hbWVzIjp7Im1heExlbmd0aCI6M319");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("propertyNames")]
+        public void Test_draft2019_09__propertyNames__propertyNames_validation__ignores_arrays_4()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0eU5hbWVzIjp7Im1heExlbmd0aCI6M319");
+            var t = ParseJToken("WzEsMiwzLDRd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("propertyNames")]
+        public void Test_draft2019_09__propertyNames__propertyNames_validation__ignores_strings_5()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0eU5hbWVzIjp7Im1heExlbmd0aCI6M319");
+            var t = ParseJToken("ImZvb2JhciI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("propertyNames")]
+        public void Test_draft2019_09__propertyNames__propertyNames_validation__ignores_other_non_objects_6()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0eU5hbWVzIjp7Im1heExlbmd0aCI6M319");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("propertyNames")]
+        public void Test_draft2019_09__propertyNames__propertyNames_with_boolean_schema_true_2__object_with_any_properties_is_valid()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0eU5hbWVzIjp0cnVlfQ==");
+            var t = ParseJToken("eyJmb28iOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("propertyNames")]
+        public void Test_draft2019_09__propertyNames__propertyNames_with_boolean_schema_true_2__empty_object_is_valid_2()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0eU5hbWVzIjp0cnVlfQ==");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("propertyNames")]
+        public void Test_draft2019_09__propertyNames__propertyNames_with_boolean_schema_false_3__object_with_any_properties_is_invalid()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0eU5hbWVzIjpmYWxzZX0=");
+            var t = ParseJToken("eyJmb28iOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("propertyNames")]
+        public void Test_draft2019_09__propertyNames__propertyNames_with_boolean_schema_false_3__empty_object_is_valid_2()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0eU5hbWVzIjpmYWxzZX0=");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_without__recursiveAnchor_works_like__ref__match()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyIkcmVjdXJzaXZlUmVmIjoiIyJ9fSwiYWRkaXRpb25hbFByb3BlcnRpZXMiOmZhbHNlfQ==");
+            var t = ParseJToken("eyJmb28iOmZhbHNlfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_without__recursiveAnchor_works_like__ref__recursive_match_2()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyIkcmVjdXJzaXZlUmVmIjoiIyJ9fSwiYWRkaXRpb25hbFByb3BlcnRpZXMiOmZhbHNlfQ==");
+            var t = ParseJToken("eyJmb28iOnsiZm9vIjpmYWxzZX19");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_without__recursiveAnchor_works_like__ref__mismatch_3()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyIkcmVjdXJzaXZlUmVmIjoiIyJ9fSwiYWRkaXRpb25hbFByb3BlcnRpZXMiOmZhbHNlfQ==");
+            var t = ParseJToken("eyJiYXIiOmZhbHNlfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_without__recursiveAnchor_works_like__ref__recursive_mismatch_4()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyIkcmVjdXJzaXZlUmVmIjoiIyJ9fSwiYWRkaXRpb25hbFByb3BlcnRpZXMiOmZhbHNlfQ==");
+            var t = ParseJToken("eyJmb28iOnsiYmFyIjpmYWxzZX19");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_without_using_nesting_2__integer_matches_at_the_outer_level()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmMi9zY2hlbWEuanNvbiIsIiRkZWZzIjp7Im15b2JqZWN0Ijp7IiRpZCI6Im15b2JqZWN0Lmpzb24iLCIkcmVjdXJzaXZlQW5jaG9yIjp0cnVlLCJhbnlPZiI6W3sidHlwZSI6InN0cmluZyJ9LHsidHlwZSI6Im9iamVjdCIsImFkZGl0aW9uYWxQcm9wZXJ0aWVzIjp7IiRyZWN1cnNpdmVSZWYiOiIjIn19XX19LCJhbnlPZiI6W3sidHlwZSI6ImludGVnZXIifSx7IiRyZWYiOiIjLyRkZWZzL215b2JqZWN0In1dfQ==");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_without_using_nesting_2__single_level_match_2()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmMi9zY2hlbWEuanNvbiIsIiRkZWZzIjp7Im15b2JqZWN0Ijp7IiRpZCI6Im15b2JqZWN0Lmpzb24iLCIkcmVjdXJzaXZlQW5jaG9yIjp0cnVlLCJhbnlPZiI6W3sidHlwZSI6InN0cmluZyJ9LHsidHlwZSI6Im9iamVjdCIsImFkZGl0aW9uYWxQcm9wZXJ0aWVzIjp7IiRyZWN1cnNpdmVSZWYiOiIjIn19XX19LCJhbnlPZiI6W3sidHlwZSI6ImludGVnZXIifSx7IiRyZWYiOiIjLyRkZWZzL215b2JqZWN0In1dfQ==");
+            var t = ParseJToken("eyJmb28iOiJoaSJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_without_using_nesting_2__integer_does_not_match_as_a_property_value_3()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmMi9zY2hlbWEuanNvbiIsIiRkZWZzIjp7Im15b2JqZWN0Ijp7IiRpZCI6Im15b2JqZWN0Lmpzb24iLCIkcmVjdXJzaXZlQW5jaG9yIjp0cnVlLCJhbnlPZiI6W3sidHlwZSI6InN0cmluZyJ9LHsidHlwZSI6Im9iamVjdCIsImFkZGl0aW9uYWxQcm9wZXJ0aWVzIjp7IiRyZWN1cnNpdmVSZWYiOiIjIn19XX19LCJhbnlPZiI6W3sidHlwZSI6ImludGVnZXIifSx7IiRyZWYiOiIjLyRkZWZzL215b2JqZWN0In1dfQ==");
+            var t = ParseJToken("eyJmb28iOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_without_using_nesting_2__two_levels__properties_match_with_inner_definition_4()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmMi9zY2hlbWEuanNvbiIsIiRkZWZzIjp7Im15b2JqZWN0Ijp7IiRpZCI6Im15b2JqZWN0Lmpzb24iLCIkcmVjdXJzaXZlQW5jaG9yIjp0cnVlLCJhbnlPZiI6W3sidHlwZSI6InN0cmluZyJ9LHsidHlwZSI6Im9iamVjdCIsImFkZGl0aW9uYWxQcm9wZXJ0aWVzIjp7IiRyZWN1cnNpdmVSZWYiOiIjIn19XX19LCJhbnlPZiI6W3sidHlwZSI6ImludGVnZXIifSx7IiRyZWYiOiIjLyRkZWZzL215b2JqZWN0In1dfQ==");
+            var t = ParseJToken("eyJmb28iOnsiYmFyIjoiaGkifX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_without_using_nesting_2__two_levels__no_match_5()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmMi9zY2hlbWEuanNvbiIsIiRkZWZzIjp7Im15b2JqZWN0Ijp7IiRpZCI6Im15b2JqZWN0Lmpzb24iLCIkcmVjdXJzaXZlQW5jaG9yIjp0cnVlLCJhbnlPZiI6W3sidHlwZSI6InN0cmluZyJ9LHsidHlwZSI6Im9iamVjdCIsImFkZGl0aW9uYWxQcm9wZXJ0aWVzIjp7IiRyZWN1cnNpdmVSZWYiOiIjIn19XX19LCJhbnlPZiI6W3sidHlwZSI6ImludGVnZXIifSx7IiRyZWYiOiIjLyRkZWZzL215b2JqZWN0In1dfQ==");
+            var t = ParseJToken("eyJmb28iOnsiYmFyIjoxfX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_with_nesting_3__integer_matches_at_the_outer_level()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmMy9zY2hlbWEuanNvbiIsIiRyZWN1cnNpdmVBbmNob3IiOnRydWUsIiRkZWZzIjp7Im15b2JqZWN0Ijp7IiRpZCI6Im15b2JqZWN0Lmpzb24iLCIkcmVjdXJzaXZlQW5jaG9yIjp0cnVlLCJhbnlPZiI6W3sidHlwZSI6InN0cmluZyJ9LHsidHlwZSI6Im9iamVjdCIsImFkZGl0aW9uYWxQcm9wZXJ0aWVzIjp7IiRyZWN1cnNpdmVSZWYiOiIjIn19XX19LCJhbnlPZiI6W3sidHlwZSI6ImludGVnZXIifSx7IiRyZWYiOiIjLyRkZWZzL215b2JqZWN0In1dfQ==");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_with_nesting_3__single_level_match_2()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmMy9zY2hlbWEuanNvbiIsIiRyZWN1cnNpdmVBbmNob3IiOnRydWUsIiRkZWZzIjp7Im15b2JqZWN0Ijp7IiRpZCI6Im15b2JqZWN0Lmpzb24iLCIkcmVjdXJzaXZlQW5jaG9yIjp0cnVlLCJhbnlPZiI6W3sidHlwZSI6InN0cmluZyJ9LHsidHlwZSI6Im9iamVjdCIsImFkZGl0aW9uYWxQcm9wZXJ0aWVzIjp7IiRyZWN1cnNpdmVSZWYiOiIjIn19XX19LCJhbnlPZiI6W3sidHlwZSI6ImludGVnZXIifSx7IiRyZWYiOiIjLyRkZWZzL215b2JqZWN0In1dfQ==");
+            var t = ParseJToken("eyJmb28iOiJoaSJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_with_nesting_3__integer_now_matches_as_a_property_value_3()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmMy9zY2hlbWEuanNvbiIsIiRyZWN1cnNpdmVBbmNob3IiOnRydWUsIiRkZWZzIjp7Im15b2JqZWN0Ijp7IiRpZCI6Im15b2JqZWN0Lmpzb24iLCIkcmVjdXJzaXZlQW5jaG9yIjp0cnVlLCJhbnlPZiI6W3sidHlwZSI6InN0cmluZyJ9LHsidHlwZSI6Im9iamVjdCIsImFkZGl0aW9uYWxQcm9wZXJ0aWVzIjp7IiRyZWN1cnNpdmVSZWYiOiIjIn19XX19LCJhbnlPZiI6W3sidHlwZSI6ImludGVnZXIifSx7IiRyZWYiOiIjLyRkZWZzL215b2JqZWN0In1dfQ==");
+            var t = ParseJToken("eyJmb28iOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_with_nesting_3__two_levels__properties_match_with_inner_definition_4()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmMy9zY2hlbWEuanNvbiIsIiRyZWN1cnNpdmVBbmNob3IiOnRydWUsIiRkZWZzIjp7Im15b2JqZWN0Ijp7IiRpZCI6Im15b2JqZWN0Lmpzb24iLCIkcmVjdXJzaXZlQW5jaG9yIjp0cnVlLCJhbnlPZiI6W3sidHlwZSI6InN0cmluZyJ9LHsidHlwZSI6Im9iamVjdCIsImFkZGl0aW9uYWxQcm9wZXJ0aWVzIjp7IiRyZWN1cnNpdmVSZWYiOiIjIn19XX19LCJhbnlPZiI6W3sidHlwZSI6ImludGVnZXIifSx7IiRyZWYiOiIjLyRkZWZzL215b2JqZWN0In1dfQ==");
+            var t = ParseJToken("eyJmb28iOnsiYmFyIjoiaGkifX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_with_nesting_3__two_levels__properties_match_with__recursiveRef_5()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmMy9zY2hlbWEuanNvbiIsIiRyZWN1cnNpdmVBbmNob3IiOnRydWUsIiRkZWZzIjp7Im15b2JqZWN0Ijp7IiRpZCI6Im15b2JqZWN0Lmpzb24iLCIkcmVjdXJzaXZlQW5jaG9yIjp0cnVlLCJhbnlPZiI6W3sidHlwZSI6InN0cmluZyJ9LHsidHlwZSI6Im9iamVjdCIsImFkZGl0aW9uYWxQcm9wZXJ0aWVzIjp7IiRyZWN1cnNpdmVSZWYiOiIjIn19XX19LCJhbnlPZiI6W3sidHlwZSI6ImludGVnZXIifSx7IiRyZWYiOiIjLyRkZWZzL215b2JqZWN0In1dfQ==");
+            var t = ParseJToken("eyJmb28iOnsiYmFyIjoxfX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_with__recursiveAnchor__false_works_like__ref_4__integer_matches_at_the_outer_level()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmNC9zY2hlbWEuanNvbiIsIiRyZWN1cnNpdmVBbmNob3IiOmZhbHNlLCIkZGVmcyI6eyJteW9iamVjdCI6eyIkaWQiOiJteW9iamVjdC5qc29uIiwiJHJlY3Vyc2l2ZUFuY2hvciI6ZmFsc2UsImFueU9mIjpbeyJ0eXBlIjoic3RyaW5nIn0seyJ0eXBlIjoib2JqZWN0IiwiYWRkaXRpb25hbFByb3BlcnRpZXMiOnsiJHJlY3Vyc2l2ZVJlZiI6IiMifX1dfX0sImFueU9mIjpbeyJ0eXBlIjoiaW50ZWdlciJ9LHsiJHJlZiI6IiMvJGRlZnMvbXlvYmplY3QifV19");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_with__recursiveAnchor__false_works_like__ref_4__single_level_match_2()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmNC9zY2hlbWEuanNvbiIsIiRyZWN1cnNpdmVBbmNob3IiOmZhbHNlLCIkZGVmcyI6eyJteW9iamVjdCI6eyIkaWQiOiJteW9iamVjdC5qc29uIiwiJHJlY3Vyc2l2ZUFuY2hvciI6ZmFsc2UsImFueU9mIjpbeyJ0eXBlIjoic3RyaW5nIn0seyJ0eXBlIjoib2JqZWN0IiwiYWRkaXRpb25hbFByb3BlcnRpZXMiOnsiJHJlY3Vyc2l2ZVJlZiI6IiMifX1dfX0sImFueU9mIjpbeyJ0eXBlIjoiaW50ZWdlciJ9LHsiJHJlZiI6IiMvJGRlZnMvbXlvYmplY3QifV19");
+            var t = ParseJToken("eyJmb28iOiJoaSJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_with__recursiveAnchor__false_works_like__ref_4__integer_does_not_match_as_a_property_value_3()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmNC9zY2hlbWEuanNvbiIsIiRyZWN1cnNpdmVBbmNob3IiOmZhbHNlLCIkZGVmcyI6eyJteW9iamVjdCI6eyIkaWQiOiJteW9iamVjdC5qc29uIiwiJHJlY3Vyc2l2ZUFuY2hvciI6ZmFsc2UsImFueU9mIjpbeyJ0eXBlIjoic3RyaW5nIn0seyJ0eXBlIjoib2JqZWN0IiwiYWRkaXRpb25hbFByb3BlcnRpZXMiOnsiJHJlY3Vyc2l2ZVJlZiI6IiMifX1dfX0sImFueU9mIjpbeyJ0eXBlIjoiaW50ZWdlciJ9LHsiJHJlZiI6IiMvJGRlZnMvbXlvYmplY3QifV19");
+            var t = ParseJToken("eyJmb28iOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_with__recursiveAnchor__false_works_like__ref_4__two_levels__properties_match_with_inner_definition_4()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmNC9zY2hlbWEuanNvbiIsIiRyZWN1cnNpdmVBbmNob3IiOmZhbHNlLCIkZGVmcyI6eyJteW9iamVjdCI6eyIkaWQiOiJteW9iamVjdC5qc29uIiwiJHJlY3Vyc2l2ZUFuY2hvciI6ZmFsc2UsImFueU9mIjpbeyJ0eXBlIjoic3RyaW5nIn0seyJ0eXBlIjoib2JqZWN0IiwiYWRkaXRpb25hbFByb3BlcnRpZXMiOnsiJHJlY3Vyc2l2ZVJlZiI6IiMifX1dfX0sImFueU9mIjpbeyJ0eXBlIjoiaW50ZWdlciJ9LHsiJHJlZiI6IiMvJGRlZnMvbXlvYmplY3QifV19");
+            var t = ParseJToken("eyJmb28iOnsiYmFyIjoiaGkifX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_with__recursiveAnchor__false_works_like__ref_4__two_levels__integer_does_not_match_as_a_property_value_5()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmNC9zY2hlbWEuanNvbiIsIiRyZWN1cnNpdmVBbmNob3IiOmZhbHNlLCIkZGVmcyI6eyJteW9iamVjdCI6eyIkaWQiOiJteW9iamVjdC5qc29uIiwiJHJlY3Vyc2l2ZUFuY2hvciI6ZmFsc2UsImFueU9mIjpbeyJ0eXBlIjoic3RyaW5nIn0seyJ0eXBlIjoib2JqZWN0IiwiYWRkaXRpb25hbFByb3BlcnRpZXMiOnsiJHJlY3Vyc2l2ZVJlZiI6IiMifX1dfX0sImFueU9mIjpbeyJ0eXBlIjoiaW50ZWdlciJ9LHsiJHJlZiI6IiMvJGRlZnMvbXlvYmplY3QifV19");
+            var t = ParseJToken("eyJmb28iOnsiYmFyIjoxfX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_with_no__recursiveAnchor_works_like__ref_5__integer_matches_at_the_outer_level()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmNS9zY2hlbWEuanNvbiIsIiRkZWZzIjp7Im15b2JqZWN0Ijp7IiRpZCI6Im15b2JqZWN0Lmpzb24iLCIkcmVjdXJzaXZlQW5jaG9yIjpmYWxzZSwiYW55T2YiOlt7InR5cGUiOiJzdHJpbmcifSx7InR5cGUiOiJvYmplY3QiLCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyIkcmVjdXJzaXZlUmVmIjoiIyJ9fV19fSwiYW55T2YiOlt7InR5cGUiOiJpbnRlZ2VyIn0seyIkcmVmIjoiIy8kZGVmcy9teW9iamVjdCJ9XX0=");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_with_no__recursiveAnchor_works_like__ref_5__single_level_match_2()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmNS9zY2hlbWEuanNvbiIsIiRkZWZzIjp7Im15b2JqZWN0Ijp7IiRpZCI6Im15b2JqZWN0Lmpzb24iLCIkcmVjdXJzaXZlQW5jaG9yIjpmYWxzZSwiYW55T2YiOlt7InR5cGUiOiJzdHJpbmcifSx7InR5cGUiOiJvYmplY3QiLCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyIkcmVjdXJzaXZlUmVmIjoiIyJ9fV19fSwiYW55T2YiOlt7InR5cGUiOiJpbnRlZ2VyIn0seyIkcmVmIjoiIy8kZGVmcy9teW9iamVjdCJ9XX0=");
+            var t = ParseJToken("eyJmb28iOiJoaSJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_with_no__recursiveAnchor_works_like__ref_5__integer_does_not_match_as_a_property_value_3()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmNS9zY2hlbWEuanNvbiIsIiRkZWZzIjp7Im15b2JqZWN0Ijp7IiRpZCI6Im15b2JqZWN0Lmpzb24iLCIkcmVjdXJzaXZlQW5jaG9yIjpmYWxzZSwiYW55T2YiOlt7InR5cGUiOiJzdHJpbmcifSx7InR5cGUiOiJvYmplY3QiLCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyIkcmVjdXJzaXZlUmVmIjoiIyJ9fV19fSwiYW55T2YiOlt7InR5cGUiOiJpbnRlZ2VyIn0seyIkcmVmIjoiIy8kZGVmcy9teW9iamVjdCJ9XX0=");
+            var t = ParseJToken("eyJmb28iOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_with_no__recursiveAnchor_works_like__ref_5__two_levels__properties_match_with_inner_definition_4()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmNS9zY2hlbWEuanNvbiIsIiRkZWZzIjp7Im15b2JqZWN0Ijp7IiRpZCI6Im15b2JqZWN0Lmpzb24iLCIkcmVjdXJzaXZlQW5jaG9yIjpmYWxzZSwiYW55T2YiOlt7InR5cGUiOiJzdHJpbmcifSx7InR5cGUiOiJvYmplY3QiLCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyIkcmVjdXJzaXZlUmVmIjoiIyJ9fV19fSwiYW55T2YiOlt7InR5cGUiOiJpbnRlZ2VyIn0seyIkcmVmIjoiIy8kZGVmcy9teW9iamVjdCJ9XX0=");
+            var t = ParseJToken("eyJmb28iOnsiYmFyIjoiaGkifX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_with_no__recursiveAnchor_works_like__ref_5__two_levels__integer_does_not_match_as_a_property_value_5()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmNS9zY2hlbWEuanNvbiIsIiRkZWZzIjp7Im15b2JqZWN0Ijp7IiRpZCI6Im15b2JqZWN0Lmpzb24iLCIkcmVjdXJzaXZlQW5jaG9yIjpmYWxzZSwiYW55T2YiOlt7InR5cGUiOiJzdHJpbmcifSx7InR5cGUiOiJvYmplY3QiLCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyIkcmVjdXJzaXZlUmVmIjoiIyJ9fV19fSwiYW55T2YiOlt7InR5cGUiOiJpbnRlZ2VyIn0seyIkcmVmIjoiIy8kZGVmcy9teW9iamVjdCJ9XX0=");
+            var t = ParseJToken("eyJmb28iOnsiYmFyIjoxfX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_with_no__recursiveAnchor_in_the_initial_target_schema_resource_6__leaf_node_does_not_match__no_recursion()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmNi9iYXNlLmpzb24iLCIkcmVjdXJzaXZlQW5jaG9yIjp0cnVlLCJhbnlPZiI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJvYmplY3QiLCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmNi9pbm5lci5qc29uIiwiJGNvbW1lbnQiOiJ0aGVyZSBpcyBubyAkcmVjdXJzaXZlQW5jaG9yOiB0cnVlIGhlcmUsIHNvIHdlIGRvIE5PVCByZWN1cnNlIHRvIHRoZSBiYXNlIiwiYW55T2YiOlt7InR5cGUiOiJpbnRlZ2VyIn0seyJ0eXBlIjoib2JqZWN0IiwiYWRkaXRpb25hbFByb3BlcnRpZXMiOnsiJHJlY3Vyc2l2ZVJlZiI6IiMifX1dfX1dfQ==");
+            var t = ParseJToken("eyJmb28iOnRydWV9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_with_no__recursiveAnchor_in_the_initial_target_schema_resource_6__leaf_node_matches__recursion_uses_the_inner_schema_2()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmNi9iYXNlLmpzb24iLCIkcmVjdXJzaXZlQW5jaG9yIjp0cnVlLCJhbnlPZiI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJvYmplY3QiLCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmNi9pbm5lci5qc29uIiwiJGNvbW1lbnQiOiJ0aGVyZSBpcyBubyAkcmVjdXJzaXZlQW5jaG9yOiB0cnVlIGhlcmUsIHNvIHdlIGRvIE5PVCByZWN1cnNlIHRvIHRoZSBiYXNlIiwiYW55T2YiOlt7InR5cGUiOiJpbnRlZ2VyIn0seyJ0eXBlIjoib2JqZWN0IiwiYWRkaXRpb25hbFByb3BlcnRpZXMiOnsiJHJlY3Vyc2l2ZVJlZiI6IiMifX1dfX1dfQ==");
+            var t = ParseJToken("eyJmb28iOnsiYmFyIjoxfX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_with_no__recursiveAnchor_in_the_initial_target_schema_resource_6__leaf_node_does_not_match__recursion_uses_the_inner_schema_3()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmNi9iYXNlLmpzb24iLCIkcmVjdXJzaXZlQW5jaG9yIjp0cnVlLCJhbnlPZiI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJvYmplY3QiLCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmNi9pbm5lci5qc29uIiwiJGNvbW1lbnQiOiJ0aGVyZSBpcyBubyAkcmVjdXJzaXZlQW5jaG9yOiB0cnVlIGhlcmUsIHNvIHdlIGRvIE5PVCByZWN1cnNlIHRvIHRoZSBiYXNlIiwiYW55T2YiOlt7InR5cGUiOiJpbnRlZ2VyIn0seyJ0eXBlIjoib2JqZWN0IiwiYWRkaXRpb25hbFByb3BlcnRpZXMiOnsiJHJlY3Vyc2l2ZVJlZiI6IiMifX1dfX1dfQ==");
+            var t = ParseJToken("eyJmb28iOnsiYmFyIjp0cnVlfX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_with_no__recursiveAnchor_in_the_outer_schema_resource_7__leaf_node_does_not_match__no_recursion()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmNy9iYXNlLmpzb24iLCJhbnlPZiI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJvYmplY3QiLCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmNy9pbm5lci5qc29uIiwiJHJlY3Vyc2l2ZUFuY2hvciI6dHJ1ZSwiYW55T2YiOlt7InR5cGUiOiJpbnRlZ2VyIn0seyJ0eXBlIjoib2JqZWN0IiwiYWRkaXRpb25hbFByb3BlcnRpZXMiOnsiJHJlY3Vyc2l2ZVJlZiI6IiMifX1dfX1dfQ==");
+            var t = ParseJToken("eyJmb28iOnRydWV9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_with_no__recursiveAnchor_in_the_outer_schema_resource_7__leaf_node_matches__recursion_only_uses_inner_schema_2()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmNy9iYXNlLmpzb24iLCJhbnlPZiI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJvYmplY3QiLCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmNy9pbm5lci5qc29uIiwiJHJlY3Vyc2l2ZUFuY2hvciI6dHJ1ZSwiYW55T2YiOlt7InR5cGUiOiJpbnRlZ2VyIn0seyJ0eXBlIjoib2JqZWN0IiwiYWRkaXRpb25hbFByb3BlcnRpZXMiOnsiJHJlY3Vyc2l2ZVJlZiI6IiMifX1dfX1dfQ==");
+            var t = ParseJToken("eyJmb28iOnsiYmFyIjoxfX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef___recursiveRef_with_no__recursiveAnchor_in_the_outer_schema_resource_7__leaf_node_does_not_match__recursion_only_uses_inner_schema_3()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmNy9iYXNlLmpzb24iLCJhbnlPZiI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJvYmplY3QiLCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjQyNDIvcmVjdXJzaXZlUmVmNy9pbm5lci5qc29uIiwiJHJlY3Vyc2l2ZUFuY2hvciI6dHJ1ZSwiYW55T2YiOlt7InR5cGUiOiJpbnRlZ2VyIn0seyJ0eXBlIjoib2JqZWN0IiwiYWRkaXRpb25hbFByb3BlcnRpZXMiOnsiJHJlY3Vyc2l2ZVJlZiI6IiMifX1dfX1dfQ==");
+            var t = ParseJToken("eyJmb28iOnsiYmFyIjp0cnVlfX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef__multiple_dynamic_paths_to_the__recursiveRef_keyword_8__recurse_to_anyLeafNode___floats_are_allowed()
+        {
+            var s = ParseSchema("eyIkaWQiOiJyZWN1cnNpdmVSZWY4X21haW4uanNvbiIsIiRkZWZzIjp7ImlubmVyIjp7IiRpZCI6InJlY3Vyc2l2ZVJlZjhfaW5uZXIuanNvbiIsIiRyZWN1cnNpdmVBbmNob3IiOnRydWUsInRpdGxlIjoiaW5uZXIiLCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyIkcmVjdXJzaXZlUmVmIjoiIyJ9fX0sImlmIjp7InByb3BlcnR5TmFtZXMiOnsicGF0dGVybiI6Il5bYS1tXSJ9fSwidGhlbiI6eyJ0aXRsZSI6ImFueSB0eXBlIG9mIG5vZGUiLCIkaWQiOiJyZWN1cnNpdmVSZWY4X2FueUxlYWZOb2RlLmpzb24iLCIkcmVjdXJzaXZlQW5jaG9yIjp0cnVlLCIkcmVmIjoicmVjdXJzaXZlUmVmOF9tYWluLmpzb24jLyRkZWZzL2lubmVyIn0sImVsc2UiOnsidGl0bGUiOiJpbnRlZ2VyIG5vZGUiLCIkaWQiOiJyZWN1cnNpdmVSZWY4X2ludGVnZXJOb2RlLmpzb24iLCIkcmVjdXJzaXZlQW5jaG9yIjp0cnVlLCJ0eXBlIjpbIm9iamVjdCIsImludGVnZXIiXSwiJHJlZiI6InJlY3Vyc2l2ZVJlZjhfbWFpbi5qc29uIy8kZGVmcy9pbm5lciJ9fQ==");
+            var t = ParseJToken("eyJhbHBoYSI6MS4xfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("recursiveRef")]
+        public void Test_draft2019_09__recursiveRef__multiple_dynamic_paths_to_the__recursiveRef_keyword_8__recurse_to_integerNode___floats_are_not_allowed_2()
+        {
+            var s = ParseSchema("eyIkaWQiOiJyZWN1cnNpdmVSZWY4X21haW4uanNvbiIsIiRkZWZzIjp7ImlubmVyIjp7IiRpZCI6InJlY3Vyc2l2ZVJlZjhfaW5uZXIuanNvbiIsIiRyZWN1cnNpdmVBbmNob3IiOnRydWUsInRpdGxlIjoiaW5uZXIiLCJhZGRpdGlvbmFsUHJvcGVydGllcyI6eyIkcmVjdXJzaXZlUmVmIjoiIyJ9fX0sImlmIjp7InByb3BlcnR5TmFtZXMiOnsicGF0dGVybiI6Il5bYS1tXSJ9fSwidGhlbiI6eyJ0aXRsZSI6ImFueSB0eXBlIG9mIG5vZGUiLCIkaWQiOiJyZWN1cnNpdmVSZWY4X2FueUxlYWZOb2RlLmpzb24iLCIkcmVjdXJzaXZlQW5jaG9yIjp0cnVlLCIkcmVmIjoicmVjdXJzaXZlUmVmOF9tYWluLmpzb24jLyRkZWZzL2lubmVyIn0sImVsc2UiOnsidGl0bGUiOiJpbnRlZ2VyIG5vZGUiLCIkaWQiOiJyZWN1cnNpdmVSZWY4X2ludGVnZXJOb2RlLmpzb24iLCIkcmVjdXJzaXZlQW5jaG9yIjp0cnVlLCJ0eXBlIjpbIm9iamVjdCIsImludGVnZXIiXSwiJHJlZiI6InJlY3Vyc2l2ZVJlZjhfbWFpbi5qc29uIy8kZGVmcy9pbm5lciJ9fQ==");
+            var t = ParseJToken("eyJub3ZlbWJlciI6MS4xfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__root_pointer_ref__match()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyIkcmVmIjoiIyJ9fSwiYWRkaXRpb25hbFByb3BlcnRpZXMiOmZhbHNlfQ==");
+            var t = ParseJToken("eyJmb28iOmZhbHNlfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__root_pointer_ref__recursive_match_2()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyIkcmVmIjoiIyJ9fSwiYWRkaXRpb25hbFByb3BlcnRpZXMiOmZhbHNlfQ==");
+            var t = ParseJToken("eyJmb28iOnsiZm9vIjpmYWxzZX19");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__root_pointer_ref__mismatch_3()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyIkcmVmIjoiIyJ9fSwiYWRkaXRpb25hbFByb3BlcnRpZXMiOmZhbHNlfQ==");
+            var t = ParseJToken("eyJiYXIiOmZhbHNlfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__root_pointer_ref__recursive_mismatch_4()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyIkcmVmIjoiIyJ9fSwiYWRkaXRpb25hbFByb3BlcnRpZXMiOmZhbHNlfQ==");
+            var t = ParseJToken("eyJmb28iOnsiYmFyIjpmYWxzZX19");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__relative_pointer_ref_to_object_2__match()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJiYXIiOnsiJHJlZiI6IiMvcHJvcGVydGllcy9mb28ifX19");
+            var t = ParseJToken("eyJiYXIiOjN9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__relative_pointer_ref_to_object_2__mismatch_2()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJiYXIiOnsiJHJlZiI6IiMvcHJvcGVydGllcy9mb28ifX19");
+            var t = ParseJToken("eyJiYXIiOnRydWV9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__relative_pointer_ref_to_array_3__match_array()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImludGVnZXIifSx7IiRyZWYiOiIjL2l0ZW1zLzAifV19");
+            var t = ParseJToken("WzEsMl0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__relative_pointer_ref_to_array_3__mismatch_array_2()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImludGVnZXIifSx7IiRyZWYiOiIjL2l0ZW1zLzAifV19");
+            var t = ParseJToken("WzEsImZvbyJd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__escaped_pointer_ref_4__slash_invalid()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJ0aWxkZX5maWVsZCI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJzbGFzaC9maWVsZCI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJwZXJjZW50JWZpZWxkIjp7InR5cGUiOiJpbnRlZ2VyIn19LCJwcm9wZXJ0aWVzIjp7InRpbGRlIjp7IiRyZWYiOiIjLyRkZWZzL3RpbGRlfjBmaWVsZCJ9LCJzbGFzaCI6eyIkcmVmIjoiIy8kZGVmcy9zbGFzaH4xZmllbGQifSwicGVyY2VudCI6eyIkcmVmIjoiIy8kZGVmcy9wZXJjZW50JTI1ZmllbGQifX19");
+            var t = ParseJToken("eyJzbGFzaCI6ImFvZXUifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__escaped_pointer_ref_4__tilde_invalid_2()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJ0aWxkZX5maWVsZCI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJzbGFzaC9maWVsZCI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJwZXJjZW50JWZpZWxkIjp7InR5cGUiOiJpbnRlZ2VyIn19LCJwcm9wZXJ0aWVzIjp7InRpbGRlIjp7IiRyZWYiOiIjLyRkZWZzL3RpbGRlfjBmaWVsZCJ9LCJzbGFzaCI6eyIkcmVmIjoiIy8kZGVmcy9zbGFzaH4xZmllbGQifSwicGVyY2VudCI6eyIkcmVmIjoiIy8kZGVmcy9wZXJjZW50JTI1ZmllbGQifX19");
+            var t = ParseJToken("eyJ0aWxkZSI6ImFvZXUifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__escaped_pointer_ref_4__percent_invalid_3()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJ0aWxkZX5maWVsZCI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJzbGFzaC9maWVsZCI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJwZXJjZW50JWZpZWxkIjp7InR5cGUiOiJpbnRlZ2VyIn19LCJwcm9wZXJ0aWVzIjp7InRpbGRlIjp7IiRyZWYiOiIjLyRkZWZzL3RpbGRlfjBmaWVsZCJ9LCJzbGFzaCI6eyIkcmVmIjoiIy8kZGVmcy9zbGFzaH4xZmllbGQifSwicGVyY2VudCI6eyIkcmVmIjoiIy8kZGVmcy9wZXJjZW50JTI1ZmllbGQifX19");
+            var t = ParseJToken("eyJwZXJjZW50IjoiYW9ldSJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__escaped_pointer_ref_4__slash_valid_4()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJ0aWxkZX5maWVsZCI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJzbGFzaC9maWVsZCI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJwZXJjZW50JWZpZWxkIjp7InR5cGUiOiJpbnRlZ2VyIn19LCJwcm9wZXJ0aWVzIjp7InRpbGRlIjp7IiRyZWYiOiIjLyRkZWZzL3RpbGRlfjBmaWVsZCJ9LCJzbGFzaCI6eyIkcmVmIjoiIy8kZGVmcy9zbGFzaH4xZmllbGQifSwicGVyY2VudCI6eyIkcmVmIjoiIy8kZGVmcy9wZXJjZW50JTI1ZmllbGQifX19");
+            var t = ParseJToken("eyJzbGFzaCI6MTIzfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__escaped_pointer_ref_4__tilde_valid_5()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJ0aWxkZX5maWVsZCI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJzbGFzaC9maWVsZCI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJwZXJjZW50JWZpZWxkIjp7InR5cGUiOiJpbnRlZ2VyIn19LCJwcm9wZXJ0aWVzIjp7InRpbGRlIjp7IiRyZWYiOiIjLyRkZWZzL3RpbGRlfjBmaWVsZCJ9LCJzbGFzaCI6eyIkcmVmIjoiIy8kZGVmcy9zbGFzaH4xZmllbGQifSwicGVyY2VudCI6eyIkcmVmIjoiIy8kZGVmcy9wZXJjZW50JTI1ZmllbGQifX19");
+            var t = ParseJToken("eyJ0aWxkZSI6MTIzfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__escaped_pointer_ref_4__percent_valid_6()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJ0aWxkZX5maWVsZCI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJzbGFzaC9maWVsZCI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJwZXJjZW50JWZpZWxkIjp7InR5cGUiOiJpbnRlZ2VyIn19LCJwcm9wZXJ0aWVzIjp7InRpbGRlIjp7IiRyZWYiOiIjLyRkZWZzL3RpbGRlfjBmaWVsZCJ9LCJzbGFzaCI6eyIkcmVmIjoiIy8kZGVmcy9zbGFzaH4xZmllbGQifSwicGVyY2VudCI6eyIkcmVmIjoiIy8kZGVmcy9wZXJjZW50JTI1ZmllbGQifX19");
+            var t = ParseJToken("eyJwZXJjZW50IjoxMjN9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__nested_refs_5__nested_ref_valid()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJhIjp7InR5cGUiOiJpbnRlZ2VyIn0sImIiOnsiJHJlZiI6IiMvJGRlZnMvYSJ9LCJjIjp7IiRyZWYiOiIjLyRkZWZzL2IifX0sIiRyZWYiOiIjLyRkZWZzL2MifQ==");
+            var t = ParseJToken("NQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__nested_refs_5__nested_ref_invalid_2()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJhIjp7InR5cGUiOiJpbnRlZ2VyIn0sImIiOnsiJHJlZiI6IiMvJGRlZnMvYSJ9LCJjIjp7IiRyZWYiOiIjLyRkZWZzL2IifX0sIiRyZWYiOiIjLyRkZWZzL2MifQ==");
+            var t = ParseJToken("ImEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__ref_applies_alongside_sibling_keywords_6__ref_valid__maxItems_valid()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJyZWZmZWQiOnsidHlwZSI6ImFycmF5In19LCJwcm9wZXJ0aWVzIjp7ImZvbyI6eyIkcmVmIjoiIy8kZGVmcy9yZWZmZWQiLCJtYXhJdGVtcyI6Mn19fQ==");
+            var t = ParseJToken("eyJmb28iOltdfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__ref_applies_alongside_sibling_keywords_6__ref_valid__maxItems_invalid_2()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJyZWZmZWQiOnsidHlwZSI6ImFycmF5In19LCJwcm9wZXJ0aWVzIjp7ImZvbyI6eyIkcmVmIjoiIy8kZGVmcy9yZWZmZWQiLCJtYXhJdGVtcyI6Mn19fQ==");
+            var t = ParseJToken("eyJmb28iOlsxLDIsM119");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__ref_applies_alongside_sibling_keywords_6__ref_invalid_3()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJyZWZmZWQiOnsidHlwZSI6ImFycmF5In19LCJwcm9wZXJ0aWVzIjp7ImZvbyI6eyIkcmVmIjoiIy8kZGVmcy9yZWZmZWQiLCJtYXhJdGVtcyI6Mn19fQ==");
+            var t = ParseJToken("eyJmb28iOiJzdHJpbmcifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__remote_ref__containing_refs_itself_7__remote_ref_valid()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAxOS0wOS9zY2hlbWEifQ==");
+            var t = ParseJToken("eyJtaW5MZW5ndGgiOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__remote_ref__containing_refs_itself_7__remote_ref_invalid_2()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cHM6Ly9qc29uLXNjaGVtYS5vcmcvZHJhZnQvMjAxOS0wOS9zY2hlbWEifQ==");
+            var t = ParseJToken("eyJtaW5MZW5ndGgiOi0xfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__property_named__ref_that_is_not_a_reference_8__property_named__ref_valid()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7IiRyZWYiOnsidHlwZSI6InN0cmluZyJ9fX0=");
+            var t = ParseJToken("eyIkcmVmIjoiYSJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__property_named__ref_that_is_not_a_reference_8__property_named__ref_invalid_2()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7IiRyZWYiOnsidHlwZSI6InN0cmluZyJ9fX0=");
+            var t = ParseJToken("eyIkcmVmIjoyfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__property_named__ref__containing_an_actual__ref_9__property_named__ref_valid()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7IiRyZWYiOnsiJHJlZiI6IiMvJGRlZnMvaXMtc3RyaW5nIn19LCIkZGVmcyI6eyJpcy1zdHJpbmciOnsidHlwZSI6InN0cmluZyJ9fX0=");
+            var t = ParseJToken("eyIkcmVmIjoiYSJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__property_named__ref__containing_an_actual__ref_9__property_named__ref_invalid_2()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7IiRyZWYiOnsiJHJlZiI6IiMvJGRlZnMvaXMtc3RyaW5nIn19LCIkZGVmcyI6eyJpcy1zdHJpbmciOnsidHlwZSI6InN0cmluZyJ9fX0=");
+            var t = ParseJToken("eyIkcmVmIjoyfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref___ref_to_boolean_schema_true_10__any_value_is_valid()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiIy8kZGVmcy9ib29sIiwiJGRlZnMiOnsiYm9vbCI6dHJ1ZX19");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref___ref_to_boolean_schema_false_11__any_value_is_invalid()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiIy8kZGVmcy9ib29sIiwiJGRlZnMiOnsiYm9vbCI6ZmFsc2V9fQ==");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__Recursive_references_between_schemas_12__valid_tree()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjEyMzQvdHJlZSIsImRlc2NyaXB0aW9uIjoidHJlZSBvZiBub2RlcyIsInR5cGUiOiJvYmplY3QiLCJwcm9wZXJ0aWVzIjp7Im1ldGEiOnsidHlwZSI6InN0cmluZyJ9LCJub2RlcyI6eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6eyIkcmVmIjoibm9kZSJ9fX0sInJlcXVpcmVkIjpbIm1ldGEiLCJub2RlcyJdLCIkZGVmcyI6eyJub2RlIjp7IiRpZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MTIzNC9ub2RlIiwiZGVzY3JpcHRpb24iOiJub2RlIiwidHlwZSI6Im9iamVjdCIsInByb3BlcnRpZXMiOnsidmFsdWUiOnsidHlwZSI6Im51bWJlciJ9LCJzdWJ0cmVlIjp7IiRyZWYiOiJ0cmVlIn19LCJyZXF1aXJlZCI6WyJ2YWx1ZSJdfX19");
+            var t = ParseJToken("eyJtZXRhIjoicm9vdCIsIm5vZGVzIjpbeyJ2YWx1ZSI6MSwic3VidHJlZSI6eyJtZXRhIjoiY2hpbGQiLCJub2RlcyI6W3sidmFsdWUiOjEuMX0seyJ2YWx1ZSI6MS4yfV19fSx7InZhbHVlIjoyLCJzdWJ0cmVlIjp7Im1ldGEiOiJjaGlsZCIsIm5vZGVzIjpbeyJ2YWx1ZSI6Mi4xfSx7InZhbHVlIjoyLjJ9XX19XX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__Recursive_references_between_schemas_12__invalid_tree_2()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjEyMzQvdHJlZSIsImRlc2NyaXB0aW9uIjoidHJlZSBvZiBub2RlcyIsInR5cGUiOiJvYmplY3QiLCJwcm9wZXJ0aWVzIjp7Im1ldGEiOnsidHlwZSI6InN0cmluZyJ9LCJub2RlcyI6eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6eyIkcmVmIjoibm9kZSJ9fX0sInJlcXVpcmVkIjpbIm1ldGEiLCJub2RlcyJdLCIkZGVmcyI6eyJub2RlIjp7IiRpZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MTIzNC9ub2RlIiwiZGVzY3JpcHRpb24iOiJub2RlIiwidHlwZSI6Im9iamVjdCIsInByb3BlcnRpZXMiOnsidmFsdWUiOnsidHlwZSI6Im51bWJlciJ9LCJzdWJ0cmVlIjp7IiRyZWYiOiJ0cmVlIn19LCJyZXF1aXJlZCI6WyJ2YWx1ZSJdfX19");
+            var t = ParseJToken("eyJtZXRhIjoicm9vdCIsIm5vZGVzIjpbeyJ2YWx1ZSI6MSwic3VidHJlZSI6eyJtZXRhIjoiY2hpbGQiLCJub2RlcyI6W3sidmFsdWUiOiJzdHJpbmcgaXMgaW52YWxpZCJ9LHsidmFsdWUiOjEuMn1dfX0seyJ2YWx1ZSI6Miwic3VidHJlZSI6eyJtZXRhIjoiY2hpbGQiLCJub2RlcyI6W3sidmFsdWUiOjIuMX0seyJ2YWx1ZSI6Mi4yfV19fV19");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__refs_with_quote_13__object_with_numbers_is_valid()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvb1wiYmFyIjp7IiRyZWYiOiIjLyRkZWZzL2ZvbyUyMmJhciJ9fSwiJGRlZnMiOnsiZm9vXCJiYXIiOnsidHlwZSI6Im51bWJlciJ9fX0=");
+            var t = ParseJToken("eyJmb29cImJhciI6MX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__refs_with_quote_13__object_with_strings_is_invalid_2()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvb1wiYmFyIjp7IiRyZWYiOiIjLyRkZWZzL2ZvbyUyMmJhciJ9fSwiJGRlZnMiOnsiZm9vXCJiYXIiOnsidHlwZSI6Im51bWJlciJ9fX0=");
+            var t = ParseJToken("eyJmb29cImJhciI6IjEifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__ref_creates_new_scope_when_adjacent_to_keywords_14__referenced_subschema_doesn_t_see_annotations_from_properties()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJBIjp7InVuZXZhbHVhdGVkUHJvcGVydGllcyI6ZmFsc2V9fSwicHJvcGVydGllcyI6eyJwcm9wMSI6eyJ0eXBlIjoic3RyaW5nIn19LCIkcmVmIjoiIy8kZGVmcy9BIn0=");
+            var t = ParseJToken("eyJwcm9wMSI6Im1hdGNoIn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__naive_replacement_of__ref_with_its_destination_is_not_correct_15__do_not_evaluate_the__ref_inside_the_enum__matching_any_string()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJhX3N0cmluZyI6eyJ0eXBlIjoic3RyaW5nIn19LCJlbnVtIjpbeyIkcmVmIjoiIy8kZGVmcy9hX3N0cmluZyJ9XX0=");
+            var t = ParseJToken("InRoaXMgaXMgYSBzdHJpbmci");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__naive_replacement_of__ref_with_its_destination_is_not_correct_15__do_not_evaluate_the__ref_inside_the_enum__definition_exact_match_2()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJhX3N0cmluZyI6eyJ0eXBlIjoic3RyaW5nIn19LCJlbnVtIjpbeyIkcmVmIjoiIy8kZGVmcy9hX3N0cmluZyJ9XX0=");
+            var t = ParseJToken("eyJ0eXBlIjoic3RyaW5nIn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("ref")]
+        public void Test_draft2019_09__ref__naive_replacement_of__ref_with_its_destination_is_not_correct_15__match_the_enum_exactly_3()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJhX3N0cmluZyI6eyJ0eXBlIjoic3RyaW5nIn19LCJlbnVtIjpbeyIkcmVmIjoiIy8kZGVmcy9hX3N0cmluZyJ9XX0=");
+            var t = ParseJToken("eyIkcmVmIjoiIy8kZGVmcy9hX3N0cmluZyJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("refRemote")]
+        public void Test_draft2019_09__refRemote__remote_ref__remote_ref_valid()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cDovL2xvY2FsaG9zdDoxMjM0L2ludGVnZXIuanNvbiJ9");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("refRemote")]
+        public void Test_draft2019_09__refRemote__remote_ref__remote_ref_invalid_2()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cDovL2xvY2FsaG9zdDoxMjM0L2ludGVnZXIuanNvbiJ9");
+            var t = ParseJToken("ImEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("refRemote")]
+        public void Test_draft2019_09__refRemote__fragment_within_remote_ref_2__remote_fragment_valid()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cDovL2xvY2FsaG9zdDoxMjM0L3N1YlNjaGVtYXMtZGVmcy5qc29uIy8kZGVmcy9pbnRlZ2VyIn0=");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("refRemote")]
+        public void Test_draft2019_09__refRemote__fragment_within_remote_ref_2__remote_fragment_invalid_2()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cDovL2xvY2FsaG9zdDoxMjM0L3N1YlNjaGVtYXMtZGVmcy5qc29uIy8kZGVmcy9pbnRlZ2VyIn0=");
+            var t = ParseJToken("ImEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("refRemote")]
+        public void Test_draft2019_09__refRemote__ref_within_remote_ref_3__ref_within_ref_valid()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cDovL2xvY2FsaG9zdDoxMjM0L3N1YlNjaGVtYXMtZGVmcy5qc29uIy8kZGVmcy9yZWZUb0ludGVnZXIifQ==");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("refRemote")]
+        public void Test_draft2019_09__refRemote__ref_within_remote_ref_3__ref_within_ref_invalid_2()
+        {
+            var s = ParseSchema("eyIkcmVmIjoiaHR0cDovL2xvY2FsaG9zdDoxMjM0L3N1YlNjaGVtYXMtZGVmcy5qc29uIy8kZGVmcy9yZWZUb0ludGVnZXIifQ==");
+            var t = ParseJToken("ImEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("refRemote")]
+        public void Test_draft2019_09__refRemote__base_URI_change_4__base_URI_change_ref_valid()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjEyMzQvIiwiaXRlbXMiOnsiJGlkIjoiYmFzZVVyaUNoYW5nZS8iLCJpdGVtcyI6eyIkcmVmIjoiZm9sZGVySW50ZWdlci5qc29uIn19fQ==");
+            var t = ParseJToken("W1sxXV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("refRemote")]
+        public void Test_draft2019_09__refRemote__base_URI_change_4__base_URI_change_ref_invalid_2()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjEyMzQvIiwiaXRlbXMiOnsiJGlkIjoiYmFzZVVyaUNoYW5nZS8iLCJpdGVtcyI6eyIkcmVmIjoiZm9sZGVySW50ZWdlci5qc29uIn19fQ==");
+            var t = ParseJToken("W1siYSJdXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("refRemote")]
+        public void Test_draft2019_09__refRemote__base_URI_change___change_folder_5__number_is_valid()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjEyMzQvc2NvcGVfY2hhbmdlX2RlZnMxLmpzb24iLCJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJsaXN0Ijp7IiRyZWYiOiJiYXNlVXJpQ2hhbmdlRm9sZGVyLyJ9fSwiJGRlZnMiOnsiYmF6Ijp7IiRpZCI6ImJhc2VVcmlDaGFuZ2VGb2xkZXIvIiwidHlwZSI6ImFycmF5IiwiaXRlbXMiOnsiJHJlZiI6ImZvbGRlckludGVnZXIuanNvbiJ9fX19");
+            var t = ParseJToken("eyJsaXN0IjpbMV19");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("refRemote")]
+        public void Test_draft2019_09__refRemote__base_URI_change___change_folder_5__string_is_invalid_2()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjEyMzQvc2NvcGVfY2hhbmdlX2RlZnMxLmpzb24iLCJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJsaXN0Ijp7IiRyZWYiOiJiYXNlVXJpQ2hhbmdlRm9sZGVyLyJ9fSwiJGRlZnMiOnsiYmF6Ijp7IiRpZCI6ImJhc2VVcmlDaGFuZ2VGb2xkZXIvIiwidHlwZSI6ImFycmF5IiwiaXRlbXMiOnsiJHJlZiI6ImZvbGRlckludGVnZXIuanNvbiJ9fX19");
+            var t = ParseJToken("eyJsaXN0IjpbImEiXX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("refRemote")]
+        public void Test_draft2019_09__refRemote__base_URI_change___change_folder_in_subschema_6__number_is_valid()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjEyMzQvc2NvcGVfY2hhbmdlX2RlZnMyLmpzb24iLCJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJsaXN0Ijp7IiRyZWYiOiJiYXNlVXJpQ2hhbmdlRm9sZGVySW5TdWJzY2hlbWEvIy8kZGVmcy9iYXIifX0sIiRkZWZzIjp7ImJheiI6eyIkaWQiOiJiYXNlVXJpQ2hhbmdlRm9sZGVySW5TdWJzY2hlbWEvIiwiJGRlZnMiOnsiYmFyIjp7InR5cGUiOiJhcnJheSIsIml0ZW1zIjp7IiRyZWYiOiJmb2xkZXJJbnRlZ2VyLmpzb24ifX19fX19");
+            var t = ParseJToken("eyJsaXN0IjpbMV19");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("refRemote")]
+        public void Test_draft2019_09__refRemote__base_URI_change___change_folder_in_subschema_6__string_is_invalid_2()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjEyMzQvc2NvcGVfY2hhbmdlX2RlZnMyLmpzb24iLCJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJsaXN0Ijp7IiRyZWYiOiJiYXNlVXJpQ2hhbmdlRm9sZGVySW5TdWJzY2hlbWEvIy8kZGVmcy9iYXIifX0sIiRkZWZzIjp7ImJheiI6eyIkaWQiOiJiYXNlVXJpQ2hhbmdlRm9sZGVySW5TdWJzY2hlbWEvIiwiJGRlZnMiOnsiYmFyIjp7InR5cGUiOiJhcnJheSIsIml0ZW1zIjp7IiRyZWYiOiJmb2xkZXJJbnRlZ2VyLmpzb24ifX19fX19");
+            var t = ParseJToken("eyJsaXN0IjpbImEiXX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("refRemote")]
+        public void Test_draft2019_09__refRemote__root_ref_in_remote_ref_7__string_is_valid()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjEyMzQvb2JqZWN0IiwidHlwZSI6Im9iamVjdCIsInByb3BlcnRpZXMiOnsibmFtZSI6eyIkcmVmIjoibmFtZS1kZWZzLmpzb24jLyRkZWZzL29yTnVsbCJ9fX0=");
+            var t = ParseJToken("eyJuYW1lIjoiZm9vIn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("refRemote")]
+        public void Test_draft2019_09__refRemote__root_ref_in_remote_ref_7__null_is_valid_2()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjEyMzQvb2JqZWN0IiwidHlwZSI6Im9iamVjdCIsInByb3BlcnRpZXMiOnsibmFtZSI6eyIkcmVmIjoibmFtZS1kZWZzLmpzb24jLyRkZWZzL29yTnVsbCJ9fX0=");
+            var t = ParseJToken("eyJuYW1lIjpudWxsfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("refRemote")]
+        public void Test_draft2019_09__refRemote__root_ref_in_remote_ref_7__object_is_invalid_3()
+        {
+            var s = ParseSchema("eyIkaWQiOiJodHRwOi8vbG9jYWxob3N0OjEyMzQvb2JqZWN0IiwidHlwZSI6Im9iamVjdCIsInByb3BlcnRpZXMiOnsibmFtZSI6eyIkcmVmIjoibmFtZS1kZWZzLmpzb24jLyRkZWZzL29yTnVsbCJ9fX0=");
+            var t = ParseJToken("eyJuYW1lIjp7Im5hbWUiOm51bGx9fQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("required")]
+        public void Test_draft2019_09__required__required_validation__present_required_property_is_valid()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6e30sImJhciI6e319LCJyZXF1aXJlZCI6WyJmb28iXX0=");
+            var t = ParseJToken("eyJmb28iOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("required")]
+        public void Test_draft2019_09__required__required_validation__non_present_required_property_is_invalid_2()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6e30sImJhciI6e319LCJyZXF1aXJlZCI6WyJmb28iXX0=");
+            var t = ParseJToken("eyJiYXIiOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("required")]
+        public void Test_draft2019_09__required__required_validation__ignores_arrays_3()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6e30sImJhciI6e319LCJyZXF1aXJlZCI6WyJmb28iXX0=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("required")]
+        public void Test_draft2019_09__required__required_validation__ignores_strings_4()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6e30sImJhciI6e319LCJyZXF1aXJlZCI6WyJmb28iXX0=");
+            var t = ParseJToken("IiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("required")]
+        public void Test_draft2019_09__required__required_validation__ignores_other_non_objects_5()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6e30sImJhciI6e319LCJyZXF1aXJlZCI6WyJmb28iXX0=");
+            var t = ParseJToken("MTI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("required")]
+        public void Test_draft2019_09__required__required_default_validation_2__not_required_by_default()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6e319fQ==");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("required")]
+        public void Test_draft2019_09__required__required_with_empty_array_3__property_not_required()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6e319LCJyZXF1aXJlZCI6W119");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("required")]
+        public void Test_draft2019_09__required__required_with_escaped_characters_4__object_with_all_properties_present_is_valid()
+        {
+            var s = ParseSchema("eyJyZXF1aXJlZCI6WyJmb29cbmJhciIsImZvb1wiYmFyIiwiZm9vXFxiYXIiLCJmb29ccmJhciIsImZvb1x0YmFyIiwiZm9vXGZiYXIiXX0=");
+            var t = ParseJToken("eyJmb29cbmJhciI6MSwiZm9vXCJiYXIiOjEsImZvb1xcYmFyIjoxLCJmb29ccmJhciI6MSwiZm9vXHRiYXIiOjEsImZvb1xmYmFyIjoxfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("required")]
+        public void Test_draft2019_09__required__required_with_escaped_characters_4__object_with_some_properties_missing_is_invalid_2()
+        {
+            var s = ParseSchema("eyJyZXF1aXJlZCI6WyJmb29cbmJhciIsImZvb1wiYmFyIiwiZm9vXFxiYXIiLCJmb29ccmJhciIsImZvb1x0YmFyIiwiZm9vXGZiYXIiXX0=");
+            var t = ParseJToken("eyJmb29cbmJhciI6IjEiLCJmb29cImJhciI6IjEifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__integer_type_matches_integers__an_integer_is_an_integer()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiaW50ZWdlciJ9");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__integer_type_matches_integers__a_float_with_zero_fractional_part_is_an_integer_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiaW50ZWdlciJ9");
+            var t = ParseJToken("MS4w");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__integer_type_matches_integers__a_float_is_not_an_integer_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiaW50ZWdlciJ9");
+            var t = ParseJToken("MS4x");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__integer_type_matches_integers__a_string_is_not_an_integer_4()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiaW50ZWdlciJ9");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__integer_type_matches_integers__a_string_is_still_not_an_integer__even_if_it_looks_like_one_5()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiaW50ZWdlciJ9");
+            var t = ParseJToken("IjEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__integer_type_matches_integers__an_object_is_not_an_integer_6()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiaW50ZWdlciJ9");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__integer_type_matches_integers__an_array_is_not_an_integer_7()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiaW50ZWdlciJ9");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__integer_type_matches_integers__a_boolean_is_not_an_integer_8()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiaW50ZWdlciJ9");
+            var t = ParseJToken("dHJ1ZQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__integer_type_matches_integers__null_is_not_an_integer_9()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiaW50ZWdlciJ9");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__number_type_matches_numbers_2__an_integer_is_a_number()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoibnVtYmVyIn0=");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__number_type_matches_numbers_2__a_float_with_zero_fractional_part_is_a_number__and_an_integer__2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoibnVtYmVyIn0=");
+            var t = ParseJToken("MS4w");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__number_type_matches_numbers_2__a_float_is_a_number_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoibnVtYmVyIn0=");
+            var t = ParseJToken("MS4x");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__number_type_matches_numbers_2__a_string_is_not_a_number_4()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoibnVtYmVyIn0=");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__number_type_matches_numbers_2__a_string_is_still_not_a_number__even_if_it_looks_like_one_5()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoibnVtYmVyIn0=");
+            var t = ParseJToken("IjEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__number_type_matches_numbers_2__an_object_is_not_a_number_6()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoibnVtYmVyIn0=");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__number_type_matches_numbers_2__an_array_is_not_a_number_7()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoibnVtYmVyIn0=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__number_type_matches_numbers_2__a_boolean_is_not_a_number_8()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoibnVtYmVyIn0=");
+            var t = ParseJToken("dHJ1ZQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__number_type_matches_numbers_2__null_is_not_a_number_9()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoibnVtYmVyIn0=");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__string_type_matches_strings_3__1_is_not_a_string()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIn0=");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__string_type_matches_strings_3__a_float_is_not_a_string_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIn0=");
+            var t = ParseJToken("MS4x");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__string_type_matches_strings_3__a_string_is_a_string_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIn0=");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__string_type_matches_strings_3__a_string_is_still_a_string__even_if_it_looks_like_a_number_4()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIn0=");
+            var t = ParseJToken("IjEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__string_type_matches_strings_3__an_empty_string_is_still_a_string_5()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIn0=");
+            var t = ParseJToken("IiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__string_type_matches_strings_3__an_object_is_not_a_string_6()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIn0=");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__string_type_matches_strings_3__an_array_is_not_a_string_7()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIn0=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__string_type_matches_strings_3__a_boolean_is_not_a_string_8()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIn0=");
+            var t = ParseJToken("dHJ1ZQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__string_type_matches_strings_3__null_is_not_a_string_9()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIn0=");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__object_type_matches_objects_4__an_integer_is_not_an_object()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0In0=");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__object_type_matches_objects_4__a_float_is_not_an_object_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0In0=");
+            var t = ParseJToken("MS4x");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__object_type_matches_objects_4__a_string_is_not_an_object_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0In0=");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__object_type_matches_objects_4__an_object_is_an_object_4()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0In0=");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__object_type_matches_objects_4__an_array_is_not_an_object_5()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0In0=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__object_type_matches_objects_4__a_boolean_is_not_an_object_6()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0In0=");
+            var t = ParseJToken("dHJ1ZQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__object_type_matches_objects_4__null_is_not_an_object_7()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0In0=");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__array_type_matches_arrays_5__an_integer_is_not_an_array()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkifQ==");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__array_type_matches_arrays_5__a_float_is_not_an_array_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkifQ==");
+            var t = ParseJToken("MS4x");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__array_type_matches_arrays_5__a_string_is_not_an_array_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkifQ==");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__array_type_matches_arrays_5__an_object_is_not_an_array_4()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkifQ==");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__array_type_matches_arrays_5__an_array_is_an_array_5()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkifQ==");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__array_type_matches_arrays_5__a_boolean_is_not_an_array_6()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkifQ==");
+            var t = ParseJToken("dHJ1ZQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__array_type_matches_arrays_5__null_is_not_an_array_7()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkifQ==");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__boolean_type_matches_booleans_6__an_integer_is_not_a_boolean()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYm9vbGVhbiJ9");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__boolean_type_matches_booleans_6__zero_is_not_a_boolean_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYm9vbGVhbiJ9");
+            var t = ParseJToken("MA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__boolean_type_matches_booleans_6__a_float_is_not_a_boolean_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYm9vbGVhbiJ9");
+            var t = ParseJToken("MS4x");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__boolean_type_matches_booleans_6__a_string_is_not_a_boolean_4()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYm9vbGVhbiJ9");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__boolean_type_matches_booleans_6__an_empty_string_is_not_a_boolean_5()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYm9vbGVhbiJ9");
+            var t = ParseJToken("IiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__boolean_type_matches_booleans_6__an_object_is_not_a_boolean_6()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYm9vbGVhbiJ9");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__boolean_type_matches_booleans_6__an_array_is_not_a_boolean_7()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYm9vbGVhbiJ9");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__boolean_type_matches_booleans_6__true_is_a_boolean_8()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYm9vbGVhbiJ9");
+            var t = ParseJToken("dHJ1ZQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__boolean_type_matches_booleans_6__false_is_a_boolean_9()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYm9vbGVhbiJ9");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__boolean_type_matches_booleans_6__null_is_not_a_boolean_10()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYm9vbGVhbiJ9");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__null_type_matches_only_the_null_object_7__an_integer_is_not_null()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoibnVsbCJ9");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__null_type_matches_only_the_null_object_7__a_float_is_not_null_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoibnVsbCJ9");
+            var t = ParseJToken("MS4x");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__null_type_matches_only_the_null_object_7__zero_is_not_null_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoibnVsbCJ9");
+            var t = ParseJToken("MA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__null_type_matches_only_the_null_object_7__a_string_is_not_null_4()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoibnVsbCJ9");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__null_type_matches_only_the_null_object_7__an_empty_string_is_not_null_5()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoibnVsbCJ9");
+            var t = ParseJToken("IiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__null_type_matches_only_the_null_object_7__an_object_is_not_null_6()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoibnVsbCJ9");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__null_type_matches_only_the_null_object_7__an_array_is_not_null_7()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoibnVsbCJ9");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__null_type_matches_only_the_null_object_7__true_is_not_null_8()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoibnVsbCJ9");
+            var t = ParseJToken("dHJ1ZQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__null_type_matches_only_the_null_object_7__false_is_not_null_9()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoibnVsbCJ9");
+            var t = ParseJToken("ZmFsc2U=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__null_type_matches_only_the_null_object_7__null_is_null_10()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoibnVsbCJ9");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__multiple_types_can_be_specified_in_an_array_8__an_integer_is_valid()
+        {
+            var s = ParseSchema("eyJ0eXBlIjpbImludGVnZXIiLCJzdHJpbmciXX0=");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__multiple_types_can_be_specified_in_an_array_8__a_string_is_valid_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjpbImludGVnZXIiLCJzdHJpbmciXX0=");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__multiple_types_can_be_specified_in_an_array_8__a_float_is_invalid_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjpbImludGVnZXIiLCJzdHJpbmciXX0=");
+            var t = ParseJToken("MS4x");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__multiple_types_can_be_specified_in_an_array_8__an_object_is_invalid_4()
+        {
+            var s = ParseSchema("eyJ0eXBlIjpbImludGVnZXIiLCJzdHJpbmciXX0=");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__multiple_types_can_be_specified_in_an_array_8__an_array_is_invalid_5()
+        {
+            var s = ParseSchema("eyJ0eXBlIjpbImludGVnZXIiLCJzdHJpbmciXX0=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__multiple_types_can_be_specified_in_an_array_8__a_boolean_is_invalid_6()
+        {
+            var s = ParseSchema("eyJ0eXBlIjpbImludGVnZXIiLCJzdHJpbmciXX0=");
+            var t = ParseJToken("dHJ1ZQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__multiple_types_can_be_specified_in_an_array_8__null_is_invalid_7()
+        {
+            var s = ParseSchema("eyJ0eXBlIjpbImludGVnZXIiLCJzdHJpbmciXX0=");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__type_as_array_with_one_item_9__string_is_valid()
+        {
+            var s = ParseSchema("eyJ0eXBlIjpbInN0cmluZyJdfQ==");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__type_as_array_with_one_item_9__number_is_invalid_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjpbInN0cmluZyJdfQ==");
+            var t = ParseJToken("MTIz");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__type__array_or_object_10__array_is_valid()
+        {
+            var s = ParseSchema("eyJ0eXBlIjpbImFycmF5Iiwib2JqZWN0Il19");
+            var t = ParseJToken("WzEsMiwzXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__type__array_or_object_10__object_is_valid_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjpbImFycmF5Iiwib2JqZWN0Il19");
+            var t = ParseJToken("eyJmb28iOjEyM30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__type__array_or_object_10__number_is_invalid_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjpbImFycmF5Iiwib2JqZWN0Il19");
+            var t = ParseJToken("MTIz");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__type__array_or_object_10__string_is_invalid_4()
+        {
+            var s = ParseSchema("eyJ0eXBlIjpbImFycmF5Iiwib2JqZWN0Il19");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__type__array_or_object_10__null_is_invalid_5()
+        {
+            var s = ParseSchema("eyJ0eXBlIjpbImFycmF5Iiwib2JqZWN0Il19");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__type__array__object_or_null_11__array_is_valid()
+        {
+            var s = ParseSchema("eyJ0eXBlIjpbImFycmF5Iiwib2JqZWN0IiwibnVsbCJdfQ==");
+            var t = ParseJToken("WzEsMiwzXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__type__array__object_or_null_11__object_is_valid_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjpbImFycmF5Iiwib2JqZWN0IiwibnVsbCJdfQ==");
+            var t = ParseJToken("eyJmb28iOjEyM30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__type__array__object_or_null_11__null_is_valid_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjpbImFycmF5Iiwib2JqZWN0IiwibnVsbCJdfQ==");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__type__array__object_or_null_11__number_is_invalid_4()
+        {
+            var s = ParseSchema("eyJ0eXBlIjpbImFycmF5Iiwib2JqZWN0IiwibnVsbCJdfQ==");
+            var t = ParseJToken("MTIz");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("type")]
+        public void Test_draft2019_09__type__type__array__object_or_null_11__string_is_invalid_5()
+        {
+            var s = ParseSchema("eyJ0eXBlIjpbImFycmF5Iiwib2JqZWN0IiwibnVsbCJdfQ==");
+            var t = ParseJToken("ImZvbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_true__with_no_unevaluated_items()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJ1bmV2YWx1YXRlZEl0ZW1zIjp0cnVlfQ==");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_true__with_unevaluated_items_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJ1bmV2YWx1YXRlZEl0ZW1zIjp0cnVlfQ==");
+            var t = ParseJToken("WyJmb28iXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_false_2__with_no_unevaluated_items()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJ1bmV2YWx1YXRlZEl0ZW1zIjpmYWxzZX0=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_false_2__with_unevaluated_items_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJ1bmV2YWx1YXRlZEl0ZW1zIjpmYWxzZX0=");
+            var t = ParseJToken("WyJmb28iXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_as_schema_3__with_no_unevaluated_items()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJ1bmV2YWx1YXRlZEl0ZW1zIjp7InR5cGUiOiJzdHJpbmcifX0=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_as_schema_3__with_valid_unevaluated_items_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJ1bmV2YWx1YXRlZEl0ZW1zIjp7InR5cGUiOiJzdHJpbmcifX0=");
+            var t = ParseJToken("WyJmb28iXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_as_schema_3__with_invalid_unevaluated_items_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJ1bmV2YWx1YXRlZEl0ZW1zIjp7InR5cGUiOiJzdHJpbmcifX0=");
+            var t = ParseJToken("WzQyXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with_uniform_items_4__unevaluatedItems_doesn_t_apply()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6eyJ0eXBlIjoic3RyaW5nIn0sInVuZXZhbHVhdGVkSXRlbXMiOmZhbHNlfQ==");
+            var t = ParseJToken("WyJmb28iLCJiYXIiXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with_tuple_5__with_no_unevaluated_items()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6W3sidHlwZSI6InN0cmluZyJ9XSwidW5ldmFsdWF0ZWRJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("WyJmb28iXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with_tuple_5__with_unevaluated_items_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6W3sidHlwZSI6InN0cmluZyJ9XSwidW5ldmFsdWF0ZWRJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("WyJmb28iLCJiYXIiXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with_additionalItems_6__unevaluatedItems_doesn_t_apply()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6W3sidHlwZSI6InN0cmluZyJ9XSwiYWRkaXRpb25hbEl0ZW1zIjp0cnVlLCJ1bmV2YWx1YXRlZEl0ZW1zIjpmYWxzZX0=");
+            var t = ParseJToken("WyJmb28iLDQyXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with_nested_tuple_7__with_no_unevaluated_items()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6W3sidHlwZSI6InN0cmluZyJ9XSwiYWxsT2YiOlt7Iml0ZW1zIjpbdHJ1ZSx7InR5cGUiOiJudW1iZXIifV19XSwidW5ldmFsdWF0ZWRJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("WyJmb28iLDQyXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with_nested_tuple_7__with_unevaluated_items_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6W3sidHlwZSI6InN0cmluZyJ9XSwiYWxsT2YiOlt7Iml0ZW1zIjpbdHJ1ZSx7InR5cGUiOiJudW1iZXIifV19XSwidW5ldmFsdWF0ZWRJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("WyJmb28iLDQyLHRydWVd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with_nested_additionalItems_8__with_no_additional_items()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJhbGxPZiI6W3siaXRlbXMiOlt7InR5cGUiOiJzdHJpbmcifV0sImFkZGl0aW9uYWxJdGVtcyI6dHJ1ZX1dLCJ1bmV2YWx1YXRlZEl0ZW1zIjpmYWxzZX0=");
+            var t = ParseJToken("WyJmb28iXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with_nested_additionalItems_8__with_additional_items_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJhbGxPZiI6W3siaXRlbXMiOlt7InR5cGUiOiJzdHJpbmcifV0sImFkZGl0aW9uYWxJdGVtcyI6dHJ1ZX1dLCJ1bmV2YWx1YXRlZEl0ZW1zIjpmYWxzZX0=");
+            var t = ParseJToken("WyJmb28iLDQyLHRydWVd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with_nested_unevaluatedItems_9__with_no_additional_items()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJhbGxPZiI6W3siaXRlbXMiOlt7InR5cGUiOiJzdHJpbmcifV19LHsidW5ldmFsdWF0ZWRJdGVtcyI6dHJ1ZX1dLCJ1bmV2YWx1YXRlZEl0ZW1zIjpmYWxzZX0=");
+            var t = ParseJToken("WyJmb28iXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with_nested_unevaluatedItems_9__with_additional_items_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJhbGxPZiI6W3siaXRlbXMiOlt7InR5cGUiOiJzdHJpbmcifV19LHsidW5ldmFsdWF0ZWRJdGVtcyI6dHJ1ZX1dLCJ1bmV2YWx1YXRlZEl0ZW1zIjpmYWxzZX0=");
+            var t = ParseJToken("WyJmb28iLDQyLHRydWVd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with_anyOf_10__when_one_schema_matches_and_has_no_unevaluated_items()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6W3siY29uc3QiOiJmb28ifV0sImFueU9mIjpbeyJpdGVtcyI6W3RydWUseyJjb25zdCI6ImJhciJ9XX0seyJpdGVtcyI6W3RydWUsdHJ1ZSx7ImNvbnN0IjoiYmF6In1dfV0sInVuZXZhbHVhdGVkSXRlbXMiOmZhbHNlfQ==");
+            var t = ParseJToken("WyJmb28iLCJiYXIiXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with_anyOf_10__when_one_schema_matches_and_has_unevaluated_items_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6W3siY29uc3QiOiJmb28ifV0sImFueU9mIjpbeyJpdGVtcyI6W3RydWUseyJjb25zdCI6ImJhciJ9XX0seyJpdGVtcyI6W3RydWUsdHJ1ZSx7ImNvbnN0IjoiYmF6In1dfV0sInVuZXZhbHVhdGVkSXRlbXMiOmZhbHNlfQ==");
+            var t = ParseJToken("WyJmb28iLCJiYXIiLDQyXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with_anyOf_10__when_two_schemas_match_and_has_no_unevaluated_items_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6W3siY29uc3QiOiJmb28ifV0sImFueU9mIjpbeyJpdGVtcyI6W3RydWUseyJjb25zdCI6ImJhciJ9XX0seyJpdGVtcyI6W3RydWUsdHJ1ZSx7ImNvbnN0IjoiYmF6In1dfV0sInVuZXZhbHVhdGVkSXRlbXMiOmZhbHNlfQ==");
+            var t = ParseJToken("WyJmb28iLCJiYXIiLCJiYXoiXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with_anyOf_10__when_two_schemas_match_and_has_unevaluated_items_4()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6W3siY29uc3QiOiJmb28ifV0sImFueU9mIjpbeyJpdGVtcyI6W3RydWUseyJjb25zdCI6ImJhciJ9XX0seyJpdGVtcyI6W3RydWUsdHJ1ZSx7ImNvbnN0IjoiYmF6In1dfV0sInVuZXZhbHVhdGVkSXRlbXMiOmZhbHNlfQ==");
+            var t = ParseJToken("WyJmb28iLCJiYXIiLCJiYXoiLDQyXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with_oneOf_11__with_no_unevaluated_items()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6W3siY29uc3QiOiJmb28ifV0sIm9uZU9mIjpbeyJpdGVtcyI6W3RydWUseyJjb25zdCI6ImJhciJ9XX0seyJpdGVtcyI6W3RydWUseyJjb25zdCI6ImJheiJ9XX1dLCJ1bmV2YWx1YXRlZEl0ZW1zIjpmYWxzZX0=");
+            var t = ParseJToken("WyJmb28iLCJiYXIiXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with_oneOf_11__with_unevaluated_items_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6W3siY29uc3QiOiJmb28ifV0sIm9uZU9mIjpbeyJpdGVtcyI6W3RydWUseyJjb25zdCI6ImJhciJ9XX0seyJpdGVtcyI6W3RydWUseyJjb25zdCI6ImJheiJ9XX1dLCJ1bmV2YWx1YXRlZEl0ZW1zIjpmYWxzZX0=");
+            var t = ParseJToken("WyJmb28iLCJiYXIiLDQyXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with_not_12__with_unevaluated_items()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6W3siY29uc3QiOiJmb28ifV0sIm5vdCI6eyJub3QiOnsiaXRlbXMiOlt0cnVlLHsiY29uc3QiOiJiYXIifV19fSwidW5ldmFsdWF0ZWRJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("WyJmb28iLCJiYXIiXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with_if_then_else_13__when_if_matches_and_it_has_no_unevaluated_items()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6W3siY29uc3QiOiJmb28ifV0sImlmIjp7Iml0ZW1zIjpbdHJ1ZSx7ImNvbnN0IjoiYmFyIn1dfSwidGhlbiI6eyJpdGVtcyI6W3RydWUsdHJ1ZSx7ImNvbnN0IjoidGhlbiJ9XX0sImVsc2UiOnsiaXRlbXMiOlt0cnVlLHRydWUsdHJ1ZSx7ImNvbnN0IjoiZWxzZSJ9XX0sInVuZXZhbHVhdGVkSXRlbXMiOmZhbHNlfQ==");
+            var t = ParseJToken("WyJmb28iLCJiYXIiLCJ0aGVuIl0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with_if_then_else_13__when_if_matches_and_it_has_unevaluated_items_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6W3siY29uc3QiOiJmb28ifV0sImlmIjp7Iml0ZW1zIjpbdHJ1ZSx7ImNvbnN0IjoiYmFyIn1dfSwidGhlbiI6eyJpdGVtcyI6W3RydWUsdHJ1ZSx7ImNvbnN0IjoidGhlbiJ9XX0sImVsc2UiOnsiaXRlbXMiOlt0cnVlLHRydWUsdHJ1ZSx7ImNvbnN0IjoiZWxzZSJ9XX0sInVuZXZhbHVhdGVkSXRlbXMiOmZhbHNlfQ==");
+            var t = ParseJToken("WyJmb28iLCJiYXIiLCJ0aGVuIiwiZWxzZSJd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with_if_then_else_13__when_if_doesn_t_match_and_it_has_no_unevaluated_items_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6W3siY29uc3QiOiJmb28ifV0sImlmIjp7Iml0ZW1zIjpbdHJ1ZSx7ImNvbnN0IjoiYmFyIn1dfSwidGhlbiI6eyJpdGVtcyI6W3RydWUsdHJ1ZSx7ImNvbnN0IjoidGhlbiJ9XX0sImVsc2UiOnsiaXRlbXMiOlt0cnVlLHRydWUsdHJ1ZSx7ImNvbnN0IjoiZWxzZSJ9XX0sInVuZXZhbHVhdGVkSXRlbXMiOmZhbHNlfQ==");
+            var t = ParseJToken("WyJmb28iLDQyLDQyLCJlbHNlIl0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with_if_then_else_13__when_if_doesn_t_match_and_it_has_unevaluated_items_4()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJpdGVtcyI6W3siY29uc3QiOiJmb28ifV0sImlmIjp7Iml0ZW1zIjpbdHJ1ZSx7ImNvbnN0IjoiYmFyIn1dfSwidGhlbiI6eyJpdGVtcyI6W3RydWUsdHJ1ZSx7ImNvbnN0IjoidGhlbiJ9XX0sImVsc2UiOnsiaXRlbXMiOlt0cnVlLHRydWUsdHJ1ZSx7ImNvbnN0IjoiZWxzZSJ9XX0sInVuZXZhbHVhdGVkSXRlbXMiOmZhbHNlfQ==");
+            var t = ParseJToken("WyJmb28iLDQyLDQyLCJlbHNlIiw0Ml0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with_boolean_schemas_14__with_no_unevaluated_items()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJhbGxPZiI6W3RydWVdLCJ1bmV2YWx1YXRlZEl0ZW1zIjpmYWxzZX0=");
+            var t = ParseJToken("W10=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with_boolean_schemas_14__with_unevaluated_items_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCJhbGxPZiI6W3RydWVdLCJ1bmV2YWx1YXRlZEl0ZW1zIjpmYWxzZX0=");
+            var t = ParseJToken("WyJmb28iXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with__ref_15__with_no_unevaluated_items()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCIkcmVmIjoiIy8kZGVmcy9iYXIiLCJpdGVtcyI6W3sidHlwZSI6InN0cmluZyJ9XSwidW5ldmFsdWF0ZWRJdGVtcyI6ZmFsc2UsIiRkZWZzIjp7ImJhciI6eyJpdGVtcyI6W3RydWUseyJ0eXBlIjoic3RyaW5nIn1dfX19");
+            var t = ParseJToken("WyJmb28iLCJiYXIiXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_with__ref_15__with_unevaluated_items_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiYXJyYXkiLCIkcmVmIjoiIy8kZGVmcy9iYXIiLCJpdGVtcyI6W3sidHlwZSI6InN0cmluZyJ9XSwidW5ldmFsdWF0ZWRJdGVtcyI6ZmFsc2UsIiRkZWZzIjp7ImJhciI6eyJpdGVtcyI6W3RydWUseyJ0eXBlIjoic3RyaW5nIn1dfX19");
+            var t = ParseJToken("WyJmb28iLCJiYXIiLCJiYXoiXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__unevaluatedItems_can_t_see_inside_cousins_16__always_fails()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3siaXRlbXMiOlt0cnVlXX0seyJ1bmV2YWx1YXRlZEl0ZW1zIjpmYWxzZX1dfQ==");
+            var t = ParseJToken("WzFd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__item_is_evaluated_in_an_uncle_schema_to_unevaluatedItems_17__no_extra_items()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6ImFycmF5IiwiaXRlbXMiOlt7InR5cGUiOiJzdHJpbmcifV0sInVuZXZhbHVhdGVkSXRlbXMiOmZhbHNlfX0sImFueU9mIjpbeyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJpdGVtcyI6W3RydWUseyJ0eXBlIjoic3RyaW5nIn1dfX19XX0=");
+            var t = ParseJToken("eyJmb28iOlsidGVzdCJdfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedItems")]
+        public void Test_draft2019_09__unevaluatedItems__item_is_evaluated_in_an_uncle_schema_to_unevaluatedItems_17__uncle_keyword_evaluation_is_not_significant_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6ImFycmF5IiwiaXRlbXMiOlt7InR5cGUiOiJzdHJpbmcifV0sInVuZXZhbHVhdGVkSXRlbXMiOmZhbHNlfX0sImFueU9mIjpbeyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJpdGVtcyI6W3RydWUseyJ0eXBlIjoic3RyaW5nIn1dfX19XX0=");
+            var t = ParseJToken("eyJmb28iOlsidGVzdCIsInRlc3QiXX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_true__with_no_unevaluated_properties()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjp0cnVlfQ==");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_true__with_unevaluated_properties_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjp0cnVlfQ==");
+            var t = ParseJToken("eyJmb28iOiJmb28ifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_schema_2__with_no_unevaluated_properties()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjp7InR5cGUiOiJzdHJpbmciLCJtaW5MZW5ndGgiOjN9fQ==");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_schema_2__with_valid_unevaluated_properties_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjp7InR5cGUiOiJzdHJpbmciLCJtaW5MZW5ndGgiOjN9fQ==");
+            var t = ParseJToken("eyJmb28iOiJmb28ifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_schema_2__with_invalid_unevaluated_properties_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjp7InR5cGUiOiJzdHJpbmciLCJtaW5MZW5ndGgiOjN9fQ==");
+            var t = ParseJToken("eyJmb28iOiJmbyJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_false_3__with_no_unevaluated_properties()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjpmYWxzZX0=");
+            var t = ParseJToken("e30=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_false_3__with_unevaluated_properties_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjpmYWxzZX0=");
+            var t = ParseJToken("eyJmb28iOiJmb28ifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_adjacent_properties_4__with_no_unevaluated_properties()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjpmYWxzZX0=");
+            var t = ParseJToken("eyJmb28iOiJmb28ifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_adjacent_properties_4__with_unevaluated_properties_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjpmYWxzZX0=");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_adjacent_patternProperties_5__with_no_unevaluated_properties()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicGF0dGVyblByb3BlcnRpZXMiOnsiXmZvbyI6eyJ0eXBlIjoic3RyaW5nIn19LCJ1bmV2YWx1YXRlZFByb3BlcnRpZXMiOmZhbHNlfQ==");
+            var t = ParseJToken("eyJmb28iOiJmb28ifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_adjacent_patternProperties_5__with_unevaluated_properties_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicGF0dGVyblByb3BlcnRpZXMiOnsiXmZvbyI6eyJ0eXBlIjoic3RyaW5nIn19LCJ1bmV2YWx1YXRlZFByb3BlcnRpZXMiOmZhbHNlfQ==");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_adjacent_additionalProperties_6__with_no_additional_properties()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwiYWRkaXRpb25hbFByb3BlcnRpZXMiOnRydWUsInVuZXZhbHVhdGVkUHJvcGVydGllcyI6ZmFsc2V9");
+            var t = ParseJToken("eyJmb28iOiJmb28ifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_adjacent_additionalProperties_6__with_additional_properties_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwiYWRkaXRpb25hbFByb3BlcnRpZXMiOnRydWUsInVuZXZhbHVhdGVkUHJvcGVydGllcyI6ZmFsc2V9");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_nested_properties_7__with_no_additional_properties()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwiYWxsT2YiOlt7InByb3BlcnRpZXMiOnsiYmFyIjp7InR5cGUiOiJzdHJpbmcifX19XSwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjpmYWxzZX0=");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_nested_properties_7__with_additional_properties_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwiYWxsT2YiOlt7InByb3BlcnRpZXMiOnsiYmFyIjp7InR5cGUiOiJzdHJpbmcifX19XSwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjpmYWxzZX0=");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIiLCJiYXoiOiJiYXoifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_nested_patternProperties_8__with_no_additional_properties()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwiYWxsT2YiOlt7InBhdHRlcm5Qcm9wZXJ0aWVzIjp7Il5iYXIiOnsidHlwZSI6InN0cmluZyJ9fX1dLCJ1bmV2YWx1YXRlZFByb3BlcnRpZXMiOmZhbHNlfQ==");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_nested_patternProperties_8__with_additional_properties_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwiYWxsT2YiOlt7InBhdHRlcm5Qcm9wZXJ0aWVzIjp7Il5iYXIiOnsidHlwZSI6InN0cmluZyJ9fX1dLCJ1bmV2YWx1YXRlZFByb3BlcnRpZXMiOmZhbHNlfQ==");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIiLCJiYXoiOiJiYXoifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_nested_additionalProperties_9__with_no_additional_properties()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwiYWxsT2YiOlt7ImFkZGl0aW9uYWxQcm9wZXJ0aWVzIjp0cnVlfV0sInVuZXZhbHVhdGVkUHJvcGVydGllcyI6ZmFsc2V9");
+            var t = ParseJToken("eyJmb28iOiJmb28ifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_nested_additionalProperties_9__with_additional_properties_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwiYWxsT2YiOlt7ImFkZGl0aW9uYWxQcm9wZXJ0aWVzIjp0cnVlfV0sInVuZXZhbHVhdGVkUHJvcGVydGllcyI6ZmFsc2V9");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_nested_unevaluatedProperties_10__with_no_nested_unevaluated_properties()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwiYWxsT2YiOlt7InVuZXZhbHVhdGVkUHJvcGVydGllcyI6dHJ1ZX1dLCJ1bmV2YWx1YXRlZFByb3BlcnRpZXMiOnsidHlwZSI6InN0cmluZyIsIm1heExlbmd0aCI6Mn19");
+            var t = ParseJToken("eyJmb28iOiJmb28ifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_nested_unevaluatedProperties_10__with_nested_unevaluated_properties_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwiYWxsT2YiOlt7InVuZXZhbHVhdGVkUHJvcGVydGllcyI6dHJ1ZX1dLCJ1bmV2YWx1YXRlZFByb3BlcnRpZXMiOnsidHlwZSI6InN0cmluZyIsIm1heExlbmd0aCI6Mn19");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_anyOf_11__when_one_matches_and_has_no_unevaluated_properties()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwiYW55T2YiOlt7InByb3BlcnRpZXMiOnsiYmFyIjp7ImNvbnN0IjoiYmFyIn19LCJyZXF1aXJlZCI6WyJiYXIiXX0seyJwcm9wZXJ0aWVzIjp7ImJheiI6eyJjb25zdCI6ImJheiJ9fSwicmVxdWlyZWQiOlsiYmF6Il19LHsicHJvcGVydGllcyI6eyJxdXV4Ijp7ImNvbnN0IjoicXV1eCJ9fSwicmVxdWlyZWQiOlsicXV1eCJdfV0sInVuZXZhbHVhdGVkUHJvcGVydGllcyI6ZmFsc2V9");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_anyOf_11__when_one_matches_and_has_unevaluated_properties_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwiYW55T2YiOlt7InByb3BlcnRpZXMiOnsiYmFyIjp7ImNvbnN0IjoiYmFyIn19LCJyZXF1aXJlZCI6WyJiYXIiXX0seyJwcm9wZXJ0aWVzIjp7ImJheiI6eyJjb25zdCI6ImJheiJ9fSwicmVxdWlyZWQiOlsiYmF6Il19LHsicHJvcGVydGllcyI6eyJxdXV4Ijp7ImNvbnN0IjoicXV1eCJ9fSwicmVxdWlyZWQiOlsicXV1eCJdfV0sInVuZXZhbHVhdGVkUHJvcGVydGllcyI6ZmFsc2V9");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIiLCJiYXoiOiJub3QtYmF6In0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_anyOf_11__when_two_match_and_has_no_unevaluated_properties_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwiYW55T2YiOlt7InByb3BlcnRpZXMiOnsiYmFyIjp7ImNvbnN0IjoiYmFyIn19LCJyZXF1aXJlZCI6WyJiYXIiXX0seyJwcm9wZXJ0aWVzIjp7ImJheiI6eyJjb25zdCI6ImJheiJ9fSwicmVxdWlyZWQiOlsiYmF6Il19LHsicHJvcGVydGllcyI6eyJxdXV4Ijp7ImNvbnN0IjoicXV1eCJ9fSwicmVxdWlyZWQiOlsicXV1eCJdfV0sInVuZXZhbHVhdGVkUHJvcGVydGllcyI6ZmFsc2V9");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIiLCJiYXoiOiJiYXoifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_anyOf_11__when_two_match_and_has_unevaluated_properties_4()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwiYW55T2YiOlt7InByb3BlcnRpZXMiOnsiYmFyIjp7ImNvbnN0IjoiYmFyIn19LCJyZXF1aXJlZCI6WyJiYXIiXX0seyJwcm9wZXJ0aWVzIjp7ImJheiI6eyJjb25zdCI6ImJheiJ9fSwicmVxdWlyZWQiOlsiYmF6Il19LHsicHJvcGVydGllcyI6eyJxdXV4Ijp7ImNvbnN0IjoicXV1eCJ9fSwicmVxdWlyZWQiOlsicXV1eCJdfV0sInVuZXZhbHVhdGVkUHJvcGVydGllcyI6ZmFsc2V9");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIiLCJiYXoiOiJiYXoiLCJxdXV4Ijoibm90LXF1dXgifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_oneOf_12__with_no_unevaluated_properties()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwib25lT2YiOlt7InByb3BlcnRpZXMiOnsiYmFyIjp7ImNvbnN0IjoiYmFyIn19LCJyZXF1aXJlZCI6WyJiYXIiXX0seyJwcm9wZXJ0aWVzIjp7ImJheiI6eyJjb25zdCI6ImJheiJ9fSwicmVxdWlyZWQiOlsiYmF6Il19XSwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjpmYWxzZX0=");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_oneOf_12__with_unevaluated_properties_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwib25lT2YiOlt7InByb3BlcnRpZXMiOnsiYmFyIjp7ImNvbnN0IjoiYmFyIn19LCJyZXF1aXJlZCI6WyJiYXIiXX0seyJwcm9wZXJ0aWVzIjp7ImJheiI6eyJjb25zdCI6ImJheiJ9fSwicmVxdWlyZWQiOlsiYmF6Il19XSwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjpmYWxzZX0=");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIiLCJxdXV4IjoicXV1eCJ9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_not_13__with_unevaluated_properties()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwibm90Ijp7Im5vdCI6eyJwcm9wZXJ0aWVzIjp7ImJhciI6eyJjb25zdCI6ImJhciJ9fSwicmVxdWlyZWQiOlsiYmFyIl19fSwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjpmYWxzZX0=");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_if_then_else_14__when_if_is_true_and_has_no_unevaluated_properties()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwiaWYiOnsicHJvcGVydGllcyI6eyJmb28iOnsiY29uc3QiOiJ0aGVuIn19LCJyZXF1aXJlZCI6WyJmb28iXX0sInRoZW4iOnsicHJvcGVydGllcyI6eyJiYXIiOnsidHlwZSI6InN0cmluZyJ9fSwicmVxdWlyZWQiOlsiYmFyIl19LCJlbHNlIjp7InByb3BlcnRpZXMiOnsiYmF6Ijp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbImJheiJdfSwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjpmYWxzZX0=");
+            var t = ParseJToken("eyJmb28iOiJ0aGVuIiwiYmFyIjoiYmFyIn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_if_then_else_14__when_if_is_true_and_has_unevaluated_properties_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwiaWYiOnsicHJvcGVydGllcyI6eyJmb28iOnsiY29uc3QiOiJ0aGVuIn19LCJyZXF1aXJlZCI6WyJmb28iXX0sInRoZW4iOnsicHJvcGVydGllcyI6eyJiYXIiOnsidHlwZSI6InN0cmluZyJ9fSwicmVxdWlyZWQiOlsiYmFyIl19LCJlbHNlIjp7InByb3BlcnRpZXMiOnsiYmF6Ijp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbImJheiJdfSwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjpmYWxzZX0=");
+            var t = ParseJToken("eyJmb28iOiJ0aGVuIiwiYmFyIjoiYmFyIiwiYmF6IjoiYmF6In0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_if_then_else_14__when_if_is_false_and_has_no_unevaluated_properties_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwiaWYiOnsicHJvcGVydGllcyI6eyJmb28iOnsiY29uc3QiOiJ0aGVuIn19LCJyZXF1aXJlZCI6WyJmb28iXX0sInRoZW4iOnsicHJvcGVydGllcyI6eyJiYXIiOnsidHlwZSI6InN0cmluZyJ9fSwicmVxdWlyZWQiOlsiYmFyIl19LCJlbHNlIjp7InByb3BlcnRpZXMiOnsiYmF6Ijp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbImJheiJdfSwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjpmYWxzZX0=");
+            var t = ParseJToken("eyJiYXoiOiJiYXoifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_if_then_else_14__when_if_is_false_and_has_unevaluated_properties_4()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwiaWYiOnsicHJvcGVydGllcyI6eyJmb28iOnsiY29uc3QiOiJ0aGVuIn19LCJyZXF1aXJlZCI6WyJmb28iXX0sInRoZW4iOnsicHJvcGVydGllcyI6eyJiYXIiOnsidHlwZSI6InN0cmluZyJ9fSwicmVxdWlyZWQiOlsiYmFyIl19LCJlbHNlIjp7InByb3BlcnRpZXMiOnsiYmF6Ijp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbImJheiJdfSwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjpmYWxzZX0=");
+            var t = ParseJToken("eyJmb28iOiJlbHNlIiwiYmF6IjoiYmF6In0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_dependentSchemas_15__with_no_unevaluated_properties()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwiZGVwZW5kZW50U2NoZW1hcyI6eyJmb28iOnsicHJvcGVydGllcyI6eyJiYXIiOnsiY29uc3QiOiJiYXIifX0sInJlcXVpcmVkIjpbImJhciJdfX0sInVuZXZhbHVhdGVkUHJvcGVydGllcyI6ZmFsc2V9");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_dependentSchemas_15__with_unevaluated_properties_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwiZGVwZW5kZW50U2NoZW1hcyI6eyJmb28iOnsicHJvcGVydGllcyI6eyJiYXIiOnsiY29uc3QiOiJiYXIifX0sInJlcXVpcmVkIjpbImJhciJdfX0sInVuZXZhbHVhdGVkUHJvcGVydGllcyI6ZmFsc2V9");
+            var t = ParseJToken("eyJiYXIiOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_boolean_schemas_16__with_no_unevaluated_properties()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwiYWxsT2YiOlt0cnVlXSwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjpmYWxzZX0=");
+            var t = ParseJToken("eyJmb28iOiJmb28ifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with_boolean_schemas_16__with_unevaluated_properties_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwiYWxsT2YiOlt0cnVlXSwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjpmYWxzZX0=");
+            var t = ParseJToken("eyJiYXIiOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with__ref_17__with_no_unevaluated_properties()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwiJHJlZiI6IiMvJGRlZnMvYmFyIiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjpmYWxzZSwiJGRlZnMiOnsiYmFyIjp7InByb3BlcnRpZXMiOnsiYmFyIjp7InR5cGUiOiJzdHJpbmcifX19fX0=");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_with__ref_17__with_unevaluated_properties_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwiJHJlZiI6IiMvJGRlZnMvYmFyIiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjpmYWxzZSwiJGRlZnMiOnsiYmFyIjp7InByb3BlcnRpZXMiOnsiYmFyIjp7InR5cGUiOiJzdHJpbmcifX19fX0=");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIiLCJiYXoiOiJiYXoifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__unevaluatedProperties_can_t_see_inside_cousins_18__always_fails()
+        {
+            var s = ParseSchema("eyJhbGxPZiI6W3sicHJvcGVydGllcyI6eyJmb28iOnRydWV9fSx7InVuZXZhbHVhdGVkUHJvcGVydGllcyI6ZmFsc2V9XX0=");
+            var t = ParseJToken("eyJmb28iOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__nested_unevaluatedProperties__outer_false__inner_true__properties_outside_19__with_no_nested_unevaluated_properties()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwiYWxsT2YiOlt7InVuZXZhbHVhdGVkUHJvcGVydGllcyI6dHJ1ZX1dLCJ1bmV2YWx1YXRlZFByb3BlcnRpZXMiOmZhbHNlfQ==");
+            var t = ParseJToken("eyJmb28iOiJmb28ifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__nested_unevaluatedProperties__outer_false__inner_true__properties_outside_19__with_nested_unevaluated_properties_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwiYWxsT2YiOlt7InVuZXZhbHVhdGVkUHJvcGVydGllcyI6dHJ1ZX1dLCJ1bmV2YWx1YXRlZFByb3BlcnRpZXMiOmZhbHNlfQ==");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__nested_unevaluatedProperties__outer_false__inner_true__properties_inside_20__with_no_nested_unevaluated_properties()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwiYWxsT2YiOlt7InByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX0sInVuZXZhbHVhdGVkUHJvcGVydGllcyI6dHJ1ZX1dLCJ1bmV2YWx1YXRlZFByb3BlcnRpZXMiOmZhbHNlfQ==");
+            var t = ParseJToken("eyJmb28iOiJmb28ifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__nested_unevaluatedProperties__outer_false__inner_true__properties_inside_20__with_nested_unevaluated_properties_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwiYWxsT2YiOlt7InByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX0sInVuZXZhbHVhdGVkUHJvcGVydGllcyI6dHJ1ZX1dLCJ1bmV2YWx1YXRlZFByb3BlcnRpZXMiOmZhbHNlfQ==");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__nested_unevaluatedProperties__outer_true__inner_false__properties_outside_21__with_no_nested_unevaluated_properties()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwiYWxsT2YiOlt7InVuZXZhbHVhdGVkUHJvcGVydGllcyI6ZmFsc2V9XSwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjp0cnVlfQ==");
+            var t = ParseJToken("eyJmb28iOiJmb28ifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__nested_unevaluatedProperties__outer_true__inner_false__properties_outside_21__with_nested_unevaluated_properties_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6InN0cmluZyJ9fSwiYWxsT2YiOlt7InVuZXZhbHVhdGVkUHJvcGVydGllcyI6ZmFsc2V9XSwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjp0cnVlfQ==");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__nested_unevaluatedProperties__outer_true__inner_false__properties_inside_22__with_no_nested_unevaluated_properties()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwiYWxsT2YiOlt7InByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX0sInVuZXZhbHVhdGVkUHJvcGVydGllcyI6ZmFsc2V9XSwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjp0cnVlfQ==");
+            var t = ParseJToken("eyJmb28iOiJmb28ifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__nested_unevaluatedProperties__outer_true__inner_false__properties_inside_22__with_nested_unevaluated_properties_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwiYWxsT2YiOlt7InByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX0sInVuZXZhbHVhdGVkUHJvcGVydGllcyI6ZmFsc2V9XSwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjp0cnVlfQ==");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__cousin_unevaluatedProperties__true_and_false__true_with_properties_23__with_no_nested_unevaluated_properties()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwiYWxsT2YiOlt7InByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX0sInVuZXZhbHVhdGVkUHJvcGVydGllcyI6dHJ1ZX0seyJ1bmV2YWx1YXRlZFByb3BlcnRpZXMiOmZhbHNlfV19");
+            var t = ParseJToken("eyJmb28iOiJmb28ifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__cousin_unevaluatedProperties__true_and_false__true_with_properties_23__with_nested_unevaluated_properties_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwiYWxsT2YiOlt7InByb3BlcnRpZXMiOnsiZm9vIjp7InR5cGUiOiJzdHJpbmcifX0sInVuZXZhbHVhdGVkUHJvcGVydGllcyI6dHJ1ZX0seyJ1bmV2YWx1YXRlZFByb3BlcnRpZXMiOmZhbHNlfV19");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__cousin_unevaluatedProperties__true_and_false__false_with_properties_24__with_no_nested_unevaluated_properties()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwiYWxsT2YiOlt7InVuZXZhbHVhdGVkUHJvcGVydGllcyI6dHJ1ZX0seyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoic3RyaW5nIn19LCJ1bmV2YWx1YXRlZFByb3BlcnRpZXMiOmZhbHNlfV19");
+            var t = ParseJToken("eyJmb28iOiJmb28ifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__cousin_unevaluatedProperties__true_and_false__false_with_properties_24__with_nested_unevaluated_properties_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwiYWxsT2YiOlt7InVuZXZhbHVhdGVkUHJvcGVydGllcyI6dHJ1ZX0seyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ0eXBlIjoic3RyaW5nIn19LCJ1bmV2YWx1YXRlZFByb3BlcnRpZXMiOmZhbHNlfV19");
+            var t = ParseJToken("eyJmb28iOiJmb28iLCJiYXIiOiJiYXIifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__property_is_evaluated_in_an_uncle_schema_to_unevaluatedProperties_25__no_extra_properties()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6Im9iamVjdCIsInByb3BlcnRpZXMiOnsiYmFyIjp7InR5cGUiOiJzdHJpbmcifX0sInVuZXZhbHVhdGVkUHJvcGVydGllcyI6ZmFsc2V9fSwiYW55T2YiOlt7InByb3BlcnRpZXMiOnsiZm9vIjp7InByb3BlcnRpZXMiOnsiZmF6Ijp7InR5cGUiOiJzdHJpbmcifX19fX1dfQ==");
+            var t = ParseJToken("eyJmb28iOnsiYmFyIjoidGVzdCJ9fQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__property_is_evaluated_in_an_uncle_schema_to_unevaluatedProperties_25__uncle_keyword_evaluation_is_not_significant_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJmb28iOnsidHlwZSI6Im9iamVjdCIsInByb3BlcnRpZXMiOnsiYmFyIjp7InR5cGUiOiJzdHJpbmcifX0sInVuZXZhbHVhdGVkUHJvcGVydGllcyI6ZmFsc2V9fSwiYW55T2YiOlt7InByb3BlcnRpZXMiOnsiZm9vIjp7InByb3BlcnRpZXMiOnsiZmF6Ijp7InR5cGUiOiJzdHJpbmcifX19fX1dfQ==");
+            var t = ParseJToken("eyJmb28iOnsiYmFyIjoidGVzdCIsImZheiI6InRlc3QifX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__in_place_applicator_siblings__allOf_has_unevaluated_26__base_case__both_properties_present()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwiYWxsT2YiOlt7InByb3BlcnRpZXMiOnsiZm9vIjp0cnVlfSwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjpmYWxzZX1dLCJhbnlPZiI6W3sicHJvcGVydGllcyI6eyJiYXIiOnRydWV9fV19");
+            var t = ParseJToken("eyJmb28iOjEsImJhciI6MX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__in_place_applicator_siblings__allOf_has_unevaluated_26__in_place_applicator_siblings__bar_is_missing_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwiYWxsT2YiOlt7InByb3BlcnRpZXMiOnsiZm9vIjp0cnVlfSwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjpmYWxzZX1dLCJhbnlPZiI6W3sicHJvcGVydGllcyI6eyJiYXIiOnRydWV9fV19");
+            var t = ParseJToken("eyJmb28iOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__in_place_applicator_siblings__allOf_has_unevaluated_26__in_place_applicator_siblings__foo_is_missing_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwiYWxsT2YiOlt7InByb3BlcnRpZXMiOnsiZm9vIjp0cnVlfSwidW5ldmFsdWF0ZWRQcm9wZXJ0aWVzIjpmYWxzZX1dLCJhbnlPZiI6W3sicHJvcGVydGllcyI6eyJiYXIiOnRydWV9fV19");
+            var t = ParseJToken("eyJiYXIiOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__in_place_applicator_siblings__anyOf_has_unevaluated_27__base_case__both_properties_present()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwiYWxsT2YiOlt7InByb3BlcnRpZXMiOnsiZm9vIjp0cnVlfX1dLCJhbnlPZiI6W3sicHJvcGVydGllcyI6eyJiYXIiOnRydWV9LCJ1bmV2YWx1YXRlZFByb3BlcnRpZXMiOmZhbHNlfV19");
+            var t = ParseJToken("eyJmb28iOjEsImJhciI6MX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__in_place_applicator_siblings__anyOf_has_unevaluated_27__in_place_applicator_siblings__bar_is_missing_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwiYWxsT2YiOlt7InByb3BlcnRpZXMiOnsiZm9vIjp0cnVlfX1dLCJhbnlPZiI6W3sicHJvcGVydGllcyI6eyJiYXIiOnRydWV9LCJ1bmV2YWx1YXRlZFByb3BlcnRpZXMiOmZhbHNlfV19");
+            var t = ParseJToken("eyJmb28iOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unevaluatedProperties")]
+        public void Test_draft2019_09__unevaluatedProperties__in_place_applicator_siblings__anyOf_has_unevaluated_27__in_place_applicator_siblings__foo_is_missing_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoib2JqZWN0IiwiYWxsT2YiOlt7InByb3BlcnRpZXMiOnsiZm9vIjp0cnVlfX1dLCJhbnlPZiI6W3sicHJvcGVydGllcyI6eyJiYXIiOnRydWV9LCJ1bmV2YWx1YXRlZFByb3BlcnRpZXMiOmZhbHNlfV19");
+            var t = ParseJToken("eyJiYXIiOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_validation__unique_array_of_integers_is_valid()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("WzEsMl0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_validation__non_unique_array_of_integers_is_invalid_2()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("WzEsMV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_validation__numbers_are_unique_if_mathematically_unequal_3()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("WzEuMCwxLjAsMV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_validation__false_is_not_equal_to_zero_4()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("WzAsZmFsc2Vd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_validation__true_is_not_equal_to_one_5()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("WzEsdHJ1ZV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_validation__unique_array_of_objects_is_valid_6()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W3siZm9vIjoiYmFyIn0seyJmb28iOiJiYXoifV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_validation__non_unique_array_of_objects_is_invalid_7()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W3siZm9vIjoiYmFyIn0seyJmb28iOiJiYXIifV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_validation__unique_array_of_nested_objects_is_valid_8()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W3siZm9vIjp7ImJhciI6eyJiYXoiOnRydWV9fX0seyJmb28iOnsiYmFyIjp7ImJheiI6ZmFsc2V9fX1d");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_validation__non_unique_array_of_nested_objects_is_invalid_9()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W3siZm9vIjp7ImJhciI6eyJiYXoiOnRydWV9fX0seyJmb28iOnsiYmFyIjp7ImJheiI6dHJ1ZX19fV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_validation__unique_array_of_arrays_is_valid_10()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W1siZm9vIl0sWyJiYXIiXV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_validation__non_unique_array_of_arrays_is_invalid_11()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W1siZm9vIl0sWyJmb28iXV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_validation__1_and_true_are_unique_12()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("WzEsdHJ1ZV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_validation__0_and_false_are_unique_13()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("WzAsZmFsc2Vd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_validation___1__and__true__are_unique_14()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W1sxXSxbdHJ1ZV1d");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_validation___0__and__false__are_unique_15()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W1swXSxbZmFsc2VdXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_validation__nested__1__and__true__are_unique_16()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W1tbMV0sImZvbyJdLFtbdHJ1ZV0sImZvbyJdXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_validation__nested__0__and__false__are_unique_17()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W1tbMF0sImZvbyJdLFtbZmFsc2VdLCJmb28iXV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_validation__unique_heterogeneous_types_are_valid_18()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W3t9LFsxXSx0cnVlLG51bGwsMSwie30iXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_validation__non_unique_heterogeneous_types_are_invalid_19()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W3t9LFsxXSx0cnVlLG51bGwse30sMV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_validation__different_objects_are_unique_20()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W3siYSI6MSwiYiI6Mn0seyJhIjoyLCJiIjoxfV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_validation__objects_are_non_unique_despite_key_order_21()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W3siYSI6MSwiYiI6Mn0seyJiIjoyLCJhIjoxfV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_validation____a___false__and___a___0__are_unique_22()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W3siYSI6ZmFsc2V9LHsiYSI6MH1d");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_validation____a___true__and___a___1__are_unique_23()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W3siYSI6dHJ1ZX0seyJhIjoxfV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_with_an_array_of_items_2___false__true__from_items_array_is_valid()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W2ZhbHNlLHRydWVd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_with_an_array_of_items_2___true__false__from_items_array_is_valid_2()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W3RydWUsZmFsc2Vd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_with_an_array_of_items_2___false__false__from_items_array_is_not_valid_3()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W2ZhbHNlLGZhbHNlXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_with_an_array_of_items_2___true__true__from_items_array_is_not_valid_4()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W3RydWUsdHJ1ZV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_with_an_array_of_items_2__unique_array_extended_from__false__true__is_valid_5()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W2ZhbHNlLHRydWUsImZvbyIsImJhciJd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_with_an_array_of_items_2__unique_array_extended_from__true__false__is_valid_6()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W3RydWUsZmFsc2UsImZvbyIsImJhciJd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_with_an_array_of_items_2__non_unique_array_extended_from__false__true__is_not_valid_7()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W2ZhbHNlLHRydWUsImZvbyIsImZvbyJd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_with_an_array_of_items_2__non_unique_array_extended_from__true__false__is_not_valid_8()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6dHJ1ZX0=");
+            var t = ParseJToken("W3RydWUsZmFsc2UsImZvbyIsImZvbyJd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_with_an_array_of_items_and_additionalItems_false_3___false__true__from_items_array_is_valid()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6dHJ1ZSwiYWRkaXRpb25hbEl0ZW1zIjpmYWxzZX0=");
+            var t = ParseJToken("W2ZhbHNlLHRydWVd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_with_an_array_of_items_and_additionalItems_false_3___true__false__from_items_array_is_valid_2()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6dHJ1ZSwiYWRkaXRpb25hbEl0ZW1zIjpmYWxzZX0=");
+            var t = ParseJToken("W3RydWUsZmFsc2Vd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_with_an_array_of_items_and_additionalItems_false_3___false__false__from_items_array_is_not_valid_3()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6dHJ1ZSwiYWRkaXRpb25hbEl0ZW1zIjpmYWxzZX0=");
+            var t = ParseJToken("W2ZhbHNlLGZhbHNlXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_with_an_array_of_items_and_additionalItems_false_3___true__true__from_items_array_is_not_valid_4()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6dHJ1ZSwiYWRkaXRpb25hbEl0ZW1zIjpmYWxzZX0=");
+            var t = ParseJToken("W3RydWUsdHJ1ZV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_with_an_array_of_items_and_additionalItems_false_3__extra_items_are_invalid_even_if_unique_5()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6dHJ1ZSwiYWRkaXRpb25hbEl0ZW1zIjpmYWxzZX0=");
+            var t = ParseJToken("W2ZhbHNlLHRydWUsbnVsbF0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_validation_4__unique_array_of_integers_is_valid()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("WzEsMl0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_validation_4__non_unique_array_of_integers_is_valid_2()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("WzEsMV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_validation_4__numbers_are_unique_if_mathematically_unequal_3()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("WzEuMCwxLjAsMV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_validation_4__false_is_not_equal_to_zero_4()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("WzAsZmFsc2Vd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_validation_4__true_is_not_equal_to_one_5()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("WzEsdHJ1ZV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_validation_4__unique_array_of_objects_is_valid_6()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("W3siZm9vIjoiYmFyIn0seyJmb28iOiJiYXoifV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_validation_4__non_unique_array_of_objects_is_valid_7()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("W3siZm9vIjoiYmFyIn0seyJmb28iOiJiYXIifV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_validation_4__unique_array_of_nested_objects_is_valid_8()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("W3siZm9vIjp7ImJhciI6eyJiYXoiOnRydWV9fX0seyJmb28iOnsiYmFyIjp7ImJheiI6ZmFsc2V9fX1d");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_validation_4__non_unique_array_of_nested_objects_is_valid_9()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("W3siZm9vIjp7ImJhciI6eyJiYXoiOnRydWV9fX0seyJmb28iOnsiYmFyIjp7ImJheiI6dHJ1ZX19fV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_validation_4__unique_array_of_arrays_is_valid_10()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("W1siZm9vIl0sWyJiYXIiXV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_validation_4__non_unique_array_of_arrays_is_valid_11()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("W1siZm9vIl0sWyJmb28iXV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_validation_4__1_and_true_are_unique_12()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("WzEsdHJ1ZV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_validation_4__0_and_false_are_unique_13()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("WzAsZmFsc2Vd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_validation_4__unique_heterogeneous_types_are_valid_14()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("W3t9LFsxXSx0cnVlLG51bGwsMV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_validation_4__non_unique_heterogeneous_types_are_valid_15()
+        {
+            var s = ParseSchema("eyJ1bmlxdWVJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("W3t9LFsxXSx0cnVlLG51bGwse30sMV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_with_an_array_of_items_5___false__true__from_items_array_is_valid()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("W2ZhbHNlLHRydWVd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_with_an_array_of_items_5___true__false__from_items_array_is_valid_2()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("W3RydWUsZmFsc2Vd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_with_an_array_of_items_5___false__false__from_items_array_is_valid_3()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("W2ZhbHNlLGZhbHNlXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_with_an_array_of_items_5___true__true__from_items_array_is_valid_4()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("W3RydWUsdHJ1ZV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_with_an_array_of_items_5__unique_array_extended_from__false__true__is_valid_5()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("W2ZhbHNlLHRydWUsImZvbyIsImJhciJd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_with_an_array_of_items_5__unique_array_extended_from__true__false__is_valid_6()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("W3RydWUsZmFsc2UsImZvbyIsImJhciJd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_with_an_array_of_items_5__non_unique_array_extended_from__false__true__is_valid_7()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("W2ZhbHNlLHRydWUsImZvbyIsImZvbyJd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_with_an_array_of_items_5__non_unique_array_extended_from__true__false__is_valid_8()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("W3RydWUsZmFsc2UsImZvbyIsImZvbyJd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_with_an_array_of_items_and_additionalItems_false_6___false__true__from_items_array_is_valid()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6ZmFsc2UsImFkZGl0aW9uYWxJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("W2ZhbHNlLHRydWVd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_with_an_array_of_items_and_additionalItems_false_6___true__false__from_items_array_is_valid_2()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6ZmFsc2UsImFkZGl0aW9uYWxJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("W3RydWUsZmFsc2Vd");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_with_an_array_of_items_and_additionalItems_false_6___false__false__from_items_array_is_valid_3()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6ZmFsc2UsImFkZGl0aW9uYWxJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("W2ZhbHNlLGZhbHNlXQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_with_an_array_of_items_and_additionalItems_false_6___true__true__from_items_array_is_valid_4()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6ZmFsc2UsImFkZGl0aW9uYWxJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("W3RydWUsdHJ1ZV0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("uniqueItems")]
+        public void Test_draft2019_09__uniqueItems__uniqueItems_false_with_an_array_of_items_and_additionalItems_false_6__extra_items_are_invalid_even_if_unique_5()
+        {
+            var s = ParseSchema("eyJpdGVtcyI6W3sidHlwZSI6ImJvb2xlYW4ifSx7InR5cGUiOiJib29sZWFuIn1dLCJ1bmlxdWVJdGVtcyI6ZmFsc2UsImFkZGl0aW9uYWxJdGVtcyI6ZmFsc2V9");
+            var t = ParseJToken("W2ZhbHNlLHRydWUsbnVsbF0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unknownKeyword")]
+        public void Test_draft2019_09__unknownKeyword___id_inside_an_unknown_keyword_is_not_a_real_identifier__type_matches_second_anyOf__which_has_a_real_schema_in_it()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJpZF9pbl91bmtub3duMCI6eyJub3QiOnsiYXJyYXlfb2Zfc2NoZW1hcyI6W3siJGlkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6MTIzNC91bmtub3duS2V5d29yZC9teV9pZGVudGlmaWVyLmpzb24iLCJ0eXBlIjoibnVsbCJ9XX19LCJyZWFsX2lkX2luX3NjaGVtYSI6eyIkaWQiOiJodHRwczovL2xvY2FsaG9zdDoxMjM0L3Vua25vd25LZXl3b3JkL215X2lkZW50aWZpZXIuanNvbiIsInR5cGUiOiJzdHJpbmcifSwiaWRfaW5fdW5rbm93bjEiOnsibm90Ijp7Im9iamVjdF9vZl9zY2hlbWFzIjp7ImZvbyI6eyIkaWQiOiJodHRwczovL2xvY2FsaG9zdDoxMjM0L3Vua25vd25LZXl3b3JkL215X2lkZW50aWZpZXIuanNvbiIsInR5cGUiOiJpbnRlZ2VyIn19fX19LCJhbnlPZiI6W3siJHJlZiI6IiMvJGRlZnMvaWRfaW5fdW5rbm93bjAifSx7IiRyZWYiOiIjLyRkZWZzL2lkX2luX3Vua25vd24xIn0seyIkcmVmIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6MTIzNC91bmtub3duS2V5d29yZC9teV9pZGVudGlmaWVyLmpzb24ifV19");
+            var t = ParseJToken("ImEgc3RyaW5nIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unknownKeyword")]
+        public void Test_draft2019_09__unknownKeyword___id_inside_an_unknown_keyword_is_not_a_real_identifier__type_matches_non_schema_in_first_anyOf_2()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJpZF9pbl91bmtub3duMCI6eyJub3QiOnsiYXJyYXlfb2Zfc2NoZW1hcyI6W3siJGlkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6MTIzNC91bmtub3duS2V5d29yZC9teV9pZGVudGlmaWVyLmpzb24iLCJ0eXBlIjoibnVsbCJ9XX19LCJyZWFsX2lkX2luX3NjaGVtYSI6eyIkaWQiOiJodHRwczovL2xvY2FsaG9zdDoxMjM0L3Vua25vd25LZXl3b3JkL215X2lkZW50aWZpZXIuanNvbiIsInR5cGUiOiJzdHJpbmcifSwiaWRfaW5fdW5rbm93bjEiOnsibm90Ijp7Im9iamVjdF9vZl9zY2hlbWFzIjp7ImZvbyI6eyIkaWQiOiJodHRwczovL2xvY2FsaG9zdDoxMjM0L3Vua25vd25LZXl3b3JkL215X2lkZW50aWZpZXIuanNvbiIsInR5cGUiOiJpbnRlZ2VyIn19fX19LCJhbnlPZiI6W3siJHJlZiI6IiMvJGRlZnMvaWRfaW5fdW5rbm93bjAifSx7IiRyZWYiOiIjLyRkZWZzL2lkX2luX3Vua25vd24xIn0seyIkcmVmIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6MTIzNC91bmtub3duS2V5d29yZC9teV9pZGVudGlmaWVyLmpzb24ifV19");
+            var t = ParseJToken("bnVsbA==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09")]
+        [TestCategory("unknownKeyword")]
+        public void Test_draft2019_09__unknownKeyword___id_inside_an_unknown_keyword_is_not_a_real_identifier__type_matches_non_schema_in_third_anyOf_3()
+        {
+            var s = ParseSchema("eyIkZGVmcyI6eyJpZF9pbl91bmtub3duMCI6eyJub3QiOnsiYXJyYXlfb2Zfc2NoZW1hcyI6W3siJGlkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6MTIzNC91bmtub3duS2V5d29yZC9teV9pZGVudGlmaWVyLmpzb24iLCJ0eXBlIjoibnVsbCJ9XX19LCJyZWFsX2lkX2luX3NjaGVtYSI6eyIkaWQiOiJodHRwczovL2xvY2FsaG9zdDoxMjM0L3Vua25vd25LZXl3b3JkL215X2lkZW50aWZpZXIuanNvbiIsInR5cGUiOiJzdHJpbmcifSwiaWRfaW5fdW5rbm93bjEiOnsibm90Ijp7Im9iamVjdF9vZl9zY2hlbWFzIjp7ImZvbyI6eyIkaWQiOiJodHRwczovL2xvY2FsaG9zdDoxMjM0L3Vua25vd25LZXl3b3JkL215X2lkZW50aWZpZXIuanNvbiIsInR5cGUiOiJpbnRlZ2VyIn19fX19LCJhbnlPZiI6W3siJHJlZiI6IiMvJGRlZnMvaWRfaW5fdW5rbm93bjAifSx7IiRyZWYiOiIjLyRkZWZzL2lkX2luX3Vua25vd24xIn0seyIkcmVmIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6MTIzNC91bmtub3duS2V5d29yZC9teV9pZGVudGlmaWVyLmpzb24ifV19");
+            var t = ParseJToken("MQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("bignum")]
+        public void Test_draft2019_09_optional__bignum__integer__a_bignum_is_an_integer()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiaW50ZWdlciJ9");
+            var t = ParseJToken("MTIzNDU2Nzg5MTAxMTEyMTMxNDE1MTYxNzE4MTkyMDIxMjIyMzI0MjUyNjI3MjgyOTMwMzE=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("bignum")]
+        public void Test_draft2019_09_optional__bignum__number_2__a_bignum_is_a_number()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoibnVtYmVyIn0=");
+            var t = ParseJToken("OTgyNDkyODM3NDkyMzQ5MjM0OTgyOTMxNzE4MjM5NDg3MjkzNDg3MTAyOTgzMDE5MjgzMzE=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("bignum")]
+        public void Test_draft2019_09_optional__bignum__integer_3__a_negative_bignum_is_an_integer()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiaW50ZWdlciJ9");
+            var t = ParseJToken("LTEyMzQ1Njc4OTEwMTExMjEzMTQxNTE2MTcxODE5MjAyMTIyMjMyNDI1MjYyNzI4MjkzMDMx");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("bignum")]
+        public void Test_draft2019_09_optional__bignum__number_4__a_negative_bignum_is_a_number()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoibnVtYmVyIn0=");
+            var t = ParseJToken("LTk4MjQ5MjgzNzQ5MjM0OTIzNDk4MjkzMTcxODIzOTQ4NzI5MzQ4NzEwMjk4MzAxOTI4MzMx");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("bignum")]
+        public void Test_draft2019_09_optional__bignum__string_5__a_bignum_is_not_a_string()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIn0=");
+            var t = ParseJToken("OTgyNDkyODM3NDkyMzQ5MjM0OTgyOTMxNzE4MjM5NDg3MjkzNDg3MTAyOTgzMDE5MjgzMzE=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("bignum")]
+        public void Test_draft2019_09_optional__bignum__integer_comparison_6__comparison_works_for_high_numbers()
+        {
+            var s = ParseSchema("eyJtYXhpbXVtIjoxODQ0Njc0NDA3MzcwOTU1MTYxNX0=");
+            var t = ParseJToken("MTg0NDY3NDQwNzM3MDk1NTE2MDA=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("bignum")]
+        public void Test_draft2019_09_optional__bignum__float_comparison_with_high_precision_7__comparison_works_for_high_numbers()
+        {
+            var s = ParseSchema("eyJleGNsdXNpdmVNYXhpbXVtIjo5LjcyNzgzNzk4MTg3OTg3MTJFKzI2fQ==");
+            var t = ParseJToken("OS43Mjc4Mzc5ODE4Nzk4NzEyRSsyNg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("bignum")]
+        public void Test_draft2019_09_optional__bignum__integer_comparison_8__comparison_works_for_very_negative_numbers()
+        {
+            var s = ParseSchema("eyJtaW5pbXVtIjotMTg0NDY3NDQwNzM3MDk1NTE2MTV9");
+            var t = ParseJToken("LTE4NDQ2NzQ0MDczNzA5NTUxNjAw");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("bignum")]
+        public void Test_draft2019_09_optional__bignum__float_comparison_with_high_precision_on_negative_numbers_9__comparison_works_for_very_negative_numbers()
+        {
+            var s = ParseSchema("eyJleGNsdXNpdmVNaW5pbXVtIjotOS43Mjc4Mzc5ODE4Nzk4NzEyRSsyNn0=");
+            var t = ParseJToken("LTkuNzI3ODM3OTgxODc5ODcxMkUrMjY=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262_regex___does_not_match_trailing_newline__matches_in_Python__but_should_not_in_jsonschema()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5hYmMkIn0=");
+            var t = ParseJToken("ImFiY1xuIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262_regex___does_not_match_trailing_newline__should_match_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5hYmMkIn0=");
+            var t = ParseJToken("ImFiYyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262_regex_converts__t_to_horizontal_tab_2__does_not_match()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXHQkIn0=");
+            var t = ParseJToken("IlxcdCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262_regex_converts__t_to_horizontal_tab_2__matches_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXHQkIn0=");
+            var t = ParseJToken("Ilx0Ig==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262_regex_escapes_control_codes_with__c_and_upper_letter_3__does_not_match()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXGNDJCJ9");
+            var t = ParseJToken("IlxcY0Mi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262_regex_escapes_control_codes_with__c_and_upper_letter_3__matches_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXGNDJCJ9");
+            var t = ParseJToken("Ilx1MDAwMyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262_regex_escapes_control_codes_with__c_and_lower_letter_4__does_not_match()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXGNjJCJ9");
+            var t = ParseJToken("IlxcY2Mi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262_regex_escapes_control_codes_with__c_and_lower_letter_4__matches_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXGNjJCJ9");
+            var t = ParseJToken("Ilx1MDAwMyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__d_matches_ascii_digits_only_5__ASCII_zero_matches()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXGQkIn0=");
+            var t = ParseJToken("IjAi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__d_matches_ascii_digits_only_5__NKO_DIGIT_ZERO_does_not_match__unlike_e_g__Python__2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXGQkIn0=");
+            var t = ParseJToken("It+AIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__d_matches_ascii_digits_only_5__NKO_DIGIT_ZERO__as__u_escape__does_not_match_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXGQkIn0=");
+            var t = ParseJToken("It+AIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__D_matches_everything_but_ascii_digits_6__ASCII_zero_does_not_match()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXEQkIn0=");
+            var t = ParseJToken("IjAi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__D_matches_everything_but_ascii_digits_6__NKO_DIGIT_ZERO_matches__unlike_e_g__Python__2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXEQkIn0=");
+            var t = ParseJToken("It+AIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__D_matches_everything_but_ascii_digits_6__NKO_DIGIT_ZERO__as__u_escape__matches_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXEQkIn0=");
+            var t = ParseJToken("It+AIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__w_matches_ascii_letters_only_7__ASCII__a__matches()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXHckIn0=");
+            var t = ParseJToken("ImEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__w_matches_ascii_letters_only_7__latin_1_e_acute_does_not_match__unlike_e_g__Python__2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXHckIn0=");
+            var t = ParseJToken("IsOpIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__W_matches_everything_but_ascii_letters_8__ASCII__a__does_not_match()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXFckIn0=");
+            var t = ParseJToken("ImEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__W_matches_everything_but_ascii_letters_8__latin_1_e_acute_matches__unlike_e_g__Python__2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXFckIn0=");
+            var t = ParseJToken("IsOpIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__s_matches_whitespace_9__ASCII_space_matches()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXHMkIn0=");
+            var t = ParseJToken("IiAi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__s_matches_whitespace_9__Character_tabulation_matches_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXHMkIn0=");
+            var t = ParseJToken("Ilx0Ig==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__s_matches_whitespace_9__Line_tabulation_matches_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXHMkIn0=");
+            var t = ParseJToken("Ilx1MDAwYiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__s_matches_whitespace_9__Form_feed_matches_4()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXHMkIn0=");
+            var t = ParseJToken("IlxmIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__s_matches_whitespace_9__latin_1_non_breaking_space_matches_5()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXHMkIn0=");
+            var t = ParseJToken("IsKgIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__s_matches_whitespace_9__zero_width_whitespace_matches_6()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXHMkIn0=");
+            var t = ParseJToken("Iu+7vyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__s_matches_whitespace_9__line_feed_matches__line_terminator__7()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXHMkIn0=");
+            var t = ParseJToken("IlxuIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__s_matches_whitespace_9__paragraph_separator_matches__line_terminator__8()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXHMkIn0=");
+            var t = ParseJToken("Ilx1MjAyOSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__s_matches_whitespace_9__EM_SPACE_matches__Space_Separator__9()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXHMkIn0=");
+            var t = ParseJToken("IuKAgyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__s_matches_whitespace_9__Non_whitespace_control_does_not_match_10()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXHMkIn0=");
+            var t = ParseJToken("Ilx1MDAwMSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__s_matches_whitespace_9__Non_whitespace_does_not_match_11()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXHMkIn0=");
+            var t = ParseJToken("IuKAkyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__S_matches_everything_but_whitespace_10__ASCII_space_does_not_match()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXFMkIn0=");
+            var t = ParseJToken("IiAi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__S_matches_everything_but_whitespace_10__Character_tabulation_does_not_match_2()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXFMkIn0=");
+            var t = ParseJToken("Ilx0Ig==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__S_matches_everything_but_whitespace_10__Line_tabulation_does_not_match_3()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXFMkIn0=");
+            var t = ParseJToken("Ilx1MDAwYiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__S_matches_everything_but_whitespace_10__Form_feed_does_not_match_4()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXFMkIn0=");
+            var t = ParseJToken("IlxmIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__S_matches_everything_but_whitespace_10__latin_1_non_breaking_space_does_not_match_5()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXFMkIn0=");
+            var t = ParseJToken("IsKgIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__S_matches_everything_but_whitespace_10__zero_width_whitespace_does_not_match_6()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXFMkIn0=");
+            var t = ParseJToken("Iu+7vyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__S_matches_everything_but_whitespace_10__line_feed_does_not_match__line_terminator__7()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXFMkIn0=");
+            var t = ParseJToken("IlxuIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__S_matches_everything_but_whitespace_10__paragraph_separator_does_not_match__line_terminator__8()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXFMkIn0=");
+            var t = ParseJToken("Ilx1MjAyOSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__S_matches_everything_but_whitespace_10__EM_SPACE_does_not_match__Space_Separator__9()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXFMkIn0=");
+            var t = ParseJToken("IuKAgyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__S_matches_everything_but_whitespace_10__Non_whitespace_control_matches_10()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXFMkIn0=");
+            var t = ParseJToken("Ilx1MDAwMSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("ecmascript-regex")]
+        public void Test_draft2019_09_optional__ecmascript_regex__ECMA_262__S_matches_everything_but_whitespace_10__Non_whitespace_matches_11()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoic3RyaW5nIiwicGF0dGVybiI6Il5cXFMkIn0=");
+            var t = ParseJToken("IuKAkyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("float-overflow")]
+        public void Test_draft2019_09_optional__float_overflow__all_integers_are_multiples_of_0_5__if_overflow_is_handled__valid_if_optional_overflow_handling_is_implemented()
+        {
+            var s = ParseSchema("eyJ0eXBlIjoiaW50ZWdlciIsIm11bHRpcGxlT2YiOjAuNX0=");
+            var t = ParseJToken("MUUrMzA4");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("non-bmp-regex")]
+        public void Test_draft2019_09_optional__non_bmp_regex__Proper_UTF_16_surrogate_pair_handling__pattern__matches_empty()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuIjoiXvCfkLIqJCJ9");
+            var t = ParseJToken("IiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("non-bmp-regex")]
+        public void Test_draft2019_09_optional__non_bmp_regex__Proper_UTF_16_surrogate_pair_handling__pattern__matches_single_2()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuIjoiXvCfkLIqJCJ9");
+            var t = ParseJToken("IvCfkLIi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("non-bmp-regex")]
+        public void Test_draft2019_09_optional__non_bmp_regex__Proper_UTF_16_surrogate_pair_handling__pattern__matches_two_3()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuIjoiXvCfkLIqJCJ9");
+            var t = ParseJToken("IvCfkLLwn5CyIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("non-bmp-regex")]
+        public void Test_draft2019_09_optional__non_bmp_regex__Proper_UTF_16_surrogate_pair_handling__pattern__doesn_t_match_one_4()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuIjoiXvCfkLIqJCJ9");
+            var t = ParseJToken("IvCfkIki");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("non-bmp-regex")]
+        public void Test_draft2019_09_optional__non_bmp_regex__Proper_UTF_16_surrogate_pair_handling__pattern__doesn_t_match_two_5()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuIjoiXvCfkLIqJCJ9");
+            var t = ParseJToken("IvCfkInwn5CJIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("non-bmp-regex")]
+        public void Test_draft2019_09_optional__non_bmp_regex__Proper_UTF_16_surrogate_pair_handling__pattern__doesn_t_match_one_ASCII_6()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuIjoiXvCfkLIqJCJ9");
+            var t = ParseJToken("IkQi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("non-bmp-regex")]
+        public void Test_draft2019_09_optional__non_bmp_regex__Proper_UTF_16_surrogate_pair_handling__pattern__doesn_t_match_two_ASCII_7()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuIjoiXvCfkLIqJCJ9");
+            var t = ParseJToken("IkREIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("non-bmp-regex")]
+        public void Test_draft2019_09_optional__non_bmp_regex__Proper_UTF_16_surrogate_pair_handling__patternProperties_2__matches_empty()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJe8J+QsiokIjp7InR5cGUiOiJpbnRlZ2VyIn19fQ==");
+            var t = ParseJToken("eyIiOjF9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("non-bmp-regex")]
+        public void Test_draft2019_09_optional__non_bmp_regex__Proper_UTF_16_surrogate_pair_handling__patternProperties_2__matches_single_2()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJe8J+QsiokIjp7InR5cGUiOiJpbnRlZ2VyIn19fQ==");
+            var t = ParseJToken("eyLwn5CyIjoxfQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("non-bmp-regex")]
+        public void Test_draft2019_09_optional__non_bmp_regex__Proper_UTF_16_surrogate_pair_handling__patternProperties_2__matches_two_3()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJe8J+QsiokIjp7InR5cGUiOiJpbnRlZ2VyIn19fQ==");
+            var t = ParseJToken("eyLwn5Cy8J+QsiI6MX0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("non-bmp-regex")]
+        public void Test_draft2019_09_optional__non_bmp_regex__Proper_UTF_16_surrogate_pair_handling__patternProperties_2__doesn_t_match_one_4()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJe8J+QsiokIjp7InR5cGUiOiJpbnRlZ2VyIn19fQ==");
+            var t = ParseJToken("eyLwn5CyIjoiaGVsbG8ifQ==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("non-bmp-regex")]
+        public void Test_draft2019_09_optional__non_bmp_regex__Proper_UTF_16_surrogate_pair_handling__patternProperties_2__doesn_t_match_two_5()
+        {
+            var s = ParseSchema("eyJwYXR0ZXJuUHJvcGVydGllcyI6eyJe8J+QsiokIjp7InR5cGUiOiJpbnRlZ2VyIn19fQ==");
+            var t = ParseJToken("eyLwn5Cy8J+QsiI6ImhlbGxvIn0=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("refOfUnknownKeyword")]
+        public void Test_draft2019_09_optional__refOfUnknownKeyword__reference_of_a_root_arbitrary_keyword___match()
+        {
+            var s = ParseSchema("eyJ1bmtub3duLWtleXdvcmQiOnsidHlwZSI6ImludGVnZXIifSwicHJvcGVydGllcyI6eyJiYXIiOnsiJHJlZiI6IiMvdW5rbm93bi1rZXl3b3JkIn19fQ==");
+            var t = ParseJToken("eyJiYXIiOjN9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("refOfUnknownKeyword")]
+        public void Test_draft2019_09_optional__refOfUnknownKeyword__reference_of_a_root_arbitrary_keyword___mismatch_2()
+        {
+            var s = ParseSchema("eyJ1bmtub3duLWtleXdvcmQiOnsidHlwZSI6ImludGVnZXIifSwicHJvcGVydGllcyI6eyJiYXIiOnsiJHJlZiI6IiMvdW5rbm93bi1rZXl3b3JkIn19fQ==");
+            var t = ParseJToken("eyJiYXIiOnRydWV9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("refOfUnknownKeyword")]
+        public void Test_draft2019_09_optional__refOfUnknownKeyword__reference_of_an_arbitrary_keyword_of_a_sub_schema_2__match()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ1bmtub3duLWtleXdvcmQiOnsidHlwZSI6ImludGVnZXIifX0sImJhciI6eyIkcmVmIjoiIy9wcm9wZXJ0aWVzL2Zvby91bmtub3duLWtleXdvcmQifX19");
+            var t = ParseJToken("eyJiYXIiOjN9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional")]
+        [TestCategory("refOfUnknownKeyword")]
+        public void Test_draft2019_09_optional__refOfUnknownKeyword__reference_of_an_arbitrary_keyword_of_a_sub_schema_2__mismatch_2()
+        {
+            var s = ParseSchema("eyJwcm9wZXJ0aWVzIjp7ImZvbyI6eyJ1bmtub3duLWtleXdvcmQiOnsidHlwZSI6ImludGVnZXIifX0sImJhciI6eyIkcmVmIjoiIy9wcm9wZXJ0aWVzL2Zvby91bmtub3duLWtleXdvcmQifX19");
+            var t = ParseJToken("eyJiYXIiOnRydWV9");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("date-time")]
+        public void Test_draft2019_09_optional_format__date_time__validation_of_date_time_strings__a_valid_date_time_string()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlLXRpbWUifQ==");
+            var t = ParseJToken("IjE5NjMtMDYtMTlUMDg6MzA6MDYuMjgzMTg1WiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("date-time")]
+        public void Test_draft2019_09_optional_format__date_time__validation_of_date_time_strings__a_valid_date_time_string_without_second_fraction_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlLXRpbWUifQ==");
+            var t = ParseJToken("IjE5NjMtMDYtMTlUMDg6MzA6MDZaIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("date-time")]
+        public void Test_draft2019_09_optional_format__date_time__validation_of_date_time_strings__a_valid_date_time_string_with_plus_offset_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlLXRpbWUifQ==");
+            var t = ParseJToken("IjE5MzctMDEtMDFUMDU6NDA6MjcuODctMDY6MDAi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("date-time")]
+        public void Test_draft2019_09_optional_format__date_time__validation_of_date_time_strings__a_valid_date_time_string_with_minus_offset_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlLXRpbWUifQ==");
+            var t = ParseJToken("IjE5OTAtMTItMzFUMTc6NTk6NTAuMTIzLTA2OjAwIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("date-time")]
+        public void Test_draft2019_09_optional_format__date_time__validation_of_date_time_strings__a_invalid_day_in_date_time_string_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlLXRpbWUifQ==");
+            var t = ParseJToken("IjE5OTAtMDItMzFUMTU6NTk6NjAuMTIzLTA4OjAwIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("date-time")]
+        public void Test_draft2019_09_optional_format__date_time__validation_of_date_time_strings__an_invalid_offset_in_date_time_string_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlLXRpbWUifQ==");
+            var t = ParseJToken("IjE5OTAtMTItMzFUMTU6NTk6NjAtMjQ6MDAi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("date-time")]
+        public void Test_draft2019_09_optional_format__date_time__validation_of_date_time_strings__an_invalid_date_time_string_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlLXRpbWUifQ==");
+            var t = ParseJToken("IjA2LzE5LzE5NjMgMDg6MzA6MDYgUFNUIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("date-time")]
+        public void Test_draft2019_09_optional_format__date_time__validation_of_date_time_strings__case_insensitive_T_and_Z_8()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlLXRpbWUifQ==");
+            var t = ParseJToken("IjE5NjMtMDYtMTl0MDg6MzA6MDYuMjgzMTg1eiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("date-time")]
+        public void Test_draft2019_09_optional_format__date_time__validation_of_date_time_strings__only_RFC3339_not_all_of_ISO_8601_are_valid_9()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlLXRpbWUifQ==");
+            var t = ParseJToken("IjIwMTMtMzUwVDAxOjAxOjAxIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("date-time")]
+        public void Test_draft2019_09_optional_format__date_time__validation_of_date_time_strings__invalid_non_padded_month_dates_10()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlLXRpbWUifQ==");
+            var t = ParseJToken("IjE5NjMtNi0xOVQwODozMDowNi4yODMxODVaIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("date-time")]
+        public void Test_draft2019_09_optional_format__date_time__validation_of_date_time_strings__invalid_non_padded_day_dates_11()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlLXRpbWUifQ==");
+            var t = ParseJToken("IjE5NjMtMDYtMVQwODozMDowNi4yODMxODVaIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("date")]
+        public void Test_draft2019_09_optional_format__date__validation_of_date_strings__a_valid_date_string()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlIn0=");
+            var t = ParseJToken("IjE5NjMtMDYtMTki");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("date")]
+        public void Test_draft2019_09_optional_format__date__validation_of_date_strings__an_invalid_date_time_string_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlIn0=");
+            var t = ParseJToken("IjA2LzE5LzE5NjMi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("date")]
+        public void Test_draft2019_09_optional_format__date__validation_of_date_strings__only_RFC3339_not_all_of_ISO_8601_are_valid_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlIn0=");
+            var t = ParseJToken("IjIwMTMtMzUwIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("date")]
+        public void Test_draft2019_09_optional_format__date__validation_of_date_strings__invalidates_non_padded_month_dates_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlIn0=");
+            var t = ParseJToken("IjE5OTgtMS0yMCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("date")]
+        public void Test_draft2019_09_optional_format__date__validation_of_date_strings__invalidates_non_padded_day_dates_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkYXRlIn0=");
+            var t = ParseJToken("IjE5OTgtMDEtMSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("duration")]
+        public void Test_draft2019_09_optional_format__duration__validation_of_duration_strings__a_valid_duration_string()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkdXJhdGlvbiJ9");
+            var t = ParseJToken("IlA0RFQxMkgzME01UyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("duration")]
+        public void Test_draft2019_09_optional_format__duration__validation_of_duration_strings__an_invalid_duration_string_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkdXJhdGlvbiJ9");
+            var t = ParseJToken("IlBUMUQi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("duration")]
+        public void Test_draft2019_09_optional_format__duration__validation_of_duration_strings__no_elements_present_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkdXJhdGlvbiJ9");
+            var t = ParseJToken("IlAi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("duration")]
+        public void Test_draft2019_09_optional_format__duration__validation_of_duration_strings__no_time_elements_present_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkdXJhdGlvbiJ9");
+            var t = ParseJToken("IlAxWVQi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("duration")]
+        public void Test_draft2019_09_optional_format__duration__validation_of_duration_strings__no_date_or_time_elements_present_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkdXJhdGlvbiJ9");
+            var t = ParseJToken("IlBUIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("duration")]
+        public void Test_draft2019_09_optional_format__duration__validation_of_duration_strings__elements_out_of_order_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkdXJhdGlvbiJ9");
+            var t = ParseJToken("IlAyRDFZIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("duration")]
+        public void Test_draft2019_09_optional_format__duration__validation_of_duration_strings__missing_time_separator_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkdXJhdGlvbiJ9");
+            var t = ParseJToken("IlAxRDJIIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("duration")]
+        public void Test_draft2019_09_optional_format__duration__validation_of_duration_strings__time_element_in_the_date_position_8()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkdXJhdGlvbiJ9");
+            var t = ParseJToken("IlAyUyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("duration")]
+        public void Test_draft2019_09_optional_format__duration__validation_of_duration_strings__four_years_duration_9()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkdXJhdGlvbiJ9");
+            var t = ParseJToken("IlA0WSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("duration")]
+        public void Test_draft2019_09_optional_format__duration__validation_of_duration_strings__zero_time__in_seconds_10()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkdXJhdGlvbiJ9");
+            var t = ParseJToken("IlBUMFMi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("duration")]
+        public void Test_draft2019_09_optional_format__duration__validation_of_duration_strings__zero_time__in_days_11()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkdXJhdGlvbiJ9");
+            var t = ParseJToken("IlAwRCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("duration")]
+        public void Test_draft2019_09_optional_format__duration__validation_of_duration_strings__one_month_duration_12()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkdXJhdGlvbiJ9");
+            var t = ParseJToken("IlAxTSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("duration")]
+        public void Test_draft2019_09_optional_format__duration__validation_of_duration_strings__one_minute_duration_13()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkdXJhdGlvbiJ9");
+            var t = ParseJToken("IlBUMU0i");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("duration")]
+        public void Test_draft2019_09_optional_format__duration__validation_of_duration_strings__one_and_a_half_days__in_hours_14()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkdXJhdGlvbiJ9");
+            var t = ParseJToken("IlBUMzZIIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("duration")]
+        public void Test_draft2019_09_optional_format__duration__validation_of_duration_strings__one_and_a_half_days__in_days_and_hours_15()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkdXJhdGlvbiJ9");
+            var t = ParseJToken("IlAxRFQxMkgi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("duration")]
+        public void Test_draft2019_09_optional_format__duration__validation_of_duration_strings__two_weeks_16()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkdXJhdGlvbiJ9");
+            var t = ParseJToken("IlAyVyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("duration")]
+        public void Test_draft2019_09_optional_format__duration__validation_of_duration_strings__weeks_cannot_be_combined_with_other_units_17()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJkdXJhdGlvbiJ9");
+            var t = ParseJToken("IlAxWTJXIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("email")]
+        public void Test_draft2019_09_optional_format__email__validation_of_e_mail_addresses__a_valid_e_mail_address()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJlbWFpbCJ9");
+            var t = ParseJToken("ImpvZS5ibG9nZ3NAZXhhbXBsZS5jb20i");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("email")]
+        public void Test_draft2019_09_optional_format__email__validation_of_e_mail_addresses__an_invalid_e_mail_address_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJlbWFpbCJ9");
+            var t = ParseJToken("IjI5NjIi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("email")]
+        public void Test_draft2019_09_optional_format__email__validation_of_e_mail_addresses__tilde_in_local_part_is_valid_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJlbWFpbCJ9");
+            var t = ParseJToken("InRlfnN0QGV4YW1wbGUuY29tIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("email")]
+        public void Test_draft2019_09_optional_format__email__validation_of_e_mail_addresses__tilde_before_local_part_is_valid_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJlbWFpbCJ9");
+            var t = ParseJToken("In50ZXN0QGV4YW1wbGUuY29tIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("email")]
+        public void Test_draft2019_09_optional_format__email__validation_of_e_mail_addresses__tilde_after_local_part_is_valid_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJlbWFpbCJ9");
+            var t = ParseJToken("InRlc3R+QGV4YW1wbGUuY29tIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("email")]
+        public void Test_draft2019_09_optional_format__email__validation_of_e_mail_addresses__dot_before_local_part_is_not_valid_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJlbWFpbCJ9");
+            var t = ParseJToken("Ii50ZXN0QGV4YW1wbGUuY29tIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("email")]
+        public void Test_draft2019_09_optional_format__email__validation_of_e_mail_addresses__dot_after_local_part_is_not_valid_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJlbWFpbCJ9");
+            var t = ParseJToken("InRlc3QuQGV4YW1wbGUuY29tIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("email")]
+        public void Test_draft2019_09_optional_format__email__validation_of_e_mail_addresses__two_separated_dots_inside_local_part_are_valid_8()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJlbWFpbCJ9");
+            var t = ParseJToken("InRlLnMudEBleGFtcGxlLmNvbSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("email")]
+        public void Test_draft2019_09_optional_format__email__validation_of_e_mail_addresses__two_subsequent_dots_inside_local_part_are_not_valid_9()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJlbWFpbCJ9");
+            var t = ParseJToken("InRlLi5zdEBleGFtcGxlLmNvbSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("hostname")]
+        public void Test_draft2019_09_optional_format__hostname__validation_of_host_names__a_valid_host_name()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJob3N0bmFtZSJ9");
+            var t = ParseJToken("Ind3dy5leGFtcGxlLmNvbSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("hostname")]
+        public void Test_draft2019_09_optional_format__hostname__validation_of_host_names__a_valid_punycoded_IDN_hostname_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJob3N0bmFtZSJ9");
+            var t = ParseJToken("InhuLS00Z2J3ZGwueG4tLXdnYmgxYyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("hostname")]
+        public void Test_draft2019_09_optional_format__hostname__validation_of_host_names__a_host_name_starting_with_an_illegal_character_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJob3N0bmFtZSJ9");
+            var t = ParseJToken("Ii1hLWhvc3QtbmFtZS10aGF0LXN0YXJ0cy13aXRoLS0i");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("hostname")]
+        public void Test_draft2019_09_optional_format__hostname__validation_of_host_names__a_host_name_containing_illegal_characters_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJob3N0bmFtZSJ9");
+            var t = ParseJToken("Im5vdF9hX3ZhbGlkX2hvc3RfbmFtZSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("hostname")]
+        public void Test_draft2019_09_optional_format__hostname__validation_of_host_names__a_host_name_with_a_component_too_long_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJob3N0bmFtZSJ9");
+            var t = ParseJToken("ImEtdnZ2dnZ2dnZ2dnZ2dnZ2dmVlZWVlZWVlZWVlZWVlZWVycnJycnJycnJycnJycnJyeXl5eXl5eXl5eXl5eXl5eS1sb25nLWhvc3QtbmFtZS1jb21wb25lbnQi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("hostname")]
+        public void Test_draft2019_09_optional_format__hostname__validation_of_host_names__starts_with_hyphen_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJob3N0bmFtZSJ9");
+            var t = ParseJToken("Ii1ob3N0bmFtZSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("hostname")]
+        public void Test_draft2019_09_optional_format__hostname__validation_of_host_names__ends_with_hyphen_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJob3N0bmFtZSJ9");
+            var t = ParseJToken("Imhvc3RuYW1lLSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("hostname")]
+        public void Test_draft2019_09_optional_format__hostname__validation_of_host_names__starts_with_underscore_8()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJob3N0bmFtZSJ9");
+            var t = ParseJToken("Il9ob3N0bmFtZSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("hostname")]
+        public void Test_draft2019_09_optional_format__hostname__validation_of_host_names__ends_with_underscore_9()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJob3N0bmFtZSJ9");
+            var t = ParseJToken("Imhvc3RuYW1lXyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("hostname")]
+        public void Test_draft2019_09_optional_format__hostname__validation_of_host_names__contains_underscore_10()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJob3N0bmFtZSJ9");
+            var t = ParseJToken("Imhvc3RfbmFtZSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("hostname")]
+        public void Test_draft2019_09_optional_format__hostname__validation_of_host_names__maximum_label_length_11()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJob3N0bmFtZSJ9");
+            var t = ParseJToken("ImFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXphYmNkZWZnaGlqay5jb20i");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("hostname")]
+        public void Test_draft2019_09_optional_format__hostname__validation_of_host_names__exceeds_maximum_label_length_12()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJob3N0bmFtZSJ9");
+            var t = ParseJToken("ImFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXphYmNkZWZnaGlqa2wuY29tIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-email")]
+        public void Test_draft2019_09_optional_format__idn_email__validation_of_an_internationalized_e_mail_addresses__a_valid_idn_e_mail__example_example_test_in_Hangul_()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4tZW1haWwifQ==");
+            var t = ParseJToken("IuyLpOuhgEDsi6TroYAu7YWM7Iqk7Yq4Ig==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-email")]
+        public void Test_draft2019_09_optional_format__idn_email__validation_of_an_internationalized_e_mail_addresses__an_invalid_idn_e_mail_address_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4tZW1haWwifQ==");
+            var t = ParseJToken("IjI5NjIi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-email")]
+        public void Test_draft2019_09_optional_format__idn_email__validation_of_an_internationalized_e_mail_addresses__a_valid_e_mail_address_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4tZW1haWwifQ==");
+            var t = ParseJToken("ImpvZS5ibG9nZ3NAZXhhbXBsZS5jb20i");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-email")]
+        public void Test_draft2019_09_optional_format__idn_email__validation_of_an_internationalized_e_mail_addresses__an_invalid_e_mail_address_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4tZW1haWwifQ==");
+            var t = ParseJToken("IjI5NjIi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__a_valid_host_name__example_test_in_Hangul_()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("IuyLpOuhgC7thYzsiqTtirgi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__illegal_first_char_U_302E_Hangul_single_dot_tone_mark_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("IuOAruyLpOuhgC7thYzsiqTtirgi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__contains_illegal_char_U_302E_Hangul_single_dot_tone_mark_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("IuyLpOOAruuhgC7thYzsiqTtirgi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__a_host_name_with_a_component_too_long_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("IuyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOyLpOuhgOuhgO2FjOyKpO2KuOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgO2FjOyKpO2KuOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgO2FjOyKpO2KuOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgOuhgO2FjOyKpO2KuOuhgOuhgOyLpOuhgC7thYzsiqTtirgi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__invalid_label__correct_Punycode_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("Ii0+ICQxLjAwIDwtLSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__valid_Chinese_Punycode_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("InhuLS1paHF3Y3JiNGN2OGE4ZHFnMDU2cHFqeWUi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__invalid_Punycode_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("InhuLS1YIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__U_label_contains______in_the_3rd_and_4th_position_8()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("IlhOLS1hYS0tLW80N2pnNzhxIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__U_label_starts_with_a_dash_9()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("Ii1oZWxsbyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__U_label_ends_with_a_dash_10()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("ImhlbGxvLSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__U_label_starts_and_ends_with_a_dash_11()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("Ii1oZWxsby0i");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__Begins_with_a_Spacing_Combining_Mark_12()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("IuCkg2hlbGxvIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__Begins_with_a_Nonspacing_Mark_13()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("IsyAaGVsbG8i");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__Begins_with_an_Enclosing_Mark_14()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("ItKIaGVsbG8i");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__Exceptions_that_are_PVALID__left_to_right_chars_15()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("IsOfz4LgvIvjgIci");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__Exceptions_that_are_PVALID__right_to_left_chars_16()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("Itu9274i");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__Exceptions_that_are_DISALLOWED__right_to_left_chars_17()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("ItmA37oi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__Exceptions_that_are_DISALLOWED__left_to_right_chars_18()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("IuOAseOAsuOAs+OAtOOAteOAruOAr+OAuyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__MIDDLE_DOT_with_no_preceding__l__19()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("ImHCt2wi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__MIDDLE_DOT_with_nothing_preceding_20()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("IsK3bCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__MIDDLE_DOT_with_no_following__l__21()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("ImzCt2Ei");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__MIDDLE_DOT_with_nothing_following_22()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("ImzCtyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__MIDDLE_DOT_with_surrounding__l_s_23()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("ImzCt2wi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__Greek_KERAIA_not_followed_by_Greek_24()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("Is6xzbVTIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__Greek_KERAIA_not_followed_by_anything_25()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("Is6xzbUi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__Greek_KERAIA_followed_by_Greek_26()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("Is6xzbXOsiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__Hebrew_GERESH_not_preceded_by_Hebrew_27()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("IkHXs9eRIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__Hebrew_GERESH_not_preceded_by_anything_28()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("Itez15Ei");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__Hebrew_GERESH_preceded_by_Hebrew_29()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("IteQ17PXkSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__Hebrew_GERSHAYIM_not_preceded_by_Hebrew_30()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("IkHXtNeRIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__Hebrew_GERSHAYIM_not_preceded_by_anything_31()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("Ite015Ei");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__Hebrew_GERSHAYIM_preceded_by_Hebrew_32()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("IteQ17TXkSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__KATAKANA_MIDDLE_DOT_with_no_Hiragana__Katakana__or_Han_33()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("ImRlZuODu2FiYyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__KATAKANA_MIDDLE_DOT_with_no_other_characters_34()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("IuODuyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__KATAKANA_MIDDLE_DOT_with_Hiragana_35()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("IuODu+OBgSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__KATAKANA_MIDDLE_DOT_with_Katakana_36()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("IuODu+OCoSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__KATAKANA_MIDDLE_DOT_with_Han_37()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("IuODu+S4iCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__Arabic_Indic_digits_mixed_with_Extended_Arabic_Indic_digits_38()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("Itmg27Ai");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__Arabic_Indic_digits_not_mixed_with_Extended_Arabic_Indic_digits_39()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("Itio2aDYqCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__Extended_Arabic_Indic_digits_not_mixed_with_Arabic_Indic_digits_40()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("ItuwMCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__ZERO_WIDTH_JOINER_not_preceded_by_Virama_41()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("IuCkleKAjeCktyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__ZERO_WIDTH_JOINER_not_preceded_by_anything_42()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("IuKAjeCktyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__ZERO_WIDTH_JOINER_preceded_by_Virama_43()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("IuCkleCljeKAjeCktyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__ZERO_WIDTH_NON_JOINER_preceded_by_Virama_44()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("IuCkleCljeKAjOCktyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("idn-hostname")]
+        public void Test_draft2019_09_optional_format__idn_hostname__validation_of_internationalized_host_names__ZERO_WIDTH_NON_JOINER_not_preceded_by_Virama_but_matches_regexp_45()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpZG4taG9zdG5hbWUifQ==");
+            var t = ParseJToken("Itio2YrigIzYqNmKIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv4")]
+        public void Test_draft2019_09_optional_format__ipv4__validation_of_IP_addresses__a_valid_IP_address()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY0In0=");
+            var t = ParseJToken("IjE5Mi4xNjguMC4xIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv4")]
+        public void Test_draft2019_09_optional_format__ipv4__validation_of_IP_addresses__an_IP_address_with_too_many_components_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY0In0=");
+            var t = ParseJToken("IjEyNy4wLjAuMC4xIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv4")]
+        public void Test_draft2019_09_optional_format__ipv4__validation_of_IP_addresses__an_IP_address_with_out_of_range_values_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY0In0=");
+            var t = ParseJToken("IjI1Ni4yNTYuMjU2LjI1NiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv4")]
+        public void Test_draft2019_09_optional_format__ipv4__validation_of_IP_addresses__an_IP_address_without_4_components_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY0In0=");
+            var t = ParseJToken("IjEyNy4wIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv4")]
+        public void Test_draft2019_09_optional_format__ipv4__validation_of_IP_addresses__an_IP_address_as_an_integer_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY0In0=");
+            var t = ParseJToken("IjB4N2YwMDAwMDEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv4")]
+        public void Test_draft2019_09_optional_format__ipv4__validation_of_IP_addresses__an_IP_address_as_an_integer__decimal__6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY0In0=");
+            var t = ParseJToken("IjIxMzA3MDY0MzMi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv4")]
+        public void Test_draft2019_09_optional_format__ipv4__validation_of_IP_addresses__leading_zeroes_should_be_rejected__as_they_are_treated_as_octals_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY0In0=");
+            var t = ParseJToken("IjA4Ny4xMC4wLjEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv4")]
+        public void Test_draft2019_09_optional_format__ipv4__validation_of_IP_addresses__value_without_leading_zero_is_valid_8()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY0In0=");
+            var t = ParseJToken("Ijg3LjEwLjAuMSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__a_valid_IPv6_address()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("Ijo6MSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__an_IPv6_address_with_out_of_range_values_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("IjEyMzQ1Ojoi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__an_IPv6_address_with_too_many_components_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("IjE6MToxOjE6MToxOjE6MToxOjE6MToxOjE6MToxOjEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__an_IPv6_address_containing_illegal_characters_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("Ijo6bGFwdG9wIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__no_digits_is_valid_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("Ijo6Ig==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__leading_colons_is_valid_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("Ijo6NDI6ZmY6MSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__trailing_colons_is_valid_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("ImQ2Ojoi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__missing_leading_octet_is_invalid_8()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("IjoyOjM6NDo1OjY6Nzo4Ig==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__missing_trailing_octet_is_invalid_9()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("IjE6MjozOjQ6NTo2Ojc6Ig==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__missing_leading_octet_with_omitted_octets_later_10()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("IjoyOjM6NDo6OCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__two_sets_of_double_colons_is_invalid_11()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("IjE6OmQ2Ojo0MiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__mixed_format_with_the_ipv4_section_as_decimal_octets_12()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("IjE6OmQ2OjE5Mi4xNjguMC4xIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__mixed_format_with_double_colons_between_the_sections_13()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("IjE6Mjo6MTkyLjE2OC4wLjEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__mixed_format_with_ipv4_section_with_octet_out_of_range_14()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("IjE6OjI6MTkyLjE2OC4yNTYuMSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__mixed_format_with_ipv4_section_with_a_hex_octet_15()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("IjE6OjI6MTkyLjE2OC5mZi4xIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__mixed_format_with_leading_double_colons__ipv4_mapped_ipv6_address__16()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("Ijo6ZmZmZjoxOTIuMTY4LjAuMSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__triple_colons_is_invalid_17()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("IjE6MjozOjQ6NTo6Ojgi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__8_octets_18()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("IjE6MjozOjQ6NTo2Ojc6OCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__insufficient_octets_without_double_colons_19()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("IjE6MjozOjQ6NTo2Ojci");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__no_colons_is_invalid_20()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("IjEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__ipv4_is_not_ipv6_21()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("IjEyNy4wLjAuMSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__ipv4_segment_must_have_4_octets_22()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("IjE6MjozOjQ6MS4yLjMi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__leading_whitespace_is_invalid_23()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("IiAgOjoxIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__trailing_whitespace_is_invalid_24()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("Ijo6MSAgIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__netmask_is_not_a_part_of_ipv6_address_25()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("ImZlODA6Oi82NCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__zone_id_is_not_a_part_of_ipv6_address_26()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("ImZlODA6OmElZXRoMSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__a_long_valid_ipv6_27()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("IjEwMDA6MTAwMDoxMDAwOjEwMDA6MTAwMDoxMDAwOjI1NS4yNTUuMjU1LjI1NSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__a_long_invalid_ipv6__below_length_limit__first_28()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("IjEwMDoxMDA6MTAwOjEwMDoxMDA6MTAwOjI1NS4yNTUuMjU1LjI1NS4yNTUi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("ipv6")]
+        public void Test_draft2019_09_optional_format__ipv6__validation_of_IPv6_addresses__a_long_invalid_ipv6__below_length_limit__second_29()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcHY2In0=");
+            var t = ParseJToken("IjEwMDoxMDA6MTAwOjEwMDoxMDA6MTAwOjEwMDoyNTUuMjU1LjI1NS4yNTUi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("iri-reference")]
+        public void Test_draft2019_09_optional_format__iri_reference__validation_of_IRI_References__a_valid_IRI()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("Imh0dHA6Ly/GksO4w7guw5/DpXIvP+KIgsOpxZM9z4DDrngjz4DDrsO8eCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("iri-reference")]
+        public void Test_draft2019_09_optional_format__iri_reference__validation_of_IRI_References__a_valid_protocol_relative_IRI_Reference_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("Ii8vxpLDuMO4LsOfw6VyLz/iiILDqcWTPc+Aw654I8+Aw67DvHgi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("iri-reference")]
+        public void Test_draft2019_09_optional_format__iri_reference__validation_of_IRI_References__a_valid_relative_IRI_Reference_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("Ii/Dos+Az4Ai");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("iri-reference")]
+        public void Test_draft2019_09_optional_format__iri_reference__validation_of_IRI_References__an_invalid_IRI_Reference_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("IlxcXFxXSU5ET1dTXFxmaWzDq8Ofw6Vyw6ki");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("iri-reference")]
+        public void Test_draft2019_09_optional_format__iri_reference__validation_of_IRI_References__a_valid_IRI_Reference_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("IsOiz4DPgCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("iri-reference")]
+        public void Test_draft2019_09_optional_format__iri_reference__validation_of_IRI_References__a_valid_IRI_fragment_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("IiPGknLDpGdtw6pudCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("iri-reference")]
+        public void Test_draft2019_09_optional_format__iri_reference__validation_of_IRI_References__an_invalid_IRI_fragment_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("IiPGknLDpGdcXG3Dqm50Ig==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("iri")]
+        public void Test_draft2019_09_optional_format__iri__validation_of_IRIs__a_valid_IRI_with_anchor_tag()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmkifQ==");
+            var t = ParseJToken("Imh0dHA6Ly/GksO4w7guw5/DpXIvP+KIgsOpxZM9z4DDrngjz4DDrsO8eCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("iri")]
+        public void Test_draft2019_09_optional_format__iri__validation_of_IRIs__a_valid_IRI_with_anchor_tag_and_parentheses_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmkifQ==");
+            var t = ParseJToken("Imh0dHA6Ly/GksO4w7guY29tL2JsYWhfKHfDrmvDr3DDqWRpw6UpX2JsYWgjw59pdMOpLTEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("iri")]
+        public void Test_draft2019_09_optional_format__iri__validation_of_IRIs__a_valid_IRI_with_URL_encoded_stuff_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmkifQ==");
+            var t = ParseJToken("Imh0dHA6Ly/GksO4w7guw5/DpXIvP3E9VGVzdCUyMFVSTC1lbmNvZGVkJTIwc3R1ZmYi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("iri")]
+        public void Test_draft2019_09_optional_format__iri__validation_of_IRIs__a_valid_IRI_with_many_special_characters_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmkifQ==");
+            var t = ParseJToken("Imh0dHA6Ly8tLn5fISQmJygpKissOz06JTQwOjgwJTJmOjo6Ojo6QGV4YW1wbGUuY29tIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("iri")]
+        public void Test_draft2019_09_optional_format__iri__validation_of_IRIs__a_valid_IRI_based_on_IPv6_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmkifQ==");
+            var t = ParseJToken("Imh0dHA6Ly9bMjAwMTowZGI4Ojg1YTM6MDAwMDowMDAwOjhhMmU6MDM3MDo3MzM0XSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("iri")]
+        public void Test_draft2019_09_optional_format__iri__validation_of_IRIs__an_invalid_IRI_based_on_IPv6_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmkifQ==");
+            var t = ParseJToken("Imh0dHA6Ly8yMDAxOjBkYjg6ODVhMzowMDAwOjAwMDA6OGEyZTowMzcwOjczMzQi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("iri")]
+        public void Test_draft2019_09_optional_format__iri__validation_of_IRIs__an_invalid_relative_IRI_Reference_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmkifQ==");
+            var t = ParseJToken("Ii9hYmMi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("iri")]
+        public void Test_draft2019_09_optional_format__iri__validation_of_IRIs__an_invalid_IRI_8()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmkifQ==");
+            var t = ParseJToken("IlxcXFxXSU5ET1dTXFxmaWzDq8Ofw6Vyw6ki");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("iri")]
+        public void Test_draft2019_09_optional_format__iri__validation_of_IRIs__an_invalid_IRI_though_valid_IRI_reference_9()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJpcmkifQ==");
+            var t = ParseJToken("IsOiz4DPgCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___a_valid_JSON_pointer()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9mb28vYmFyfjAvYmF6fjEvJWEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___not_a_valid_JSON_pointer____not_escaped__2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9mb28vYmFyfiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___valid_JSON_pointer_with_empty_segment_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9mb28vL2JhciI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___valid_JSON_pointer_with_the_last_empty_segment_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9mb28vYmFyLyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___valid_JSON_pointer_as_stated_in_RFC_6901__1_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("IiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___valid_JSON_pointer_as_stated_in_RFC_6901__2_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9mb28i");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___valid_JSON_pointer_as_stated_in_RFC_6901__3_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9mb28vMCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___valid_JSON_pointer_as_stated_in_RFC_6901__4_8()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii8i");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___valid_JSON_pointer_as_stated_in_RFC_6901__5_9()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9hfjFiIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___valid_JSON_pointer_as_stated_in_RFC_6901__6_10()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9jJWQi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___valid_JSON_pointer_as_stated_in_RFC_6901__7_11()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9lXmYi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___valid_JSON_pointer_as_stated_in_RFC_6901__8_12()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9nfGgi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___valid_JSON_pointer_as_stated_in_RFC_6901__9_13()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9pXFxqIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___valid_JSON_pointer_as_stated_in_RFC_6901__10_14()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9rXCJsIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___valid_JSON_pointer_as_stated_in_RFC_6901__11_15()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii8gIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___valid_JSON_pointer_as_stated_in_RFC_6901__12_16()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9tfjBuIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___valid_JSON_pointer_used_adding_to_the_last_array_position_17()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9mb28vLSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___valid_JSON_pointer____used_as_object_member_name__18()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9mb28vLS9iYXIi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___valid_JSON_pointer__multiple_escaped_characters__19()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9+MX4wfjB+MX4xIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___valid_JSON_pointer__escaped_with_fraction_part___1_20()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9+MS4xIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___valid_JSON_pointer__escaped_with_fraction_part___2_21()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9+MC4xIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___not_a_valid_JSON_pointer__URI_Fragment_Identifier___1_22()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("IiMi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___not_a_valid_JSON_pointer__URI_Fragment_Identifier___2_23()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("IiMvIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___not_a_valid_JSON_pointer__URI_Fragment_Identifier___3_24()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("IiNhIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___not_a_valid_JSON_pointer__some_escaped__but_not_all___1_25()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9+MH4i");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___not_a_valid_JSON_pointer__some_escaped__but_not_all___2_26()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9+MC9+Ig==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___not_a_valid_JSON_pointer__wrong_escape_character___1_27()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9+MiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___not_a_valid_JSON_pointer__wrong_escape_character___2_28()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9+LTEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___not_a_valid_JSON_pointer__multiple_characters_not_escaped__29()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9+fiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___not_a_valid_JSON_pointer__isn_t_empty_nor_starts_with_____1_30()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("ImEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___not_a_valid_JSON_pointer__isn_t_empty_nor_starts_with_____2_31()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("IjAi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("json-pointer")]
+        public void Test_draft2019_09_optional_format__json_pointer__validation_of_JSON_pointers__JSON_String_Representation___not_a_valid_JSON_pointer__isn_t_empty_nor_starts_with_____3_32()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJqc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("ImEvYSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("regex")]
+        public void Test_draft2019_09_optional_format__regex__validation_of_regular_expressions__a_valid_regular_expression()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWdleCJ9");
+            var t = ParseJToken("IihbYWJjXSkrXFxzKyQi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("regex")]
+        public void Test_draft2019_09_optional_format__regex__validation_of_regular_expressions__a_regular_expression_with_unclosed_parens_is_invalid_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWdleCJ9");
+            var t = ParseJToken("Il4oYWJjXSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("relative-json-pointer")]
+        public void Test_draft2019_09_optional_format__relative_json_pointer__validation_of_Relative_JSON_Pointers__RJP___a_valid_upwards_RJP()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWxhdGl2ZS1qc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("IjEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("relative-json-pointer")]
+        public void Test_draft2019_09_optional_format__relative_json_pointer__validation_of_Relative_JSON_Pointers__RJP___a_valid_downwards_RJP_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWxhdGl2ZS1qc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("IjAvZm9vL2JhciI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("relative-json-pointer")]
+        public void Test_draft2019_09_optional_format__relative_json_pointer__validation_of_Relative_JSON_Pointers__RJP___a_valid_up_and_then_down_RJP__with_array_index_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWxhdGl2ZS1qc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("IjIvMC9iYXovMS96aXAi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("relative-json-pointer")]
+        public void Test_draft2019_09_optional_format__relative_json_pointer__validation_of_Relative_JSON_Pointers__RJP___a_valid_RJP_taking_the_member_or_index_name_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWxhdGl2ZS1qc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("IjAjIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("relative-json-pointer")]
+        public void Test_draft2019_09_optional_format__relative_json_pointer__validation_of_Relative_JSON_Pointers__RJP___an_invalid_RJP_that_is_a_valid_JSON_Pointer_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWxhdGl2ZS1qc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii9mb28vYmFyIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("relative-json-pointer")]
+        public void Test_draft2019_09_optional_format__relative_json_pointer__validation_of_Relative_JSON_Pointers__RJP___negative_prefix_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWxhdGl2ZS1qc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("Ii0xL2Zvby9iYXIi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("relative-json-pointer")]
+        public void Test_draft2019_09_optional_format__relative_json_pointer__validation_of_Relative_JSON_Pointers__RJP______is_not_a_valid_json_pointer_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWxhdGl2ZS1qc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("IjAjIyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("relative-json-pointer")]
+        public void Test_draft2019_09_optional_format__relative_json_pointer__validation_of_Relative_JSON_Pointers__RJP___zero_cannot_be_followed_by_other_digits__plus_json_pointer_8()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWxhdGl2ZS1qc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("IjAxL2Ei");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("relative-json-pointer")]
+        public void Test_draft2019_09_optional_format__relative_json_pointer__validation_of_Relative_JSON_Pointers__RJP___zero_cannot_be_followed_by_other_digits__plus_octothorpe_9()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJyZWxhdGl2ZS1qc29uLXBvaW50ZXIifQ==");
+            var t = ParseJToken("IjAxIyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("time")]
+        public void Test_draft2019_09_optional_format__time__validation_of_time_strings__a_valid_time_string()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("IjA4OjMwOjA2WiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("time")]
+        public void Test_draft2019_09_optional_format__time__validation_of_time_strings__a_valid_time_string_with_leap_second_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("IjIzOjU5OjYwWiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("time")]
+        public void Test_draft2019_09_optional_format__time__validation_of_time_strings__a_valid_time_string_with_leap_second_with_offset_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("IjE1OjU5OjYwLTA4OjAwIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("time")]
+        public void Test_draft2019_09_optional_format__time__validation_of_time_strings__a_valid_time_string_with_second_fraction_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("IjIzOjIwOjUwLjUyWiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("time")]
+        public void Test_draft2019_09_optional_format__time__validation_of_time_strings__a_valid_time_string_with_precise_second_fraction_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("IjA4OjMwOjA2LjI4MzE4NVoi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("time")]
+        public void Test_draft2019_09_optional_format__time__validation_of_time_strings__a_valid_time_string_with_plus_offset_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("IjA4OjMwOjA2KzAwOjIwIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("time")]
+        public void Test_draft2019_09_optional_format__time__validation_of_time_strings__a_valid_time_string_with_minus_offset_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("IjA4OjMwOjA2LTA4OjAwIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("time")]
+        public void Test_draft2019_09_optional_format__time__validation_of_time_strings__a_valid_time_string_with_case_insensitive_Z_8()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("IjA4OjMwOjA2eiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("time")]
+        public void Test_draft2019_09_optional_format__time__validation_of_time_strings__an_invalid_time_string_with_invalid_hour_9()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("IjI0OjAwOjAwWiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("time")]
+        public void Test_draft2019_09_optional_format__time__validation_of_time_strings__an_invalid_time_string_with_invalid_minute_10()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("IjAwOjYwOjAwWiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("time")]
+        public void Test_draft2019_09_optional_format__time__validation_of_time_strings__an_invalid_time_string_with_invalid_second_11()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("IjAwOjAwOjYxWiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("time")]
+        public void Test_draft2019_09_optional_format__time__validation_of_time_strings__an_invalid_time_string_with_invalid_leap_second__wrong_hour__12()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("IjIyOjU5OjYwWiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("time")]
+        public void Test_draft2019_09_optional_format__time__validation_of_time_strings__an_invalid_time_string_with_invalid_leap_second__wrong_minute__13()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("IjIzOjU4OjYwWiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("time")]
+        public void Test_draft2019_09_optional_format__time__validation_of_time_strings__an_invalid_time_string_with_invalid_time_numoffset_hour_14()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("IjAxOjAyOjAzKzI0OjAwIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("time")]
+        public void Test_draft2019_09_optional_format__time__validation_of_time_strings__an_invalid_time_string_with_invalid_time_numoffset_minute_15()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("IjAxOjAyOjAzKzAwOjYwIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("time")]
+        public void Test_draft2019_09_optional_format__time__validation_of_time_strings__an_invalid_time_string_with_invalid_time_with_both_Z_and_numoffset_16()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("IjAxOjAyOjAzWiswMDozMCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("time")]
+        public void Test_draft2019_09_optional_format__time__validation_of_time_strings__an_invalid_time_string_17()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("IjA4OjMwOjA2IFBTVCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("time")]
+        public void Test_draft2019_09_optional_format__time__validation_of_time_strings__only_RFC3339_not_all_of_ISO_8601_are_valid_18()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ0aW1lIn0=");
+            var t = ParseJToken("IjAxOjAxOjAxLDExMTEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri-reference")]
+        public void Test_draft2019_09_optional_format__uri_reference__validation_of_URI_References__a_valid_URI()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("Imh0dHA6Ly9mb28uYmFyLz9iYXo9cXV4I3F1dXgi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri-reference")]
+        public void Test_draft2019_09_optional_format__uri_reference__validation_of_URI_References__a_valid_protocol_relative_URI_Reference_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("Ii8vZm9vLmJhci8/YmF6PXF1eCNxdXV4Ig==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri-reference")]
+        public void Test_draft2019_09_optional_format__uri_reference__validation_of_URI_References__a_valid_relative_URI_Reference_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("Ii9hYmMi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri-reference")]
+        public void Test_draft2019_09_optional_format__uri_reference__validation_of_URI_References__an_invalid_URI_Reference_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("IlxcXFxXSU5ET1dTXFxmaWxlc2hhcmUi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri-reference")]
+        public void Test_draft2019_09_optional_format__uri_reference__validation_of_URI_References__a_valid_URI_Reference_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("ImFiYyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri-reference")]
+        public void Test_draft2019_09_optional_format__uri_reference__validation_of_URI_References__a_valid_URI_fragment_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("IiNmcmFnbWVudCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri-reference")]
+        public void Test_draft2019_09_optional_format__uri_reference__validation_of_URI_References__an_invalid_URI_fragment_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktcmVmZXJlbmNlIn0=");
+            var t = ParseJToken("IiNmcmFnXFxtZW50Ig==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri-template")]
+        public void Test_draft2019_09_optional_format__uri_template__format__uri_template__a_valid_uri_template()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktdGVtcGxhdGUifQ==");
+            var t = ParseJToken("Imh0dHA6Ly9leGFtcGxlLmNvbS9kaWN0aW9uYXJ5L3t0ZXJtOjF9L3t0ZXJtfSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri-template")]
+        public void Test_draft2019_09_optional_format__uri_template__format__uri_template__an_invalid_uri_template_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktdGVtcGxhdGUifQ==");
+            var t = ParseJToken("Imh0dHA6Ly9leGFtcGxlLmNvbS9kaWN0aW9uYXJ5L3t0ZXJtOjF9L3t0ZXJtIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri-template")]
+        public void Test_draft2019_09_optional_format__uri_template__format__uri_template__a_valid_uri_template_without_variables_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktdGVtcGxhdGUifQ==");
+            var t = ParseJToken("Imh0dHA6Ly9leGFtcGxlLmNvbS9kaWN0aW9uYXJ5Ig==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri-template")]
+        public void Test_draft2019_09_optional_format__uri_template__format__uri_template__a_valid_relative_uri_template_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmktdGVtcGxhdGUifQ==");
+            var t = ParseJToken("ImRpY3Rpb25hcnkve3Rlcm06MX0ve3Rlcm19Ig==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri")]
+        public void Test_draft2019_09_optional_format__uri__validation_of_URIs__a_valid_URL_with_anchor_tag()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("Imh0dHA6Ly9mb28uYmFyLz9iYXo9cXV4I3F1dXgi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri")]
+        public void Test_draft2019_09_optional_format__uri__validation_of_URIs__a_valid_URL_with_anchor_tag_and_parentheses_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("Imh0dHA6Ly9mb28uY29tL2JsYWhfKHdpa2lwZWRpYSlfYmxhaCNjaXRlLTEi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri")]
+        public void Test_draft2019_09_optional_format__uri__validation_of_URIs__a_valid_URL_with_URL_encoded_stuff_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("Imh0dHA6Ly9mb28uYmFyLz9xPVRlc3QlMjBVUkwtZW5jb2RlZCUyMHN0dWZmIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri")]
+        public void Test_draft2019_09_optional_format__uri__validation_of_URIs__a_valid_puny_coded_URL__4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("Imh0dHA6Ly94bi0tbncyYS54bi0tajZ3MTkzZy8i");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri")]
+        public void Test_draft2019_09_optional_format__uri__validation_of_URIs__a_valid_URL_with_many_special_characters_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("Imh0dHA6Ly8tLn5fISQmJygpKissOz06JTQwOjgwJTJmOjo6Ojo6QGV4YW1wbGUuY29tIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri")]
+        public void Test_draft2019_09_optional_format__uri__validation_of_URIs__a_valid_URL_based_on_IPv4_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("Imh0dHA6Ly8yMjMuMjU1LjI1NS4yNTQi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri")]
+        public void Test_draft2019_09_optional_format__uri__validation_of_URIs__a_valid_URL_with_ftp_scheme_7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("ImZ0cDovL2Z0cC5pcy5jby56YS9yZmMvcmZjMTgwOC50eHQi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri")]
+        public void Test_draft2019_09_optional_format__uri__validation_of_URIs__a_valid_URL_for_a_simple_text_file_8()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("Imh0dHA6Ly93d3cuaWV0Zi5vcmcvcmZjL3JmYzIzOTYudHh0Ig==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri")]
+        public void Test_draft2019_09_optional_format__uri__validation_of_URIs__a_valid_URL__9()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("ImxkYXA6Ly9bMjAwMTpkYjg6OjddL2M9R0I/b2JqZWN0Q2xhc3M/b25lIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri")]
+        public void Test_draft2019_09_optional_format__uri__validation_of_URIs__a_valid_mailto_URI_10()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("Im1haWx0bzpKb2huLkRvZUBleGFtcGxlLmNvbSI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri")]
+        public void Test_draft2019_09_optional_format__uri__validation_of_URIs__a_valid_newsgroup_URI_11()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("Im5ld3M6Y29tcC5pbmZvc3lzdGVtcy53d3cuc2VydmVycy51bml4Ig==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri")]
+        public void Test_draft2019_09_optional_format__uri__validation_of_URIs__a_valid_tel_URI_12()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("InRlbDorMS04MTYtNTU1LTEyMTIi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri")]
+        public void Test_draft2019_09_optional_format__uri__validation_of_URIs__a_valid_URN_13()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("InVybjpvYXNpczpuYW1lczpzcGVjaWZpY2F0aW9uOmRvY2Jvb2s6ZHRkOnhtbDo0LjEuMiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri")]
+        public void Test_draft2019_09_optional_format__uri__validation_of_URIs__an_invalid_protocol_relative_URI_Reference_14()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("Ii8vZm9vLmJhci8/YmF6PXF1eCNxdXV4Ig==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri")]
+        public void Test_draft2019_09_optional_format__uri__validation_of_URIs__an_invalid_relative_URI_Reference_15()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("Ii9hYmMi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri")]
+        public void Test_draft2019_09_optional_format__uri__validation_of_URIs__an_invalid_URI_16()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("IlxcXFxXSU5ET1dTXFxmaWxlc2hhcmUi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri")]
+        public void Test_draft2019_09_optional_format__uri__validation_of_URIs__an_invalid_URI_though_valid_URI_reference_17()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("ImFiYyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri")]
+        public void Test_draft2019_09_optional_format__uri__validation_of_URIs__an_invalid_URI_with_spaces_18()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("Imh0dHA6Ly8gc2hvdWxkZmFpbC5jb20i");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri")]
+        public void Test_draft2019_09_optional_format__uri__validation_of_URIs__an_invalid_URI_with_spaces_and_missing_scheme_19()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("IjovLyBzaG91bGQgZmFpbCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uri")]
+        public void Test_draft2019_09_optional_format__uri__validation_of_URIs__an_invalid_URI_with_comma_in_scheme_20()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1cmkifQ==");
+            var t = ParseJToken("ImJhcixiYXo6Zm9vIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uuid")]
+        public void Test_draft2019_09_optional_format__uuid__uuid_format__all_upper_case()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1dWlkIn0=");
+            var t = ParseJToken("IjJFQjhBQTA4LUFBOTgtMTFFQS1CNEFBLTczQjQ0MUQxNjM4MCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uuid")]
+        public void Test_draft2019_09_optional_format__uuid__uuid_format__all_lower_case_2()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1dWlkIn0=");
+            var t = ParseJToken("IjJlYjhhYTA4LWFhOTgtMTFlYS1iNGFhLTczYjQ0MWQxNjM4MCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uuid")]
+        public void Test_draft2019_09_optional_format__uuid__uuid_format__mixed_case_3()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1dWlkIn0=");
+            var t = ParseJToken("IjJlYjhhYTA4LUFBOTgtMTFlYS1CNEFhLTczQjQ0MUQxNjM4MCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uuid")]
+        public void Test_draft2019_09_optional_format__uuid__uuid_format__all_zeroes_is_valid_4()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1dWlkIn0=");
+            var t = ParseJToken("IjAwMDAwMDAwLTAwMDAtMDAwMC0wMDAwLTAwMDAwMDAwMDAwMCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uuid")]
+        public void Test_draft2019_09_optional_format__uuid__uuid_format__wrong_length_5()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1dWlkIn0=");
+            var t = ParseJToken("IjJlYjhhYTA4LWFhOTgtMTFlYS1iNGFhLTczYjQ0MWQxNjM4Ig==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uuid")]
+        public void Test_draft2019_09_optional_format__uuid__uuid_format__missing_section_6()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1dWlkIn0=");
+            var t = ParseJToken("IjJlYjhhYTA4LWFhOTgtMTFlYS03M2I0NDFkMTYzODAi");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uuid")]
+        public void Test_draft2019_09_optional_format__uuid__uuid_format__bad_characters__not_hex__7()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1dWlkIn0=");
+            var t = ParseJToken("IjJlYjhhYTA4LWFhOTgtMTFlYS1iNGdhLTczYjQ0MWQxNjM4MCI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uuid")]
+        public void Test_draft2019_09_optional_format__uuid__uuid_format__no_dashes_8()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1dWlkIn0=");
+            var t = ParseJToken("IjJlYjhhYTA4YWE5ODExZWFiNGFhNzNiNDQxZDE2MzgwIg==");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uuid")]
+        public void Test_draft2019_09_optional_format__uuid__uuid_format__valid_version_4_9()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1dWlkIn0=");
+            var t = ParseJToken("Ijk4ZDgwNTc2LTQ4MmUtNDI3Zi04NDM0LTdmODY4OTBhYjIyMiI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uuid")]
+        public void Test_draft2019_09_optional_format__uuid__uuid_format__valid_version_5_10()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1dWlkIn0=");
+            var t = ParseJToken("Ijk5YzE3Y2JiLTY1NmYtNTY0YS05NDBmLTFhNDU2OGYwMzQ4NyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uuid")]
+        public void Test_draft2019_09_optional_format__uuid__uuid_format__hypothetical_version_6_11()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1dWlkIn0=");
+            var t = ParseJToken("Ijk5YzE3Y2JiLTY1NmYtNjY0YS05NDBmLTFhNDU2OGYwMzQ4NyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("draft2019-09_optional_format")]
+        [TestCategory("uuid")]
+        public void Test_draft2019_09_optional_format__uuid__uuid_format__hypothetical_version_15_12()
+        {
+            var s = ParseSchema("eyJmb3JtYXQiOiJ1dWlkIn0=");
+            var t = ParseJToken("Ijk5YzE3Y2JiLTY1NmYtZjY0YS05NDBmLTFhNDU2OGYwMzQ4NyI=");
+
+            s.SchemaVersion = new Uri("https://json-schema.org/draft/2019-09/schema");
+
+            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+        }
+
 
     }
 

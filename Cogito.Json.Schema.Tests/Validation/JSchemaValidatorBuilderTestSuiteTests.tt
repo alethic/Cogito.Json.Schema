@@ -31,6 +31,7 @@ TestSuite(new Uri("http://json-schema.org/draft-03/schema#"), "draft3");
 TestSuite(new Uri("http://json-schema.org/draft-04/schema#"), "draft4");
 TestSuite(new Uri("http://json-schema.org/draft-06/schema#"), "draft6");
 TestSuite(new Uri("http://json-schema.org/draft-07/schema#"), "draft7");
+TestSuite(new Uri("https://json-schema.org/draft/2019-09/schema"), "draft2019-09");
 
 #>
 
