@@ -2,8 +2,6 @@
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Net;
-using System.Net.Sockets;
 using System.Text.RegularExpressions;
 
 using Cogito.Json.Schema.Validation.Internal;
@@ -79,32 +77,23 @@ namespace Cogito.Json.Schema.Validation.Builders
             }
         }
 
-        static bool ValidateEmail(string value) =>
-            EmailHelpers.Validate(value, false);
+        static bool ValidateEmail(string value) => EmailHelpers.Validate(value, false);
 
-        static bool ValidateIdnEmail(string value) =>
-            EmailHelpers.Validate(value, true);
+        static bool ValidateIdnEmail(string value) => EmailHelpers.Validate(value, true);
 
-        static bool ValidateUri(string value) =>
-            Uri.IsWellFormedUriString(value, UriKind.Absolute);
+        static bool ValidateUri(string value) => FormatValidation.ValidateUri(value);
 
-        static bool ValidateUriReference(string value) =>
-            FormatHelpers.ValidateUriReference(value);
+        static bool ValidateUriReference(string value) => FormatValidation.ValidateUriReference(value);
 
-        static bool ValidateIri(string value) =>
-            Uri.IsWellFormedUriString(value, UriKind.Absolute);
+        static bool ValidateIri(string value) => FormatValidation.ValidateIri(value);
 
-        static bool ValidateIriReference(string value) =>
-            FormatHelpers.ValidateIriReference(value);
+        static bool ValidateIriReference(string value) => FormatValidation.ValidateIriReference(value);
 
-        static bool ValidateUriTemplate(string value) =>
-            FormatHelpers.ValidateUriTemplate(value);
+        static bool ValidateUriTemplate(string value) => FormatValidation.ValidateUriTemplate(value);
 
-        static bool ValidateJsonPointer(string value) =>
-            FormatHelpers.ValidateJsonPointer(value);
+        static bool ValidateJsonPointer(string value) => FormatValidation.ValidateJsonPointer(value);
 
-        static bool ValidateRelativeJsonPointer(string value) =>
-            FormatHelpers.ValidateRelativeJsonPointer(value);
+        static bool ValidateRelativeJsonPointer(string value) => FormatValidation.ValidateRelativeJsonPointer(value);
 
         static bool ValidateDate(string value) => DateTime.TryParseExact(value, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var _);
 
@@ -199,20 +188,9 @@ namespace Cogito.Json.Schema.Validation.Builders
 
         static bool ValidateColor(string value) => ColorHelpers.IsValid(value);
 
-        static bool ValidateIPv6(string value) => Uri.CheckHostName(value) == UriHostNameType.IPv6 && IPAddress.TryParse(value, out var ip) && ip.AddressFamily == AddressFamily.InterNetworkV6;
+        static bool ValidateIPv6(string value) => FormatValidation.ValidateIPv6(value);
 
-        static bool ValidateIPv4(string value)
-        {
-            var parts = value.Split('.');
-            if (parts.Length != 4)
-                return false;
-
-            for (var i = 0; i < parts.Length; i++)
-                if (!int.TryParse(parts[i], NumberStyles.Integer, CultureInfo.InvariantCulture, out var num) || num < 0 || num > 255 || (parts[i] != "0" && parts[i].StartsWith("0")))
-                    return false;
-
-            return true;
-        }
+        static bool ValidateIPv4(string value) => FormatValidation.ValidateIPv4(value);
 
     }
 

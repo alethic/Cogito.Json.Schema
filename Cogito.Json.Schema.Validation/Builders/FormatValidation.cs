@@ -1,9 +1,17 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Globalization;
+using System.Net;
+using System.Net.Sockets;
+using System.Text.RegularExpressions;
+using System.Web;
 
-namespace Cogito.Json.Schema.Validation.Internal
+namespace Cogito.Json.Schema.Validation.Builders
 {
 
-    static class FormatHelpers
+    /// <summary>
+    /// Provides helper methods that conduct format validation.
+    /// </summary>
+    static class FormatValidation
     {
 
         static readonly Regex UriTemplateRegex = new Regex(@"^(?:(?:[^\x00-\x20""'<>%\\^`{|}]|%[0-9a-f]{2})|\{[+#.\/;?&=,!@|]?(?:[a-z0-9_]|%[0-9a-f]{2})+(?:\:[1-9][0-9]{0,3}|\*)?(?:,(?:[a-z0-9_]|%[0-9a-f]{2})+(?:\:[1-9][0-9]{0,3}|\*)?)*\})*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
@@ -14,6 +22,16 @@ namespace Cogito.Json.Schema.Validation.Internal
         public static bool ValidateUriTemplate(string text)
         {
             return UriTemplateRegex.IsMatch(text);
+        }
+
+        public static bool ValidateUri(string text)
+        {
+            return ValidateIri(text) && Uri.TryCreate(text, UriKind.RelativeOrAbsolute, out var u) && u.Host == u.IdnHost;
+        }
+
+        public static bool ValidateIri(string text)
+        {
+            return Uri.IsWellFormedUriString(text, UriKind.RelativeOrAbsolute) || Uri.IsWellFormedUriString(new Uri(text, UriKind.RelativeOrAbsolute).ToString(), UriKind.RelativeOrAbsolute) || Uri.TryCreate(text, UriKind.RelativeOrAbsolute, out _);
         }
 
         public static bool ValidateJsonPointer(string text)
@@ -28,14 +46,37 @@ namespace Cogito.Json.Schema.Validation.Internal
 
         public static bool ValidateUriReference(string text)
         {
-            return UriReferenceRegex.IsMatch(text);
+            if (text.StartsWith("#"))
+                return ValidateUriReference("http://foo.bar" + text);
+            else
+                return ValidateUri(text);
         }
 
         public static bool ValidateIriReference(string text)
         {
-            return UriReferenceRegex.IsMatch(text);
+            if (text.StartsWith("#"))
+                return ValidateIriReference("http://ƒøø.ßår" + text);
+            else
+                return ValidateIri(text);
         }
 
+        public static bool ValidateIPv4(string value)
+        {
+            var parts = value.Split('.');
+            if (parts.Length != 4)
+                return false;
+
+            for (var i = 0; i < parts.Length; i++)
+                if (!int.TryParse(parts[i], NumberStyles.Integer, CultureInfo.InvariantCulture, out var num) || num < 0 || num > 255 || (parts[i] != "0" && parts[i].StartsWith("0")))
+                    return false;
+
+            return true;
+        }
+
+        public static bool ValidateIPv6(string value)
+        {
+            return Uri.CheckHostName(value) == UriHostNameType.IPv6 && IPAddress.TryParse(value, out var ip) && ip.AddressFamily == AddressFamily.InterNetworkV6 && value.Contains("%") == false;
+        }
     }
 
 }
