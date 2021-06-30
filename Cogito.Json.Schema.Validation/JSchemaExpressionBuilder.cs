@@ -716,8 +716,6 @@ namespace Cogito.Json.Schema.Validation
             Expression Comparer(Expression left, Expression right) =>
                 schema.ExclusiveMaximum ? Expression.LessThan(left, right) : Expression.LessThanOrEqual(left, right);
 
-            var bi = new BigInteger((double)schema.Maximum);
-
             return Expression.Switch(
                 TokenType(o),
                 True,
