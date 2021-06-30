@@ -21,18 +21,18 @@ build:
 
 test:
   assemblies:
-    - '**/Tests.dll'
+  - '**/Tests.dll'
 
 artifacts:
   - path: pkg\*.nupkg
     name: Cogito.Json.Schema
-    
+
 deploy:
   provider: NuGet
   server: https://nuget.pkg.github.com/alethic/index.json
   username: wasabii
   api_key:
-    secure: 7KMGqRm3xSXVWGq+DM0EBZL2KXGW5VXgDD774n4dB5xEQA/Febc7GbwhZIkvZeV1
+    secure: u7+1z/CZGBli+CiDxHSQetMjE1dbaf1f9eJtSCb8wifl7s1+AdnhWjnsjGQaEsAw
   skip_symbols: false
   symbol_server:
   artifact: /.*\.nupkg/
