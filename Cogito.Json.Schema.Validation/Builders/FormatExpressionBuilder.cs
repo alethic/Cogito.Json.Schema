@@ -99,7 +99,7 @@ namespace Cogito.Json.Schema.Validation.Builders
 
         static bool ValidateTime(string value) => ValidateTimeRegex(value);
 
-        static readonly Regex TimeRegex = new Regex(@"^(?<h>\d{2})\:(?<m>\d{2})\:(?<s>\d{2})(.(?<ms>\d+))?([Zz]|(?<o>[-+])(?<zh>\d{2}):(?<zm>\d{2}))?$", RegexOptions.CultureInvariant | RegexOptions.Compiled);
+        static readonly Regex TimeRegex = new Regex(@"^(?<h>\d{2})\:(?<m>\d{2})\:(?<s>\d{2})(\.(?<ms>\d+))?([Zz]|(?<o>[-+])(?<zh>\d{2}):(?<zm>\d{2}))?$", RegexOptions.CultureInvariant | RegexOptions.Compiled);
 
         static bool ValidateTimeRegex(string value)
         {
@@ -110,6 +110,14 @@ namespace Cogito.Json.Schema.Validation.Builders
                 {
                     // time values must be in range (leap seconds!)
                     if (h < 0 || h > 23 || m < 0 || m > 59 || s < 0 || s > 60)
+                        return false;
+
+                    // leap second, but wrong hour
+                    if (s == 60 && h != 23)
+                        return false;
+
+                    // leap second, but wrong minute
+                    if (s == 60 && m != 59)
                         return false;
 
                     // millisecond value must be at least 0
