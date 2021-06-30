@@ -26,12 +26,12 @@ namespace Cogito.Json.Schema.Validation.Builders
 
         public static bool ValidateUri(string text)
         {
-            return ValidateIri(text) && Uri.TryCreate(text, UriKind.RelativeOrAbsolute, out var u) && u.Host == u.IdnHost;
+            return ValidateIri(text);
         }
 
         public static bool ValidateIri(string text)
         {
-            return Uri.IsWellFormedUriString(text, UriKind.RelativeOrAbsolute) || Uri.IsWellFormedUriString(new Uri(text, UriKind.RelativeOrAbsolute).ToString(), UriKind.RelativeOrAbsolute) || Uri.TryCreate(text, UriKind.RelativeOrAbsolute, out _);
+            return Uri.IsWellFormedUriString(text, UriKind.Absolute);
         }
 
         public static bool ValidateJsonPointer(string text)
@@ -49,7 +49,7 @@ namespace Cogito.Json.Schema.Validation.Builders
             if (text.StartsWith("#"))
                 return ValidateUriReference("http://foo.bar" + text);
             else
-                return ValidateUri(text);
+                return Uri.IsWellFormedUriString(text, UriKind.Relative);
         }
 
         public static bool ValidateIriReference(string text)
@@ -57,7 +57,7 @@ namespace Cogito.Json.Schema.Validation.Builders
             if (text.StartsWith("#"))
                 return ValidateIriReference("http://ƒøø.ßår" + text);
             else
-                return ValidateIri(text);
+                return Uri.IsWellFormedUriString(text, UriKind.Relative);
         }
 
         public static bool ValidateIPv4(string value)
