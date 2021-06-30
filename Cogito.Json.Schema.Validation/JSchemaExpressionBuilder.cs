@@ -325,6 +325,10 @@ namespace Cogito.Json.Schema.Validation
         /// <returns></returns>
         public Expression Eval(JSchema schema, Expression token)
         {
+            // ensure we are working with the final referenced schema
+            while (schema.Ref != null && schema.Ref != schema)
+                schema = schema.Ref;
+
             // evaluating of this schema is already in progress, return future variable to delegate
             if (delayed.TryGetValue(schema, out var expr))
             {
@@ -671,15 +675,19 @@ namespace Cogito.Json.Schema.Validation
             Expression CompareExpr(Expression val, Expression off, JSchema sch) =>
                 CallThis(nameof(CompareLocal), val, off, EvalSchemaFunc(sch));
 
+            // returns an expression that returns true if the expression is not an array type
+            Expression TrueIfNotArray(Expression expression) =>
+                IfThenElseTrue(IsTokenType(o, JTokenType.Array), expression);
+
+            // convert target object into array
+            var val = Expression.Convert(o, typeof(JArray));
+
             // compare single schema item to all array items
             if (schema.ItemsPositionValidation == false && schema.Items.Count > 0)
-                return IfThenElseTrue(
-                    IsTokenType(o, JTokenType.Array),
-                    CompareExpr(Expression.Convert(o, typeof(JArray)), Expression.Constant(0), schema.Items[0]));
+                return TrueIfNotArray(CompareExpr(val, Expression.Constant(0), schema.Items[0]));
 
             if (schema.ItemsPositionValidation == true)
             {
-                var val = Expression.Convert(o, typeof(JArray));
                 var len = Expression.Property(val, nameof(JArray.Count));
 
                 // compares the schema to the array from the beginning
@@ -691,18 +699,20 @@ namespace Cogito.Json.Schema.Validation
 
                 // additional items are not allowed, esure size is equal, and match
                 if (schema.AllowAdditionalItems == false)
-                    return Expression.AndAlso(
-                        Expression.LessThanOrEqual(len, Expression.Constant(schema.Items.Count)),
-                        cmp);
+                    return TrueIfNotArray(
+                        Expression.AndAlso(
+                            Expression.LessThanOrEqual(len, Expression.Constant(schema.Items.Count)),
+                            cmp));
 
                 // compare 1:1, but then also compare remaining items from end of schema as offset
                 if (schema.AdditionalItems != null)
-                    return Expression.AndAlso(
-                        cmp,
-                        CompareExpr(val, Expression.Constant(schema.Items.Count), schema.AdditionalItems));
+                    return TrueIfNotArray(
+                        Expression.AndAlso(
+                            cmp,
+                            CompareExpr(val, Expression.Constant(schema.Items.Count), schema.AdditionalItems)));
 
                 // basic comparison, additional items are allowed, but no validated
-                return cmp;
+                return TrueIfNotArray(cmp);
             }
 
             return null;
