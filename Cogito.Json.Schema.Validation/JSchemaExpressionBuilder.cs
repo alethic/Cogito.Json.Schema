@@ -412,6 +412,8 @@ namespace Cogito.Json.Schema.Validation
             yield return BuildContains(schema, token);
             yield return BuildContent(schema, token);
             yield return BuildDependencies(schema, token);
+            yield return BuildDependentRequired(schema, token);
+            yield return BuildDependentSchemas(schema, token);
             yield return BuildEnum(schema, token);
             yield return BuildItems(schema, token);
             yield return BuildMaximum(schema, token);
@@ -621,6 +623,12 @@ namespace Cogito.Json.Schema.Validation
             }
         }
 
+        /// <summary>
+        /// Processes the 'dependencies' constraint.
+        /// </summary>
+        /// <param name="schema"></param>
+        /// <param name="o"></param>
+        /// <returns></returns>
         Expression BuildDependencies(JSchema schema, Expression o)
         {
             if (schema.Dependencies == null ||
@@ -632,6 +640,13 @@ namespace Cogito.Json.Schema.Validation
                 AllOf(schema.Dependencies.Select(i => BuildDependencyItem(i.Key, i.Value, o))));
         }
 
+        /// <summary>
+        /// Processes each item in the 'dependencies' constraint.
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <param name="dependencyValue"></param>
+        /// <param name="o"></param>
+        /// <returns></returns>
         Expression BuildDependencyItem(string propertyName, object dependencyValue, Expression o)
         {
             return IfThenElseTrue(
@@ -641,24 +656,69 @@ namespace Cogito.Json.Schema.Validation
                 BuildDependencyItem(dependencyValue, o));
         }
 
+        /// <summary>
+        /// Processes each item in the 'dependencies' constraint against its property value.
+        /// </summary>
+        /// <param name="dependencyValue"></param>
+        /// <param name="o"></param>
+        /// <returns></returns>
         Expression BuildDependencyItem(object dependencyValue, Expression o)
         {
             switch (dependencyValue)
             {
                 case JArray a:
-                    return BuildDependency(a.Select(i => (string)i).ToArray(), o);
+                    return BuildDependentRequired(a.Select(i => (string)i).ToArray(), o);
                 case string[] a2:
-                    return BuildDependency(a2, o);
+                    return BuildDependentRequired(a2, o);
                 case IList<string> a3:
-                    return BuildDependency(a3.ToArray(), o);
+                    return BuildDependentRequired(a3.ToArray(), o);
                 case JSchema s:
-                    return BuildDependency(s, o);
+                    return BuildDependentSchema(s, o);
                 default:
                     throw new NotSupportedException();
             }
         }
 
-        Expression BuildDependency(string[] required, Expression o)
+        /// <summary>
+        /// Processes the 'dependentRequired' constraint.
+        /// </summary>
+        /// <param name="schema"></param>
+        /// <param name="o"></param>
+        /// <returns></returns>
+        Expression BuildDependentRequired(JSchema schema, Expression o)
+        {
+            if (schema.DependentRequired == null ||
+                schema.DependentRequired.Count == 0)
+                return null;
+
+            return IfThenElseTrue(
+                IsTokenType(o, JTokenType.Object),
+                AllOf(schema.DependentRequired.Select(i => BuildDependentRequired(i.Key, i.Value.ToArray(), o))));
+        }
+
+        /// <summary>
+        /// Processes each item in the 'dependentRequired' constraint.
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <param name="dependencyValue"></param>
+        /// <param name="o"></param>
+        /// <returns></returns>
+        Expression BuildDependentRequired(string propertyName, string[] dependencyValue, Expression o)
+        {
+            return IfThenElseTrue(
+                CallThis(nameof(ContainsKey),
+                    Expression.Convert(o, typeof(JObject)),
+                    Expression.Constant(propertyName)),
+                BuildDependentRequired(dependencyValue, o));
+        }
+
+        /// <summary>
+        /// Processes each item in the 'dependentRequired' constraint against its dependent properties.
+        /// </summary>
+        /// <param name="required"></param>
+        /// <param name="o"></param>
+        /// <returns></returns>
+        Expression BuildDependentRequired(string[] required, Expression o)
         {
             return AllOf(
                 required.Select(i =>
@@ -668,7 +728,40 @@ namespace Cogito.Json.Schema.Validation
                         Expression.Constant(i))));
         }
 
-        Expression BuildDependency(JSchema required, Expression o)
+        /// <summary>
+        /// Processes the 'dependentSchemas' constraint.
+        /// </summary>
+        /// <param name="schema"></param>
+        /// <param name="o"></param>
+        /// <returns></returns>
+        Expression BuildDependentSchemas(JSchema schema, Expression o)
+        {
+            if (schema.DependentSchemas == null ||
+                schema.DependentSchemas.Count == 0)
+                return null;
+
+            return IfThenElseTrue(
+                IsTokenType(o, JTokenType.Object),
+                AllOf(schema.DependentSchemas.Select(i => BuildDependentSchema(i.Key, i.Value, o))));
+        }
+
+        /// <summary>
+        /// Processes an item in the 'dependentSchema' constraint.
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <param name="schema"></param>
+        /// <param name="o"></param>
+        /// <returns></returns>
+        Expression BuildDependentSchema(string propertyName, JSchema schema, Expression o)
+        {
+            return IfThenElseTrue(
+                CallThis(nameof(ContainsKey),
+                    Expression.Convert(o, typeof(JObject)),
+                    Expression.Constant(propertyName)),
+                BuildDependentSchema(schema, o));
+        }
+
+        Expression BuildDependentSchema(JSchema required, Expression o)
         {
             return Eval(required, o);
         }

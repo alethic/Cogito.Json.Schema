@@ -36,7 +36,13 @@ namespace Cogito.Json.Schema.Tests.Validation
                 nested.Add(new Uri("http://json-schema.org/draft-04/schema"), File.ReadAllText(Path.Combine(baseDir, @"schema-draft-04.json")));
                 nested.Add(new Uri("http://json-schema.org/draft-06/schema"), File.ReadAllText(Path.Combine(baseDir, @"schema-draft-06.json")));
                 nested.Add(new Uri("http://json-schema.org/draft-07/schema"), File.ReadAllText(Path.Combine(baseDir, @"schema-draft-07.json")));
-                nested.Add(new Uri("https://json-schema.org/draft/2019-09/schema"), File.ReadAllText(Path.Combine(baseDir, @"schema-draft2019-09.json")));
+                nested.Add(new Uri("https://json-schema.org/draft/2019-09/schema"), File.ReadAllText(Path.Combine(baseDir, @"schema-draft2019-09/schema.json")));
+                nested.Add(new Uri("https://json-schema.org/draft/2019-09/meta/core"), File.ReadAllText(Path.Combine(baseDir, @"schema-draft2019-09/meta/core.json")));
+                nested.Add(new Uri("https://json-schema.org/draft/2019-09/meta/applicator"), File.ReadAllText(Path.Combine(baseDir, @"schema-draft2019-09/meta/applicator.json")));
+                nested.Add(new Uri("https://json-schema.org/draft/2019-09/meta/content"), File.ReadAllText(Path.Combine(baseDir, @"schema-draft2019-09/meta/content.json")));
+                nested.Add(new Uri("https://json-schema.org/draft/2019-09/meta/format"), File.ReadAllText(Path.Combine(baseDir, @"schema-draft2019-09/meta/format.json")));
+                nested.Add(new Uri("https://json-schema.org/draft/2019-09/meta/meta-data"), File.ReadAllText(Path.Combine(baseDir, @"schema-draft2019-09/meta/meta-data.json")));
+                nested.Add(new Uri("https://json-schema.org/draft/2019-09/meta/validation"), File.ReadAllText(Path.Combine(baseDir, @"schema-draft2019-09/meta/validation.json")));
             }
 
             public override Stream GetSchemaResource(ResolveSchemaContext context, SchemaReference reference)
