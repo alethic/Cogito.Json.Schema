@@ -473,25 +473,91 @@ namespace Cogito.Json.Schema.Validation
             if (schema.Contains == null)
                 return null;
 
-            var val = Expression.Convert(o, typeof(JArray));
-            var idx = Expression.Variable(typeof(int));
-            var brk = Expression.Label(typeof(bool));
-            var len = Expression.Property(val, nameof(JArray.Count));
+            var min = (int?)schema.MinimumContains ?? 1;
+            var max = (int?)schema.MaximumContains;
 
+            if (max == null && min == 0)
+                return null;
+
+            if (max == null && min == 1)
+                return BuildContains(schema, o);
+
+            if (max == null && min >= 2)
+                return BuildContainsWithMin(schema, o, min);
+
+            if (max != null && min != 0)
+                return BuildContainsWithMinAndMax(schema, o, min, (int)max);
+
+            return null;
+        }
+
+        Expression BuildContain(JSchema schema, Expression o)
+        {
             return IfThenElseTrue(
                 IsTokenType(o, JTokenType.Array),
-                Expression.Block(
-                    new[] { idx },
-                    Expression.Assign(idx, Expression.Constant(0)),
-                    Expression.Loop(
-                        Expression.IfThenElse(
-                            Expression.Not(Expression.LessThan(idx, len)),
-                            Expression.Break(brk, False),
-                            Expression.IfThenElse(
-                                Eval(schema.Contains, FromItemIndex(val, idx)),
-                                Expression.Break(brk, True),
-                                Expression.PostIncrementAssign(idx))),
-                        brk)));
+                CallThis(
+                    nameof(ContainsFunc),
+                    EvalSchemaFunc(schema.Contains),
+                    Expression.Convert(o, typeof(JArray))));
+        }
+
+        static bool ContainsFunc(Func<JToken, bool> contains, JArray o)
+        {
+            foreach (var i in o)
+                if (contains(i))
+                    return true;
+
+            return false;
+        }
+
+        Expression BuildContainsWithMin(JSchema schema, Expression o, int min)
+        {
+            return IfThenElseTrue(
+                IsTokenType(o, JTokenType.Array),
+                CallThis(
+                    nameof(ContainsWithMinFunc),
+                    EvalSchemaFunc(schema.Contains),
+                    Expression.Convert(o, typeof(JArray)),
+                    Expression.Constant(min, typeof(int))));
+        }
+
+        static bool ContainsWithMinFunc(Func<JToken, bool> contains, JArray o, int min)
+        {
+            var cnt = 0;
+
+            foreach (var i in o)
+                if (contains(i))
+                    if (++cnt >= min)
+                        return true;
+
+            return false;
+        }
+
+        Expression BuildContainsWithMinAndMax(JSchema schema, Expression o, int min, int max)
+        {
+            return IfThenElseTrue(
+                IsTokenType(o, JTokenType.Array),
+                CallThis(
+                    nameof(ContainsWithMinAndMaxFunc),
+                    EvalSchemaFunc(schema.Contains),
+                    Expression.Convert(o, typeof(JArray)),
+                    Expression.Constant(min, typeof(int)),
+                    Expression.Constant(max, typeof(int))));
+        }
+
+        static bool ContainsWithMinAndMaxFunc(Func<JToken, bool> contains, JArray o, int min, int max)
+        {
+            var cnt = 0;
+
+            foreach (var i in o)
+                if (contains(i))
+                    if (++cnt > max)
+                        return false;
+
+            if (cnt >= min)
+                return true;
+
+            return false;
         }
 
         Expression BuildContent(JSchema schema, Expression o)
