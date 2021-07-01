@@ -99,7 +99,7 @@ namespace Cogito.Json.Schema.Validation.Builders
 
         static bool ValidateTime(string value) => ValidateTimeRegex(value);
 
-        static readonly Regex TimeRegex = new Regex(@"^(?<h>\d{2})\:(?<m>\d{2})\:(?<s>\d{2})(\.(?<ms>\d+))?([Zz]|(?<o>[-+])(?<zh>\d{2}):(?<zm>\d{2}))?$", RegexOptions.CultureInvariant | RegexOptions.Compiled);
+        static readonly Regex TimeRegex = new Regex(@"^(?<h>\d{2})\:(?<m>\d{2})\:(?<s>\d{2})(\.(?<ms>\d+))?([Zz]|(?<oo>[-+])(?<zh>\d{2}):(?<zm>\d{2}))?$", RegexOptions.CultureInvariant | RegexOptions.Compiled);
 
         static bool ValidateTimeRegex(string value)
         {
@@ -108,31 +108,58 @@ namespace Cogito.Json.Schema.Validation.Builders
             {
                 if (int.TryParse(r.Groups["h"].Value, out var h) && int.TryParse(r.Groups["m"].Value, out var m) && int.TryParse(r.Groups["s"].Value, out var s))
                 {
+                    // parse milliseconds
+                    var ms = r.Groups["ms"] is Group msg && msg.Success && int.TryParse(msg.Value, out var ms_) ? (int?)ms_ : null;
+
+                    // extract offset information
+                    var oo = r.Groups["oo"] is Group oog && oog.Success ? oog.Value : null;
+                    var zh = r.Groups["zh"] is Group zhg && zhg.Success && int.TryParse(zhg.Value, out var zh_) ? (int?)zh_ : null;
+                    var zm = r.Groups["zm"] is Group zmg && zmg.Success && int.TryParse(zmg.Value, out var zm_) ? (int?)zm_ : null;
+
                     // time values must be in range (leap seconds!)
                     if (h < 0 || h > 23 || m < 0 || m > 59 || s < 0 || s > 60)
                         return false;
 
-                    // leap second, but wrong hour
-                    if (s == 60 && h != 23)
-                        return false;
-
-                    // leap second, but wrong minute
-                    if (s == 60 && m != 59)
-                        return false;
-
                     // millisecond value must be at least 0
-                    if (r.Groups["ms"] is Group msg && msg.Success && int.TryParse(msg.Value, out var ms))
-                        if (ms < 0)
-                            return false;
+                    if (ms != null && ms < 0)
+                        return false;
 
                     // offset indicator exists but isn't proper value
-                    if (r.Groups["o"] is Group og && og.Success && og.Value != "-" && og.Value != "+")
+                    if (oo != null && oo != "-" && oo != "+")
                         return false;
 
-                    // check that offset values are accurate
-                    if (r.Groups["zh"] is Group zhg && zhg.Success && r.Groups["zm"] is Group zmg && zmg.Success && int.TryParse(zhg.Value, out var zh) && int.TryParse(zmg.Value, out var zm))
-                        if (zh < 0 || zh > 23 || zm < 0 || zm > 59)
+                    // check that offset hour is valid
+                    if (zh != null)
+                        if (zh < 0 || zh > 23)
                             return false;
+
+                    // check that offset minute is valid
+                    if (zm != null)
+                        if (zm < 0 || zm > 59)
+                            return false;
+
+                    // leap second, but wrong minute
+                    if (s == 60)
+                    {
+                        var t = new DateTime(2000, 1, 1, h, m, 59);
+
+                        // offset indicator exists but isn't proper value
+                        if (oo != null)
+                        {
+                            if (zh is int zhi)
+                                t = oo == "+" ? t.AddHours(-zhi) : t.AddHours(zhi);
+                            if (zm is int zmi)
+                                t = oo == "+" ? t.AddMinutes(-zmi) : t.AddMinutes(zmi);
+                        }
+
+                        // leap second, but wrong minute
+                        if (t.Minute != 59)
+                            return false;
+
+                        // leap second, but wrong hour
+                        if (t.Hour != 23)
+                            return false;
+                    }
 
                     // all the checks succeeded
                     return true;

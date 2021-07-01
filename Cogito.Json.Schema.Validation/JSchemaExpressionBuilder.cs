@@ -234,13 +234,13 @@ namespace Cogito.Json.Schema.Validation
                 Expression.Label(brk, rsl));
         }
 
-        static readonly Lazy<TinyIoCContainer> DefaultIoCContainer = new Lazy<TinyIoCContainer>(CreateDefaultIoCContainer, true);
+        static readonly Lazy<TinyIoCContainer> DefaultContainer = new Lazy<TinyIoCContainer>(CreateDefaultContainer, true);
 
         /// <summary>
         /// Creates a new TinyIoC instance with the default validation configuration.
         /// </summary>
         /// <returns></returns>
-        static TinyIoCContainer CreateDefaultIoCContainer()
+        static TinyIoCContainer CreateDefaultContainer()
         {
             var c = new TinyIoCContainer();
 
@@ -258,7 +258,7 @@ namespace Cogito.Json.Schema.Validation
         /// <returns></returns>
         public static JSchemaExpressionBuilder CreateDefault()
         {
-            return new JSchemaExpressionBuilder(DefaultIoCContainer.Value.ResolveAll<IExpressionBuilder>());
+            return new JSchemaExpressionBuilder(DefaultContainer.Value.ResolveAll<IExpressionBuilder>());
         }
 
         readonly JTokenEqualityExpressionBuilder equalityBuilder = new JTokenEqualityExpressionBuilder();
@@ -284,9 +284,9 @@ namespace Cogito.Json.Schema.Validation
             if (schema == null)
                 throw new ArgumentNullException(nameof(schema));
 
-            var o = Expression.Parameter(typeof(JToken), "o");
-            var e = Build(schema, o);
-            return Expression.Lambda<Func<JToken, bool>>(e, o);
+            var t = Expression.Parameter(typeof(JToken), "t");
+            var e = Build(schema, t);
+            return Expression.Lambda<Func<JToken, bool>>(e, t);
         }
 
         /// <summary>
@@ -295,15 +295,15 @@ namespace Cogito.Json.Schema.Validation
         /// </summary>
         /// <param name="schema"></param>
         /// <returns></returns>
-        public Expression Build(JSchema schema, Expression o)
+        public Expression Build(JSchema schema, Expression token)
         {
             if (schema == null)
                 throw new ArgumentNullException(nameof(schema));
-            if (o == null)
-                throw new ArgumentNullException(nameof(o));
+            if (token == null)
+                throw new ArgumentNullException(nameof(token));
 
             // evaluate expression
-            var e = Eval(schema, o);
+            var e = Eval(schema, token);
 
             // if any recursed, generate assignment of delegates in block
             var v = delayed.Where(i => i.Value != null).ToArray();

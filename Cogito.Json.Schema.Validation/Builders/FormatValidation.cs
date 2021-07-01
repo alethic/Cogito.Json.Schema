@@ -45,28 +45,30 @@ namespace Cogito.Json.Schema.Validation.Builders
 
         public static bool ValidateUriReference(string text)
         {
-#if !NET5_0_OR_GREATER
+            if (ValidateUri(text))
+                return true;
+
             if (text.StartsWith("//"))
                 return Uri.IsWellFormedUriString("scheme:" + text, UriKind.Absolute);
-#endif
 
             if (text.StartsWith("#"))
                 return Uri.IsWellFormedUriString("scheme://foo.bar" + text, UriKind.Absolute);
             else
-                return Uri.IsWellFormedUriString(text, UriKind.Relative);
+                return Uri.IsWellFormedUriString(text, UriKind.RelativeOrAbsolute);
         }
 
         public static bool ValidateIriReference(string text)
         {
-#if !NET5_0_OR_GREATER
+            if (ValidateIri(text))
+                return true;
+
             if (text.StartsWith("//"))
                 return Uri.IsWellFormedUriString("scheme:" + text, UriKind.Absolute);
-#endif
 
             if (text.StartsWith("#"))
                 return Uri.IsWellFormedUriString("scheme://ƒøø.ßår" + text, UriKind.Absolute);
             else
-                return Uri.IsWellFormedUriString(text, UriKind.Relative);
+                return Uri.IsWellFormedUriString(text, UriKind.Absolute);
         }
 
         public static bool ValidateIPv4(string value)
