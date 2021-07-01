@@ -13,6 +13,7 @@ namespace Cogito.Json.Schema.Validation.Internal
             public static readonly Uri Draft4 = new Uri("http://json-schema.org/draft-04/schema#");
             public static readonly Uri Draft6 = new Uri("http://json-schema.org/draft-06/schema#");
             public static readonly Uri Draft7 = new Uri("http://json-schema.org/draft-07/schema#");
+            public static readonly Uri Draft201909 = new Uri("https://json-schema.org/draft/2019-09/schema");
 
         }
 

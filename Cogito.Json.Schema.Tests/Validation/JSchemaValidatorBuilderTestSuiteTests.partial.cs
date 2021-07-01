@@ -36,6 +36,7 @@ namespace Cogito.Json.Schema.Tests.Validation
                 nested.Add(new Uri("http://json-schema.org/draft-04/schema"), File.ReadAllText(Path.Combine(baseDir, @"schema-draft-04.json")));
                 nested.Add(new Uri("http://json-schema.org/draft-06/schema"), File.ReadAllText(Path.Combine(baseDir, @"schema-draft-06.json")));
                 nested.Add(new Uri("http://json-schema.org/draft-07/schema"), File.ReadAllText(Path.Combine(baseDir, @"schema-draft-07.json")));
+                nested.Add(new Uri("https://json-schema.org/draft/2019-09/schema"), File.ReadAllText(Path.Combine(baseDir, @"schema-draft2019-09.json")));
             }
 
             public override Stream GetSchemaResource(ResolveSchemaContext context, SchemaReference reference)

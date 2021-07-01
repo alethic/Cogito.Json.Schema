@@ -261,6 +261,7 @@ namespace Cogito.Json.Schema.Validation
             return new JSchemaExpressionBuilder(DefaultContainer.Value.ResolveAll<IExpressionBuilder>());
         }
 
+        readonly JSchemaExpressionBuilderOptions options;
         readonly JTokenEqualityExpressionBuilder equalityBuilder = new JTokenEqualityExpressionBuilder();
         readonly IEnumerable<IExpressionBuilder> providers;
         readonly Dictionary<JSchema, ParameterExpression> delayed = new Dictionary<JSchema, ParameterExpression>();
@@ -269,8 +270,21 @@ namespace Cogito.Json.Schema.Validation
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        public JSchemaExpressionBuilder(IEnumerable<IExpressionBuilder> providers)
+        /// <param name="providers"></param>
+        public JSchemaExpressionBuilder(IEnumerable<IExpressionBuilder> providers) :
+            this(new JSchemaExpressionBuilderOptions(), providers)
         {
+
+        }
+
+        /// <summary>
+        /// Initializes a new instance.
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="providers"></param>
+        public JSchemaExpressionBuilder(JSchemaExpressionBuilderOptions options, IEnumerable<IExpressionBuilder> providers)
+        {
+            this.options = options ?? throw new ArgumentNullException(nameof(options));
             this.providers = providers?.ToList() ?? throw new ArgumentNullException(nameof(providers));
         }
 
@@ -475,6 +489,19 @@ namespace Cogito.Json.Schema.Validation
 
         Expression BuildContent(JSchema schema, Expression o)
         {
+            var enable = options.ValidateFormat;
+
+            // content restrictions are annotations in later versions
+            if (options == null)
+                if (schema.SchemaVersion == Constants.SchemaVersions.Draft201909)
+                    enable = false;
+                else
+                    enable = true;
+
+            // we've been instructed to not validate format
+            if (enable == false)
+                return null;
+
             // no content related validation
             if (schema.ContentEncoding == null &&
                 schema.ContentMediaType == null)
