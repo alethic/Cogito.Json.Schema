@@ -3,7 +3,7 @@ configuration: Release
 platform: Any CPU
 
 install:
-  - choco install gitversion.portable -y
+  - choco install gitversion.portable -y -pre
 
 before_build:
   - ps: gitversion /l console /output buildserver
