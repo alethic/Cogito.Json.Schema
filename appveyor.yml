@@ -29,7 +29,8 @@ test:
 artifacts:
   - path: pkg\*.nupkg
     name: Cogito.Json.Schema
-    
+ 
+for:
 -
   branches:
     only:
