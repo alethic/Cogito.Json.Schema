@@ -25,11 +25,21 @@ namespace Cogito.Json.Schema.Validation.Builders
 
         public static bool ValidateUri(string text)
         {
+            if (text.StartsWith("//"))
+                return false;
+            if (text.StartsWith("\\\\"))
+                return false;
+
             return ValidateIri(text);
         }
 
         public static bool ValidateIri(string text)
         {
+            if (text.StartsWith("//"))
+                return false;
+            if (text.StartsWith("\\\\"))
+                return false;
+
             return Uri.IsWellFormedUriString(text, UriKind.Absolute) || Uri.TryCreate(text, UriKind.Absolute, out var _);
         }
 
@@ -45,6 +55,11 @@ namespace Cogito.Json.Schema.Validation.Builders
 
         public static bool ValidateUriReference(string text)
         {
+            if (text.StartsWith("//"))
+                return false;
+            if (text.StartsWith("\\\\"))
+                return false;
+
             if (ValidateUri(text))
                 return true;
 
@@ -59,6 +74,11 @@ namespace Cogito.Json.Schema.Validation.Builders
 
         public static bool ValidateIriReference(string text)
         {
+            if (text.StartsWith("//"))
+                return false;
+            if (text.StartsWith("\\\\"))
+                return false;
+
             if (ValidateIri(text))
                 return true;
 
