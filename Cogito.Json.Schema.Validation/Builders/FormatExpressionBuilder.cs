@@ -77,38 +77,70 @@ namespace Cogito.Json.Schema.Validation.Builders
             }
         }
 
-        static bool ValidateEmail(string value) =>
-            EmailHelpers.Validate(value, false);
+        static bool ValidateEmail(string value) => EmailHelpers.Validate(value, false);
 
-        static bool ValidateIdnEmail(string value) =>
-            EmailHelpers.Validate(value, true);
+        static bool ValidateIdnEmail(string value) => EmailHelpers.Validate(value, true);
 
-        static bool ValidateUri(string value) =>
-            Uri.IsWellFormedUriString(value, UriKind.Absolute);
+        static bool ValidateUri(string value) => FormatValidation.ValidateUri(value);
 
-        static bool ValidateUriReference(string value) =>
-            FormatHelpers.ValidateUriReference(value);
+        static bool ValidateUriReference(string value) => FormatValidation.ValidateUriReference(value);
 
-        static bool ValidateIri(string value) =>
-            Uri.IsWellFormedUriString(value, UriKind.Absolute);
+        static bool ValidateIri(string value) => FormatValidation.ValidateIri(value);
 
-        static bool ValidateIriReference(string value) =>
-            FormatHelpers.ValidateIriReference(value);
+        static bool ValidateIriReference(string value) => FormatValidation.ValidateIriReference(value);
 
-        static bool ValidateUriTemplate(string value) =>
-            FormatHelpers.ValidateUriTemplate(value);
+        static bool ValidateUriTemplate(string value) => FormatValidation.ValidateUriTemplate(value);
 
-        static bool ValidateJsonPointer(string value) =>
-            FormatHelpers.ValidateJsonPointer(value);
+        static bool ValidateJsonPointer(string value) => FormatValidation.ValidateJsonPointer(value);
 
-        static bool ValidateRelativeJsonPointer(string value) =>
-            FormatHelpers.ValidateRelativeJsonPointer(value);
+        static bool ValidateRelativeJsonPointer(string value) => FormatValidation.ValidateRelativeJsonPointer(value);
 
-        static bool ValidateDate(string value) =>
-            DateTime.TryParseExact(value, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var _);
+        static bool ValidateDate(string value) => DateTime.TryParseExact(value, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var _);
 
-        static bool ValidateTime(string value) =>
-            DateTime.TryParseExact(value, "HH:mm:ss.FFFFFFFK", CultureInfo.InvariantCulture, DateTimeStyles.None, out var _);
+        static bool ValidateTime(string value) => ValidateTimeRegex(value);
+
+        static readonly Regex TimeRegex = new Regex(@"^(?<h>\d{2})\:(?<m>\d{2})\:(?<s>\d{2})(\.(?<ms>\d+))?([Zz]|(?<o>[-+])(?<zh>\d{2}):(?<zm>\d{2}))?$", RegexOptions.CultureInvariant | RegexOptions.Compiled);
+
+        static bool ValidateTimeRegex(string value)
+        {
+            var r = TimeRegex.Match(value);
+            if (r.Success)
+            {
+                if (int.TryParse(r.Groups["h"].Value, out var h) && int.TryParse(r.Groups["m"].Value, out var m) && int.TryParse(r.Groups["s"].Value, out var s))
+                {
+                    // time values must be in range (leap seconds!)
+                    if (h < 0 || h > 23 || m < 0 || m > 59 || s < 0 || s > 60)
+                        return false;
+
+                    // leap second, but wrong hour
+                    if (s == 60 && h != 23)
+                        return false;
+
+                    // leap second, but wrong minute
+                    if (s == 60 && m != 59)
+                        return false;
+
+                    // millisecond value must be at least 0
+                    if (r.Groups["ms"] is Group msg && msg.Success && int.TryParse(msg.Value, out var ms))
+                        if (ms < 0)
+                            return false;
+
+                    // offset indicator exists but isn't proper value
+                    if (r.Groups["o"] is Group og && og.Success && og.Value != "-" && og.Value != "+")
+                        return false;
+
+                    // check that offset values are accurate
+                    if (r.Groups["zh"] is Group zhg && zhg.Success && r.Groups["zm"] is Group zmg && zmg.Success && int.TryParse(zhg.Value, out var zh) && int.TryParse(zmg.Value, out var zm))
+                        if (zh < 0 || zh > 23 || zm < 0 || zm > 59)
+                            return false;
+
+                    // all the checks succeeded
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         static bool ValidateDateTime(string value) =>
             DateTime.TryParseExact(value, @"yyyy-MM-dd\THH:mm:ss.FFFFFFFK", CultureInfo.InvariantCulture, DateTimeStyles.None, out var _) ||
@@ -143,25 +175,30 @@ namespace Cogito.Json.Schema.Validation.Builders
 
         static bool ValidateIdnHostname(string value)
         {
-            return IdnHostnameRegex.IsMatch(value) && value.IndexOfAny(DisallowedIdnChars) == -1 && IdnMapping.GetAscii(value).Split('.').All(i => i.Length <= 63);
+            return IdnHostnameRegex.IsMatch(value) && value.IndexOfAny(DisallowedIdnChars) == -1 && TryGetIdnAsciiString(value, out var idn) && idn.Split('.').All(i => i.Length <= 63);
+        }
+
+        static bool TryGetIdnAsciiString(string unicode, out string idn)
+        {
+            try
+            {
+                idn = IdnMapping.GetAscii(unicode);
+                return true;
+            }
+            catch (ArgumentException)
+            {
+
+            }
+
+            idn = null;
+            return false;
         }
 
         static bool ValidateColor(string value) => ColorHelpers.IsValid(value);
 
-        static bool ValidateIPv6(string value) => Uri.CheckHostName(value) == UriHostNameType.IPv6;
+        static bool ValidateIPv6(string value) => FormatValidation.ValidateIPv6(value);
 
-        static bool ValidateIPv4(string value)
-        {
-            var parts = value.Split('.');
-            if (parts.Length != 4)
-                return false;
-
-            for (var i = 0; i < parts.Length; i++)
-                if (!int.TryParse(parts[i], NumberStyles.Integer, CultureInfo.InvariantCulture, out var num) || num < 0 || num > 255)
-                    return false;
-
-            return true;
-        }
+        static bool ValidateIPv4(string value) => FormatValidation.ValidateIPv4(value);
 
     }
 

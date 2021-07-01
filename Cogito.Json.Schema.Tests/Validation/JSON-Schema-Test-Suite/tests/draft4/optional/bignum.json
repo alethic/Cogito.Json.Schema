@@ -61,7 +61,8 @@
             {
                 "description": "comparison works for high numbers",
                 "data": 18446744073709551600,
-                "valid": true
+                "valid": true,
+                "ignore": true
             }
         ]
     },
@@ -86,7 +87,8 @@
             {
                 "description": "comparison works for very negative numbers",
                 "data": -18446744073709551600,
-                "valid": true
+                "valid": true,
+                "ignore": true
             }
         ]
     },

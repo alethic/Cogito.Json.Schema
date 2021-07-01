@@ -75,13 +75,15 @@
     {
         "description": "escaped pointer ref",
         "schema": {
-            "tilda~field": {"type": "integer"},
-            "slash/field": {"type": "integer"},
-            "percent%field": {"type": "integer"},
+            "definitions": {
+                "tilde~field": {"type": "integer"},
+                "slash/field": {"type": "integer"},
+                "percent%field": {"type": "integer"}
+            },
             "properties": {
-                "tilda": {"$ref": "#/tilda~0field"},
-                "slash": {"$ref": "#/slash~1field"},
-                "percent": {"$ref": "#/percent%25field"}
+                "tilde": {"$ref": "#/definitions/tilde~0field"},
+                "slash": {"$ref": "#/definitions/slash~1field"},
+                "percent": {"$ref": "#/definitions/percent%25field"}
             }
         },
         "tests": [
@@ -91,8 +93,8 @@
                 "valid": false
             },
             {
-                "description": "tilda invalid",
-                "data": {"tilda": "aoeu"},
+                "description": "tilde invalid",
+                "data": {"tilde": "aoeu"},
                 "valid": false
             },
             {
@@ -106,8 +108,8 @@
                 "valid": true
             },
             {
-                "description": "tilda valid",
-                "data": {"tilda": 123},
+                "description": "tilde valid",
+                "data": {"tilde": 123},
                 "valid": true
             },
             {
@@ -125,7 +127,7 @@
                 "b": {"$ref": "#/definitions/a"},
                 "c": {"$ref": "#/definitions/b"}
             },
-            "$ref": "#/definitions/c"
+            "allOf": [{ "$ref": "#/definitions/c" }]
         },
         "tests": [
             {
@@ -194,6 +196,31 @@
         "schema": {
             "properties": {
                 "$ref": {"type": "string"}
+            }
+        },
+        "tests": [
+            {
+                "description": "property named $ref valid",
+                "data": {"$ref": "a"},
+                "valid": true
+            },
+            {
+                "description": "property named $ref invalid",
+                "data": {"$ref": 2},
+                "valid": false
+            }
+        ]
+    },
+    {
+        "description": "property named $ref, containing an actual $ref",
+        "schema": {
+            "properties": {
+                "$ref": {"$ref": "#/definitions/is-string"}
+            },
+            "definitions": {
+                "is-string": {
+                    "type": "string"
+                }
             }
         },
         "tests": [
@@ -294,6 +321,140 @@
                     ]
                 },
                 "valid": false
+            }
+        ]
+    },
+    {
+        "description": "refs with quote",
+        "schema": {
+            "properties": {
+                "foo\"bar": {"$ref": "#/definitions/foo%22bar"}
+            },
+            "definitions": {
+                "foo\"bar": {"type": "number"}
+            }
+        },
+        "tests": [
+            {
+                "description": "object with numbers is valid",
+                "data": {
+                    "foo\"bar": 1
+                },
+                "valid": true
+            },
+            {
+                "description": "object with strings is invalid",
+                "data": {
+                    "foo\"bar": "1"
+                },
+                "valid": false
+            }
+        ]
+    },
+    {
+        "description": "Location-independent identifier",
+        "schema": {
+            "allOf": [{
+                "$ref": "#foo"
+            }],
+            "definitions": {
+                "A": {
+                    "id": "#foo",
+                    "type": "integer"
+                }
+            }
+        },
+        "tests": [
+            {
+                "data": 1,
+                "description": "match",
+                "valid": true
+            },
+            {
+                "data": "a",
+                "description": "mismatch",
+                "valid": false
+            }
+        ]
+    },
+    {
+        "description": "Location-independent identifier with absolute URI",
+        "schema": {
+            "allOf": [{
+                "$ref": "http://localhost:1234/bar#foo"
+            }],
+            "definitions": {
+                "A": {
+                    "id": "http://localhost:1234/bar#foo",
+                    "type": "integer"
+                }
+            }
+        },
+        "tests": [
+            {
+                "data": 1,
+                "description": "match",
+                "valid": true
+            },
+            {
+                "data": "a",
+                "description": "mismatch",
+                "valid": false
+            }
+        ]
+    },
+    {
+        "description": "Location-independent identifier with base URI change in subschema",
+        "schema": {
+            "id": "http://localhost:1234/root",
+            "allOf": [{
+                "$ref": "http://localhost:1234/nested.json#foo"
+            }],
+            "definitions": {
+                "A": {
+                    "id": "nested.json",
+                    "definitions": {
+                        "B": {
+                            "id": "#foo",
+                            "type": "integer"
+                        }
+                    }
+                }
+            }
+        },
+        "tests": [
+            {
+                "data": 1,
+                "description": "match",
+                "valid": true
+            },
+            {
+                "data": "a",
+                "description": "mismatch",
+                "valid": false
+            }
+        ]
+    },
+    {
+        "description": "naive replacement of $ref with its destination is not correct",
+        "schema": {
+            "definitions": {
+                "a_string": { "type": "string" }
+            },
+            "enum": [
+                { "$ref": "#/definitions/a_string" }
+            ]
+        },
+        "tests": [
+            {
+                "description": "do not evaluate the $ref inside the enum, matching any string",
+                "data": "this is a string",
+                "valid": false
+            },
+            {
+                "description": "match the enum exactly",
+                "data": { "$ref": "#/definitions/a_string" },
+                "valid": true
             }
         ]
     }
