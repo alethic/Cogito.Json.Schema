@@ -15,11 +15,24 @@ namespace Cogito.Json.Schema.Validation.Builders
     /// <summary>
     /// Implements validation of the 'format' JSON schema test.
     /// </summary>
-    public class FormatExpressionBuilder : ExpressionBuilderBase
+    class FormatExpressionBuilder : ExpressionBuilderBase
     {
 
         public override Expression Build(JSchemaExpressionBuilder builder, JSchema schema, Expression token)
         {
+            var enable = builder.Options.ValidateFormat;
+
+            // content restrictions are annotations in later versions
+            if (enable == null)
+                if (schema.SchemaVersion == Constants.SchemaVersions.Draft201909)
+                    enable = false;
+                else
+                    enable = true;
+
+            // we've been instructed to not validate format
+            if (enable == false)
+                return null;
+
             if (schema.Format == null)
                 return null;
 

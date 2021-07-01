@@ -289,6 +289,11 @@ namespace Cogito.Json.Schema.Validation
         }
 
         /// <summary>
+        /// Gets the options configured on the builder.
+        /// </summary>
+        public JSchemaExpressionBuilderOptions Options => options;
+
+        /// <summary>
         /// Builds an expression tree that implements validation of JSON.
         /// </summary>
         /// <param name="schema"></param>
@@ -494,7 +499,7 @@ namespace Cogito.Json.Schema.Validation
             var enable = options.ValidateFormat;
 
             // content restrictions are annotations in later versions
-            if (options == null)
+            if (enable == null)
                 if (schema.SchemaVersion == Constants.SchemaVersions.Draft201909)
                     enable = false;
                 else
