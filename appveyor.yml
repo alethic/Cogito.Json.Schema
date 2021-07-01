@@ -22,11 +22,6 @@ build:
   verbosity: minimal
   project: Cogito.Json.Schema.sln
 
-test:
-  assemblies:
-    only:
-    - '**/*.Tests.dll'
-
 artifacts:
   - path: pkg\*.nupkg
     name: Cogito.Json.Schema
