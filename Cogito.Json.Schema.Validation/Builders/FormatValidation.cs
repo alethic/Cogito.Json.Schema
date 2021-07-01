@@ -55,8 +55,6 @@ namespace Cogito.Json.Schema.Validation.Builders
 
         public static bool ValidateUriReference(string text)
         {
-            if (text.StartsWith("//"))
-                return false;
             if (text.StartsWith("\\\\"))
                 return false;
 
@@ -74,8 +72,6 @@ namespace Cogito.Json.Schema.Validation.Builders
 
         public static bool ValidateIriReference(string text)
         {
-            if (text.StartsWith("//"))
-                return false;
             if (text.StartsWith("\\\\"))
                 return false;
 
