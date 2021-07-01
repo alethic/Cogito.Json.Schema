@@ -22,20 +22,22 @@ build:
   verbosity: minimal
   project: Cogito.Json.Schema.sln
 
-test:
-  assemblies:
-  - '**/Tests.dll'
-
 artifacts:
   - path: pkg\*.nupkg
     name: Cogito.Json.Schema
-
-deploy:
-  provider: NuGet
-  server: https://nuget.pkg.github.com/alethic/index.json
-  username: wasabii
-  api_key:
-    secure: u7+1z/CZGBli+CiDxHSQetMjE1dbaf1f9eJtSCb8wifl7s1+AdnhWjnsjGQaEsAw
-  skip_symbols: false
-  symbol_server:
-  artifact: /.*\.nupkg/
+ 
+for:
+-
+  branches:
+    only:
+    - master
+    - develop
+  deploy:
+    provider: NuGet
+    server: https://nuget.pkg.github.com/alethic/index.json
+    username: wasabii
+    api_key:
+      secure: u7+1z/CZGBli+CiDxHSQetMjE1dbaf1f9eJtSCb8wifl7s1+AdnhWjnsjGQaEsAw
+    skip_symbols: false
+    symbol_server:
+    artifact: /.*\.nupkg/

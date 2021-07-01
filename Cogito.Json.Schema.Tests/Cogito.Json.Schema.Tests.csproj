@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net47;netcoreapp2.0;netcoreapp3.0;net5.0</TargetFrameworks>
+    <TargetFrameworks>net47;netcoreapp2.1;netcoreapp3.1;net5.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="FluentAssertions.Json" Version="5.5.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
@@ -26,10 +25,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Cogito.Json.Schema.Validation\Cogito.Json.Schema.Validation.csproj" />
     <ProjectReference Include="..\Cogito.Json.Schema\Cogito.Json.Schema.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 
   <ItemGroup>
