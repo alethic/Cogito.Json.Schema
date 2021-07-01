@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net47;netcoreapp2.0;netcoreapp3.0;net5.0</TargetFrameworks>
+    <TargetFrameworks>net47;netcoreapp3.0;net5.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -17,7 +17,7 @@
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="FluentAssertions.Json" Version="5.5.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.5" />
     <PackageReference Include="MSTest.TestFramework" Version="2.2.5" />
   </ItemGroup>
