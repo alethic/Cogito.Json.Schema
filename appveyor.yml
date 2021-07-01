@@ -24,7 +24,8 @@ build:
 
 test:
   assemblies:
-  - '**/Tests.dll'
+    only:
+    - '**/*.Tests.dll'
 
 artifacts:
   - path: pkg\*.nupkg
