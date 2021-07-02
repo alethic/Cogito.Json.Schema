@@ -1,5 +1,6 @@
 [
     {
+        "treat-format-as-assertion": true,
         "description": "uuid format",
         "schema": {
             "format": "uuid"

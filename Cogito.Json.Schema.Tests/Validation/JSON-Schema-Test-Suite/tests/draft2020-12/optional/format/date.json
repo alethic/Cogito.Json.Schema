@@ -1,7 +1,8 @@
 [
     {
+        "$treat-format-as-assertion": true,
         "description": "validation of date strings",
-        "schema": {"format": "date"},
+        "schema": { "format": "date" },
         "tests": [
             {
                 "description": "a valid date string",

@@ -1,7 +1,8 @@
 [
     {
+        "treat-format-as-assertion": true,
         "description": "validation of IP addresses",
-        "schema": {"format": "ipv4"},
+        "schema": { "format": "ipv4" },
         "tests": [
             {
                 "description": "a valid IP address",

@@ -1,7 +1,8 @@
 [
     {
+        "treat-format-as-assertion": true,
         "description": "validation of IRIs",
-        "schema": {"format": "iri"},
+        "schema": { "format": "iri" },
         "tests": [
             {
                 "description": "a valid IRI with anchor tag",

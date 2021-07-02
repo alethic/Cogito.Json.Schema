@@ -1,7 +1,8 @@
 [
     {
+        "treat-format-as-assertion": true,
         "description": "validation of host names",
-        "schema": {"format": "hostname"},
+        "schema": { "format": "hostname" },
         "tests": [
             {
                 "description": "a valid host name",

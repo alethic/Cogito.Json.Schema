@@ -1,7 +1,8 @@
 [
     {
+        "treat-format-as-assertion": true,
         "description": "format: uri-template",
-        "schema": {"format": "uri-template"},
+        "schema": { "format": "uri-template" },
         "tests": [
             {
                 "description": "a valid uri-template",

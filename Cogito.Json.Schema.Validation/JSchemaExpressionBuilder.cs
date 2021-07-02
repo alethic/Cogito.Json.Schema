@@ -256,9 +256,18 @@ namespace Cogito.Json.Schema.Validation
         /// Creates a new instance of the expression builder with the default configuration.
         /// </summary>
         /// <returns></returns>
-        public static JSchemaExpressionBuilder CreateDefault()
+        public static JSchemaExpressionBuilder Create(JSchemaExpressionBuilderOptions options)
         {
-            return new JSchemaExpressionBuilder(new JSchemaExpressionBuilderOptions() { }, DefaultContainer.Value.ResolveAll<IExpressionBuilder>());
+            return new JSchemaExpressionBuilder(options, DefaultContainer.Value.ResolveAll<IExpressionBuilder>());
+        }
+
+        /// <summary>
+        /// Creates a new instance of the expression builder with the default configuration.
+        /// </summary>
+        /// <returns></returns>
+        public static JSchemaExpressionBuilder Create()
+        {
+            return new JSchemaExpressionBuilder(DefaultContainer.Value.ResolveAll<IExpressionBuilder>());
         }
 
         readonly JSchemaExpressionBuilderOptions options;
@@ -302,7 +311,7 @@ namespace Cogito.Json.Schema.Validation
         {
             if (schema == null)
                 throw new ArgumentNullException(nameof(schema));
-            
+
             var t = Expression.Parameter(typeof(JToken), "t");
             var e = Build(schema, t);
             return Expression.Lambda<Func<JToken, bool>>(e, t);
@@ -480,18 +489,18 @@ namespace Cogito.Json.Schema.Validation
                 return null;
 
             if (max == null && min == 1)
-                return BuildContains(schema, o);
+                return BuildContainsFunc(schema, o);
 
             if (max == null && min >= 2)
-                return BuildContainsWithMin(schema, o, min);
+                return BuildContainsWithMinFunc(schema, o, min);
 
             if (max != null && min != 0)
-                return BuildContainsWithMinAndMax(schema, o, min, (int)max);
+                return BuildContainsWithMinAndMaxFunc(schema, o, min, (int)max);
 
             return null;
         }
 
-        Expression BuildContain(JSchema schema, Expression o)
+        Expression BuildContainsFunc(JSchema schema, Expression o)
         {
             return IfThenElseTrue(
                 IsTokenType(o, JTokenType.Array),
@@ -510,7 +519,7 @@ namespace Cogito.Json.Schema.Validation
             return false;
         }
 
-        Expression BuildContainsWithMin(JSchema schema, Expression o, int min)
+        Expression BuildContainsWithMinFunc(JSchema schema, Expression o, int min)
         {
             return IfThenElseTrue(
                 IsTokenType(o, JTokenType.Array),
@@ -533,7 +542,7 @@ namespace Cogito.Json.Schema.Validation
             return false;
         }
 
-        Expression BuildContainsWithMinAndMax(JSchema schema, Expression o, int min, int max)
+        Expression BuildContainsWithMinAndMaxFunc(JSchema schema, Expression o, int min, int max)
         {
             return IfThenElseTrue(
                 IsTokenType(o, JTokenType.Array),

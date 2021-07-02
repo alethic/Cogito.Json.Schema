@@ -1,7 +1,8 @@
 [
     {
+        "treat-format-as-assertion": true,
         "description": "validation of Relative JSON Pointers (RJP)",
-        "schema": {"format": "relative-json-pointer"},
+        "schema": { "format": "relative-json-pointer" },
         "tests": [
             {
                 "description": "a valid upwards RJP",

@@ -1,7 +1,8 @@
 [
     {
+        "treat-format-as-assertion": true,
         "description": "validation of URIs",
-        "schema": {"format": "uri"},
+        "schema": { "format": "uri" },
         "tests": [
             {
                 "description": "a valid URL with anchor tag",

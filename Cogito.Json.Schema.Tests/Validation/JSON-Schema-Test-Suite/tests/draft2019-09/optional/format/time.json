@@ -1,7 +1,8 @@
 [
     {
+        "treat-format-as-assertion": true,
         "description": "validation of time strings",
-        "schema": {"format": "time"},
+        "schema": { "format": "time" },
         "tests": [
             {
                 "description": "a valid time string",

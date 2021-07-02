@@ -1,5 +1,6 @@
 [
     {
+        "treat-format-as-assertion": true,
         "description": "validation of internationalized host names",
         "schema": { "format": "idn-hostname" },
         "tests": [

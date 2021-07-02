@@ -41,6 +41,16 @@ TestSuite(new Uri("https://json-schema.org/draft/2019-09/schema"), "draft2019-09
 
 <#+
 
+string BoolToString(bool? value)
+{
+    return value switch
+    {
+        true => "true",
+        false => "false",
+        null => "null",
+    };
+}
+
 void TestSuite(Uri version, string name)
 {
     var suiteDir = new DirectoryInfo(Path.Combine(Host.ResolvePath(""), "JSON-Schema-Test-Suite", "tests", name));
@@ -70,6 +80,7 @@ void WriteTestFile(Uri version, FileInfo file, string suiteName, string category
         var d = (string)group["description"];
         var s = (JToken)group["schema"];
         var t = (JArray)group["tests"];
+        var faa = (bool?)group["treat-format-as-assertion"];
         var o = (bool?)group["ignore"];
 
         int j = 0;
@@ -81,6 +92,7 @@ void WriteTestFile(Uri version, FileInfo file, string suiteName, string category
             var d2 = (string)test["description"];
             var t2 = (JToken)test["data"];
             var v2 = (bool)test["valid"];
+            var faa2 = (bool?)group["treat-format-as-assertion"];
             var o2 = (bool?)test["ignore"];
 #>
 
@@ -102,17 +114,20 @@ void WriteTestFile(Uri version, FileInfo file, string suiteName, string category
 
             s.SchemaVersion = new Uri("<#= version #>");
 
+            var o = new JSchemaExpressionBuilderOptions();
+            o.TreatFormatAsAssertion = <#= BoolToString(faa2 ?? faa) #>;
+
 <#+
             if (v2)
             {
 #>
-            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeTrue();
+            JSchemaExpressionBuilder.Create(o).Build(s).Compile()(t).Should().BeTrue();
 <#+
             }
             else
             {
 #>
-            JSchemaExpressionBuilder.CreateDefault().Build(s).Compile()(t).Should().BeFalse();
+            JSchemaExpressionBuilder.Create(o).Build(s).Compile()(t).Should().BeFalse();
 <#+
             }
 #>
