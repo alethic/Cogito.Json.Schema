@@ -112,24 +112,24 @@ namespace Cogito.Json.Schema.Validation.Builders
 
         static bool ValidateRelativeJsonPointer(string value) => FormatValidation.ValidateRelativeJsonPointer(value);
 
-        static readonly Regex DurationRegex = new Regex(@"^P(?!$)((?<y>\d+)(?:\.\d+)?Y)?((?<M>\d+)(?:\.\d+)?M)?((?<w>\d+)(?:\.\d+)?W)?((?<d>\d+)(?:\.\d+)?D)?(T(?=\d)((?<h>\d+)(?:\.\d+)?H)?((?<m>\d+)(?:\.\d+)?m)?((?<s>\d+)(?:\.\d+)?S)?)?$", RegexOptions.CultureInvariant | RegexOptions.Compiled);
+        static readonly Regex DurationRegex = new Regex(@"^P(?!$)((?<y>\d+)(?:\.\d+)?Y)?((?<M>\d+)(?:\.\d+)?M)?((?<w>\d+)(?:\.\d+)?W)?((?<d>\d+)(?:\.\d+)?D)?(T(?=\d)((?<h>\d+)(?:\.\d+)?H)?((?<m>\d+)(?:\.\d+)?M)?((?<s>\d+)(?:\.\d+)?S)?)?$", RegexOptions.CultureInvariant | RegexOptions.Compiled);
 
         static bool ValidateDuration(string value)
         {
             var r = DurationRegex.Match(value);
             if (r.Success)
             {
-                var y = r.Groups["y"] is Group yg && yg.Success && int.TryParse(yg.Value, out var y_) ? (int?)y_ : null;
-                var M = r.Groups["M"] is Group Mg && Mg.Success && int.TryParse(Mg.Value, out var M_) ? (int?)M_ : null;
                 var w = r.Groups["w"] is Group wg && wg.Success && int.TryParse(wg.Value, out var w_) ? (int?)w_ : null;
-                var d = r.Groups["d"] is Group dg && dg.Success && int.TryParse(dg.Value, out var d_) ? (int?)d_ : null;
-                var h = r.Groups["h"] is Group hg && hg.Success && int.TryParse(hg.Value, out var h_) ? (int?)h_ : null;
-                var m = r.Groups["m"] is Group mg && mg.Success && int.TryParse(mg.Value, out var m_) ? (int?)m_ : null;
-                var s = r.Groups["s"] is Group sg && sg.Success && int.TryParse(sg.Value, out var s_) ? (int?)s_ : null;
 
                 if (w != null)
+                {
+                    var y = r.Groups["y"] is Group yg && yg.Success && int.TryParse(yg.Value, out var y_) ? (int?)y_ : null;
+                    var d = r.Groups["d"] is Group dg && dg.Success && int.TryParse(dg.Value, out var d_) ? (int?)d_ : null;
+                    var m = r.Groups["m"] is Group mg && mg.Success && int.TryParse(mg.Value, out var m_) ? (int?)m_ : null;
+
                     if (y != null || m != null || d != null)
                         return false;
+                }
 
                 return true;
             }

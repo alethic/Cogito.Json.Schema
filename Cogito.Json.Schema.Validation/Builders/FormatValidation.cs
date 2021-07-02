@@ -107,7 +107,7 @@ namespace Cogito.Json.Schema.Validation.Builders
 
         public static bool ValidateUuid(string value)
         {
-            return Guid.TryParse(value, out _);
+            return Guid.TryParseExact(value, "D", out _);
         }
 
     }
