@@ -20,8 +20,8 @@ namespace Cogito.Json.Schema.Validation.Builders
 
         public override Expression Build(JSchemaExpressionBuilder builder, JSchema schema, Expression token)
         {
-            var enable = builder.Options.ValidateFormat;
-
+            var enable = builder.Options.TreatFormatAsAssertion;
+            
             // content restrictions are annotations in later versions
             if (enable == null)
                 if (schema.SchemaVersion == Constants.SchemaVersions.Draft201909)
@@ -85,6 +85,8 @@ namespace Cogito.Json.Schema.Validation.Builders
                     return CallThis(nameof(ValidateUtcMilliseconds), o);
                 case Constants.Formats.Regex:
                     return CallThis(nameof(ValidateRegex), o);
+                case Constants.Formats.Uuid:
+                    return CallThis(nameof(ValidateUuid), o);
                 default:
                     return True;
             }
@@ -239,6 +241,8 @@ namespace Cogito.Json.Schema.Validation.Builders
         static bool ValidateIPv6(string value) => FormatValidation.ValidateIPv6(value);
 
         static bool ValidateIPv4(string value) => FormatValidation.ValidateIPv4(value);
+
+        static bool ValidateUuid(string value) => FormatValidation.ValidateUuid(value);
 
     }
 

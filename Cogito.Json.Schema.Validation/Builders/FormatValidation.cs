@@ -104,6 +104,12 @@ namespace Cogito.Json.Schema.Validation.Builders
         {
             return Uri.CheckHostName(value) == UriHostNameType.IPv6 && IPAddress.TryParse(value, out var ip) && ip.AddressFamily == AddressFamily.InterNetworkV6 && value.Contains("%") == false;
         }
+
+        public static bool ValidateUuid(string value)
+        {
+            return Guid.TryParse(value, out _);
+        }
+
     }
 
 }

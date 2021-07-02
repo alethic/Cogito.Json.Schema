@@ -8,9 +8,14 @@
     {
 
         /// <summary>
-        /// Indicates whether validation of the 'format' keyword will be enabled. By default this is determined by the JSON schema version being validated.
+        /// Indicates whether assertion of the 'content' keywords will be enabled. By default this is determined by the JSON schema version being validated.
         /// </summary>
-        public bool? ValidateFormat { get; set; }
+        public bool? TreatContentAsAssertion { get; set; }
+
+        /// <summary>
+        /// Indicates whether assertion of the 'format' keyword will be enabled. By default this is determined by the JSON schema version being validated.
+        /// </summary>
+        public bool? TreatFormatAsAssertion { get; set; }
 
     }
 

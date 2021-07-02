@@ -43,6 +43,7 @@ namespace Cogito.Json.Schema.Validation.Internal
             public const string IPv4 = "ipv4";
             public const string Email = "email";
             public const string IdnEmail = "idn-email";
+            public const string Uuid = "uuid";
 
         }
 

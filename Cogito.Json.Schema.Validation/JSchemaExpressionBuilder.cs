@@ -258,7 +258,7 @@ namespace Cogito.Json.Schema.Validation
         /// <returns></returns>
         public static JSchemaExpressionBuilder CreateDefault()
         {
-            return new JSchemaExpressionBuilder(DefaultContainer.Value.ResolveAll<IExpressionBuilder>());
+            return new JSchemaExpressionBuilder(new JSchemaExpressionBuilderOptions() { }, DefaultContainer.Value.ResolveAll<IExpressionBuilder>());
         }
 
         readonly JSchemaExpressionBuilderOptions options;
@@ -302,7 +302,7 @@ namespace Cogito.Json.Schema.Validation
         {
             if (schema == null)
                 throw new ArgumentNullException(nameof(schema));
-
+            
             var t = Expression.Parameter(typeof(JToken), "t");
             var e = Build(schema, t);
             return Expression.Lambda<Func<JToken, bool>>(e, t);
@@ -562,7 +562,7 @@ namespace Cogito.Json.Schema.Validation
 
         Expression BuildContent(JSchema schema, Expression o)
         {
-            var enable = options.ValidateFormat;
+            var enable = options.TreatContentAsAssertion;
 
             // content restrictions are annotations in later versions
             if (enable == null)
