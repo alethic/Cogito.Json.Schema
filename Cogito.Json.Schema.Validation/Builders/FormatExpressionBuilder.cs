@@ -21,7 +21,7 @@ namespace Cogito.Json.Schema.Validation.Builders
         public override Expression Build(JSchemaExpressionBuilder builder, JSchema schema, Expression token)
         {
             var enable = builder.Options.TreatFormatAsAssertion;
-            
+
             // content restrictions are annotations in later versions
             if (enable == null)
                 if (schema.SchemaVersion == Constants.SchemaVersions.Draft201909)
@@ -50,6 +50,8 @@ namespace Cogito.Json.Schema.Validation.Builders
                 case Constants.Formats.Hostname:
                 case Constants.Formats.Draft3Hostname:
                     return CallThis(nameof(ValidateHostname), o);
+                case Constants.Formats.Duration:
+                    return CallThis(nameof(ValidateDuration), o);
                 case Constants.Formats.IdnHostname:
                     return CallThis(nameof(ValidateIdnHostname), o);
                 case Constants.Formats.IPv4:
@@ -109,6 +111,31 @@ namespace Cogito.Json.Schema.Validation.Builders
         static bool ValidateJsonPointer(string value) => FormatValidation.ValidateJsonPointer(value);
 
         static bool ValidateRelativeJsonPointer(string value) => FormatValidation.ValidateRelativeJsonPointer(value);
+
+        static readonly Regex DurationRegex = new Regex(@"^P(?!$)((?<y>\d+)(?:\.\d+)?Y)?((?<M>\d+)(?:\.\d+)?M)?((?<w>\d+)(?:\.\d+)?W)?((?<d>\d+)(?:\.\d+)?D)?(T(?=\d)((?<h>\d+)(?:\.\d+)?H)?((?<m>\d+)(?:\.\d+)?m)?((?<s>\d+)(?:\.\d+)?S)?)?$", RegexOptions.CultureInvariant | RegexOptions.Compiled);
+
+        static bool ValidateDuration(string value)
+        {
+            var r = DurationRegex.Match(value);
+            if (r.Success)
+            {
+                var y = r.Groups["y"] is Group yg && yg.Success && int.TryParse(yg.Value, out var y_) ? (int?)y_ : null;
+                var M = r.Groups["M"] is Group Mg && Mg.Success && int.TryParse(Mg.Value, out var M_) ? (int?)M_ : null;
+                var w = r.Groups["w"] is Group wg && wg.Success && int.TryParse(wg.Value, out var w_) ? (int?)w_ : null;
+                var d = r.Groups["d"] is Group dg && dg.Success && int.TryParse(dg.Value, out var d_) ? (int?)d_ : null;
+                var h = r.Groups["h"] is Group hg && hg.Success && int.TryParse(hg.Value, out var h_) ? (int?)h_ : null;
+                var m = r.Groups["m"] is Group mg && mg.Success && int.TryParse(mg.Value, out var m_) ? (int?)m_ : null;
+                var s = r.Groups["s"] is Group sg && sg.Success && int.TryParse(sg.Value, out var s_) ? (int?)s_ : null;
+
+                if (w != null)
+                    if (y != null || m != null || d != null)
+                        return false;
+
+                return true;
+            }
+
+            return false;
+        }
 
         static bool ValidateDate(string value) => DateTime.TryParseExact(value, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var _);
 

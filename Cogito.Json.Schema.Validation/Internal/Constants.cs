@@ -22,6 +22,7 @@ namespace Cogito.Json.Schema.Validation.Internal
 
             public const string Draft3Hostname = "host-name";
             public const string Draft3IPv4 = "ip-address";
+            public const string Duration = "duration";
             public const string Hostname = "hostname";
             public const string IdnHostname = "idn-hostname";
             public const string DateTime = "date-time";
