@@ -138,8 +138,12 @@ jobs:
         }
 
         # scan and process test assemblies
-        # the suite name is the assembly name; a missing path is a staging gap and must fail
-        $tests = $(gi .\tests\$tst\$tfm\$tst.dll)
+        # under the MSTest SDK a .NET Framework suite builds as an .exe, not a .dll;
+        # a suite that is staged at neither is a staging gap and must fail
+        $dir = ".\tests\$tst\$tfm"
+        $tests = $(gi "$dir\$tst.dll" -ErrorAction SilentlyContinue)
+        if (-not $tests) { $tests = $(gi "$dir\$tst.exe" -ErrorAction SilentlyContinue) }
+        if (-not $tests) { throw "no test assembly staged for $tst at $tfm" }
         if ($tests) {
             $argl = @(
                 "-f", $tfm,
