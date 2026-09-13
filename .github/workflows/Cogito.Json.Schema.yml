@@ -1,0 +1,135 @@
+name: Cogito.Json.Schema
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+  release:
+    types:
+    - created
+
+jobs:
+  build:
+    name: Build
+    runs-on: windows-2022
+    permissions:
+      contents: read
+      packages: read
+    steps:
+    - name: Checkout Source
+      uses: actions/checkout@v6
+      with:
+        fetch-depth: 0
+    - name: Setup .NET 10.0
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: 10.0.x
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v4
+      with:
+        versionSpec: 6.x
+    - name: Execute GitVersion
+      uses: gittools/actions/gitversion/execute@v4
+      with:
+        useConfigFile: true
+    - name: Add NuGet Source (GitHub)
+      shell: pwsh
+      run: dotnet nuget add source $env:GITHUB_REPOS --name ${{ github.repository_owner }} --username USERNAME --password $env:GITHUB_TOKEN --store-password-in-clear-text
+      env:
+        GITHUB_REPOS: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: NuGet Restore
+      run: dotnet restore Cogito.Json.Schema.sln
+    - name: Build
+      shell: pwsh
+      run: |
+        dotnet build Cogito.Json.Schema.sln --no-restore /bl `
+          /p:Configuration="Release" `
+          /p:Version=${env:GitVersion_FullSemVer} `
+          /p:AssemblyVersion=${env:GitVersion_AssemblySemVer} `
+          /p:InformationalVersion=${env:GitVersion_InformationalVersion} `
+          /p:FileVersion=${env:GitVersion_AssemblySemFileVer} `
+          /p:PackageVersion=${env:GitVersion_FullSemVer} `
+          /p:RepositoryUrl="${env:GITHUB_SERVER_URL}/${env:GITHUB_REPOSITORY}.git" `
+          /p:PackageProjectUrl="${env:GITHUB_SERVER_URL}/${env:GITHUB_REPOSITORY}" `
+          /p:ContinuousIntegrationBuild=true `
+          /p:PackageOutputPath="${{ github.workspace }}/dist/nuget"
+    - name: Test
+      run: dotnet test Cogito.Json.Schema.sln -c Release --no-build --logger:trx --results-directory TestResults
+    - name: Upload Test Results
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v7
+      with:
+        name: TestResults
+        path: TestResults
+    - name: Upload MSBuild Log
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v7
+      with:
+        name: msbuild.binlog
+        path: msbuild.binlog
+    - name: Upload NuGet Packages
+      uses: actions/upload-artifact@v7
+      with:
+        name: nuget
+        path: dist/nuget
+  release:
+    name: Release
+    if: github.event_name != 'pull_request'
+    needs:
+    - build
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+      packages: write
+    steps:
+    - name: Checkout Source
+      uses: actions/checkout@v6
+      with:
+        fetch-depth: 0
+    - name: Setup .NET 10.0
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: 10.0.x
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v4
+      with:
+        versionSpec: 6.x
+    - name: Execute GitVersion
+      id: GitVersion
+      uses: gittools/actions/gitversion/execute@v4
+      with:
+        useConfigFile: true
+    - name: Download NuGet Packages
+      uses: actions/download-artifact@v8
+      with:
+        name: nuget
+        path: dist/nuget
+    - name: Create Release
+      if: github.ref_type == 'tag'
+      uses: ncipollo/release-action@v1
+      with:
+        tag: ${{ steps.GitVersion.outputs.semVer }}
+        allowUpdates: true
+        omitBodyDuringUpdate: true
+        replacesArtifacts: true
+        artifacts: dist/nuget/*.nupkg,dist/nuget/*.snupkg
+        makeLatest: true
+        token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Push NuGet (GitHub)
+      shell: pwsh
+      run: dotnet nuget push dist/nuget/*.nupkg --source $env:GITHUB_REPOS --api-key $env:GITHUB_TOKEN --skip-duplicate
+      env:
+        GITHUB_REPOS: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Push NuGet
+      if: github.ref_type == 'tag'
+      shell: pwsh
+      run: dotnet nuget push dist/nuget/*.nupkg --source $env:NUGET_REPOS --api-key $env:NUGET_TOKEN --skip-duplicate
+      env:
+        NUGET_REPOS: https://api.nuget.org/v3/index.json
+        NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
