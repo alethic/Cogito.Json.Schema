@@ -41,7 +41,7 @@ namespace Cogito.Json.Schema.Tests.Validation
             public override Stream GetSchemaResource(ResolveSchemaContext context, SchemaReference reference)
             {
                 if (reference.BaseUri.Host == "localhost")
-                    return File.OpenRead(Path.Combine(baseDir, @"JSON-Schema-Test-Suite", "remotes", reference.BaseUri.LocalPath.Trim('/').Replace('/', '\\')));
+                    return File.OpenRead(Path.Combine(baseDir, @"JSON-Schema-Test-Suite", "remotes", reference.BaseUri.LocalPath.Trim('/').Replace('/', Path.DirectorySeparatorChar)));
 
                 return nested.GetSchemaResource(context, reference);
             }
