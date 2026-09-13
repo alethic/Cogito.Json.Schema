@@ -1,0 +1,18 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+    <File Path=".github/workflows/Cogito.Json.Schema.yml" />
+    <File Path="Cogito.Json.Schema.dist.msbuildproj" />
+    <File Path="Directory.Build.props" />
+    <File Path="GitVersion.yml" />
+    <File Path="global.json" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="src/Cogito.Json.Schema.Tests/Cogito.Json.Schema.Tests.csproj" />
+  <Project Path="src/Cogito.Json.Schema.Validation/Cogito.Json.Schema.Validation.csproj" />
+  <Project Path="src/Cogito.Json.Schema/Cogito.Json.Schema.csproj" />
+  <Folder Name="/dist/">
+    <Project Path="src/dist-nuget/dist-nuget.csproj" />
+    <Project Path="src/dist-tests/dist-tests.csproj" />
+  </Folder>
+</Solution>
