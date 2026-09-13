@@ -1,4 +1,6 @@
 # Cogito.Json.Schema
+
+[![Build](https://github.com/alethic/Cogito.Json.Schema/actions/workflows/Cogito.Json.Schema.yml/badge.svg)](https://github.com/alethic/Cogito.Json.Schema/actions/workflows/Cogito.Json.Schema.yml)
 Various utilities for working with JSON schema. Contains an incredibly fast JSchema validator.
 
 ## Cogito.Json.Schema.Validation
@@ -14,3 +16,10 @@ var schema = new JSchema();
 var validator = JSchemaExpressionBuilder.CreateDefault().Build(schema).Compile();
 validator.Invoke(new JObject());
 ```
+
+## Packages
+
+| Package | Version |
+| --- | --- |
+| [Cogito.Json.Schema](https://www.nuget.org/packages/Cogito.Json.Schema) | [![NuGet](https://img.shields.io/nuget/v/Cogito.Json.Schema.svg)](https://www.nuget.org/packages/Cogito.Json.Schema) |
+| [Cogito.Json.Schema.Validation](https://www.nuget.org/packages/Cogito.Json.Schema.Validation) | [![NuGet](https://img.shields.io/nuget/v/Cogito.Json.Schema.Validation.svg)](https://www.nuget.org/packages/Cogito.Json.Schema.Validation) |
