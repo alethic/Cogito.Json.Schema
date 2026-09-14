@@ -20,4 +20,12 @@
         </PackageReference>
     </ItemGroup>
 
+    <PropertyGroup Label="Package Info">
+        <PackageReadmeFile Condition=" Exists('$(MSBuildProjectDirectory)/README.md') ">README.md</PackageReadmeFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="README.md" Pack="true" PackagePath="" Visible="false" Condition=" Exists('README.md') " />
+    </ItemGroup>
+
 </Project>
