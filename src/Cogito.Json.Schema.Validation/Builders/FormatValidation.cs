@@ -35,7 +35,8 @@ namespace Cogito.Json.Schema.Validation.Builders
 
         public static bool ValidateIri(string text)
         {
-            if (text.StartsWith("//"))
+            // an absolute IRI begins with a scheme; Uri.TryCreate takes "/abc" for an absolute file URI on Unix
+            if (text.StartsWith("/"))
                 return false;
             if (text.StartsWith("\\\\"))
                 return false;
